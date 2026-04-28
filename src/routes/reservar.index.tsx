@@ -5,7 +5,7 @@ import { StepProgress } from "@/components/StepProgress";
 import { useState } from "react";
 import { MapPin, Check, Wrench, ChevronLeft, ChevronRight, Calendar as CalIcon, Shield, FileText, ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/reservar")({
+export const Route = createFileRoute("/reservar/")({
   head: () => ({ meta: [{ title: "Reserva tu inspección — LUPAUTO" }] }),
   component: Reservar,
 });

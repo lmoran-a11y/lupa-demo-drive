@@ -9,38 +9,187 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as EjemploInformeRouteImport } from './routes/ejemplo-informe'
+import { Route as ConsultarCitaRouteImport } from './routes/consultar-cita'
+import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
+import { Route as ClasicoRouteImport } from './routes/clasico'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TalleresIndexRouteImport } from './routes/talleres.index'
+import { Route as ReservarIndexRouteImport } from './routes/reservar.index'
+import { Route as TalleresLoginRouteImport } from './routes/talleres.login'
+import { Route as TalleresDashboardRouteImport } from './routes/talleres.dashboard'
+import { Route as ReservarConfirmacionRouteImport } from './routes/reservar.confirmacion'
 
+const EjemploInformeRoute = EjemploInformeRouteImport.update({
+  id: '/ejemplo-informe',
+  path: '/ejemplo-informe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsultarCitaRoute = ConsultarCitaRouteImport.update({
+  id: '/consultar-cita',
+  path: '/consultar-cita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
+  id: '/como-funciona',
+  path: '/como-funciona',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClasicoRoute = ClasicoRouteImport.update({
+  id: '/clasico',
+  path: '/clasico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TalleresIndexRoute = TalleresIndexRouteImport.update({
+  id: '/talleres/',
+  path: '/talleres/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReservarIndexRoute = ReservarIndexRouteImport.update({
+  id: '/reservar/',
+  path: '/reservar/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalleresLoginRoute = TalleresLoginRouteImport.update({
+  id: '/talleres/login',
+  path: '/talleres/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalleresDashboardRoute = TalleresDashboardRouteImport.update({
+  id: '/talleres/dashboard',
+  path: '/talleres/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReservarConfirmacionRoute = ReservarConfirmacionRouteImport.update({
+  id: '/reservar/confirmacion',
+  path: '/reservar/confirmacion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/clasico': typeof ClasicoRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/consultar-cita': typeof ConsultarCitaRoute
+  '/ejemplo-informe': typeof EjemploInformeRoute
+  '/reservar/confirmacion': typeof ReservarConfirmacionRoute
+  '/talleres/dashboard': typeof TalleresDashboardRoute
+  '/talleres/login': typeof TalleresLoginRoute
+  '/reservar/': typeof ReservarIndexRoute
+  '/talleres/': typeof TalleresIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clasico': typeof ClasicoRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/consultar-cita': typeof ConsultarCitaRoute
+  '/ejemplo-informe': typeof EjemploInformeRoute
+  '/reservar/confirmacion': typeof ReservarConfirmacionRoute
+  '/talleres/dashboard': typeof TalleresDashboardRoute
+  '/talleres/login': typeof TalleresLoginRoute
+  '/reservar': typeof ReservarIndexRoute
+  '/talleres': typeof TalleresIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/clasico': typeof ClasicoRoute
+  '/como-funciona': typeof ComoFuncionaRoute
+  '/consultar-cita': typeof ConsultarCitaRoute
+  '/ejemplo-informe': typeof EjemploInformeRoute
+  '/reservar/confirmacion': typeof ReservarConfirmacionRoute
+  '/talleres/dashboard': typeof TalleresDashboardRoute
+  '/talleres/login': typeof TalleresLoginRoute
+  '/reservar/': typeof ReservarIndexRoute
+  '/talleres/': typeof TalleresIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/clasico'
+    | '/como-funciona'
+    | '/consultar-cita'
+    | '/ejemplo-informe'
+    | '/reservar/confirmacion'
+    | '/talleres/dashboard'
+    | '/talleres/login'
+    | '/reservar/'
+    | '/talleres/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/clasico'
+    | '/como-funciona'
+    | '/consultar-cita'
+    | '/ejemplo-informe'
+    | '/reservar/confirmacion'
+    | '/talleres/dashboard'
+    | '/talleres/login'
+    | '/reservar'
+    | '/talleres'
+  id:
+    | '__root__'
+    | '/'
+    | '/clasico'
+    | '/como-funciona'
+    | '/consultar-cita'
+    | '/ejemplo-informe'
+    | '/reservar/confirmacion'
+    | '/talleres/dashboard'
+    | '/talleres/login'
+    | '/reservar/'
+    | '/talleres/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClasicoRoute: typeof ClasicoRoute
+  ComoFuncionaRoute: typeof ComoFuncionaRoute
+  ConsultarCitaRoute: typeof ConsultarCitaRoute
+  EjemploInformeRoute: typeof EjemploInformeRoute
+  ReservarConfirmacionRoute: typeof ReservarConfirmacionRoute
+  TalleresDashboardRoute: typeof TalleresDashboardRoute
+  TalleresLoginRoute: typeof TalleresLoginRoute
+  ReservarIndexRoute: typeof ReservarIndexRoute
+  TalleresIndexRoute: typeof TalleresIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/ejemplo-informe': {
+      id: '/ejemplo-informe'
+      path: '/ejemplo-informe'
+      fullPath: '/ejemplo-informe'
+      preLoaderRoute: typeof EjemploInformeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consultar-cita': {
+      id: '/consultar-cita'
+      path: '/consultar-cita'
+      fullPath: '/consultar-cita'
+      preLoaderRoute: typeof ConsultarCitaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-funciona': {
+      id: '/como-funciona'
+      path: '/como-funciona'
+      fullPath: '/como-funciona'
+      preLoaderRoute: typeof ComoFuncionaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clasico': {
+      id: '/clasico'
+      path: '/clasico'
+      fullPath: '/clasico'
+      preLoaderRoute: typeof ClasicoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +197,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/talleres/': {
+      id: '/talleres/'
+      path: '/talleres'
+      fullPath: '/talleres/'
+      preLoaderRoute: typeof TalleresIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reservar/': {
+      id: '/reservar/'
+      path: '/reservar'
+      fullPath: '/reservar/'
+      preLoaderRoute: typeof ReservarIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talleres/login': {
+      id: '/talleres/login'
+      path: '/talleres/login'
+      fullPath: '/talleres/login'
+      preLoaderRoute: typeof TalleresLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talleres/dashboard': {
+      id: '/talleres/dashboard'
+      path: '/talleres/dashboard'
+      fullPath: '/talleres/dashboard'
+      preLoaderRoute: typeof TalleresDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reservar/confirmacion': {
+      id: '/reservar/confirmacion'
+      path: '/reservar/confirmacion'
+      fullPath: '/reservar/confirmacion'
+      preLoaderRoute: typeof ReservarConfirmacionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClasicoRoute: ClasicoRoute,
+  ComoFuncionaRoute: ComoFuncionaRoute,
+  ConsultarCitaRoute: ConsultarCitaRoute,
+  EjemploInformeRoute: EjemploInformeRoute,
+  ReservarConfirmacionRoute: ReservarConfirmacionRoute,
+  TalleresDashboardRoute: TalleresDashboardRoute,
+  TalleresLoginRoute: TalleresLoginRoute,
+  ReservarIndexRoute: ReservarIndexRoute,
+  TalleresIndexRoute: TalleresIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Star, Check, Handshake, Users } from "lucide-react";
 
-export const Route = createFileRoute("/talleres")({
+export const Route = createFileRoute("/talleres/")({
   head: () => ({ meta: [{ title: "Para talleres — LUPAUTO" }] }),
   component: Talleres,
 });
