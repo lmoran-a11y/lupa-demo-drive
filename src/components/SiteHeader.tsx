@@ -1,0 +1,25 @@
+import { Link } from "@tanstack/react-router";
+import { Logo } from "./Logo";
+import { Calendar } from "lucide-react";
+
+export function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+        <Link to="/"><Logo /></Link>
+        <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
+          <Link to="/como-funciona" className="hover:text-brand">Cómo funciona</Link>
+          <Link to="/talleres" className="hover:text-brand">Para talleres</Link>
+        </nav>
+        <div className="flex items-center gap-3">
+          <Link to="/consultar-cita" className="hidden items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-muted md:inline-flex">
+            <Calendar className="h-4 w-4" /> Consultar cita
+          </Link>
+          <Link to="/reservar" className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95">
+            Solicitar inspección
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
