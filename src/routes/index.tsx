@@ -3,6 +3,10 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Shield, Clock, Lock, Check, ArrowRight, Search } from "lucide-react";
 import { useState } from "react";
+import carTurismo from "@/assets/car-turismo.jpg";
+import carDeportivo from "@/assets/car-deportivo.jpg";
+import carSuv from "@/assets/car-suv.jpg";
+import carFurgoneta from "@/assets/car-furgoneta.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -15,10 +19,10 @@ export const Route = createFileRoute("/")({
 });
 
 const VEHICLES = [
-  { id: "turismo", label: "Turismos", emoji: "🚗" },
-  { id: "deportivo", label: "Deportivos", emoji: "🏎️" },
-  { id: "suv", label: "SUV / 4x4", emoji: "🚙" },
-  { id: "furgoneta", label: "Furgonetas", emoji: "🚐" },
+  { id: "turismo", label: "Turismos", image: carTurismo },
+  { id: "deportivo", label: "Deportivos", image: carDeportivo },
+  { id: "suv", label: "SUV / 4x4", image: carSuv },
+  { id: "furgoneta", label: "Furgonetas", image: carFurgoneta },
 ];
 
 function Home() {
@@ -73,18 +77,20 @@ function Home() {
               <button
                 key={v.id}
                 onClick={() => setSelected(v.id)}
-                className={`group relative overflow-hidden rounded-2xl border p-6 text-left transition ${
-                  selected === v.id ? "border-brand bg-white/5" : "border-white/10 bg-white/5 hover:border-white/30"
+                className={`group relative overflow-hidden rounded-2xl border bg-ink p-6 text-left text-white transition ${
+                  selected === v.id ? "border-brand" : "border-white/10 hover:border-white/30"
                 }`}
               >
                 {selected === v.id && (
-                  <div className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-ink">
+                  <div className="absolute right-3 top-3 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-ink">
                     <Check className="h-4 w-4" />
                   </div>
                 )}
-                <div className="flex h-28 items-center justify-center text-7xl">{v.emoji}</div>
+                <div className="flex h-28 items-center justify-center overflow-hidden">
+                  <img src={v.image} alt={v.label} loading="lazy" width={768} height={512} className="h-full w-full object-contain" />
+                </div>
                 <div className="mt-4 flex items-center justify-between">
-                  <span className="text-xl font-bold">{v.label}</span>
+                  <span className="text-xl font-bold text-white">{v.label}</span>
                   <ArrowRight className="h-5 w-5 text-brand" />
                 </div>
               </button>
@@ -111,7 +117,7 @@ function Home() {
               Continuar <ArrowRight className="h-4 w-4" />
             </button>
           </div>
-          <p className="mt-3 text-center text-xs text-white/60">🔒 Tus datos están protegidos. No compartimos tu información.</p>
+          <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-white/60"><Lock className="h-3 w-3" /> Tus datos están protegidos. No compartimos tu información.</p>
         </div>
       </section>
 
