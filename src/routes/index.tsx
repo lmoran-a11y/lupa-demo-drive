@@ -29,6 +29,18 @@ function Home() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string | null>(null);
   const [plate, setPlate] = useState("1234ABC");
+  const pickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!selected) return;
+    const onDown = (e: MouseEvent) => {
+      if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
+        setSelected(null);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [selected]);
 
   return (
     <div className="min-h-screen bg-background">
