@@ -26,10 +26,10 @@ export function SiteFooter() {
         <div>
           <h4 className="mb-3 text-sm font-bold">Legal</h4>
           <ul className="space-y-2 text-sm text-white/70">
-            <li><Link to="/legal" className="hover:text-white">Aviso legal</Link></li>
-            <li><Link to="/legal" className="hover:text-white">Términos y condiciones</Link></li>
-            <li><Link to="/legal" className="hover:text-white">Política de privacidad</Link></li>
-            <li><Link to="/legal" className="hover:text-white">Política de cookies</Link></li>
+            <li><Link to="/legal/aviso-legal" className="hover:text-white">Aviso legal</Link></li>
+            <li><Link to="/legal/terminos" className="hover:text-white">Términos y condiciones</Link></li>
+            <li><Link to="/legal/privacidad" className="hover:text-white">Política de privacidad</Link></li>
+            <li><Link to="/legal/cookies" className="hover:text-white">Política de cookies</Link></li>
           </ul>
         </div>
         <div>

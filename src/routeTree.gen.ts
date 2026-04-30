@@ -22,6 +22,10 @@ import { Route as ReservarIndexRouteImport } from './routes/reservar.index'
 import { Route as TalleresLoginRouteImport } from './routes/talleres.login'
 import { Route as TalleresDashboardRouteImport } from './routes/talleres.dashboard'
 import { Route as ReservarConfirmacionRouteImport } from './routes/reservar.confirmacion'
+import { Route as LegalTerminosRouteImport } from './routes/legal.terminos'
+import { Route as LegalPrivacidadRouteImport } from './routes/legal.privacidad'
+import { Route as LegalCookiesRouteImport } from './routes/legal.cookies'
+import { Route as LegalAvisoLegalRouteImport } from './routes/legal.aviso-legal'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as TalleresInspeccionIdRouteImport } from './routes/talleres.inspeccion.$id'
@@ -91,6 +95,26 @@ const ReservarConfirmacionRoute = ReservarConfirmacionRouteImport.update({
   path: '/reservar/confirmacion',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalTerminosRoute = LegalTerminosRouteImport.update({
+  id: '/terminos',
+  path: '/terminos',
+  getParentRoute: () => LegalRoute,
+} as any)
+const LegalPrivacidadRoute = LegalPrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => LegalRoute,
+} as any)
+const LegalCookiesRoute = LegalCookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => LegalRoute,
+} as any)
+const LegalAvisoLegalRoute = LegalAvisoLegalRouteImport.update({
+  id: '/aviso-legal',
+  path: '/aviso-legal',
+  getParentRoute: () => LegalRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -114,10 +138,14 @@ export interface FileRoutesByFullPath {
   '/consultar-cita': typeof ConsultarCitaRoute
   '/contacto': typeof ContactoRoute
   '/ejemplo-informe': typeof EjemploInformeRoute
-  '/legal': typeof LegalRoute
+  '/legal': typeof LegalRouteWithChildren
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
+  '/legal/aviso-legal': typeof LegalAvisoLegalRoute
+  '/legal/cookies': typeof LegalCookiesRoute
+  '/legal/privacidad': typeof LegalPrivacidadRoute
+  '/legal/terminos': typeof LegalTerminosRoute
   '/reservar/confirmacion': typeof ReservarConfirmacionRoute
   '/talleres/dashboard': typeof TalleresDashboardRoute
   '/talleres/login': typeof TalleresLoginRoute
@@ -132,10 +160,14 @@ export interface FileRoutesByTo {
   '/consultar-cita': typeof ConsultarCitaRoute
   '/contacto': typeof ContactoRoute
   '/ejemplo-informe': typeof EjemploInformeRoute
-  '/legal': typeof LegalRoute
+  '/legal': typeof LegalRouteWithChildren
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
+  '/legal/aviso-legal': typeof LegalAvisoLegalRoute
+  '/legal/cookies': typeof LegalCookiesRoute
+  '/legal/privacidad': typeof LegalPrivacidadRoute
+  '/legal/terminos': typeof LegalTerminosRoute
   '/reservar/confirmacion': typeof ReservarConfirmacionRoute
   '/talleres/dashboard': typeof TalleresDashboardRoute
   '/talleres/login': typeof TalleresLoginRoute
@@ -151,10 +183,14 @@ export interface FileRoutesById {
   '/consultar-cita': typeof ConsultarCitaRoute
   '/contacto': typeof ContactoRoute
   '/ejemplo-informe': typeof EjemploInformeRoute
-  '/legal': typeof LegalRoute
+  '/legal': typeof LegalRouteWithChildren
   '/sobre-nosotros': typeof SobreNosotrosRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/login': typeof AdminLoginRoute
+  '/legal/aviso-legal': typeof LegalAvisoLegalRoute
+  '/legal/cookies': typeof LegalCookiesRoute
+  '/legal/privacidad': typeof LegalPrivacidadRoute
+  '/legal/terminos': typeof LegalTerminosRoute
   '/reservar/confirmacion': typeof ReservarConfirmacionRoute
   '/talleres/dashboard': typeof TalleresDashboardRoute
   '/talleres/login': typeof TalleresLoginRoute
@@ -175,6 +211,10 @@ export interface FileRouteTypes {
     | '/sobre-nosotros'
     | '/admin/dashboard'
     | '/admin/login'
+    | '/legal/aviso-legal'
+    | '/legal/cookies'
+    | '/legal/privacidad'
+    | '/legal/terminos'
     | '/reservar/confirmacion'
     | '/talleres/dashboard'
     | '/talleres/login'
@@ -193,6 +233,10 @@ export interface FileRouteTypes {
     | '/sobre-nosotros'
     | '/admin/dashboard'
     | '/admin/login'
+    | '/legal/aviso-legal'
+    | '/legal/cookies'
+    | '/legal/privacidad'
+    | '/legal/terminos'
     | '/reservar/confirmacion'
     | '/talleres/dashboard'
     | '/talleres/login'
@@ -211,6 +255,10 @@ export interface FileRouteTypes {
     | '/sobre-nosotros'
     | '/admin/dashboard'
     | '/admin/login'
+    | '/legal/aviso-legal'
+    | '/legal/cookies'
+    | '/legal/privacidad'
+    | '/legal/terminos'
     | '/reservar/confirmacion'
     | '/talleres/dashboard'
     | '/talleres/login'
@@ -226,7 +274,7 @@ export interface RootRouteChildren {
   ConsultarCitaRoute: typeof ConsultarCitaRoute
   ContactoRoute: typeof ContactoRoute
   EjemploInformeRoute: typeof EjemploInformeRoute
-  LegalRoute: typeof LegalRoute
+  LegalRoute: typeof LegalRouteWithChildren
   SobreNosotrosRoute: typeof SobreNosotrosRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
@@ -331,6 +379,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservarConfirmacionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal/terminos': {
+      id: '/legal/terminos'
+      path: '/terminos'
+      fullPath: '/legal/terminos'
+      preLoaderRoute: typeof LegalTerminosRouteImport
+      parentRoute: typeof LegalRoute
+    }
+    '/legal/privacidad': {
+      id: '/legal/privacidad'
+      path: '/privacidad'
+      fullPath: '/legal/privacidad'
+      preLoaderRoute: typeof LegalPrivacidadRouteImport
+      parentRoute: typeof LegalRoute
+    }
+    '/legal/cookies': {
+      id: '/legal/cookies'
+      path: '/cookies'
+      fullPath: '/legal/cookies'
+      preLoaderRoute: typeof LegalCookiesRouteImport
+      parentRoute: typeof LegalRoute
+    }
+    '/legal/aviso-legal': {
+      id: '/legal/aviso-legal'
+      path: '/aviso-legal'
+      fullPath: '/legal/aviso-legal'
+      preLoaderRoute: typeof LegalAvisoLegalRouteImport
+      parentRoute: typeof LegalRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -355,6 +431,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LegalRouteChildren {
+  LegalAvisoLegalRoute: typeof LegalAvisoLegalRoute
+  LegalCookiesRoute: typeof LegalCookiesRoute
+  LegalPrivacidadRoute: typeof LegalPrivacidadRoute
+  LegalTerminosRoute: typeof LegalTerminosRoute
+}
+
+const LegalRouteChildren: LegalRouteChildren = {
+  LegalAvisoLegalRoute: LegalAvisoLegalRoute,
+  LegalCookiesRoute: LegalCookiesRoute,
+  LegalPrivacidadRoute: LegalPrivacidadRoute,
+  LegalTerminosRoute: LegalTerminosRoute,
+}
+
+const LegalRouteWithChildren = LegalRoute._addFileChildren(LegalRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ClasicoRoute: ClasicoRoute,
@@ -362,7 +454,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConsultarCitaRoute: ConsultarCitaRoute,
   ContactoRoute: ContactoRoute,
   EjemploInformeRoute: EjemploInformeRoute,
-  LegalRoute: LegalRoute,
+  LegalRoute: LegalRouteWithChildren,
   SobreNosotrosRoute: SobreNosotrosRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
