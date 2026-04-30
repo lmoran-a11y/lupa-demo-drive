@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Shield, Clock, Lock, Check, ArrowRight, Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import carTurismo from "@/assets/car-turismo.jpg";
 import carDeportivo from "@/assets/car-deportivo.jpg";
 import carSuv from "@/assets/car-suv.jpg";
@@ -29,6 +29,18 @@ function Home() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string | null>(null);
   const [plate, setPlate] = useState("1234ABC");
+  const pickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!selected) return;
+    const onDown = (e: MouseEvent) => {
+      if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
+        setSelected(null);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [selected]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -69,7 +81,7 @@ function Home() {
 
       {/* VEHICLE PICKER */}
       <section className="bg-ink py-12 text-white">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6" ref={pickerRef}>
           <h2 className="text-center text-2xl font-bold md:text-3xl">¿Qué vehículo quieres revisar?</h2>
           <div className="mx-auto mt-2 h-1 w-16 rounded bg-brand" />
           <div className="mt-8 grid gap-5 md:grid-cols-4">
