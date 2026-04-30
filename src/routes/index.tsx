@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Shield, Clock, Lock, Check, ArrowRight, Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import carTurismo from "@/assets/car-turismo.jpg";
 import carDeportivo from "@/assets/car-deportivo.jpg";
 import carSuv from "@/assets/car-suv.jpg";
