@@ -113,18 +113,8 @@ function Reservar() {
             </div>
           </div>
 
-          {/* RIGHT: Payment (or inline edit panel) */}
+          {/* RIGHT: Payment */}
           <div className="rounded-2xl border border-border bg-card p-6">
-            {edit === "location" && (
-              <InlineEditPanel title="Editar ubicación" onClose={() => setEdit(null)}>
-                {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
-              </InlineEditPanel>
-            )}
-            {edit === "datetime" && (
-              <InlineEditPanel title="Editar fecha y hora" onClose={() => setEdit(null)}>
-                {renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
-              </InlineEditPanel>
-            )}
             <div className="grid gap-6 md:grid-cols-[1fr_auto]">
               <div>
                 <div className="text-sm font-bold">Total a pagar</div>
