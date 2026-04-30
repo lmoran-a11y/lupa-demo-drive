@@ -258,33 +258,6 @@ function Reservar() {
         </div>
       </main>
 
-      {edit && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-4"
-          onClick={() => setEdit(null)}
-        >
-          <div
-            className="relative w-full max-w-md rounded-2xl border-2 border-brand bg-white p-6 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
-                {edit === "location" ? "Editar ubicación" : "Editar fecha y hora"}
-              </div>
-              <button
-                onClick={() => setEdit(null)}
-                className="rounded-full p-1 hover:bg-muted"
-                aria-label="Cerrar"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            {edit === "location"
-              ? renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })
-              : renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
-          </div>
-        </div>
-      )}
 
       <SiteFooter />
     </div>
