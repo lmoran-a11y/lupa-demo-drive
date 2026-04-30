@@ -82,11 +82,6 @@ function Reservar() {
               onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
               active={edit === "location"}
             />
-            {edit === "location" && (
-              <InlineEditPanel title="Editar ubicación" onClose={() => setEdit(null)}>
-                {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
-              </InlineEditPanel>
-            )}
             <SummaryRow
               icon={<CalIcon className="h-4 w-4" />}
               title="Fecha y hora"
@@ -94,11 +89,6 @@ function Reservar() {
               onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
               active={edit === "datetime"}
             />
-            {edit === "datetime" && (
-              <InlineEditPanel title="Editar fecha y hora" onClose={() => setEdit(null)}>
-                {renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
-              </InlineEditPanel>
-            )}
             <SummaryRow
               icon={<Wrench className="h-4 w-4" />}
               title="Servicio"
