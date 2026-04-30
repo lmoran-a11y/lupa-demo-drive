@@ -79,16 +79,26 @@ function Reservar() {
               icon={<MapPin className="h-4 w-4" />}
               title="Ubicación"
               value={location}
-              onEdit={() => openEdit("location")}
+              onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
               active={edit === "location"}
             />
+            {edit === "location" && (
+              <InlineEditPanel title="Editar ubicación" onClose={() => setEdit(null)}>
+                {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
+              </InlineEditPanel>
+            )}
             <SummaryRow
               icon={<CalIcon className="h-4 w-4" />}
               title="Fecha y hora"
               value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
-              onEdit={() => openEdit("datetime")}
+              onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
               active={edit === "datetime"}
             />
+            {edit === "datetime" && (
+              <InlineEditPanel title="Editar fecha y hora" onClose={() => setEdit(null)}>
+                {renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
+              </InlineEditPanel>
+            )}
             <SummaryRow
               icon={<Wrench className="h-4 w-4" />}
               title="Servicio"
@@ -197,226 +207,6 @@ function Reservar() {
           </div>
         </div>
 
-        {/* INLINE EDIT PANELS */}
-        {edit === "location" && (
-          <EditPanel title="Editar ubicación" onClose={() => setEdit(null)}>
-            <h3 className="text-xl font-bold">1. ¿Dónde está el vehículo?</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Indica la ubicación exacta para asignar el taller más cercano.
-            </p>
-            <div className="mt-5 grid gap-5 md:grid-cols-2">
-              <div className="rounded-2xl border border-border bg-card p-5">
-                <label className="text-sm font-bold">Introduce la dirección o ciudad</label>
-                <div className="mt-2 flex items-center gap-2">
-                  <div className="flex flex-1 items-center gap-2 rounded-lg border border-border px-3 py-3">
-                    <MapPin className="h-4 w-4 text-muted-foreground" />
-                    <input
-                      value={draftLocation}
-                      onChange={(e) => setDraftLocation(e.target.value)}
-                      className="flex-1 outline-none"
-                    />
-                    {draftLocation && (
-                      <button onClick={() => setDraftLocation("")} className="text-muted-foreground">
-                        <X className="h-4 w-4" />
-                      </button>
-                    )}
-                  </div>
-                  <button
-                    onClick={confirmLocation}
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-success text-white"
-                  >
-                    <Check className="h-5 w-5" />
-                  </button>
-                </div>
-
-                {draftLocation && (
-                  <div className="mt-4 flex items-start gap-3 rounded-lg border border-success/30 bg-success/10 p-4 text-sm">
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-success text-white">
-                      <Check className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-success">
-                        UBICACIÓN: {draftLocation.split(",")[0].toUpperCase()}
-                      </div>
-                      <div className="text-muted-foreground">Hemos encontrado tu ubicación correctamente.</div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="mt-3 flex items-start gap-3 rounded-lg border border-border bg-muted/40 p-4 text-sm">
-                  <Info className="mt-0.5 h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <div className="font-bold">Asignaremos el taller más cercano automáticamente</div>
-                    <div className="text-xs text-muted-foreground">
-                      Trabajamos con talleres verificados y de confianza en tu zona.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="overflow-hidden rounded-2xl border border-border bg-muted">
-                <div className="relative flex h-full min-h-[280px] items-center justify-center bg-[linear-gradient(135deg,#e8f0e0_0%,#f5f0e0_50%,#e0e8f0_100%)]">
-                  <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(#0001_1px,transparent_1px),linear-gradient(90deg,#0001_1px,transparent_1px)] [background-size:40px_40px]" />
-                  <div className="absolute h-44 w-44 rounded-full bg-brand/15 ring-2 ring-brand/40" />
-                  <div className="relative flex flex-col items-center">
-                    <MapPin className="h-12 w-12 fill-ink text-ink" />
-                    <div className="mt-1 rounded bg-white/90 px-2 py-0.5 text-xs font-bold text-ink">
-                      {draftLocation.split(",")[0] || "Lucena"}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 flex justify-end gap-2">
-              <button
-                onClick={() => setEdit(null)}
-                className="rounded-lg border border-border px-4 py-2 text-sm font-bold"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={confirmLocation}
-                className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink"
-              >
-                Confirmar
-              </button>
-            </div>
-          </EditPanel>
-        )}
-
-        {edit === "datetime" && (
-          <EditPanel title="Editar fecha y hora" onClose={() => setEdit(null)}>
-            <h3 className="text-xl font-bold">2. Elige el día y la hora disponibles</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Los horarios mostrados pertenecen al taller que se te asignará.
-            </p>
-            <div className="mt-5 grid gap-5 md:grid-cols-[1fr_1fr_0.9fr]">
-              {/* CALENDAR */}
-              <div className="rounded-2xl border border-border bg-card p-5">
-                <div className="text-sm font-bold">Selecciona el día</div>
-                <div className="mt-3 flex items-center justify-between">
-                  <button className="rounded p-1 hover:bg-muted">
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-                  <div className="text-sm font-bold">Mayo 2024</div>
-                  <button className="rounded p-1 hover:bg-muted">
-                    <ChevronRight className="h-4 w-4" />
-                  </button>
-                </div>
-                <div className="mt-3 grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-muted-foreground">
-                  {["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"].map((d) => (
-                    <div key={d}>{d}</div>
-                  ))}
-                </div>
-                <div className="mt-1 grid grid-cols-7 gap-1 text-center text-sm">
-                  {[
-                    [29, true], [30, true],
-                    [1, false], [2, false], [3, false], [4, false], [5, false],
-                    [6, false], [7, false], [8, false], [9, false], [10, false], [11, false], [12, false],
-                    [13, false], [14, false], [15, false], [16, false], [17, false], [18, false], [19, false],
-                    [20, false], [21, false], [22, false], [23, false], [24, false], [25, false], [26, false],
-                    [27, false], [28, false], [29, false], [30, false], [31, false],
-                    [1, true], [2, true],
-                  ].map(([d, other], i) => (
-                    <button
-                      key={i}
-                      onClick={() => !other && setDay(d as number)}
-                      className={`flex h-9 items-center justify-center rounded-full ${
-                        day === d && !other
-                          ? "bg-brand font-bold text-ink"
-                          : other
-                          ? "text-muted-foreground/40"
-                          : "hover:bg-muted"
-                      }`}
-                    >
-                      {d}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* HOURS */}
-              <div className="rounded-2xl border border-border bg-card p-5">
-                <div className="text-sm font-bold">Selecciona la hora</div>
-                <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                  <Clock className="h-3 w-3" /> Horarios disponibles para el taller asignado
-                </div>
-                <div className="mt-3 grid grid-cols-3 gap-2">
-                  {HOURS.map((h) => (
-                    <button
-                      key={h}
-                      onClick={() => setHour(h)}
-                      className={`rounded-lg border px-2 py-2 text-sm font-medium ${
-                        hour === h ? "border-brand bg-brand text-ink" : "border-border hover:bg-muted"
-                      }`}
-                    >
-                      {h} {hour === h && "✓"}
-                    </button>
-                  ))}
-                </div>
-                <p className="mt-3 flex items-center gap-1 text-xs text-muted-foreground">
-                  <Shield className="h-3 w-3" /> La reserva incluye hasta 24h en taller para la inspección.
-                </p>
-              </div>
-
-              {/* SELECTION */}
-              <div className="rounded-2xl border border-border bg-card p-5">
-                <div className="text-sm font-bold">Tu selección</div>
-                <div className="mt-3 space-y-3 text-sm">
-                  <Row label="Ubicación" value={location} ok />
-                  <Row label="Fecha" value={`Jueves, ${day} de mayo`} ok />
-                  <Row label="Hora" value={hour} ok />
-                </div>
-                <div className="mt-4 flex items-start gap-2 rounded-lg bg-brand/10 p-3 text-xs">
-                  <CalIcon className="mt-0.5 h-4 w-4 text-brand" />
-                  <div>
-                    <b>Horarios limitados</b>
-                    <br />
-                    Asegura ahora tu cita para garantizar disponibilidad.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 flex items-start gap-3 rounded-2xl border border-brand/30 bg-brand/5 p-4">
-              <Wrench className="mt-0.5 h-5 w-5 text-brand" />
-              <div className="flex-1">
-                <label className="flex items-center gap-2 text-sm font-bold">
-                  <input
-                    type="checkbox"
-                    checked={dgt}
-                    onChange={(e) => setDgt(e.target.checked)}
-                    className="h-4 w-4 accent-[#F5B800]"
-                  />
-                  Añadir informe DGT (+14,99 €)
-                  <span className="ml-1 inline-flex items-center gap-1 rounded-full bg-brand px-2 py-0.5 text-[10px] font-bold text-ink">
-                    Recomendado
-                  </span>
-                </label>
-                <p className="ml-6 text-xs text-muted-foreground">
-                  Incluye datos oficiales: titularidad, cargas e historial.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-5 flex justify-end gap-2">
-              <button
-                onClick={() => setEdit(null)}
-                className="rounded-lg border border-border px-4 py-2 text-sm font-bold"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={() => setEdit(null)}
-                className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink"
-              >
-                Confirmar
-              </button>
-            </div>
-          </EditPanel>
-        )}
-
         {/* CANCELLATION BANNER */}
         <div className="flex items-center justify-between rounded-2xl border border-brand/30 bg-brand/5 px-5 py-4">
           <div className="flex items-center gap-3 text-sm">
@@ -482,7 +272,7 @@ function SummaryRow({
   );
 }
 
-function EditPanel({
+function InlineEditPanel({
   title,
   onClose,
   children,
@@ -492,14 +282,189 @@ function EditPanel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border-2 border-brand bg-card p-6 shadow-lg">
-      <div className="mb-4 flex items-center justify-between">
-        <div className="text-xs font-bold uppercase tracking-widest text-brand">{title}</div>
+    <div className="mt-3 mb-4 rounded-xl border-2 border-brand bg-card p-4 shadow-md">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="text-[11px] font-bold uppercase tracking-widest text-brand">{title}</div>
         <button onClick={onClose} className="rounded-full p-1 hover:bg-muted">
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4" />
         </button>
       </div>
       {children}
+    </div>
+  );
+}
+
+function renderLocationEditor({
+  draftLocation,
+  setDraftLocation,
+  confirmLocation,
+  cancel,
+}: {
+  draftLocation: string;
+  setDraftLocation: (v: string) => void;
+  confirmLocation: () => void;
+  cancel: () => void;
+}) {
+  const city = draftLocation.split(",")[0] || "Lucena";
+  return (
+    <div>
+      <label className="text-xs font-bold">Introduce la dirección o ciudad</label>
+      <div className="mt-2 flex items-center gap-2">
+        <div className="flex flex-1 items-center gap-2 rounded-lg border border-border px-3 py-2">
+          <MapPin className="h-4 w-4 text-muted-foreground" />
+          <input
+            value={draftLocation}
+            onChange={(e) => setDraftLocation(e.target.value)}
+            className="flex-1 bg-transparent text-sm outline-none"
+          />
+          {draftLocation && (
+            <button onClick={() => setDraftLocation("")} className="text-muted-foreground">
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+        <button
+          onClick={confirmLocation}
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-success text-white"
+        >
+          <Check className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="mt-3 overflow-hidden rounded-lg border border-border">
+        <div className="relative flex h-32 items-center justify-center bg-[linear-gradient(135deg,#e8f0e0_0%,#f5f0e0_50%,#e0e8f0_100%)]">
+          <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(#0001_1px,transparent_1px),linear-gradient(90deg,#0001_1px,transparent_1px)] [background-size:30px_30px]" />
+          <div className="absolute h-24 w-24 rounded-full bg-brand/15 ring-2 ring-brand/40" />
+          <div className="relative flex flex-col items-center">
+            <MapPin className="h-8 w-8 fill-ink text-ink" />
+            <div className="mt-1 rounded bg-white/90 px-2 py-0.5 text-[10px] font-bold text-ink">
+              {city}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {draftLocation && (
+        <div className="mt-3 flex items-start gap-2 rounded-lg border border-success/30 bg-success/10 p-2 text-xs">
+          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-success text-white">
+            <Check className="h-3 w-3" />
+          </div>
+          <div>
+            <div className="font-bold text-success">UBICACIÓN: {city.toUpperCase()}</div>
+            <div className="text-muted-foreground">Hemos encontrado tu ubicación correctamente.</div>
+          </div>
+        </div>
+      )}
+
+      <div className="mt-3 flex justify-end gap-2">
+        <button onClick={cancel} className="rounded-lg border border-border px-3 py-1.5 text-xs font-bold">
+          Cancelar
+        </button>
+        <button onClick={confirmLocation} className="rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-ink">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function renderDateTimeEditor({
+  day,
+  setDay,
+  hour,
+  setHour,
+  dgt,
+  setDgt,
+  cancel,
+  confirm,
+}: {
+  day: number;
+  setDay: (d: number) => void;
+  hour: string;
+  setHour: (h: string) => void;
+  location: string;
+  dgt: boolean;
+  setDgt: (v: boolean) => void;
+  cancel: () => void;
+  confirm: () => void;
+}) {
+  const days: Array<[number, boolean]> = [
+    [29, true], [30, true],
+    [1, false], [2, false], [3, false], [4, false], [5, false],
+    [6, false], [7, false], [8, false], [9, false], [10, false], [11, false], [12, false],
+    [13, false], [14, false], [15, false], [16, false], [17, false], [18, false], [19, false],
+    [20, false], [21, false], [22, false], [23, false], [24, false], [25, false], [26, false],
+    [27, false], [28, false], [29, false], [30, false], [31, false],
+    [1, true], [2, true],
+  ];
+  return (
+    <div>
+      <div className="text-xs font-bold">Selecciona el día</div>
+      <div className="mt-2 flex items-center justify-between">
+        <button className="rounded p-1 hover:bg-muted">
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+        <div className="text-xs font-bold">Mayo 2024</div>
+        <button className="rounded p-1 hover:bg-muted">
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+      <div className="mt-2 grid grid-cols-7 gap-1 text-center text-[9px] font-bold text-muted-foreground">
+        {["L", "M", "X", "J", "V", "S", "D"].map((d) => (
+          <div key={d}>{d}</div>
+        ))}
+      </div>
+      <div className="mt-1 grid grid-cols-7 gap-1 text-center text-xs">
+        {days.map(([d, other], i) => (
+          <button
+            key={i}
+            onClick={() => !other && setDay(d)}
+            className={`flex h-7 items-center justify-center rounded-full ${
+              day === d && !other
+                ? "bg-brand font-bold text-ink"
+                : other
+                ? "text-muted-foreground/40"
+                : "hover:bg-muted"
+            }`}
+          >
+            {d}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-4 text-xs font-bold">Selecciona la hora</div>
+      <div className="mt-2 grid grid-cols-3 gap-1.5">
+        {HOURS.map((h) => (
+          <button
+            key={h}
+            onClick={() => setHour(h)}
+            className={`rounded-lg border px-2 py-1.5 text-xs font-medium ${
+              hour === h ? "border-brand bg-brand text-ink" : "border-border hover:bg-muted"
+            }`}
+          >
+            {h}
+          </button>
+        ))}
+      </div>
+
+      <label className="mt-3 flex items-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-2 py-2 text-xs font-bold">
+        <input
+          type="checkbox"
+          checked={dgt}
+          onChange={(e) => setDgt(e.target.checked)}
+          className="h-3.5 w-3.5 accent-[#F5B800]"
+        />
+        Añadir informe DGT (+14,99 €)
+      </label>
+
+      <div className="mt-3 flex justify-end gap-2">
+        <button onClick={cancel} className="rounded-lg border border-border px-3 py-1.5 text-xs font-bold">
+          Cancelar
+        </button>
+        <button onClick={confirm} className="rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-ink">
+          Confirmar
+        </button>
+      </div>
     </div>
   );
 }
