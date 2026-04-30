@@ -1,86 +1,123 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { Star, Check, Handshake, Users } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { Eye, EyeOff, Shield, Car } from "lucide-react";
 
 export const Route = createFileRoute("/talleres/")({
-  head: () => ({ meta: [{ title: "Para talleres — LUPAUTO" }] }),
-  component: Talleres,
+  head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
+  component: TalleresLogin,
 });
 
-function Talleres() {
+function TalleresLogin() {
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const [email, setEmail] = useState("taller@lupauto.es");
+  const [password, setPassword] = useState("1234");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email === "taller@lupauto.es" && password === "1234") {
+      navigate({ to: "/talleres/dashboard" });
+    } else {
+      setError("Credenciales incorrectas. Usa taller@lupauto.es / 1234");
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
-      <main className="mx-auto max-w-5xl px-6 py-12">
-        <div className="text-center">
-          <div className="text-3xl font-extrabold">LUPA<span className="text-brand">UTO</span></div>
-          <h1 className="mt-4 text-4xl font-extrabold">TALLERES COLABORADORES</h1>
-          <div className="mx-auto mt-1 h-1 w-32 bg-brand"/>
-          <div className="mt-1 text-lg font-bold text-brand">CÓRDOBA</div>
+    <div className="grid min-h-screen md:grid-cols-2">
+      {/* Left side - black */}
+      <div className="relative hidden flex-col bg-ink text-white md:flex">
+        <div className="absolute left-8 top-8">
+          <div className="text-3xl font-extrabold leading-none">
+            LUPA<span className="text-brand">UTO</span>
+          </div>
+          <div className="mt-1 text-sm italic text-white/70">Revisiones bajo lupa</div>
         </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
-          <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="flex items-center gap-3 bg-brand px-5 py-3 font-extrabold text-ink">
-              <span className="text-xl">€</span> LO QUE COBRAS<br/><span className="text-xs font-bold">POR INSPECCIÓN</span>
-            </div>
-            <div className="divide-y divide-border">
-              {[["TURISMO","150 €"],["SUV / 4x4","165 €"],["FURGONETA","175 €"],["DEPORTIVO / ALTA GAMA","180 €"]].map(([k,v])=>(
-                <div key={k} className="flex items-center justify-between px-5 py-4">
-                  <span className="font-bold">🚗 {k}</span><span className="text-2xl font-extrabold text-brand">{v}</span>
-                </div>
-              ))}
-            </div>
-            <div className="space-y-1 px-5 py-4 text-sm">
-              <div className="flex items-center gap-2"><Check className="h-4 w-4 text-brand"/>Pago por cada inspección realizada.</div>
-              <div className="flex items-center gap-2"><Check className="h-4 w-4 text-brand"/>Pago automático tras enviar el informe.</div>
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="flex items-center gap-3 bg-ink px-5 py-3 font-extrabold text-white">⏱ TIEMPO ESTIMADO</div>
-            <div className="px-5 py-10 text-center">
-              <div className="text-4xl font-extrabold">45 – 75 MIN</div>
-              <div className="mt-1 text-sm text-muted-foreground">POR VEHÍCULO</div>
-            </div>
-            <div className="border-t border-border px-5 py-5 text-center">
-              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-ink text-white"><Check/></div>
-              <div className="font-extrabold">PAGO AUTOMÁTICO</div>
-              <div className="text-xs text-muted-foreground">TRAS ENVIAR EL INFORME</div>
-            </div>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="flex h-56 w-56 items-center justify-center rounded-full bg-brand">
+            <Car className="h-24 w-24 text-ink" strokeWidth={2.2} />
           </div>
         </div>
 
-        <div className="mt-8 rounded-2xl border border-border bg-card p-6">
-          <div className="text-center text-sm font-extrabold tracking-widest">CÓMO FUNCIONA</div>
-          <div className="mx-auto mt-1 h-1 w-16 bg-brand"/>
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-5">
-            {[["1","EL CLIENTE","RESERVA"],["2","EL COCHE","LLEGA AL TALLER"],["3","REVISÁIS","EL VEHÍCULO"],["4","SUBÍS","EL INFORME"],["5","COBRÁIS",""]].map(([n,a,b])=>(
-              <div key={n} className="text-center">
-                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-brand font-extrabold text-ink">{n}</div>
-                <div className="mt-3 text-xs font-extrabold">{a}</div>
-                <div className="text-xs font-extrabold">{b}</div>
+        <div className="absolute bottom-8 left-8 flex items-center gap-3">
+          <Shield className="h-6 w-6 text-brand" />
+          <div className="text-xs font-bold leading-tight">
+            Talleres verificados<br />de confianza
+          </div>
+        </div>
+      </div>
+
+      {/* Right side - white */}
+      <div className="flex items-center justify-center bg-background px-6 py-12">
+        <div className="w-full max-w-sm">
+          <h1 className="text-3xl font-extrabold tracking-wide">ACCESO TALLER</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Panel privado para talleres colaboradores de LUPAUTO.
+          </p>
+
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <div>
+              <label className="text-sm font-bold">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-brand"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-bold">Contraseña</label>
+              <div className="relative mt-1">
+                <input
+                  type={show ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full rounded-lg border border-border bg-background px-4 py-3 pr-10 outline-none focus:border-brand"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShow(!show)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                >
+                  {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
               </div>
-            ))}
+            </div>
+
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" className="h-4 w-4 accent-[#F5B800]" />
+              Recuérdame
+            </label>
+
+            {error && (
+              <div className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-xs text-destructive">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-brand py-3 font-bold text-ink hover:brightness-95"
+            >
+              Entrar al panel
+            </button>
+          </form>
+
+          <div className="mt-4 text-center text-sm">
+            <span className="text-muted-foreground">¿Problemas para acceder? </span>
+            <Link to="/contacto" className="font-bold text-brand hover:underline">
+              Contactar con soporte
+            </Link>
+          </div>
+
+          <div className="mt-8 text-center text-xs text-muted-foreground">
+            <Link to="/admin/login" className="underline hover:text-brand">
+              Acceso administradores
+            </Link>
           </div>
         </div>
-
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl bg-ink p-6 text-white md:flex-row">
-          <div className="flex items-center gap-3"><Handshake className="h-7 w-7 text-brand"/><div className="font-extrabold">NOSOTROS TRAEMOS EL CLIENTE.<br/>TÚ HACES LA <span className="text-brand">INSPECCIÓN</span>.</div></div>
-          <div className="flex items-center gap-3"><Users className="h-7 w-7 text-brand"/><div className="text-sm font-bold">MÁS CLIENTES<br/>PARA TU TALLER</div></div>
-        </div>
-
-        <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-border bg-card p-5">
-          <Star className="h-5 w-5 fill-brand text-brand"/>
-          <div className="text-center"><div className="font-bold">PLAZAS LIMITADAS EN CÓRDOBA</div><div className="text-xs text-muted-foreground">Buscamos pocos talleres, pero de confianza.</div></div>
-        </div>
-
-        <div className="mt-6 text-center">
-          <Link to="/talleres/login" className="inline-block rounded-lg bg-brand px-6 py-3 font-bold text-ink">Acceso para talleres ›</Link>
-        </div>
-      </main>
-      <SiteFooter />
+      </div>
     </div>
   );
 }
