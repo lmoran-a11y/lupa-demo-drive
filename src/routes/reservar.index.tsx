@@ -113,18 +113,8 @@ function Reservar() {
             </div>
           </div>
 
-          {/* RIGHT: Payment (or inline edit panel) */}
+          {/* RIGHT: Payment */}
           <div className="rounded-2xl border border-border bg-card p-6">
-            {edit === "location" && (
-              <InlineEditPanel title="Editar ubicación" onClose={() => setEdit(null)}>
-                {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
-              </InlineEditPanel>
-            )}
-            {edit === "datetime" && (
-              <InlineEditPanel title="Editar fecha y hora" onClose={() => setEdit(null)}>
-                {renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
-              </InlineEditPanel>
-            )}
             <div className="grid gap-6 md:grid-cols-[1fr_auto]">
               <div>
                 <div className="text-sm font-bold">Total a pagar</div>
@@ -231,6 +221,35 @@ function Reservar() {
           <Trust icon={<Headphones className="h-5 w-5" />} t="Atención al cliente" d="Estamos aquí para ayudarte antes, durante y después." />
         </div>
       </main>
+
+      {edit && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-4"
+          onClick={() => setEdit(null)}
+        >
+          <div
+            className="relative w-full max-w-md rounded-2xl border-2 border-brand bg-white p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
+                {edit === "location" ? "Editar ubicación" : "Editar fecha y hora"}
+              </div>
+              <button
+                onClick={() => setEdit(null)}
+                className="rounded-full p-1 hover:bg-muted"
+                aria-label="Cerrar"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            {edit === "location"
+              ? renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })
+              : renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
+          </div>
+        </div>
+      )}
+
       <SiteFooter />
     </div>
   );
