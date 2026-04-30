@@ -27,7 +27,7 @@ const VEHICLES = [
 
 function Home() {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState("turismo");
+  const [selected, setSelected] = useState<string | null>(null);
   const [plate, setPlate] = useState("1234ABC");
 
   return (
