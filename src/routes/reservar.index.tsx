@@ -113,87 +113,123 @@ function Reservar() {
             </div>
           </div>
 
-          {/* RIGHT: Payment */}
+          {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
           <div className="rounded-2xl border border-border bg-card p-6">
-            <div className="grid gap-6 md:grid-cols-[1fr_auto]">
+            {edit === "location" ? (
               <div>
-                <div className="text-sm font-bold">Total a pagar</div>
-                <div className="mt-2 text-5xl font-extrabold tracking-tight">{total} €</div>
-                <div className="mt-1 text-xs text-muted-foreground">IVA incluido</div>
-                <div className="mt-3 inline-flex items-center gap-2 text-xs text-muted-foreground">
-                  <Lock className="h-3.5 w-3.5" /> Pago 100% seguro
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
+                    Editar ubicación
+                  </div>
+                  <button
+                    onClick={() => setEdit(null)}
+                    className="rounded-full p-1 hover:bg-muted"
+                    aria-label="Cerrar"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
                 </div>
+                {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
               </div>
-              <div className="flex items-start gap-3 rounded-lg border border-success/30 bg-success/5 p-3 text-xs">
-                <Shield className="mt-0.5 h-5 w-5 text-success" />
-                <div>
-                  <div className="font-bold">Sin sorpresas</div>
-                  <div className="text-muted-foreground">
-                    Precio cerrado,
-                    <br /> sin costes ocultos
+            ) : edit === "datetime" ? (
+              <div>
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
+                    Editar fecha y hora
+                  </div>
+                  <button
+                    onClick={() => setEdit(null)}
+                    className="rounded-full p-1 hover:bg-muted"
+                    aria-label="Cerrar"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+                {renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
+              </div>
+            ) : (
+              <>
+                <div className="grid gap-6 md:grid-cols-[1fr_auto]">
+                  <div>
+                    <div className="text-sm font-bold">Total a pagar</div>
+                    <div className="mt-2 text-5xl font-extrabold tracking-tight">{total} €</div>
+                    <div className="mt-1 text-xs text-muted-foreground">IVA incluido</div>
+                    <div className="mt-3 inline-flex items-center gap-2 text-xs text-muted-foreground">
+                      <Lock className="h-3.5 w-3.5" /> Pago 100% seguro
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 rounded-lg border border-success/30 bg-success/5 p-3 text-xs">
+                    <Shield className="mt-0.5 h-5 w-5 text-success" />
+                    <div>
+                      <div className="font-bold">Sin sorpresas</div>
+                      <div className="text-muted-foreground">
+                        Precio cerrado,
+                        <br /> sin costes ocultos
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <hr className="my-6 border-border" />
+                <hr className="my-6 border-border" />
 
-            <div>
-              <div className="text-base font-bold">Recibe tu informe aquí</div>
-              <div className="mt-1 text-sm text-muted-foreground">Te enviaremos el informe a este email.</div>
-              <label className="mt-4 block text-sm font-bold">Email</label>
-              <div className="relative mt-1">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ejemplo@email.com"
-                  className="w-full rounded-lg border border-success px-4 py-3 pr-10 outline-none"
-                />
-                <Check className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-success p-1 text-white" />
-              </div>
-              <div className="mt-2 text-xs text-muted-foreground">
-                Solo usaremos tu email para enviarte el informe.
-              </div>
-            </div>
+                <div>
+                  <div className="text-base font-bold">Recibe tu informe aquí</div>
+                  <div className="mt-1 text-sm text-muted-foreground">Te enviaremos el informe a este email.</div>
+                  <label className="mt-4 block text-sm font-bold">Email</label>
+                  <div className="relative mt-1">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="ejemplo@email.com"
+                      className="w-full rounded-lg border border-success px-4 py-3 pr-10 outline-none"
+                    />
+                    <Check className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-success p-1 text-white" />
+                  </div>
+                  <div className="mt-2 text-xs text-muted-foreground">
+                    Solo usaremos tu email para enviarte el informe.
+                  </div>
+                </div>
 
-            <button
-              onClick={() =>
-                navigate({
-                  to: "/reservar/confirmacion",
-                  search: { dgt, day, hour, location, total },
-                })
-              }
-              className="mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-brand py-4 text-lg font-bold text-ink hover:brightness-95"
-            >
-              <Lock className="h-5 w-5" />
-              Reservar inspección por {total} €
-              <ArrowRight className="h-5 w-5" />
-            </button>
+                <button
+                  onClick={() =>
+                    navigate({
+                      to: "/reservar/confirmacion",
+                      search: { dgt, day, hour, location, total },
+                    })
+                  }
+                  className="mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-brand py-4 text-lg font-bold text-ink hover:brightness-95"
+                >
+                  <Lock className="h-5 w-5" />
+                  Reservar inspección por {total} €
+                  <ArrowRight className="h-5 w-5" />
+                </button>
 
-            <div className="mt-5 grid grid-cols-3 gap-3 text-xs">
-              <Feature icon={<Check className="h-4 w-4 text-success" />} t="Confirmación" t2="inmediata" />
-              <Feature icon={<Camera className="h-4 w-4 text-muted-foreground" />} t="Informe completo" t2="con fotos y vídeo" />
-              <Feature icon={<Clock className="h-4 w-4 text-muted-foreground" />} t="Informe en 24h" t2="laborables" />
-            </div>
+                <div className="mt-5 grid grid-cols-3 gap-3 text-xs">
+                  <Feature icon={<Check className="h-4 w-4 text-success" />} t="Confirmación" t2="inmediata" />
+                  <Feature icon={<Camera className="h-4 w-4 text-muted-foreground" />} t="Informe completo" t2="con fotos y vídeo" />
+                  <Feature icon={<Clock className="h-4 w-4 text-muted-foreground" />} t="Informe en 24h" t2="laborables" />
+                </div>
 
-            <div className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-4 py-3 text-sm">
-              <Hourglass className="h-4 w-4 text-brand" />
-              <span className="font-bold text-ink">Plazas limitadas. Asegura tu cita ahora.</span>
-            </div>
+                <div className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-4 py-3 text-sm">
+                  <Hourglass className="h-4 w-4 text-brand" />
+                  <span className="font-bold text-ink">Plazas limitadas. Asegura tu cita ahora.</span>
+                </div>
 
-            <div className="mt-5 rounded-lg border border-border p-4">
-              <div className="text-xs text-muted-foreground">Paga de forma segura con</div>
-              <div className="mt-3 flex items-center gap-3">
-                <PayBadge label="VISA" />
-                <PayBadge label="MC" />
-                <PayBadge label=" Pay" />
-                <PayBadge label="G Pay" />
-              </div>
-            </div>
-            <div className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <Lock className="h-3.5 w-3.5" /> Pago seguro con cifrado SSL
-            </div>
+                <div className="mt-5 rounded-lg border border-border p-4">
+                  <div className="text-xs text-muted-foreground">Paga de forma segura con</div>
+                  <div className="mt-3 flex items-center gap-3">
+                    <PayBadge label="VISA" />
+                    <PayBadge label="MC" />
+                    <PayBadge label=" Pay" />
+                    <PayBadge label="G Pay" />
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                  <Lock className="h-3.5 w-3.5" /> Pago seguro con cifrado SSL
+                </div>
+              </>
+            )}
           </div>
         </div>
 
