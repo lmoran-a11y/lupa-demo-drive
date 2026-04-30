@@ -272,7 +272,7 @@ function SummaryRow({
   );
 }
 
-function EditPanel({
+function InlineEditPanel({
   title,
   onClose,
   children,
@@ -282,14 +282,189 @@ function EditPanel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border-2 border-brand bg-card p-6 shadow-lg">
-      <div className="mb-4 flex items-center justify-between">
-        <div className="text-xs font-bold uppercase tracking-widest text-brand">{title}</div>
+    <div className="mt-3 mb-4 rounded-xl border-2 border-brand bg-card p-4 shadow-md">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="text-[11px] font-bold uppercase tracking-widest text-brand">{title}</div>
         <button onClick={onClose} className="rounded-full p-1 hover:bg-muted">
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4" />
         </button>
       </div>
       {children}
+    </div>
+  );
+}
+
+function renderLocationEditor({
+  draftLocation,
+  setDraftLocation,
+  confirmLocation,
+  cancel,
+}: {
+  draftLocation: string;
+  setDraftLocation: (v: string) => void;
+  confirmLocation: () => void;
+  cancel: () => void;
+}) {
+  const city = draftLocation.split(",")[0] || "Lucena";
+  return (
+    <div>
+      <label className="text-xs font-bold">Introduce la dirección o ciudad</label>
+      <div className="mt-2 flex items-center gap-2">
+        <div className="flex flex-1 items-center gap-2 rounded-lg border border-border px-3 py-2">
+          <MapPin className="h-4 w-4 text-muted-foreground" />
+          <input
+            value={draftLocation}
+            onChange={(e) => setDraftLocation(e.target.value)}
+            className="flex-1 bg-transparent text-sm outline-none"
+          />
+          {draftLocation && (
+            <button onClick={() => setDraftLocation("")} className="text-muted-foreground">
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+        <button
+          onClick={confirmLocation}
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-success text-white"
+        >
+          <Check className="h-4 w-4" />
+        </button>
+      </div>
+
+      <div className="mt-3 overflow-hidden rounded-lg border border-border">
+        <div className="relative flex h-32 items-center justify-center bg-[linear-gradient(135deg,#e8f0e0_0%,#f5f0e0_50%,#e0e8f0_100%)]">
+          <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(#0001_1px,transparent_1px),linear-gradient(90deg,#0001_1px,transparent_1px)] [background-size:30px_30px]" />
+          <div className="absolute h-24 w-24 rounded-full bg-brand/15 ring-2 ring-brand/40" />
+          <div className="relative flex flex-col items-center">
+            <MapPin className="h-8 w-8 fill-ink text-ink" />
+            <div className="mt-1 rounded bg-white/90 px-2 py-0.5 text-[10px] font-bold text-ink">
+              {city}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {draftLocation && (
+        <div className="mt-3 flex items-start gap-2 rounded-lg border border-success/30 bg-success/10 p-2 text-xs">
+          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-success text-white">
+            <Check className="h-3 w-3" />
+          </div>
+          <div>
+            <div className="font-bold text-success">UBICACIÓN: {city.toUpperCase()}</div>
+            <div className="text-muted-foreground">Hemos encontrado tu ubicación correctamente.</div>
+          </div>
+        </div>
+      )}
+
+      <div className="mt-3 flex justify-end gap-2">
+        <button onClick={cancel} className="rounded-lg border border-border px-3 py-1.5 text-xs font-bold">
+          Cancelar
+        </button>
+        <button onClick={confirmLocation} className="rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-ink">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function renderDateTimeEditor({
+  day,
+  setDay,
+  hour,
+  setHour,
+  dgt,
+  setDgt,
+  cancel,
+  confirm,
+}: {
+  day: number;
+  setDay: (d: number) => void;
+  hour: string;
+  setHour: (h: string) => void;
+  location: string;
+  dgt: boolean;
+  setDgt: (v: boolean) => void;
+  cancel: () => void;
+  confirm: () => void;
+}) {
+  const days: Array<[number, boolean]> = [
+    [29, true], [30, true],
+    [1, false], [2, false], [3, false], [4, false], [5, false],
+    [6, false], [7, false], [8, false], [9, false], [10, false], [11, false], [12, false],
+    [13, false], [14, false], [15, false], [16, false], [17, false], [18, false], [19, false],
+    [20, false], [21, false], [22, false], [23, false], [24, false], [25, false], [26, false],
+    [27, false], [28, false], [29, false], [30, false], [31, false],
+    [1, true], [2, true],
+  ];
+  return (
+    <div>
+      <div className="text-xs font-bold">Selecciona el día</div>
+      <div className="mt-2 flex items-center justify-between">
+        <button className="rounded p-1 hover:bg-muted">
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+        <div className="text-xs font-bold">Mayo 2024</div>
+        <button className="rounded p-1 hover:bg-muted">
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+      <div className="mt-2 grid grid-cols-7 gap-1 text-center text-[9px] font-bold text-muted-foreground">
+        {["L", "M", "X", "J", "V", "S", "D"].map((d) => (
+          <div key={d}>{d}</div>
+        ))}
+      </div>
+      <div className="mt-1 grid grid-cols-7 gap-1 text-center text-xs">
+        {days.map(([d, other], i) => (
+          <button
+            key={i}
+            onClick={() => !other && setDay(d)}
+            className={`flex h-7 items-center justify-center rounded-full ${
+              day === d && !other
+                ? "bg-brand font-bold text-ink"
+                : other
+                ? "text-muted-foreground/40"
+                : "hover:bg-muted"
+            }`}
+          >
+            {d}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-4 text-xs font-bold">Selecciona la hora</div>
+      <div className="mt-2 grid grid-cols-3 gap-1.5">
+        {HOURS.map((h) => (
+          <button
+            key={h}
+            onClick={() => setHour(h)}
+            className={`rounded-lg border px-2 py-1.5 text-xs font-medium ${
+              hour === h ? "border-brand bg-brand text-ink" : "border-border hover:bg-muted"
+            }`}
+          >
+            {h}
+          </button>
+        ))}
+      </div>
+
+      <label className="mt-3 flex items-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-2 py-2 text-xs font-bold">
+        <input
+          type="checkbox"
+          checked={dgt}
+          onChange={(e) => setDgt(e.target.checked)}
+          className="h-3.5 w-3.5 accent-[#F5B800]"
+        />
+        Añadir informe DGT (+14,99 €)
+      </label>
+
+      <div className="mt-3 flex justify-end gap-2">
+        <button onClick={cancel} className="rounded-lg border border-border px-3 py-1.5 text-xs font-bold">
+          Cancelar
+        </button>
+        <button onClick={confirm} className="rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-ink">
+          Confirmar
+        </button>
+      </div>
     </div>
   );
 }
