@@ -97,7 +97,7 @@ function Home() {
               <button
                 key={v.id}
                 onClick={() => setSelected(v.id)}
-                className={`group relative flex aspect-[4/4.2] flex-col rounded-2xl border bg-gradient-to-b from-[oklch(0.32_0_0)] to-[oklch(0.22_0_0)] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
+                className={`group relative flex aspect-[4/4.2] flex-col rounded-2xl border bg-[#111111] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
                   selected === v.id ? "border-brand ring-1 ring-brand/40" : "border-white/10 hover:border-white/25"
                 }`}
               >
@@ -106,12 +106,12 @@ function Home() {
                     <Check className="h-4 w-4" />
                   </div>
                 )}
-                <div className="flex flex-1 items-center justify-center">
+                <div className="flex flex-1 items-center justify-center overflow-hidden">
                   <img
                     src={v.image}
                     alt={v.label}
                     loading="lazy"
-                    className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                    className="h-[80%] w-[110%] max-w-none object-contain transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
                 <div className="mt-2 flex items-center justify-between">
