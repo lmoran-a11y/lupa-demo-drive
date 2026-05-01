@@ -84,7 +84,7 @@ function Home() {
       </section>
 
       {/* VEHICLE PICKER */}
-      <section className="bg-ink py-12 text-white">
+      <section id="vehicle-picker" className="bg-ink py-12 text-white">
         <div className="mx-auto max-w-7xl px-6" ref={pickerRef}>
           <h2 className="text-center text-2xl font-bold md:text-3xl">¿Qué vehículo quieres revisar?</h2>
           <div className="mx-auto mt-2 h-1 w-16 rounded bg-brand" />

@@ -1,8 +1,27 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 import { Calendar } from "lucide-react";
 
 export function SiteHeader() {
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  const handleSolicitar = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const scrollToPicker = () => {
+      const el = document.getElementById("vehicle-picker");
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    if (pathname === "/") {
+      scrollToPicker();
+    } else {
+      navigate({ to: "/" }).then(() => {
+        // wait for the home page to render
+        setTimeout(scrollToPicker, 100);
+      });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -15,9 +34,13 @@ export function SiteHeader() {
           <Link to="/consultar-cita" className="hidden items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-muted md:inline-flex">
             <Calendar className="h-4 w-4" /> Consultar cita
           </Link>
-          <Link to="/reservar" className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95">
+          <button
+            type="button"
+            onClick={handleSolicitar}
+            className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95"
+          >
             Solicitar inspección
-          </Link>
+          </button>
         </div>
       </div>
     </header>
