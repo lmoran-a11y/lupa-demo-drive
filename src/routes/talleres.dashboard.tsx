@@ -120,6 +120,10 @@ function Dashboard() {
                   <div className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${accent}`}/><span className="font-bold">{i.status}</span></div>
                   <div className="text-xs text-muted-foreground">ID: {i.id}</div>
                 </div>
+                <div className="text-right text-sm">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{i.status==="Completada"?"Pagado":"Pago al enviar"}</div>
+                  <div className={`text-lg font-extrabold ${i.status==="Completada"?"text-success":"text-ink"}`}>{formatEur(getWorkshopPayout(i.vehicleType))} €</div>
+                </div>
                 <div className="flex flex-col gap-2">
                   {i.status === "Completada" ? (
                     <Link to="/ejemplo-informe" className="flex items-center gap-2 rounded-lg border-2 border-ink px-4 py-2 text-sm font-bold">Ver informe <ArrowRight className="h-4 w-4"/></Link>
