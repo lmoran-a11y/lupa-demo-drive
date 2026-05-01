@@ -85,7 +85,7 @@ export const Route = createFileRoute("/como-funciona")({
           <ol className="relative mt-9 space-y-5 pl-[96px] md:pl-[126px]">
             {/* dotted vertical connector behind numbers */}
             <div
-              className="pointer-events-none absolute top-[52px] bottom-[76px] w-0 border-l-[2px] border-dotted border-neutral-300"
+              className="pointer-events-none absolute top-[52px] bottom-[76px] w-0 border-l-[2px] border-neutral-200"
               style={{ left: "30px" }}
               aria-hidden
             />
@@ -112,18 +112,18 @@ export const Route = createFileRoute("/como-funciona")({
           </ol>
 
           {/* CTA block */}
-          <div className="relative mt-12 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 md:p-8">
-            <div className="absolute left-0 top-8 bottom-8 w-1 rounded-r bg-[#F5B400]" />
-            <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
-              <div className="flex items-center gap-5">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white">
-                  <ShieldCheck className="h-7 w-7 text-neutral-900" strokeWidth={1.8} />
+          <div className="relative mt-6 overflow-hidden rounded-[18px] border border-neutral-200 bg-white px-10 py-10 shadow-[0_2px_10px_rgba(0,0,0,0.025)] md:px-16">
+            <div className="absolute left-10 top-12 bottom-12 w-[3px] rounded-full bg-primary" />
+            <div className="flex flex-col items-start gap-8 md:flex-row md:items-center">
+              <div className="flex items-center gap-8 pl-10">
+                <div className="flex h-[96px] w-[96px] shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
+                  <ShieldCheck className="h-12 w-12 text-neutral-950" strokeWidth={1.9} />
                 </div>
                 <div>
-                  <div className="text-lg font-extrabold leading-tight text-neutral-900 md:text-xl">
+                  <div className="text-[24px] font-black leading-[1.12] text-neutral-950">
                     Compra con confianza.<br />Decide con seguridad.
                   </div>
-                  <p className="mt-2 text-sm text-neutral-500">
+                  <p className="mt-4 max-w-[405px] text-[16px] leading-relaxed text-neutral-600">
                     Talleres verificados y proceso estandarizado para comprar con más seguridad.
                   </p>
                 </div>
@@ -139,22 +139,24 @@ export const Route = createFileRoute("/como-funciona")({
                       ?.scrollIntoView({ behavior: "smooth", block: "start" });
                   }
                 }}
-                className="ml-auto inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#F5B400] px-10 py-4 text-base font-bold text-neutral-900 transition-colors hover:bg-[#e0a600] md:w-auto"
+                className="ml-auto inline-flex w-full min-w-[420px] items-center justify-center gap-14 rounded-[16px] bg-primary px-10 py-5 text-[20px] font-black text-neutral-950 transition-colors hover:bg-primary/90 md:w-auto"
               >
                 Solicitar inspección
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="h-7 w-7" strokeWidth={2.5} />
               </Link>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-neutral-600">
+            <div className="mt-7 flex flex-wrap items-center justify-end gap-x-5 gap-y-3 text-[12px] text-neutral-600">
               <div className="flex items-center gap-2">
                 <BadgeCheck className="h-4 w-4 text-neutral-700" />
                 Talleres verificados
               </div>
+              <span className="h-5 w-px bg-neutral-300" />
               <div className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-neutral-700" />
                 Informes imparciales
               </div>
+              <span className="h-5 w-px bg-neutral-300" />
               <div className="flex items-center gap-2">
                 <Lock className="h-4 w-4 text-neutral-700" />
                 Datos 100% seguros
