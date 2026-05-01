@@ -3,6 +3,16 @@ import { useState } from "react";
 import { ArrowLeft, Save, Send, Check, AlertTriangle, X, Camera, Upload, Settings, Car, Zap } from "lucide-react";
 import { workshopInspections } from "@/lib/mock-data";
 import { getWorkshopPayout, formatEur } from "@/lib/workshop-pricing";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/talleres/inspeccion/$id")({
   head: () => ({ meta: [{ title: "Informe LUPA — LUPAUTO" }] }),
@@ -31,10 +41,12 @@ function Report() {
   const [aline, setAline] = useState("ok");
   const [interior, setInterior] = useState("ok");
   const [estado, setEstado] = useState("ok");
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const payout = getWorkshopPayout(inspection.vehicleType);
 
   function send() {
+    setConfirmOpen(false);
     alert(`✅ Informe enviado correctamente.\nLa inspección se ha marcado como completada y el pago de ${formatEur(payout)} € se transferirá automáticamente a tu taller.`);
     navigate({ to: "/talleres/dashboard" });
   }
@@ -49,7 +61,7 @@ function Report() {
         </div>
         <div className="flex gap-2">
           <button onClick={()=>alert("💾 Progreso guardado")} className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-bold"><Save className="h-4 w-4"/>Guardar progreso</button>
-          <button onClick={send} className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95"><Send className="h-4 w-4"/>Enviar informe</button>
+          <button onClick={()=>setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95"><Send className="h-4 w-4"/>Enviar informe</button>
         </div>
       </header>
 
@@ -184,10 +196,27 @@ function Report() {
           </div>
           <div className="flex justify-end gap-3">
             <Link to="/talleres/dashboard" className="rounded-lg border border-border px-4 py-3 text-sm font-bold">Cancelar</Link>
-            <button onClick={send} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4"/>Enviar informe y cobrar {formatEur(payout)} €</button>
+            <button onClick={()=>setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4"/>Enviar informe y cobrar {formatEur(payout)} €</button>
           </div>
         </div>
       </main>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmar envío del informe</AlertDialogTitle>
+            <AlertDialogDescription>
+              ¿Estás seguro de que quieres enviar el informe? Una vez enviado no podrá ser modificado.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-white">Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={send} className="bg-brand text-ink hover:brightness-95">
+              Sí, enviar informe
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
