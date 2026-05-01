@@ -1,8 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
-import { Calendar, Clock, History, CreditCard, MessageSquare, Settings, LogOut, Bell, ChevronDown, Headphones, ArrowRight, Car } from "lucide-react";
+import { Calendar, Clock, History, CreditCard, MessageSquare, Settings, LogOut, Bell, ChevronDown, Headphones, ArrowRight, Car, Zap } from "lucide-react";
 import { workshopInspections, type Inspection } from "@/lib/mock-data";
+import { getWorkshopPayout, formatEur, WORKSHOP_PRICES } from "@/lib/workshop-pricing";
 
 export const Route = createFileRoute("/talleres/dashboard")({
   head: () => ({ meta: [{ title: "Inspecciones asignadas — LUPAUTO" }] }),
@@ -81,6 +82,25 @@ function Dashboard() {
           <div className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-bold"><Calendar className="h-4 w-4"/>Jueves, 16 de mayo</div>
         </div>
 
+        {/* Tariff & automatic payment banner */}
+        <div className="mt-5 grid gap-3 rounded-2xl border border-brand/30 bg-brand/5 p-4 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="flex items-start gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-ink"><Zap className="h-5 w-5"/></div>
+            <div>
+              <div className="text-sm font-extrabold">Pago automático al enviar el informe</div>
+              <p className="text-xs text-muted-foreground">En cuanto envíes el informe, la inspección se marca como completada y el pago se transfiere automáticamente a tu taller.</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2 text-xs">
+            {(Object.entries(WORKSHOP_PRICES) as [keyof typeof WORKSHOP_PRICES, number][]).map(([k,v])=>(
+              <span key={k} className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1 font-bold">
+                {k === "Deportivo" ? "Deportivo / Alta gama" : k === "SUV" ? "SUV / 4x4" : k}
+                <span className="text-brand">{formatEur(v)} €</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-5 space-y-3">
           {filtered.map(i => {
             const accent = i.status==="Completada"?"bg-success":i.status==="En proceso"?"bg-info":"bg-brand";
@@ -99,6 +119,10 @@ function Dashboard() {
                 <div className="text-sm">
                   <div className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${accent}`}/><span className="font-bold">{i.status}</span></div>
                   <div className="text-xs text-muted-foreground">ID: {i.id}</div>
+                </div>
+                <div className="text-right text-sm">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{i.status==="Completada"?"Pagado":"Pago al enviar"}</div>
+                  <div className={`text-lg font-extrabold ${i.status==="Completada"?"text-success":"text-ink"}`}>{formatEur(getWorkshopPayout(i.vehicleType))} €</div>
                 </div>
                 <div className="flex flex-col gap-2">
                   {i.status === "Completada" ? (
