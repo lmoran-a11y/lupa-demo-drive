@@ -129,7 +129,16 @@ export const Route = createFileRoute("/como-funciona")({
                 </div>
               </div>
               <Link
-                to="/reservar"
+                to="/"
+                hash="vehicle-picker"
+                onClick={(e) => {
+                  if (window.location.pathname === "/") {
+                    e.preventDefault();
+                    document
+                      .getElementById("vehicle-picker")
+                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
                 className="ml-auto inline-flex w-full items-center justify-center gap-3 rounded-xl bg-[#F5B400] px-8 py-4 text-base font-bold text-neutral-900 transition-colors hover:bg-[#e0a600] md:w-auto"
               >
                 Solicitar inspección
