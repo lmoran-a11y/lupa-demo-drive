@@ -56,9 +56,13 @@ function Home() {
             <p className="mt-4 text-lg text-muted-foreground">
               Inspección en taller con fotos y vídeo en 24h.
             </p>
-            <Link to="/reservar" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-4 text-base font-bold text-ink shadow-sm hover:brightness-95">
+            <button
+              type="button"
+              onClick={() => pickerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-4 text-base font-bold text-ink shadow-sm hover:brightness-95"
+            >
               Solicitar inspección
-            </Link>
+            </button>
 
             <div className="mt-10 grid grid-cols-3 gap-6">
               <Trust icon={<Shield className="h-5 w-5" />} title="Talleres verificados" sub="de confianza" />
