@@ -127,7 +127,7 @@ function Home() {
                   <input value={plate} onChange={(e) => setPlate(e.target.value)} className="flex-1 text-lg font-bold tracking-wider outline-none" />
                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-success text-white"><Check className="h-4 w-4" /></div>
                 </div>
-                <button onClick={() => navigate({ to: "/reservar" })} className="flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink hover:brightness-95">
+                <button onClick={() => navigate({ to: "/reservar", search: { vehicle: selected ?? "turismo", plate } })} className="flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink hover:brightness-95">
                   Continuar <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
