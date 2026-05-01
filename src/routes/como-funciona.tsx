@@ -34,22 +34,25 @@ const steps = [
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
     icon: (
       <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        {/* Car silhouette (side view) on top of the lift arms */}
-        {/* roof + hood line */}
-        <path d="M15 18l2.4-3.2c.5-.7 1.3-1.1 2.2-1.1h8.8c.9 0 1.7.4 2.2 1.1L33 18" />
-        {/* body */}
-        <path d="M11.5 22c0-1 .6-1.9 1.5-2.3l1.6-.7c.4-.2.7-.5.9-.9l.3-.6c.4-.8 1.2-1.3 2.1-1.3h12.2c.9 0 1.7.5 2.1 1.3l.3.6c.2.4.5.7.9.9l1.6.7c.9.4 1.5 1.3 1.5 2.3v2.5c0 .6-.4 1-1 1H12.5c-.6 0-1-.4-1-1V22z" />
-        {/* windows divider */}
-        <path d="M22.5 14v3.2M25.5 14v3.2" />
+        {/* Car (front view) */}
+        {/* roof */}
+        <path d="M17 18l2-3.2c.4-.6 1-1 1.7-1h6.6c.7 0 1.3.4 1.7 1L31 18" />
+        {/* upper body / windshield row */}
+        <path d="M14.5 22c0-.7.3-1.4.9-1.8l1.6-1.2c.3-.2.7-.4 1.1-.4h11.8c.4 0 .8.1 1.1.4l1.6 1.2c.6.4.9 1.1.9 1.8" />
+        <path d="M14.5 22h19" />
+        {/* lower body */}
+        <path d="M14.5 22v4c0 .6.4 1 1 1h17c.6 0 1-.4 1-1v-4" />
+        {/* headlights */}
+        <path d="M17 24.5h2M29 24.5h2" />
         {/* wheels */}
-        <circle cx="16.5" cy="26.5" r="2.2" />
-        <circle cx="31.5" cy="26.5" r="2.2" />
-        {/* Lift arms holding the car */}
-        <path d="M8 25h6.5M33.5 25h6.5" />
-        {/* Lift columns */}
-        <path d="M7 14v22M41 14v22" />
-        {/* Yellow ground */}
-        <path d="M5 36h38" stroke="#F5B400" strokeWidth="2.6" />
+        <circle cx="17.5" cy="28.5" r="1.6" />
+        <circle cx="30.5" cy="28.5" r="1.6" />
+        {/* Lift columns (left + right) */}
+        <path d="M10 14v22M38 14v22" />
+        {/* Lift arms going under the car */}
+        <path d="M10 27h6M32 27h6" />
+        {/* Yellow ground line */}
+        <path d="M8 36h32" stroke="#F5B400" strokeWidth="2.6" />
       </svg>
     ),
   },
