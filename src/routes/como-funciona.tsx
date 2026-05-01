@@ -33,12 +33,17 @@ const steps = [
     title: "El vehículo se revisa en taller",
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M10 24l3-7c.5-1.2 1.7-2 3-2h16c1.3 0 2.5.8 3 2l3 7" />
-        <path d="M8 24h32v8c0 1.1-.9 2-2 2h-2a2 2 0 01-2-2v-2H14v2a2 2 0 01-2 2h-2c-1.1 0-2-.9-2-2v-8z" />
-        <circle cx="15" cy="30" r="1.5" fill="currentColor" />
-        <circle cx="33" cy="30" r="1.5" fill="currentColor" />
-        <path d="M6 40h36" stroke="#F5B400" strokeWidth="2.5" />
+      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        {/* car body */}
+        <path d="M11 24l3-6c.5-1.1 1.6-1.8 2.8-1.8h14.4c1.2 0 2.3.7 2.8 1.8l3 6" />
+        <path d="M9 24h30v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-1H15v1a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6z" />
+        <circle cx="16" cy="28" r="1.6" fill="currentColor" stroke="none" />
+        <circle cx="32" cy="28" r="1.6" fill="currentColor" stroke="none" />
+        {/* lift column */}
+        <path d="M24 32v8" />
+        {/* lift base / floor in yellow */}
+        <path d="M10 40h28" stroke="#F5B400" strokeWidth="3" />
+        <path d="M14 40v2M34 40v2" stroke="#F5B400" strokeWidth="3" />
       </svg>
     ),
   },
