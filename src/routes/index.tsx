@@ -52,24 +52,24 @@ function Home() {
       <SiteHeader />
 
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-6 pt-10 pb-14 md:pt-16">
-        <div className="grid items-center gap-10 md:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-6 pt-8 pb-10 md:pt-10">
+        <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <h1 className="text-5xl font-extrabold leading-[1.05] text-ink md:text-6xl">
+            <h1 className="text-5xl font-extrabold leading-[1.02] tracking-tight text-ink md:text-[64px]">
               Revisa tu coche<br />antes de comprar
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-3 text-base text-muted-foreground">
               Inspección en taller con fotos y vídeo en 24h.
             </p>
             <button
               type="button"
               onClick={() => pickerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              className="mt-6 inline-flex items-center rounded-xl bg-brand px-7 py-4 text-base font-bold text-ink shadow-sm hover:brightness-95"
+              className="mt-5 inline-flex items-center rounded-xl bg-brand px-6 py-3.5 text-base font-bold text-ink shadow-sm hover:brightness-95"
             >
               Solicitar inspección
             </button>
 
-            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
               <Trust icon={<Shield className="h-5 w-5" />} title="Talleres verificados" sub="de confianza" />
               <Trust icon={<Clock className="h-5 w-5" />} title="Informe en 24h" sub="rápido y detallado" />
               <Trust icon={<Lock className="h-5 w-5" />} title="Pago seguro" sub="100% protegido" />
@@ -81,23 +81,23 @@ function Home() {
               alt="Lupa con coche"
               width={600}
               height={600}
-              className="w-full max-w-[460px]"
+              className="w-full max-w-[420px]"
             />
           </div>
         </div>
       </section>
 
       {/* VEHICLE PICKER */}
-      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.18_0_0)] py-16 text-white md:py-20">
+      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.18_0_0)] py-10 text-white md:py-12">
         <div className="mx-auto max-w-7xl px-6" ref={pickerRef}>
-          <h2 className="text-center text-2xl font-bold md:text-3xl">¿Qué vehículo quieres revisar?</h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded bg-brand" />
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+          <h2 className="text-center text-2xl font-bold md:text-[28px]">¿Qué vehículo quieres revisar?</h2>
+          <div className="mx-auto mt-2 h-[3px] w-12 rounded bg-brand" />
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-4">
             {VEHICLES.map((v) => (
               <button
                 key={v.id}
                 onClick={() => setSelected(v.id)}
-                className={`group relative flex aspect-[4/5] flex-col rounded-2xl border bg-gradient-to-b from-[oklch(0.32_0_0)] to-[oklch(0.24_0_0)] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
+                className={`group relative flex aspect-[4/4.2] flex-col rounded-2xl border bg-gradient-to-b from-[oklch(0.32_0_0)] to-[oklch(0.22_0_0)] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
                   selected === v.id ? "border-brand ring-1 ring-brand/40" : "border-white/10 hover:border-white/25"
                 }`}
               >
@@ -153,9 +153,10 @@ function Home() {
       </section>
 
       {/* HOW */}
-      <section className="mx-auto max-w-7xl px-6 py-16">
-        <h2 className="text-center text-3xl font-bold">Así funciona</h2>
-        <div className="relative mt-12 grid gap-10 md:grid-cols-3">
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <h2 className="text-center text-[28px] font-bold">Así funciona</h2>
+        <div className="mx-auto mt-2 h-[3px] w-12 rounded bg-brand" />
+        <div className="relative mt-10 grid gap-10 md:grid-cols-3">
           {/* dashed connectors (desktop only) */}
           <div className="pointer-events-none absolute left-0 right-0 top-10 hidden md:block">
             <div className="mx-auto grid max-w-5xl grid-cols-3">
@@ -312,11 +313,11 @@ function Home() {
 
 function Trust({ icon, title, sub }: { icon: React.ReactNode; title: string; sub: string }) {
   return (
-    <div className="flex items-center gap-3">
-      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card">{icon}</div>
-      <div>
-        <div className="text-sm font-bold">{title}</div>
-        <div className="text-xs text-muted-foreground">{sub}</div>
+    <div className="flex items-center gap-2.5">
+      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-ink">{icon}</div>
+      <div className="leading-tight">
+        <div className="text-[13px] font-bold">{title}</div>
+        <div className="text-[12px] text-muted-foreground">{sub}</div>
       </div>
     </div>
   );
