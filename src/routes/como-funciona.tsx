@@ -63,48 +63,48 @@ export const Route = createFileRoute("/como-funciona")({
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main className="bg-white">
-        <section className="mx-auto max-w-4xl px-6 py-20">
+        <section className="mx-auto max-w-[1130px] px-6 py-10 pb-8">
           {/* Top label */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-800">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[15px] font-bold uppercase tracking-[-0.01em] text-neutral-700">
             <span>Reserva online</span>
-            <span className="h-2 w-2 rounded-full bg-[#F5B400]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-primary" />
             <span>Taller verificado</span>
-            <span className="h-2 w-2 rounded-full bg-[#F5B400]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-primary" />
             <span>Informe claro</span>
           </div>
 
           {/* Title + subtitle */}
-          <h1 className="mt-6 text-center text-5xl font-extrabold tracking-tight text-neutral-900 md:text-6xl">
+          <h1 className="mt-5 text-center text-[46px] font-black leading-none text-neutral-950 md:text-[66px]">
             Cómo funciona LUPAUTO
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-center text-base text-neutral-500">
+          <p className="mx-auto mt-5 max-w-2xl text-center text-[20px] leading-relaxed text-neutral-600">
             Un proceso claro, rápido y profesional para comprar con más seguridad.
           </p>
 
           {/* Steps */}
-          <ol className="relative mt-14 space-y-6 pl-16 md:pl-20">
+          <ol className="relative mt-9 space-y-5 pl-[96px] md:pl-[126px]">
             {/* dotted vertical connector behind numbers */}
             <div
-              className="pointer-events-none absolute top-8 bottom-8 w-0 border-l-2 border-dotted border-neutral-300"
-              style={{ left: "27px" }}
+              className="pointer-events-none absolute top-[52px] bottom-[76px] w-0 border-l-[2px] border-dotted border-neutral-300"
+              style={{ left: "30px" }}
               aria-hidden
             />
 
             {steps.map(({ n, title, desc, icon }) => (
               <li key={n} className="relative">
                 {/* number circle - absolutely positioned to the left */}
-                <div className="absolute -left-16 top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-[#F5B400] text-xl font-extrabold text-neutral-900 shadow-[0_0_0_6px_white] md:-left-20">
+                <div className="absolute -left-[96px] top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-[28px] font-black leading-none text-neutral-950 shadow-[0_0_0_9px_white] md:-left-[126px]">
                   {n}
                 </div>
 
                 {/* card */}
-                <div className="flex items-center gap-5 rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-neutral-900">
+                <div className="flex min-h-[146px] items-center gap-12 rounded-[14px] border border-neutral-200 bg-white px-10 py-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
+                  <div className="flex h-[102px] w-[108px] shrink-0 items-center justify-center rounded-[18px] border border-neutral-200 bg-white text-neutral-950 shadow-[0_7px_22px_rgba(0,0,0,0.06)]">
                     {icon}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-lg font-extrabold text-neutral-900 md:text-xl">{title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-neutral-500 md:text-[15px]">{desc}</p>
+                    <div className="text-[24px] font-black leading-tight text-neutral-950">{title}</div>
+                    <p className="mt-2 max-w-[560px] text-[19px] leading-[1.45] text-neutral-600">{desc}</p>
                   </div>
                 </div>
               </li>
