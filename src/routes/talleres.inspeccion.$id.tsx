@@ -174,9 +174,18 @@ function Report() {
           <div>🛡 INSPECCIÓN REALIZADA POR<br/><b className="text-ink">Taller certificado LUPAUTO</b><br/>Nº Taller: ES-12345</div>
         </div>
 
-        <div className="flex justify-end gap-3">
-          <Link to="/talleres/dashboard" className="rounded-lg border border-border px-4 py-3 text-sm font-bold">Cancelar</Link>
-          <button onClick={send} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4"/>Enviar informe</button>
+        <div className="flex flex-col items-stretch justify-between gap-3 rounded-2xl border border-brand/30 bg-brand/5 p-4 md:flex-row md:items-center">
+          <div className="flex items-start gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-ink"><Zap className="h-5 w-5"/></div>
+            <div className="text-sm">
+              <div className="font-extrabold">Pago automático tras enviar el informe</div>
+              <div className="text-xs text-muted-foreground">Vehículo: <b>{inspection.vehicleType}</b> · Importe a recibir: <b className="text-ink">{formatEur(payout)} €</b></div>
+            </div>
+          </div>
+          <div className="flex justify-end gap-3">
+            <Link to="/talleres/dashboard" className="rounded-lg border border-border px-4 py-3 text-sm font-bold">Cancelar</Link>
+            <button onClick={send} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4"/>Enviar informe y cobrar {formatEur(payout)} €</button>
+          </div>
         </div>
       </main>
     </div>
