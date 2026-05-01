@@ -33,23 +33,23 @@ const steps = [
     title: "El vehículo se revisa en taller",
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        {/* car front silhouette */}
-        <path d="M13 22c0-1 .6-1.9 1.5-2.3l2-.9c.5-.2.9-.7 1.1-1.2l1-2.6c.3-.9 1.2-1.5 2.1-1.5h6.6c1 0 1.8.6 2.1 1.5l1 2.6c.2.5.6 1 1.1 1.2l2 .9c.9.4 1.5 1.3 1.5 2.3v6c0 .6-.4 1-1 1H14c-.6 0-1-.4-1-1v-6z" />
-        {/* windshield divider */}
-        <path d="M17 19h14" />
-        {/* headlights */}
-        <circle cx="16.5" cy="25" r="1.1" fill="currentColor" stroke="none" />
-        <circle cx="31.5" cy="25" r="1.1" fill="currentColor" stroke="none" />
+      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {/* Car silhouette (side view) on top of the lift arms */}
+        {/* roof + hood line */}
+        <path d="M15 18l2.4-3.2c.5-.7 1.3-1.1 2.2-1.1h8.8c.9 0 1.7.4 2.2 1.1L33 18" />
+        {/* body */}
+        <path d="M11.5 22c0-1 .6-1.9 1.5-2.3l1.6-.7c.4-.2.7-.5.9-.9l.3-.6c.4-.8 1.2-1.3 2.1-1.3h12.2c.9 0 1.7.5 2.1 1.3l.3.6c.2.4.5.7.9.9l1.6.7c.9.4 1.5 1.3 1.5 2.3v2.5c0 .6-.4 1-1 1H12.5c-.6 0-1-.4-1-1V22z" />
+        {/* windows divider */}
+        <path d="M22.5 14v3.2M25.5 14v3.2" />
         {/* wheels */}
-        <circle cx="17" cy="31" r="2" />
-        <circle cx="31" cy="31" r="2" />
-        {/* lift columns */}
-        <path d="M9 16v22M39 16v22" />
-        {/* lift platforms (arms holding the car) */}
-        <path d="M9 30h6M33 30h6" />
-        {/* yellow base/floor */}
-        <path d="M6 38h36" stroke="#F5B400" strokeWidth="2.6" />
+        <circle cx="16.5" cy="26.5" r="2.2" />
+        <circle cx="31.5" cy="26.5" r="2.2" />
+        {/* Lift arms holding the car */}
+        <path d="M8 25h6.5M33.5 25h6.5" />
+        {/* Lift columns */}
+        <path d="M7 14v22M41 14v22" />
+        {/* Yellow ground */}
+        <path d="M5 36h38" stroke="#F5B400" strokeWidth="2.6" />
       </svg>
     ),
   },
