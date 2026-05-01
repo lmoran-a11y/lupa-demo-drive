@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Save, Send, Check, AlertTriangle, X, Camera, Upload, Settings, Car } from "lucide-react";
+import { ArrowLeft, Save, Send, Check, AlertTriangle, X, Camera, Upload, Settings, Car, Zap } from "lucide-react";
 import { workshopInspections } from "@/lib/mock-data";
+import { getWorkshopPayout, formatEur } from "@/lib/workshop-pricing";
 
 export const Route = createFileRoute("/talleres/inspeccion/$id")({
   head: () => ({ meta: [{ title: "Informe LUPA — LUPAUTO" }] }),
@@ -31,8 +32,10 @@ function Report() {
   const [interior, setInterior] = useState("ok");
   const [estado, setEstado] = useState("ok");
 
+  const payout = getWorkshopPayout(inspection.vehicleType);
+
   function send() {
-    alert("✅ Informe enviado correctamente. La inspección ha sido marcada como completada.");
+    alert(`✅ Informe enviado correctamente.\nLa inspección se ha marcado como completada y el pago de ${formatEur(payout)} € se transferirá automáticamente a tu taller.`);
     navigate({ to: "/talleres/dashboard" });
   }
 
