@@ -3,6 +3,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StepProgress } from "@/components/StepProgress";
 import { useState } from "react";
+import { z } from "zod";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { getBasePrice, formatEur, VEHICLE_LABELS, type VehicleType } from "@/lib/pricing";
 import {
   MapPin,
   Check,
@@ -22,7 +25,13 @@ import {
   Info,
 } from "lucide-react";
 
+const reservarSearchSchema = z.object({
+  vehicle: fallback(z.enum(["turismo", "suv", "furgoneta", "deportivo"]), "turismo").default("turismo"),
+  plate: fallback(z.string(), "").default(""),
+});
+
 export const Route = createFileRoute("/reservar/")({
+  validateSearch: zodValidator(reservarSearchSchema),
   head: () => ({ meta: [{ title: "Reserva tu inspección — LUPAUTO" }] }),
   component: Reservar,
 });
@@ -33,6 +42,7 @@ type EditMode = null | "location" | "datetime";
 
 function Reservar() {
   const navigate = useNavigate();
+  const { vehicle, plate } = Route.useSearch();
   const [location, setLocation] = useState("Lucena, Córdoba");
   const [draftLocation, setDraftLocation] = useState("Lucena, Córdoba");
   const [locationOk, setLocationOk] = useState(true);
@@ -42,7 +52,10 @@ function Reservar() {
   const [edit, setEdit] = useState<EditMode>(null);
   const [email, setEmail] = useState("");
 
-  const total = (59.9 + (dgt ? 14.99 : 0)).toFixed(2).replace(".", ",");
+  const basePrice = getBasePrice(vehicle as VehicleType);
+  const totalNum = basePrice + (dgt ? 14.99 : 0);
+  const total = formatEur(totalNum);
+  const vehicleLabel = VEHICLE_LABELS[vehicle as VehicleType] ?? "Turismo";
 
   const openEdit = (m: EditMode) => {
     setDraftLocation(location);
@@ -92,7 +105,7 @@ function Reservar() {
             <SummaryRow
               icon={<Wrench className="h-4 w-4" />}
               title="Servicio"
-              value="Inspección estándar"
+              value={`Inspección estándar — ${vehicleLabel} (${formatEur(basePrice)} €)`}
               onEdit={() => {}}
             />
             <SummaryRow
@@ -195,7 +208,7 @@ function Reservar() {
                   onClick={() =>
                     navigate({
                       to: "/reservar/confirmacion",
-                      search: { dgt, day, hour, location, total },
+                      search: { dgt, day, hour, location, total, vehicle: vehicle as VehicleType, plate },
                     })
                   }
                   className="mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-brand py-4 text-lg font-bold text-ink hover:brightness-95"

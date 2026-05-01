@@ -5,13 +5,16 @@ import { StepProgress } from "@/components/StepProgress";
 import { Check, MapPin, Calendar, Clock, Wrench, FileText, MessageCircle, Copy, Headphones, Shield, Home } from "lucide-react";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { VEHICLE_LABELS, type VehicleType } from "@/lib/pricing";
 
 const schema = z.object({
   dgt: fallback(z.boolean(), false).default(false),
   day: fallback(z.number(), 16).default(16),
   hour: fallback(z.string(), "14:00").default("14:00"),
   location: fallback(z.string(), "Lucena, Córdoba").default("Lucena, Córdoba"),
-  total: fallback(z.string(), "59,90").default("59,90"),
+  total: fallback(z.string(), "180,00").default("180,00"),
+  vehicle: fallback(z.enum(["turismo", "suv", "furgoneta", "deportivo"]), "turismo").default("turismo"),
+  plate: fallback(z.string(), "").default(""),
 });
 
 export const Route = createFileRoute("/reservar/confirmacion")({
@@ -21,7 +24,8 @@ export const Route = createFileRoute("/reservar/confirmacion")({
 });
 
 function Confirmacion() {
-  const { dgt, day, hour, location, total } = Route.useSearch();
+  const { dgt, day, hour, location, total, vehicle } = Route.useSearch();
+  const vehicleLabel = VEHICLE_LABELS[vehicle as VehicleType] ?? "Turismo";
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -56,7 +60,7 @@ function Confirmacion() {
             <Row icon={<MapPin/>} t="Dirección" v={`Calle del Motor, 45\n14900 ${location}`}/>
             <Row icon={<Calendar/>} t="Fecha" v={`Jueves, ${day} de mayo de 2024`}/>
             <Row icon={<Clock/>} t="Hora" v={hour}/>
-            <Row icon={<Wrench/>} t="Servicio" v="Inspección estándar"/>
+            <Row icon={<Wrench/>} t="Servicio" v={`Inspección estándar — ${vehicleLabel}`}/>
             <Row icon={<FileText/>} t="Informe DGT" v={dgt ? "Incluido ✓" : "No incluido"}/>
           </div>
           <div className="mt-5 flex items-start gap-3 rounded-lg bg-info/10 p-4 text-sm">
