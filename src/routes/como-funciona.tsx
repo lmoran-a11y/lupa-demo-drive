@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock } from "lucide-react";
+import liftIcon from "@/assets/lift-icon.png";
 
 
 const steps = [
@@ -34,21 +35,7 @@ const steps = [
     title: "El vehículo se revisa en taller",
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        {/* car body */}
-        <path d="M10 22h28l-4-6H14l-4 6z" />
-        <path d="M8 22h32v6H8z" />
-        {/* wheels */}
-        <circle cx="16" cy="30" r="2" />
-        <circle cx="32" cy="30" r="2" />
-        {/* lift platform */}
-        <path d="M6 34h36" />
-        {/* lift column */}
-        <path d="M24 34v8" />
-        <path d="M20 42h8" />
-        {/* ground line */}
-        <path d="M4 44h40" stroke="#F5B400" strokeWidth="2.6" />
-      </svg>
+      <img src={liftIcon} alt="Coche en elevador de taller" className="h-16 w-16 object-contain" />
     ),
   },
   {
