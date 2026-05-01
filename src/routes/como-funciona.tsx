@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock } from "lucide-react";
+import liftIcon from "@/assets/lift-icon.png";
 
 const steps = [
   {
