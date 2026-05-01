@@ -9,7 +9,7 @@ const steps = [
     title: "Reserva online",
     desc: "Elige el tipo de vehículo, introduce la matrícula y selecciona ubicación, fecha y hora.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="7" y="10" width="34" height="30" rx="3" />
         <path d="M7 18h34" />
         <path d="M16 6v8M32 6v8" />
@@ -22,7 +22,7 @@ const steps = [
     title: "Te asignamos un taller verificado",
     desc: "Una vez completes la reserva, te enviaremos el taller, la dirección y los datos de la cita.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M24 6l14 5v11c0 9-6 15-14 20-8-5-14-11-14-20V11l14-5z" />
         <path d="M17 24l5 5 9-10" stroke="#F5B400" />
       </svg>
@@ -33,7 +33,7 @@ const steps = [
     title: "El vehículo se revisa en taller",
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M10 24l3-7c.5-1.2 1.7-2 3-2h16c1.3 0 2.5.8 3 2l3 7" />
         <path d="M8 24h32v8c0 1.1-.9 2-2 2h-2a2 2 0 01-2-2v-2H14v2a2 2 0 01-2 2h-2c-1.1 0-2-.9-2-2v-8z" />
         <circle cx="15" cy="30" r="1.5" fill="currentColor" />
@@ -47,7 +47,7 @@ const steps = [
     title: "Recibe tu Informe LUPA",
     desc: "Obtén un informe claro y visual para decidir con más seguridad antes de comprar.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 6h16l10 10v22a4 4 0 01-4 4H12a4 4 0 01-4-4V10a4 4 0 014-4z" />
         <path d="M28 6v10h10" />
         <circle cx="32" cy="34" r="6" fill="#F5B400" stroke="#F5B400" />
