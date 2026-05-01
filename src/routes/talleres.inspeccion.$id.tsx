@@ -3,6 +3,16 @@ import { useState } from "react";
 import { ArrowLeft, Save, Send, Check, AlertTriangle, X, Camera, Upload, Settings, Car, Zap } from "lucide-react";
 import { workshopInspections } from "@/lib/mock-data";
 import { getWorkshopPayout, formatEur } from "@/lib/workshop-pricing";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/talleres/inspeccion/$id")({
   head: () => ({ meta: [{ title: "Informe LUPA — LUPAUTO" }] }),
