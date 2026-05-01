@@ -196,10 +196,27 @@ function Report() {
           </div>
           <div className="flex justify-end gap-3">
             <Link to="/talleres/dashboard" className="rounded-lg border border-border px-4 py-3 text-sm font-bold">Cancelar</Link>
-            <button onClick={send} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4"/>Enviar informe y cobrar {formatEur(payout)} €</button>
+            <button onClick={()=>setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4"/>Enviar informe y cobrar {formatEur(payout)} €</button>
           </div>
         </div>
       </main>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmar envío del informe</AlertDialogTitle>
+            <AlertDialogDescription>
+              ¿Estás seguro de que quieres enviar el informe? Una vez enviado no podrá ser modificado.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-white">Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={send} className="bg-brand text-ink hover:brightness-95">
+              Sí, enviar informe
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
