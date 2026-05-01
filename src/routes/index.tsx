@@ -88,17 +88,17 @@ function Home() {
       </section>
 
       {/* VEHICLE PICKER */}
-      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.20_0_0)] py-14 text-white">
+      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.18_0_0)] py-16 text-white md:py-20">
         <div className="mx-auto max-w-7xl px-6" ref={pickerRef}>
           <h2 className="text-center text-2xl font-bold md:text-3xl">¿Qué vehículo quieres revisar?</h2>
-          <div className="mx-auto mt-2 h-1 w-16 rounded bg-brand" />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-4">
+          <div className="mx-auto mt-3 h-1 w-16 rounded bg-brand" />
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
             {VEHICLES.map((v) => (
               <button
                 key={v.id}
                 onClick={() => setSelected(v.id)}
-                className={`group relative overflow-hidden rounded-2xl border bg-[oklch(0.20_0_0)] p-6 text-left text-white transition ${
-                  selected === v.id ? "border-brand" : "border-white/10 hover:border-white/30"
+                className={`group relative flex aspect-[4/5] flex-col overflow-hidden rounded-2xl border bg-gradient-to-b from-[oklch(0.22_0_0)] to-[oklch(0.16_0_0)] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
+                  selected === v.id ? "border-brand ring-1 ring-brand/40" : "border-white/10 hover:border-white/25"
                 }`}
               >
                 {selected === v.id && (
@@ -106,12 +106,21 @@ function Home() {
                     <Check className="h-4 w-4" />
                   </div>
                 )}
-                <div className="flex h-32 items-center justify-center overflow-hidden">
-                  <img src={v.image} alt={v.label} loading="lazy" width={768} height={512} className="h-full w-full object-contain" />
+                <div className="flex flex-1 items-center justify-center overflow-hidden">
+                  <img
+                    src={v.image}
+                    alt={v.label}
+                    loading="lazy"
+                    width={768}
+                    height={512}
+                    className="h-auto w-[112%] max-w-none -translate-y-1 object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
                 </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-xl font-bold text-white">{v.label}</span>
-                  <ArrowRight className="h-6 w-6 text-brand" />
+                <div className="mt-2 flex items-center justify-between">
+                  <span className="text-lg font-bold tracking-tight text-white md:text-xl">{v.label}</span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-ink transition-transform group-hover:translate-x-0.5">
+                    <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+                  </span>
                 </div>
               </button>
             ))}
