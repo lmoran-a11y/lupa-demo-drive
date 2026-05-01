@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock } from "lucide-react";
+import liftIcon from "@/assets/lift-icon.png";
 
 const steps = [
   {
@@ -33,27 +34,7 @@ const steps = [
     title: "El vehículo se revisa en taller",
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        {/* Car (front view) */}
-        {/* roof */}
-        <path d="M17 18l2-3.2c.4-.6 1-1 1.7-1h6.6c.7 0 1.3.4 1.7 1L31 18" />
-        {/* upper body / windshield row */}
-        <path d="M14.5 22c0-.7.3-1.4.9-1.8l1.6-1.2c.3-.2.7-.4 1.1-.4h11.8c.4 0 .8.1 1.1.4l1.6 1.2c.6.4.9 1.1.9 1.8" />
-        <path d="M14.5 22h19" />
-        {/* lower body */}
-        <path d="M14.5 22v4c0 .6.4 1 1 1h17c.6 0 1-.4 1-1v-4" />
-        {/* headlights */}
-        <path d="M17 24.5h2M29 24.5h2" />
-        {/* wheels */}
-        <circle cx="17.5" cy="28.5" r="1.6" />
-        <circle cx="30.5" cy="28.5" r="1.6" />
-        {/* Lift columns (left + right) */}
-        <path d="M10 14v22M38 14v22" />
-        {/* Lift arms going under the car */}
-        <path d="M10 27h6M32 27h6" />
-        {/* Yellow ground line */}
-        <path d="M8 36h32" stroke="#F5B400" strokeWidth="2.6" />
-      </svg>
+      <img src={liftIcon} alt="Coche en elevador de taller" className="h-16 w-16 object-contain" />
     ),
   },
   {
