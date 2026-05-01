@@ -61,7 +61,7 @@ function Report() {
         </div>
         <div className="flex gap-2">
           <button onClick={()=>alert("💾 Progreso guardado")} className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-bold"><Save className="h-4 w-4"/>Guardar progreso</button>
-          <button onClick={send} className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95"><Send className="h-4 w-4"/>Enviar informe</button>
+          <button onClick={()=>setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95"><Send className="h-4 w-4"/>Enviar informe</button>
         </div>
       </header>
 
