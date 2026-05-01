@@ -106,12 +106,12 @@ function Home() {
                     <Check className="h-4 w-4" />
                   </div>
                 )}
-                <div className="flex flex-1 items-center justify-center overflow-hidden">
+                <div className="flex flex-1 items-center justify-center overflow-hidden p-4">
                   <img
                     src={v.image}
                     alt={v.label}
                     loading="lazy"
-                    className="h-[80%] w-[110%] max-w-none object-contain transition-transform duration-300 group-hover:scale-105"
+                    className="h-[75%] w-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
                 <div className="mt-2 flex items-center justify-between">
