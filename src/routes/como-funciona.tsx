@@ -63,7 +63,7 @@ export const Route = createFileRoute("/como-funciona")({
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main className="bg-white">
-        <section className="mx-auto max-w-[1130px] px-6 py-10 pb-8">
+        <section className="mx-auto max-w-[984px] px-6 py-10 pb-8">
           {/* Top label */}
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[15px] font-bold uppercase tracking-[-0.01em] text-neutral-700">
             <span>Reserva online</span>
@@ -89,6 +89,9 @@ export const Route = createFileRoute("/como-funciona")({
               style={{ left: "30px" }}
               aria-hidden
             />
+            <span className="pointer-events-none absolute top-[137px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary" style={{ left: "31px" }} aria-hidden />
+            <span className="pointer-events-none absolute top-[303px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary" style={{ left: "31px" }} aria-hidden />
+            <span className="pointer-events-none absolute top-[469px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary" style={{ left: "31px" }} aria-hidden />
 
             {steps.map(({ n, title, desc, icon }) => (
               <li key={n} className="relative">
