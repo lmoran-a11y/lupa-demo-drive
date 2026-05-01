@@ -33,17 +33,23 @@ const steps = [
     title: "El vehículo se revisa en taller",
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        {/* car body */}
-        <path d="M11 24l3-6c.5-1.1 1.6-1.8 2.8-1.8h14.4c1.2 0 2.3.7 2.8 1.8l3 6" />
-        <path d="M9 24h30v6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-1H15v1a2 2 0 01-2 2h-2a2 2 0 01-2-2v-6z" />
-        <circle cx="16" cy="28" r="1.6" fill="currentColor" stroke="none" />
-        <circle cx="32" cy="28" r="1.6" fill="currentColor" stroke="none" />
-        {/* lift column */}
-        <path d="M24 32v8" />
-        {/* lift base / floor in yellow */}
-        <path d="M10 40h28" stroke="#F5B400" strokeWidth="3" />
-        <path d="M14 40v2M34 40v2" stroke="#F5B400" strokeWidth="3" />
+      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        {/* car front silhouette */}
+        <path d="M13 22c0-1 .6-1.9 1.5-2.3l2-.9c.5-.2.9-.7 1.1-1.2l1-2.6c.3-.9 1.2-1.5 2.1-1.5h6.6c1 0 1.8.6 2.1 1.5l1 2.6c.2.5.6 1 1.1 1.2l2 .9c.9.4 1.5 1.3 1.5 2.3v6c0 .6-.4 1-1 1H14c-.6 0-1-.4-1-1v-6z" />
+        {/* windshield divider */}
+        <path d="M17 19h14" />
+        {/* headlights */}
+        <circle cx="16.5" cy="25" r="1.1" fill="currentColor" stroke="none" />
+        <circle cx="31.5" cy="25" r="1.1" fill="currentColor" stroke="none" />
+        {/* wheels */}
+        <circle cx="17" cy="31" r="2" />
+        <circle cx="31" cy="31" r="2" />
+        {/* lift columns */}
+        <path d="M9 16v22M39 16v22" />
+        {/* lift platforms (arms holding the car) */}
+        <path d="M9 30h6M33 30h6" />
+        {/* yellow base/floor */}
+        <path d="M6 38h36" stroke="#F5B400" strokeWidth="2.6" />
       </svg>
     ),
   },
