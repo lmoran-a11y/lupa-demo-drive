@@ -1,32 +1,59 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { ArrowRight, CalendarCheck, ShieldCheck, Wrench, FileCheck, BadgeCheck, FileText, Lock } from "lucide-react";
+import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock } from "lucide-react";
 
 const steps = [
   {
     n: "1",
     title: "Reserva online",
     desc: "Elige el tipo de vehículo, introduce la matrícula y selecciona ubicación, fecha y hora.",
-    Icon: CalendarCheck,
+    icon: (
+      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="7" y="10" width="34" height="30" rx="3" />
+        <path d="M7 18h34" />
+        <path d="M16 6v8M32 6v8" />
+        <path d="M18 28l4 4 8-8" stroke="#F5B400" />
+      </svg>
+    ),
   },
   {
     n: "2",
     title: "Te asignamos un taller verificado",
     desc: "Una vez completes la reserva, te enviaremos el taller, la dirección y los datos de la cita.",
-    Icon: ShieldCheck,
+    icon: (
+      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M24 6l14 5v11c0 9-6 15-14 20-8-5-14-11-14-20V11l14-5z" />
+        <path d="M17 24l5 5 9-10" stroke="#F5B400" />
+      </svg>
+    ),
   },
   {
     n: "3",
     title: "El vehículo se revisa en taller",
     desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
-    Icon: Wrench,
+    icon: (
+      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10 24l3-7c.5-1.2 1.7-2 3-2h16c1.3 0 2.5.8 3 2l3 7" />
+        <path d="M8 24h32v8c0 1.1-.9 2-2 2h-2a2 2 0 01-2-2v-2H14v2a2 2 0 01-2 2h-2c-1.1 0-2-.9-2-2v-8z" />
+        <circle cx="15" cy="30" r="1.5" fill="currentColor" />
+        <circle cx="33" cy="30" r="1.5" fill="currentColor" />
+        <path d="M6 40h36" stroke="#F5B400" strokeWidth="2.5" />
+      </svg>
+    ),
   },
   {
     n: "4",
     title: "Recibe tu Informe LUPA",
     desc: "Obtén un informe claro y visual para decidir con más seguridad antes de comprar.",
-    Icon: FileCheck,
+    icon: (
+      <svg viewBox="0 0 48 48" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 6h16l10 10v22a4 4 0 01-4 4H12a4 4 0 01-4-4V10a4 4 0 014-4z" />
+        <path d="M28 6v10h10" />
+        <circle cx="32" cy="34" r="6" fill="#F5B400" stroke="#F5B400" />
+        <path d="M29 34l2 2 4-4" stroke="#fff" strokeWidth="2" />
+      </svg>
+    ),
   },
 ];
 
@@ -38,11 +65,11 @@ export const Route = createFileRoute("/como-funciona")({
       <main className="bg-white">
         <section className="mx-auto max-w-4xl px-6 py-20">
           {/* Top label */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-700">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-800">
             <span>Reserva online</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+            <span className="h-2 w-2 rounded-full bg-[#F5B400]" />
             <span>Taller verificado</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+            <span className="h-2 w-2 rounded-full bg-[#F5B400]" />
             <span>Informe claro</span>
           </div>
 
@@ -55,25 +82,29 @@ export const Route = createFileRoute("/como-funciona")({
           </p>
 
           {/* Steps */}
-          <ol className="relative mt-14 space-y-5">
-            {/* vertical connector */}
-            <div className="pointer-events-none absolute left-[19px] top-6 bottom-6 w-px bg-neutral-200" aria-hidden />
+          <ol className="relative mt-14 space-y-6 pl-16 md:pl-20">
+            {/* dotted vertical connector behind numbers */}
+            <div
+              className="pointer-events-none absolute top-8 bottom-8 w-0 border-l-2 border-dotted border-neutral-300"
+              style={{ left: "27px" }}
+              aria-hidden
+            />
 
-            {steps.map(({ n, title, desc, Icon }) => (
-              <li key={n} className="relative flex items-stretch gap-5">
-                {/* number */}
-                <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand text-base font-bold text-neutral-900 ring-4 ring-white">
+            {steps.map(({ n, title, desc, icon }) => (
+              <li key={n} className="relative">
+                {/* number circle - absolutely positioned to the left */}
+                <div className="absolute -left-16 top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-[#F5B400] text-xl font-extrabold text-neutral-900 shadow-[0_0_0_6px_white] md:-left-20">
                   {n}
                 </div>
 
                 {/* card */}
-                <div className="flex flex-1 items-center gap-5 rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50">
-                    <Icon className="h-6 w-6 text-neutral-900" strokeWidth={1.75} />
+                <div className="flex items-center gap-5 rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-neutral-900">
+                    {icon}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-lg font-bold text-neutral-900">{title}</div>
-                    <p className="mt-1 text-sm leading-relaxed text-neutral-500">{desc}</p>
+                    <div className="text-lg font-extrabold text-neutral-900 md:text-xl">{title}</div>
+                    <p className="mt-1 text-sm leading-relaxed text-neutral-500 md:text-[15px]">{desc}</p>
                   </div>
                 </div>
               </li>
@@ -81,15 +112,15 @@ export const Route = createFileRoute("/como-funciona")({
           </ol>
 
           {/* CTA block */}
-          <div className="mt-10 rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 md:p-8">
+          <div className="relative mt-12 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50/70 p-6 md:p-8">
+            <div className="absolute left-0 top-8 bottom-8 w-1 rounded-r bg-[#F5B400]" />
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
-              <div className="hidden h-px w-1 self-stretch bg-brand md:block" />
               <div className="flex items-center gap-5">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white">
-                  <ShieldCheck className="h-6 w-6 text-neutral-900" strokeWidth={1.75} />
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white">
+                  <ShieldCheck className="h-7 w-7 text-neutral-900" strokeWidth={1.8} />
                 </div>
                 <div>
-                  <div className="text-lg font-bold leading-tight text-neutral-900">
+                  <div className="text-lg font-extrabold leading-tight text-neutral-900 md:text-xl">
                     Compra con confianza.<br />Decide con seguridad.
                   </div>
                   <p className="mt-2 text-sm text-neutral-500">
@@ -99,14 +130,14 @@ export const Route = createFileRoute("/como-funciona")({
               </div>
               <Link
                 to="/reservar"
-                className="ml-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-4 text-base font-bold text-neutral-900 transition-colors hover:bg-brand/90 md:w-auto"
+                className="ml-auto inline-flex w-full items-center justify-center gap-3 rounded-xl bg-[#F5B400] px-8 py-4 text-base font-bold text-neutral-900 transition-colors hover:bg-[#e0a600] md:w-auto"
               >
                 Solicitar inspección
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-neutral-200 pt-5 text-sm text-neutral-600">
+            <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-neutral-600">
               <div className="flex items-center gap-2">
                 <BadgeCheck className="h-4 w-4 text-neutral-700" />
                 Talleres verificados
