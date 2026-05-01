@@ -105,7 +105,7 @@ function Reservar() {
             <SummaryRow
               icon={<Wrench className="h-4 w-4" />}
               title="Servicio"
-              value="Inspección estándar"
+              value={`Inspección estándar — ${vehicleLabel} (${formatEur(basePrice)} €)`}
               onEdit={() => {}}
             />
             <SummaryRow
@@ -208,7 +208,7 @@ function Reservar() {
                   onClick={() =>
                     navigate({
                       to: "/reservar/confirmacion",
-                      search: { dgt, day, hour, location, total },
+                      search: { dgt, day, hour, location, total, vehicle: vehicle as VehicleType, plate },
                     })
                   }
                   className="mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-brand py-4 text-lg font-bold text-ink hover:brightness-95"
