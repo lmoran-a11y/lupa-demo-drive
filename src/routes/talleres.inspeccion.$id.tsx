@@ -41,10 +41,12 @@ function Report() {
   const [aline, setAline] = useState("ok");
   const [interior, setInterior] = useState("ok");
   const [estado, setEstado] = useState("ok");
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const payout = getWorkshopPayout(inspection.vehicleType);
 
   function send() {
+    setConfirmOpen(false);
     alert(`✅ Informe enviado correctamente.\nLa inspección se ha marcado como completada y el pago de ${formatEur(payout)} € se transferirá automáticamente a tu taller.`);
     navigate({ to: "/talleres/dashboard" });
   }
