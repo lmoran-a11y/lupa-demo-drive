@@ -1,10 +1,11 @@
-export type VehicleType = "turismo" | "suv" | "furgoneta" | "deportivo";
+export type VehicleType = "turismo" | "suv" | "furgoneta" | "deportivo" | "clasico";
 
 export const VEHICLE_PRICES: Record<VehicleType, number> = {
   turismo: 180,
   suv: 200,
   furgoneta: 210,
   deportivo: 220,
+  clasico: 190,
 };
 
 export const VEHICLE_LABELS: Record<VehicleType, string> = {
@@ -12,6 +13,7 @@ export const VEHICLE_LABELS: Record<VehicleType, string> = {
   suv: "SUV / 4x4",
   furgoneta: "Furgoneta",
   deportivo: "Deportivo",
+  clasico: "Clásico",
 };
 
 export function getBasePrice(v: VehicleType | string | undefined): number {

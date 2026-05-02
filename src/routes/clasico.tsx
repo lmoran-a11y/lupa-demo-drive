@@ -27,6 +27,7 @@ function Clasico() {
           />
           <Link
             to="/reservar"
+            search={{ vehicle: "clasico", plate: "" }}
             aria-label="Reservar revisión"
             className="absolute rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
             style={{
