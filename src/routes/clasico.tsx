@@ -51,7 +51,7 @@ function Clasico() {
           {/* Tapamos toda la zona de foto+miniaturas del PNG con fondo blanco */}
           <div
             className="absolute bg-white"
-            style={{ left: "62%", top: "2%", width: "34%", height: "51%" }}
+            style={{ left: "62%", top: "2%", width: "37%", height: "51%" }}
           />
 
           {/* Foto principal */}
