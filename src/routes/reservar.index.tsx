@@ -638,7 +638,7 @@ const VEHICLE_DB: Record<string, string[]> = {
   Kia: ["Carens", "Ceed", "EV6", "EV9", "Niro", "Picanto", "ProCeed", "Rio", "Sorento", "Soul", "Sportage", "Stonic", "Stinger", "XCeed"],
   Lamborghini: ["Aventador", "Huracán", "Urus"],
   Lancia: ["Delta", "Musa", "Y", "Ypsilon"],
-  Land Rover: ["Defender", "Discovery", "Discovery Sport", "Freelander", "Range Rover", "Range Rover Evoque", "Range Rover Sport", "Range Rover Velar"],
+  "Land Rover": ["Defender", "Discovery", "Discovery Sport", "Freelander", "Range Rover", "Range Rover Evoque", "Range Rover Sport", "Range Rover Velar"],
   Lexus: ["CT", "ES", "IS", "LC", "LS", "NX", "RX", "UX"],
   Lotus: ["Elise", "Emira", "Eletre", "Evora", "Exige"],
   Maserati: ["Ghibli", "Grecale", "GranTurismo", "Levante", "MC20", "Quattroporte"],
