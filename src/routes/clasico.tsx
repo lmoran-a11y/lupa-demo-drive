@@ -18,15 +18,9 @@ function Clasico() {
         />
         <Link
           to="/reservar"
-          className="mt-6 block rounded-xl bg-brand py-4 text-center text-lg font-extrabold text-ink hover:brightness-95"
+          className="mt-6 block rounded-xl bg-ink py-4 text-center text-lg font-extrabold text-white hover:brightness-110"
         >
           Reservar revisión
-        </Link>
-        <Link
-          to="/"
-          className="mt-3 block rounded-xl border border-border py-3 text-center font-bold"
-        >
-          Volver al inicio
         </Link>
       </main>
       <SiteFooter />
