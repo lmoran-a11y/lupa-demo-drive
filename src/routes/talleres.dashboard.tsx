@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
-import { Calendar, Clock, History, CreditCard, MessageSquare, Settings, LogOut, Bell, ChevronDown, Headphones, ArrowRight, Car, Zap, AlertTriangle } from "lucide-react";
+import { Calendar, Clock, History, MessageSquare, LogOut, Bell, ChevronDown, Headphones, ArrowRight, Car, Zap, AlertTriangle, Eye, Filter, ChevronLeft, ChevronRight, UserX, Camera, MoreHorizontal } from "lucide-react";
 import { workshopInspections, type Inspection } from "@/lib/mock-data";
 import { getWorkshopPayout, formatEur, WORKSHOP_PRICES } from "@/lib/workshop-pricing";
 import { IncidentModal } from "@/components/IncidentModal";
@@ -10,6 +10,34 @@ export const Route = createFileRoute("/talleres/dashboard")({
   head: () => ({ meta: [{ title: "Inspecciones asignadas — LUPAUTO" }] }),
   component: Dashboard,
 });
+
+type Section = "inspecciones" | "completadas" | "incidencias";
+
+type IncidentRow = {
+  id: string;
+  plate: string;
+  vehicle: string;
+  date: string;
+  time: string;
+  type: "ausencia" | "vehiculo" | "limitada" | "otro";
+  typeLabel: string;
+  subLabel: string;
+  status: "Pendiente" | "En revisión" | "Resuelta";
+  comp: string;
+  compMulti?: { taller: string; lupa: string; cliente: string };
+};
+
+const INCIDENTS: IncidentRow[] = [
+  { id: "#INC-0018", plate: "3124 KLM", vehicle: "Seat León 1.6 TDI", date: "02/05/2025", time: "10:30", type: "ausencia", typeLabel: "Ausencia o retraso", subLabel: "No se presenta", status: "Pendiente", comp: "25,00 €" },
+  { id: "#INC-0017", plate: "5236 MNB", vehicle: "BMW Serie 3 320d", date: "02/05/2025", time: "09:15", type: "vehiculo", typeLabel: "Vehículo incorrecto", subLabel: "Categoría distinta", status: "En revisión", comp: "Ajuste pendiente" },
+  { id: "#INC-0016", plate: "7421 GHT", vehicle: "Audi A4 2.0 TDI", date: "01/05/2025", time: "16:45", type: "limitada", typeLabel: "Inspección limitada", subLabel: "No permiten fotos / vídeo", status: "Resuelta", comp: "", compMulti: { taller: "100,00 €", lupa: "30,00 €", cliente: "50,00 €" } },
+  { id: "#INC-0015", plate: "9876 JKL", vehicle: "Ford Focus 1.0 EcoBoost", date: "01/05/2025", time: "11:20", type: "otro", typeLabel: "Otro", subLabel: "Otra incidencia", status: "Pendiente", comp: "Requiere revisión" },
+  { id: "#INC-0014", plate: "1357 BVC", vehicle: "Renault Clio 1.5 dCi", date: "30/04/2025", time: "18:10", type: "limitada", typeLabel: "Inspección limitada", subLabel: "No permiten prueba dinámica", status: "En revisión", comp: "", compMulti: { taller: "100,00 €", lupa: "30,00 €", cliente: "50,00 €" } },
+  { id: "#INC-0013", plate: "2468 QWE", vehicle: "VW Golf 2.0 TDI", date: "30/04/2025", time: "12:05", type: "vehiculo", typeLabel: "Vehículo incorrecto", subLabel: "Categoría distinta", status: "Resuelta", comp: "Ajuste aplicado\n-40,00 €" },
+  { id: "#INC-0012", plate: "3698 RTY", vehicle: "Peugeot 308 1.6 HDi", date: "29/04/2025", time: "17:50", type: "ausencia", typeLabel: "Ausencia o retraso", subLabel: "Llega tarde", status: "Resuelta", comp: "25,00 €" },
+];
+
+type Tab = "Hoy" | "Próximas" | "Completadas";
 
 type Tab = "Hoy" | "Próximas" | "Completadas";
 
