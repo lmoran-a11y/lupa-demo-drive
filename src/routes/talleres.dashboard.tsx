@@ -4,6 +4,7 @@ import { Logo } from "@/components/Logo";
 import { Calendar, Clock, History, CreditCard, MessageSquare, Settings, LogOut, Bell, ChevronDown, Headphones, ArrowRight, Car, Zap, AlertTriangle } from "lucide-react";
 import { workshopInspections, type Inspection } from "@/lib/mock-data";
 import { getWorkshopPayout, formatEur, WORKSHOP_PRICES } from "@/lib/workshop-pricing";
+import { IncidentModal } from "@/components/IncidentModal";
 
 export const Route = createFileRoute("/talleres/dashboard")({
   head: () => ({ meta: [{ title: "Inspecciones asignadas — LUPAUTO" }] }),
@@ -16,6 +17,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("Hoy");
   const [items] = useState<Inspection[]>(workshopInspections);
+  const [incidentOpen, setIncidentOpen] = useState(false);
 
   const filtered = items.filter(i => {
     if (tab === "Completadas") return i.status === "Completada";
@@ -42,7 +44,7 @@ function Dashboard() {
           <Headphones className="mx-auto h-5 w-5 text-brand"/>
           <div className="mt-2 font-bold">¿Necesitas ayuda?</div>
           <p className="text-muted-foreground">Nuestro equipo está aquí para ayudarte.</p>
-          <Link to="/contacto" className="mt-2 inline-block rounded-lg border border-border bg-card px-3 py-1.5 font-bold">Reportar incidencia</Link>
+          <button onClick={()=>setIncidentOpen(true)} className="mt-2 inline-block rounded-lg border border-border bg-card px-3 py-1.5 font-bold">Reportar incidencia</button>
         </div>
       </aside>
 
@@ -130,7 +132,7 @@ function Dashboard() {
                       {i.status==="En proceso"?"Continuar inspección":"Abrir inspección"} <ArrowRight className="h-4 w-4"/>
                     </button>
                   )}
-                  <Link to="/contacto" className="flex items-center justify-center gap-2 rounded-lg border border-brand px-4 py-2 text-xs font-bold text-ink"><MessageSquare className="h-3 w-3"/>Reportar incidencia</Link>
+                  <button onClick={()=>setIncidentOpen(true)} className="flex items-center justify-center gap-2 rounded-lg border border-brand px-4 py-2 text-xs font-bold text-ink"><MessageSquare className="h-3 w-3"/>Reportar incidencia</button>
                 </div>
               </div>
             );
@@ -139,6 +141,7 @@ function Dashboard() {
 
         <p className="mt-6 text-center text-xs text-muted-foreground">🛡 Tus inspecciones están seguras. Solo tú decides con quién compartirlas.</p>
       </main>
+      <IncidentModal open={incidentOpen} onClose={()=>setIncidentOpen(false)}/>
     </div>
   );
 }
