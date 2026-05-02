@@ -101,14 +101,37 @@ function Reservar() {
               value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
               onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
               active={edit === "datetime"}
-            />
-            <SummaryRow
-              icon={<FileText className="h-4 w-4" />}
-              title="Informe DGT"
-              value={dgt ? "Incluido (+14,99 €)" : "No incluido"}
-              onEdit={() => setDgt(!dgt)}
               last
             />
+            <div className={`mt-5 rounded-xl border p-4 transition-colors ${dgt ? "border-brand bg-brand/5" : "border-border bg-card"}`}>
+              <div className="flex items-start gap-3">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted">
+                  <div className="relative">
+                    <FileText className="h-7 w-7 text-foreground" strokeWidth={1.5} />
+                    <span className="absolute -bottom-0.5 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-success text-[8px] font-bold text-success-foreground">✓</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="text-base font-bold">Informe DGT</div>
+                    <div className="whitespace-nowrap text-sm font-semibold text-muted-foreground">+14,99 €</div>
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Incluye el informe oficial de la Dirección General de Tráfico.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDgt(!dgt)}
+                className="mt-4 flex w-full items-center gap-3 border-t border-border/60 pt-3 text-left"
+              >
+                <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors ${dgt ? "border-brand bg-brand text-brand-foreground" : "border-muted-foreground/40 bg-background"}`}>
+                  {dgt && <span className="text-xs font-bold leading-none">✓</span>}
+                </span>
+                <span className="text-sm font-semibold">Añadir a mi reserva</span>
+              </button>
+            </div>
 
             <div className="mt-6 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
               <Shield className="mt-0.5 h-4 w-4 text-info" />
