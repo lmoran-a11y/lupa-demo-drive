@@ -103,12 +103,6 @@ function Reservar() {
               active={edit === "datetime"}
             />
             <SummaryRow
-              icon={<Wrench className="h-4 w-4" />}
-              title="Servicio"
-              value={`Inspección estándar — ${vehicleLabel} (${formatEur(basePrice)} €)`}
-              onEdit={() => {}}
-            />
-            <SummaryRow
               icon={<FileText className="h-4 w-4" />}
               title="Informe DGT"
               value={dgt ? "Incluido (+14,99 €)" : "No incluido"}
