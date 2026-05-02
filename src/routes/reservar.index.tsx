@@ -118,7 +118,10 @@ function Reservar() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between gap-2">
-                    <div className="text-base font-bold">Informe DGT</div>
+                    <div className="flex items-center gap-2">
+                      <div className="text-base font-bold">Informe DGT</div>
+                      <span className="rounded-full border border-muted-foreground/30 bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Opcional</span>
+                    </div>
                     <div className="whitespace-nowrap text-sm font-semibold text-muted-foreground">+14,99 €</div>
                   </div>
                   <p className="mt-1 text-sm text-muted-foreground">
