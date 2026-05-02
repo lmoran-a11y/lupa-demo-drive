@@ -93,6 +93,9 @@ function Reservar() {
           {/* LEFT: Summary */}
           <div className="rounded-2xl border border-border bg-card p-6">
             <div className="text-base font-bold">Resumen de tu reserva</div>
+            <div className="mt-1 text-xs text-muted-foreground">
+              {vehicleLabel} · {plate || "—"}
+            </div>
 
             <SummaryRow
               icon={<MapPin className="h-4 w-4" />}
