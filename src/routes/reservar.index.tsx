@@ -373,17 +373,23 @@ function renderLocationEditor({
       </div>
 
       <div className="mt-3 overflow-hidden rounded-lg border border-border">
-        <div className="relative flex h-32 items-center justify-center bg-[linear-gradient(135deg,#e8f0e0_0%,#f5f0e0_50%,#e0e8f0_100%)]">
-          <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(#0001_1px,transparent_1px),linear-gradient(90deg,#0001_1px,transparent_1px)] [background-size:30px_30px]" />
-          <div className="absolute h-24 w-24 rounded-full bg-brand/15 ring-2 ring-brand/40" />
-          <div className="relative flex flex-col items-center">
-            <MapPin className="h-8 w-8 fill-ink text-ink" />
-            <div className="mt-1 rounded bg-white/90 px-2 py-0.5 text-[10px] font-bold text-ink">
-              {city}
-            </div>
-          </div>
-        </div>
+        <iframe
+          key={draftLocation}
+          title={`Mapa de ${city}`}
+          src={`https://www.google.com/maps?q=${encodeURIComponent(draftLocation || city)}&z=13&output=embed`}
+          className="h-64 w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
+      <a
+        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(draftLocation || city)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-brand hover:underline"
+      >
+        <MapPin className="h-3 w-3" /> Abrir en Google Maps
+      </a>
 
       {draftLocation && (
         <div className="mt-3 flex items-start gap-2 rounded-lg border border-success/30 bg-success/10 p-2 text-xs">
