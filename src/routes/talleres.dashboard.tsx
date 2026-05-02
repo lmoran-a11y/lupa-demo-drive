@@ -44,7 +44,7 @@ function Dashboard() {
           <Headphones className="mx-auto h-5 w-5 text-brand"/>
           <div className="mt-2 font-bold">¿Necesitas ayuda?</div>
           <p className="text-muted-foreground">Nuestro equipo está aquí para ayudarte.</p>
-          <Link to="/contacto" className="mt-2 inline-block rounded-lg border border-border bg-card px-3 py-1.5 font-bold">Reportar incidencia</Link>
+          <button onClick={()=>setIncidentOpen(true)} className="mt-2 inline-block rounded-lg border border-border bg-card px-3 py-1.5 font-bold">Reportar incidencia</button>
         </div>
       </aside>
 
