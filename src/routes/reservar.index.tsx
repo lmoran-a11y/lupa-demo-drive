@@ -243,7 +243,7 @@ function Reservar() {
                 <div className="mt-5 grid grid-cols-3 gap-3 text-xs">
                   <Feature icon={<Check className="h-4 w-4 text-success" />} t="Confirmación" t2="inmediata" />
                   <Feature icon={<Camera className="h-4 w-4 text-muted-foreground" />} t="Informe completo" t2="con fotos y vídeo" />
-                  <Feature icon={<Clock className="h-4 w-4 text-muted-foreground" />} t="Informe en 24h" t2="laborables" />
+                  <Feature icon={<Clock className="h-4 w-4 text-muted-foreground" />} t="Informe en menos de 24h" t2="" />
                 </div>
 
                 <div className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-4 py-3 text-sm">
