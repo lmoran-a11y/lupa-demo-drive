@@ -113,13 +113,14 @@ function Home() {
                       v.id === "suv" ? 1.15 :
                       v.id === "furgoneta" ? 1.10 : 1;
                     const hoverScale = baseScale + 0.1;
+                    const tx = v.id === "furgoneta" ? "-6%" : "0%";
                     return (
                       <img
                         src={v.image}
                         alt={v.label}
                         loading="lazy"
-                        style={{ "--base": baseScale, "--hover": hoverScale } as React.CSSProperties}
-                        className="h-[92%] w-full object-contain transition-transform duration-300 [transform:scale(var(--base))] group-hover:[transform:scale(var(--hover))]"
+                        style={{ "--base": baseScale, "--hover": hoverScale, "--tx": tx } as React.CSSProperties}
+                        className="h-[92%] w-full object-contain transition-transform duration-300 [transform:translateX(var(--tx))_scale(var(--base))] group-hover:[transform:translateX(var(--tx))_scale(var(--hover))]"
                       />
                     );
                   })()}
