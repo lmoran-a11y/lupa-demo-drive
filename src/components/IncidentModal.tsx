@@ -17,7 +17,7 @@ const SUBTYPES: Record<IncidentType, { icon: any; title: string; desc: string }[
   ],
   vehiculo: [
     { icon: Car, title: "Matrícula no coincide", desc: "La matrícula es distinta a la de la reserva" },
-    { icon: Car, title: "Modelo distinto", desc: "El vehículo no coincide con el reservado" },
+    { icon: Car, title: "Categoría distinta", desc: "El vehículo no coincide con el reservado" },
   ],
   limitada: [
     { icon: Camera, title: "Acceso limitado", desc: "No se permite revisar todas las zonas" },
@@ -80,11 +80,13 @@ export function IncidentModal({ open, onClose }: { open: boolean; onClose: () =>
                   );
                 })}
               </div>
-              <div className={`mt-4 flex items-center gap-2 rounded-xl ${current.bg} px-4 py-3 text-sm`}>
-                <Info className={`h-4 w-4 ${current.color}`}/>
-                <span className="font-bold">Compensación al taller:</span>
-                <span className={`font-extrabold ${current.text}`}>25,00 €</span>
-              </div>
+              {selected !== "vehiculo" && (
+                <div className={`mt-4 flex items-center gap-2 rounded-xl ${current.bg} px-4 py-3 text-sm`}>
+                  <Info className={`h-4 w-4 ${current.color}`}/>
+                  <span className="font-bold">Compensación al taller:</span>
+                  <span className={`font-extrabold ${current.text}`}>{selected === "limitada" ? "100,00 €" : "25,00 €"}</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
