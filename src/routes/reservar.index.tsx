@@ -129,7 +129,7 @@ function Reservar() {
               <button
                 type="button"
                 onClick={() => setDgt(!dgt)}
-                className="mt-5 flex w-full items-center gap-3 border-t border-border/60 pt-4 text-left"
+                className="mt-5 flex w-full items-center gap-3 border-t border-brand pt-4 text-left"
               >
                 <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors ${dgt ? "border-brand bg-brand text-brand-foreground" : "border-muted-foreground/40 bg-background"}`}>
                   {dgt && <span className="text-xs font-bold leading-none">✓</span>}
