@@ -610,3 +610,126 @@ function PayBadge({ label }: { label: string }) {
     </span>
   );
 }
+
+const VEHICLE_DB: Record<string, string[]> = {
+  Audi: ["A1", "A3", "A4", "A5", "A6", "Q3", "Q5", "Q7"],
+  BMW: ["Serie 1", "Serie 2", "Serie 3", "Serie 4", "Serie 5", "X1", "X3", "X5"],
+  Citroën: ["C3", "C4", "C5 Aircross", "Berlingo"],
+  Dacia: ["Sandero", "Duster", "Jogger"],
+  Fiat: ["500", "Panda", "Tipo"],
+  Ford: ["Fiesta", "Focus", "Kuga", "Puma", "Mondeo"],
+  Hyundai: ["i10", "i20", "i30", "Tucson", "Kona"],
+  Kia: ["Picanto", "Rio", "Ceed", "Sportage", "Niro"],
+  Mercedes: ["Clase A", "Clase B", "Clase C", "Clase E", "GLA", "GLC"],
+  Nissan: ["Micra", "Juke", "Qashqai", "X-Trail"],
+  Opel: ["Corsa", "Astra", "Mokka", "Crossland"],
+  Peugeot: ["208", "2008", "308", "3008", "5008"],
+  Renault: ["Clio", "Captur", "Mégane", "Kadjar", "Arkana"],
+  Seat: ["Ibiza", "León", "Arona", "Ateca", "Tarraco"],
+  Skoda: ["Fabia", "Octavia", "Karoq", "Kodiaq"],
+  Toyota: ["Yaris", "Corolla", "C-HR", "RAV4", "Prius"],
+  Volkswagen: ["Polo", "Golf", "Passat", "T-Roc", "Tiguan"],
+  Volvo: ["XC40", "XC60", "XC90"],
+};
+
+function BrandModelPicker({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<"brand" | "model">("brand");
+  const [brand, setBrand] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
+
+  const brands = Object.keys(VEHICLE_DB);
+  const list =
+    step === "brand"
+      ? brands.filter((b) => b.toLowerCase().includes(query.toLowerCase()))
+      : (brand ? VEHICLE_DB[brand] : []).filter((m) => m.toLowerCase().includes(query.toLowerCase()));
+
+  const reset = () => {
+    setStep("brand");
+    setBrand(null);
+    setQuery("");
+  };
+
+  return (
+    <div className="mt-4 border-b border-border pb-4">
+      <div className="flex items-start gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted/40">
+          <Car className="h-4 w-4" />
+        </div>
+        <div className="flex-1">
+          <div className="text-sm font-bold">Marca y modelo <span className="text-xs font-normal text-muted-foreground">(opcional)</span></div>
+          {value ? (
+            <div className="text-sm text-muted-foreground">{value}</div>
+          ) : (
+            <div className="text-sm text-muted-foreground">Sin especificar</div>
+          )}
+          <button
+            onClick={() => {
+              if (open) {
+                setOpen(false);
+              } else {
+                reset();
+                setOpen(true);
+              }
+            }}
+            className={`mt-1 text-sm font-bold ${open ? "text-brand" : "text-success"} hover:underline`}
+          >
+            {open ? "Cerrar" : value ? "Cambiar" : "Añadir"}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="mt-3 rounded-xl border-2 border-brand bg-card p-4 shadow-md">
+          <div className="mb-3 flex items-center justify-between text-[11px] font-bold uppercase tracking-widest text-brand">
+            <span>{step === "brand" ? "Selecciona marca" : `Modelos de ${brand}`}</span>
+            {step === "model" && (
+              <button onClick={reset} className="text-xs font-bold text-muted-foreground hover:text-foreground">
+                ← Cambiar marca
+              </button>
+            )}
+          </div>
+
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <input
+              autoFocus
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={step === "brand" ? "Buscar marca…" : "Buscar modelo…"}
+              className="w-full rounded-lg border border-border bg-background py-2 pl-9 pr-3 text-sm outline-none focus:border-brand"
+            />
+          </div>
+
+          <ul className="mt-3 max-h-56 overflow-y-auto rounded-lg border border-border">
+            {list.length === 0 ? (
+              <li className="px-3 py-2 text-sm text-muted-foreground">Sin resultados</li>
+            ) : (
+              list.map((item) => (
+                <li key={item}>
+                  <button
+                    onClick={() => {
+                      if (step === "brand") {
+                        setBrand(item);
+                        setStep("model");
+                        setQuery("");
+                      } else {
+                        onChange(`${brand} ${item}`);
+                        setOpen(false);
+                        reset();
+                      }
+                    }}
+                    className="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-muted"
+                  >
+                    <span>{item}</span>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
