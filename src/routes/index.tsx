@@ -107,14 +107,22 @@ function Home() {
                   </div>
                 )}
                 <div className="flex flex-1 items-center justify-center overflow-hidden p-2">
-                  <img
-                    src={v.image}
-                    alt={v.label}
-                    loading="lazy"
-                    className={`h-[92%] w-full object-contain transition-transform duration-300 group-hover:scale-105 ${
-                      v.id === "deportivo" ? "scale-115" : ""
-                    } ${v.id === "suv" ? "scale-115" : ""} ${v.id === "furgoneta" ? "scale-110" : ""}`}
-                  />
+                  {(() => {
+                    const baseScale =
+                      v.id === "deportivo" ? 1.15 :
+                      v.id === "suv" ? 1.15 :
+                      v.id === "furgoneta" ? 1.10 : 1;
+                    const hoverScale = baseScale + 0.1;
+                    return (
+                      <img
+                        src={v.image}
+                        alt={v.label}
+                        loading="lazy"
+                        style={{ "--base": baseScale, "--hover": hoverScale } as React.CSSProperties}
+                        className="h-[92%] w-full object-contain transition-transform duration-300 [transform:scale(var(--base))] group-hover:[transform:scale(var(--hover))]"
+                      />
+                    );
+                  })()}
                 </div>
                 <div className="mt-2 flex items-center justify-between">
                   <span className="text-lg font-bold tracking-tight text-white md:text-xl">{v.label}</span>
