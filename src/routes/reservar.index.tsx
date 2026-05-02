@@ -101,6 +101,7 @@ function Reservar() {
               value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
               onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
               active={edit === "datetime"}
+              last
             />
             <div className={`mt-5 rounded-xl border p-4 transition-colors ${dgt ? "border-brand bg-brand/5" : "border-border bg-card"}`}>
               <div className="flex items-start gap-3">
