@@ -51,7 +51,7 @@ function Clasico() {
           {/* Carrusel encima de la foto principal del coche */}
           <div
             className="absolute overflow-hidden rounded-md bg-black"
-            style={{ left: "62.3%", top: "3.2%", width: "32.4%", height: "33.5%" }}
+            style={{ left: "63.55%", top: "2.75%", width: "34.65%", height: "37.95%" }}
           >
             <img
               src={fotos[idx]}
@@ -66,7 +66,7 @@ function Clasico() {
             onClick={prev}
             aria-label="Foto anterior"
             className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
-            style={{ left: "63.5%", top: "17%", width: "2.6%", aspectRatio: "1 / 1" }}
+            style={{ left: "66.9%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
           >
             <ChevronLeft className="h-4 w-4 text-black" />
           </button>
@@ -77,7 +77,7 @@ function Clasico() {
             onClick={next}
             aria-label="Foto siguiente"
             className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
-            style={{ left: "93.7%", top: "17%", width: "2.6%", aspectRatio: "1 / 1" }}
+            style={{ left: "95.2%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
           >
             <ChevronRight className="h-4 w-4 text-black" />
           </button>
@@ -85,7 +85,7 @@ function Clasico() {
           {/* Miniaturas clicables */}
           <div
             className="absolute flex gap-[0.6%]"
-            style={{ left: "62.3%", top: "37.5%", width: "32.4%", height: "11%" }}
+            style={{ left: "63.55%", top: "44%", width: "34.65%", height: "7.15%" }}
           >
             {fotos.map((src, i) => (
               <button
