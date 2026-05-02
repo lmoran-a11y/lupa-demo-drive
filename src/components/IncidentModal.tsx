@@ -78,15 +78,17 @@ export function IncidentModal({ open, onClose }: { open: boolean; onClose: () =>
                   );
                 })}
               </div>
-              <div className={`mt-4 flex items-center gap-2 rounded-xl ${current.bg} px-4 py-3 text-sm`}>
-                <Info className={`h-4 w-4 ${current.color}`}/>
-                <span className="font-bold">Compensación al taller:</span>
-                {selected === "vehiculo" ? (
-                  <span className={`font-extrabold ${current.text}`}>Se aplicará el ajuste correspondiente</span>
-                ) : (
-                  <span className={`font-extrabold ${current.text}`}>{selected === "limitada" ? "100,00 €" : "25,00 €"}</span>
-                )}
-              </div>
+              {selected !== "otro" && (
+                <div className={`mt-4 flex items-center gap-2 rounded-xl ${current.bg} px-4 py-3 text-sm`}>
+                  <Info className={`h-4 w-4 ${current.color}`}/>
+                  <span className="font-bold">Compensación al taller:</span>
+                  {selected === "vehiculo" ? (
+                    <span className={`font-extrabold ${current.text}`}>Se aplicará el ajuste correspondiente</span>
+                  ) : (
+                    <span className={`font-extrabold ${current.text}`}>{selected === "limitada" ? "100,00 €" : "25,00 €"}</span>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
