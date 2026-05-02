@@ -16,12 +16,10 @@ const SUBTYPES: Record<IncidentType, { icon: any; title: string; desc: string }[
     { icon: Clock, title: "Llega tarde", desc: "El cliente llega fuera del margen de cortesía" },
   ],
   vehiculo: [
-    { icon: Car, title: "Matrícula no coincide", desc: "La matrícula es distinta a la de la reserva" },
     { icon: Car, title: "Categoría distinta", desc: "El vehículo no coincide con el reservado" },
   ],
   limitada: [
-    { icon: Camera, title: "Acceso limitado", desc: "No se permite revisar todas las zonas" },
-    { icon: Camera, title: "Falta documentación", desc: "Faltan documentos para la inspección" },
+    { icon: Camera, title: "Acceso limitado", desc: "El vendedor no permite prueba dinámica/fotos y video" },
   ],
   otro: [
     { icon: MoreHorizontal, title: "Otra situación", desc: "Describe la incidencia en el siguiente paso" },
