@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft } from "lucide-react";
 import { SiteFooter } from "@/components/SiteFooter";
 import clasicoEjemplo from "@/assets/clasico-ejemplo.png";
 
@@ -10,7 +11,14 @@ export const Route = createFileRoute("/clasico")({
 function Clasico() {
   return (
     <div className="min-h-screen bg-background">
-      <main className="mx-auto max-w-7xl px-6 py-10">
+      <main className="mx-auto max-w-7xl px-6 pt-4 pb-10">
+        <Link
+          to="/"
+          aria-label="Volver al inicio"
+          className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card hover:bg-muted"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Link>
         <div className="relative">
           <img
             src={clasicoEjemplo}
@@ -23,7 +31,7 @@ function Clasico() {
             className="absolute rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
             style={{
               left: "3.4%",
-              top: "57.4%",
+              top: "55%",
               width: "22.7%",
               height: "6.5%",
             }}
