@@ -60,7 +60,6 @@ function Confirmacion() {
             <Row icon={<MapPin/>} t="Dirección" v={`Calle del Motor, 45\n14900 ${location}`}/>
             <Row icon={<Calendar/>} t="Fecha" v={`Jueves, ${day} de mayo de 2024`}/>
             <Row icon={<Clock/>} t="Hora" v={hour}/>
-            <Row icon={<Wrench/>} t="Servicio" v={`Inspección estándar — ${vehicleLabel}`}/>
             <Row icon={<FileText/>} t="Informe DGT" v={dgt ? "Incluido ✓" : "No incluido"}/>
           </div>
           <div className="mt-5 flex items-start gap-3 rounded-lg bg-info/10 p-4 text-sm">
