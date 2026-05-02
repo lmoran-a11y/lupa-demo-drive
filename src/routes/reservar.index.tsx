@@ -238,19 +238,19 @@ function Reservar() {
                     {brandModel && <> · Vehículo: <b className="text-foreground">{brandModel}</b></>}
                   </div>
 
-                  <label className="mt-4 flex items-start gap-2 text-xs text-muted-foreground">
+                  <label className="mt-4 flex items-start gap-2 text-xs text-foreground">
                     <input
                       type="checkbox"
                       checked={confirmVehicle}
                       onChange={(e) => setConfirmVehicle(e.target.checked)}
                       className="mt-0.5 h-4 w-4 shrink-0 accent-brand"
                     />
-                    <span>
+                    <span className="font-bold">
                       Confirmo que la matrícula y la categoría seleccionada corresponden al vehículo que será inspeccionado.
                     </span>
                   </label>
 
-                  <p className="mt-3 text-[11px] font-bold text-foreground">
+                  <p className="mt-3 text-[11px] text-muted-foreground">
                     Si el vehículo presentado pertenece a una categoría distinta de la reservada, LUPAUTO podrá aplicar el ajuste de precio correspondiente conforme a la tarifa vigente y gestionar el cobro o la devolución de la diferencia en el método de pago autorizado, según las condiciones de la reserva.
                   </p>
                 </div>
