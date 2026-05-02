@@ -216,10 +216,9 @@ function Reservar() {
                 <hr className="my-6 border-border" />
 
                 <div>
-                  <div className="text-base font-bold">Recibe tu informe aquí</div>
-                  <div className="mt-1 text-sm text-muted-foreground">Te enviaremos el informe a este email.</div>
-                  <label className="mt-4 block text-sm font-bold">Email</label>
-                  <div className="relative mt-1">
+                  <div className="text-base font-bold">Email para tu informe</div>
+                  <div className="mt-1 text-sm text-muted-foreground">Te enviaremos aquí todos los detalles de tu reserva e informe.</div>
+                  <div className="relative mt-4">
                     <input
                       type="email"
                       value={email}
@@ -229,16 +228,13 @@ function Reservar() {
                     />
                     <Check className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-success p-1 text-white" />
                   </div>
-                  <div className="mt-2 text-xs text-muted-foreground">
-                    Solo usaremos tu email para enviarte el informe.
+
+                  <div className="mt-4 rounded-lg border border-border bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
+                    Vehículo reservado: <b className="text-foreground">{vehicleLabel}</b> · <b className="text-foreground">{plate || "—"}</b>
+                    {brandModel && <> · <b className="text-foreground">{brandModel}</b></>}
                   </div>
 
-                  <div className="mt-4 rounded-lg border border-border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground">
-                    Categoría: <b className="text-foreground">{vehicleLabel}</b> · Matrícula: <b className="text-foreground">{plate || "—"}</b>
-                    {brandModel && <> · Vehículo: <b className="text-foreground">{brandModel}</b></>}
-                  </div>
-
-                  <label className="mt-4 flex items-start gap-2 text-xs text-foreground">
+                  <label className="mt-4 flex items-start gap-3 text-sm text-foreground">
                     <input
                       type="checkbox"
                       checked={confirmVehicle}
@@ -246,13 +242,17 @@ function Reservar() {
                       className="mt-0.5 h-4 w-4 shrink-0 accent-brand"
                     />
                     <span className="font-bold">
-                      Confirmo que la matrícula y la categoría seleccionada corresponden al vehículo que será inspeccionado.
+                      Confirmo que la matrícula indicada y la categoría seleccionada corresponden al vehículo que será inspeccionado.
                     </span>
                   </label>
 
-                  <p className="mt-3 text-[11px] text-muted-foreground">
-                    Si el vehículo presentado pertenece a una categoría distinta de la reservada, LUPAUTO podrá aplicar el ajuste de precio correspondiente conforme a la tarifa vigente y gestionar el cobro o la devolución de la diferencia en el método de pago autorizado, según las condiciones de la reserva.
-                  </p>
+                  <div className="mt-3 flex items-start gap-2 text-[12px] text-muted-foreground">
+                    <Info className="mt-0.5 h-4 w-4 shrink-0" />
+                    <p>
+                      Si el vehículo no coincide con la reserva, podrán aplicarse ajustes según las condiciones.{" "}
+                      <a href="/legal/terminos" className="font-semibold text-brand underline-offset-2 hover:underline">Ver condiciones</a>
+                    </p>
+                  </div>
                 </div>
 
                 <button
