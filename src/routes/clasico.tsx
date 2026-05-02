@@ -1,7 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import { SiteFooter } from "@/components/SiteFooter";
 import clasicoEjemplo from "@/assets/clasico-ejemplo.png";
+import mg1 from "@/assets/clasico-fotos/mg-1.jpg";
+import mg2 from "@/assets/clasico-fotos/mg-2.jpg";
+import mg3 from "@/assets/clasico-fotos/mg-3.jpg";
+import mg4 from "@/assets/clasico-fotos/mg-4.jpg";
+import mg5 from "@/assets/clasico-fotos/mg-5.jpg";
+import mg6 from "@/assets/clasico-fotos/mg-6.jpg";
+
+const fotos = [mg1, mg2, mg3, mg4, mg5, mg6];
 
 export const Route = createFileRoute("/clasico")({
   head: () => ({ meta: [{ title: "Inspección de vehículos clásicos — LUPAUTO" }] }),
@@ -9,6 +18,10 @@ export const Route = createFileRoute("/clasico")({
 });
 
 function Clasico() {
+  const [idx, setIdx] = useState(0);
+  const prev = () => setIdx((i) => (i - 1 + fotos.length) % fotos.length);
+  const next = () => setIdx((i) => (i + 1) % fotos.length);
+
   return (
     <div className="min-h-screen bg-background">
       <main className="mx-auto max-w-7xl px-6 pt-4 pb-10">
@@ -25,18 +38,69 @@ function Clasico() {
             alt="Inspección de vehículos clásicos LUPAUTO"
             className="w-full h-auto rounded-2xl border border-border shadow-sm"
           />
+
+          {/* Botón Reservar revisión */}
           <Link
             to="/reservar"
             search={{ vehicle: "clasico", plate: "" }}
             aria-label="Reservar revisión"
             className="absolute rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
-            style={{
-              left: "3.4%",
-              top: "55%",
-              width: "22.7%",
-              height: "6.5%",
-            }}
+            style={{ left: "3.4%", top: "55%", width: "22.7%", height: "6.5%" }}
           />
+
+          {/* Carrusel encima de la foto principal del coche */}
+          <div
+            className="absolute overflow-hidden rounded-md bg-black"
+            style={{ left: "62.3%", top: "3.2%", width: "32.4%", height: "33.5%" }}
+          >
+            <img
+              src={fotos[idx]}
+              alt={`Foto ${idx + 1} del MG B Roadster`}
+              className="h-full w-full object-cover transition-opacity duration-300"
+            />
+          </div>
+
+          {/* Flecha izquierda */}
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Foto anterior"
+            className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
+            style={{ left: "63.5%", top: "17%", width: "2.6%", aspectRatio: "1 / 1" }}
+          >
+            <ChevronLeft className="h-4 w-4 text-black" />
+          </button>
+
+          {/* Flecha derecha */}
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Foto siguiente"
+            className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
+            style={{ left: "93.7%", top: "17%", width: "2.6%", aspectRatio: "1 / 1" }}
+          >
+            <ChevronRight className="h-4 w-4 text-black" />
+          </button>
+
+          {/* Miniaturas clicables */}
+          <div
+            className="absolute flex gap-[0.6%]"
+            style={{ left: "62.3%", top: "37.5%", width: "32.4%", height: "11%" }}
+          >
+            {fotos.map((src, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setIdx(i)}
+                aria-label={`Ver foto ${i + 1}`}
+                className={`flex-1 overflow-hidden rounded-md border-2 transition ${
+                  i === idx ? "border-brand" : "border-transparent opacity-90 hover:opacity-100"
+                }`}
+              >
+                <img src={src} alt="" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
         </div>
       </main>
       <SiteFooter />
