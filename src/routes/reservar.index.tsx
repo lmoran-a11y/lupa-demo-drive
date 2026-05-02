@@ -234,10 +234,7 @@ function Reservar() {
                     <Check className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-success p-1 text-white" />
                   </div>
 
-                  <div className="mt-4 rounded-lg border border-border bg-muted/30 px-4 py-3 text-sm text-muted-foreground">
-                    Vehículo reservado: <b className="text-foreground">{vehicleLabel}</b> · <b className="text-foreground">{plate || "—"}</b>
-                    {brandModel && <> · <b className="text-foreground">{brandModel}</b></>}
-                  </div>
+
 
                   <label className="mt-4 flex items-start gap-3 text-sm text-foreground">
                     <input
