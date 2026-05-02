@@ -111,7 +111,9 @@ function Home() {
                     src={v.image}
                     alt={v.label}
                     loading="lazy"
-                    className="h-[92%] w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                    className={`h-[92%] w-full object-contain transition-transform duration-300 group-hover:scale-105 ${
+                      v.id === "deportivo" ? "scale-115" : ""
+                    }`}
                   />
                 </div>
                 <div className="mt-2 flex items-center justify-between">
