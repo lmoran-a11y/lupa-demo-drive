@@ -25,6 +25,7 @@ import {
   Info,
   Search,
   Car,
+  Euro,
 } from "lucide-react";
 
 const reservarSearchSchema = z.object({
