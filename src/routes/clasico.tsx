@@ -57,7 +57,7 @@ function Clasico() {
           {/* Foto principal */}
           <div
             className="absolute overflow-hidden rounded-md bg-black"
-            style={{ left: "63.55%", top: "2.75%", width: "31.85%", height: "37.95%" }}
+            style={{ left: "64%", top: "2.75%", width: "29.2%", height: "37.95%" }}
           >
             <img
               src={fotos[idx]}
@@ -72,7 +72,7 @@ function Clasico() {
             onClick={prev}
             aria-label="Foto anterior"
             className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
-            style={{ left: "65%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
+            style={{ left: "65.2%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
           >
             <ChevronLeft className="h-4 w-4 text-black" />
           </button>
@@ -83,7 +83,7 @@ function Clasico() {
             onClick={next}
             aria-label="Foto siguiente"
             className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
-            style={{ left: "92.8%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
+            style={{ left: "90.4%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
           >
             <ChevronRight className="h-4 w-4 text-black" />
           </button>
@@ -91,7 +91,7 @@ function Clasico() {
           {/* Miniaturas clicables (6) */}
           <div
             className="absolute flex gap-[1%]"
-            style={{ left: "63.55%", top: "42%", width: "31.85%", height: "9%" }}
+            style={{ left: "64%", top: "42%", width: "29.2%", height: "9%" }}
           >
             {fotos.map((src, i) => (
               <button
