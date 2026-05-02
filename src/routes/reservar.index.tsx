@@ -23,6 +23,8 @@ import {
   Headphones,
   Hourglass,
   Info,
+  Search,
+  Car,
 } from "lucide-react";
 
 const reservarSearchSchema = z.object({
