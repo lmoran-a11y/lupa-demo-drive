@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
-import { Calendar, Clock, History, CreditCard, MessageSquare, Settings, LogOut, Bell, ChevronDown, Headphones, ArrowRight, Car, Zap } from "lucide-react";
+import { Calendar, Clock, History, CreditCard, MessageSquare, Settings, LogOut, Bell, ChevronDown, Headphones, ArrowRight, Car, Zap, AlertTriangle } from "lucide-react";
 import { workshopInspections, type Inspection } from "@/lib/mock-data";
 import { getWorkshopPayout, formatEur, WORKSHOP_PRICES } from "@/lib/workshop-pricing";
 
