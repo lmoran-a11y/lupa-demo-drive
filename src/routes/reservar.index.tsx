@@ -252,7 +252,7 @@ function Reservar() {
                     <Info className="mt-0.5 h-4 w-4 shrink-0" />
                     <p>
                       Si el vehículo no coincide con la reserva, podrán aplicarse ajustes según las condiciones.{" "}
-                      <a href="/legal/terminos" className="font-semibold text-brand underline-offset-2 hover:underline">Ver condiciones</a>
+                      <button type="button" onClick={() => setShowConditions(true)} className="font-semibold text-brand underline-offset-2 hover:underline">Ver condiciones</button>
                     </p>
                   </div>
                 </div>
