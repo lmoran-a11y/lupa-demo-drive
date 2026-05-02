@@ -113,7 +113,7 @@ function Home() {
                     loading="lazy"
                     className={`h-[92%] w-full object-contain transition-transform duration-300 group-hover:scale-105 ${
                       v.id === "deportivo" ? "scale-115" : ""
-                    } ${v.id === "suv" ? "scale-115" : ""} ${v.id === "furgoneta" ? "scale-125" : ""}`}
+                    } ${v.id === "suv" ? "scale-115" : ""} ${v.id === "furgoneta" ? "scale-110" : ""}`}
                   />
                 </div>
                 <div className="mt-2 flex items-center justify-between">
