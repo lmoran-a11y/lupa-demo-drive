@@ -226,6 +226,35 @@ function Reservar() {
                   <div className="mt-2 text-xs text-muted-foreground">
                     Solo usaremos tu email para enviarte el informe.
                   </div>
+
+                  <div className="mt-4 flex items-center justify-between">
+                    <label htmlFor="brandModel" className="text-xs font-medium text-muted-foreground">
+                      Marca y modelo <span className="text-muted-foreground/70">(opcional)</span>
+                    </label>
+                    <span className="text-[11px] text-muted-foreground">
+                      Categoría: <b className="text-foreground">{vehicleLabel}</b> · Matrícula: <b className="text-foreground">{plate || "—"}</b>
+                    </span>
+                  </div>
+                  <input
+                    id="brandModel"
+                    type="text"
+                    value={brandModel}
+                    onChange={(e) => setBrandModel(e.target.value)}
+                    placeholder="Ej. Seat León"
+                    className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-brand"
+                  />
+
+                  <label className="mt-4 flex items-start gap-2 text-xs text-muted-foreground">
+                    <input
+                      type="checkbox"
+                      checked={confirmVehicle}
+                      onChange={(e) => setConfirmVehicle(e.target.checked)}
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-brand"
+                    />
+                    <span>
+                      Confirmo que la matrícula y la categoría seleccionada corresponden al vehículo que será inspeccionado.
+                    </span>
+                  </label>
                 </div>
 
                 <button
@@ -235,7 +264,8 @@ function Reservar() {
                       search: { dgt, day, hour, location, total, vehicle: vehicle as VehicleType, plate },
                     })
                   }
-                  className="mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-brand py-4 text-lg font-bold text-ink hover:brightness-95"
+                  disabled={!confirmVehicle}
+                  className="mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-brand py-4 text-lg font-bold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <Lock className="h-5 w-5" />
                   Reservar inspección por {total} €
