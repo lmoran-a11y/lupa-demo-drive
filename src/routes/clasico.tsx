@@ -66,24 +66,24 @@ function Clasico() {
             />
           </div>
 
-          {/* Flecha izquierda */}
+          {/* Flecha izquierda (fuera de la foto) */}
           <button
             type="button"
             onClick={prev}
             aria-label="Foto anterior"
-            className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
-            style={{ left: "67.7%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
+            className="absolute flex items-center justify-center rounded-full bg-white shadow border border-border hover:bg-muted"
+            style={{ left: "63.5%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
           >
             <ChevronLeft className="h-4 w-4 text-black" />
           </button>
 
-          {/* Flecha derecha */}
+          {/* Flecha derecha (fuera de la foto) */}
           <button
             type="button"
             onClick={next}
             aria-label="Foto siguiente"
-            className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
-            style={{ left: "92.9%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
+            className="absolute flex items-center justify-center rounded-full bg-white shadow border border-border hover:bg-muted"
+            style={{ left: "96.1%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
           >
             <ChevronRight className="h-4 w-4 text-black" />
           </button>
