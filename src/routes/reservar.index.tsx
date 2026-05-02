@@ -244,7 +244,7 @@ function Reservar() {
                       className="mt-0.5 h-4 w-4 shrink-0 accent-brand"
                     />
                     <span className="font-bold">
-                      Confirmo que la matrícula indicada y la categoría seleccionada corresponden al vehículo que será inspeccionado.
+                      Confirmo que los datos del vehículo indicados en la reserva son correctos para la inspección.
                     </span>
                   </label>
 
