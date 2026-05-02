@@ -141,6 +141,7 @@ function Dashboard() {
 
         <p className="mt-6 text-center text-xs text-muted-foreground">🛡 Tus inspecciones están seguras. Solo tú decides con quién compartirlas.</p>
       </main>
+      <IncidentModal open={incidentOpen} onClose={()=>setIncidentOpen(false)}/>
     </div>
   );
 }
