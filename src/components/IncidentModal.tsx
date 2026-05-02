@@ -59,7 +59,7 @@ export function IncidentModal({ open, onClose }: { open: boolean; onClose: () =>
             })}
           </div>
 
-          <div className="mt-5 grid gap-4 md:grid-cols-2">
+          <div className="mt-5">
             <div className="rounded-2xl border border-border p-5">
               <div className="text-lg font-bold">{current.title}</div>
               <p className="text-sm text-muted-foreground">Selecciona el motivo</p>
@@ -84,21 +84,6 @@ export function IncidentModal({ open, onClose }: { open: boolean; onClose: () =>
                 <Info className={`h-4 w-4 ${current.color}`}/>
                 <span className="font-bold">Compensación al taller:</span>
                 <span className={`font-extrabold ${current.text}`}>25,00 €</span>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-border p-5">
-              <div className="text-lg font-bold">¿Qué ocurre después?</div>
-              <div className="mt-4 space-y-3">
-                <Step icon={ClipboardList} title="Reportas la incidencia" desc="Nos cuentas qué ha ocurrido"/>
-                <Arrow/>
-                <Step icon={Scale} title="Se aplica la política correspondiente" desc="Se calculan los cargos o devoluciones"/>
-                <Arrow/>
-                <Step icon={Mail} title="Informamos al cliente" desc="El cliente recibe el detalle de la incidencia"/>
-              </div>
-              <div className="mt-4 flex items-start gap-2 rounded-xl bg-info/10 p-3 text-xs">
-                <Shield className="h-4 w-4 shrink-0 text-info"/>
-                <span>Todas las incidencias están protegidas y se revisan según nuestras <span className="font-bold text-info">condiciones de servicio</span>.</span>
               </div>
             </div>
           </div>
