@@ -185,11 +185,129 @@ function Dashboard() {
   );
 }
 
-function NavItem({ icon, label, active, badge }: any) {
+function NavItem({ icon, label, active, badge, onClick }: any) {
   return (
-    <button className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-bold ${active?"bg-brand text-ink":"hover:bg-muted"}`}>
+    <button onClick={onClick} className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-bold ${active?"bg-brand text-ink":"hover:bg-muted"}`}>
       <span className="h-4 w-4">{icon}</span>{label}
       {badge && <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] text-ink">{badge}</span>}
     </button>
+  );
+}
+
+const TYPE_STYLES: Record<IncidentRow["type"], { bg: string; text: string; icon: any }> = {
+  ausencia: { bg: "bg-destructive/10", text: "text-destructive", icon: UserX },
+  vehiculo: { bg: "bg-info/10", text: "text-info", icon: Car },
+  limitada: { bg: "bg-brand/15", text: "text-ink", icon: Camera },
+  otro: { bg: "bg-muted", text: "text-foreground", icon: MoreHorizontal },
+};
+
+const STATUS_STYLES: Record<IncidentRow["status"], string> = {
+  "Pendiente": "bg-brand/15 text-brand",
+  "En revisión": "bg-info/15 text-info",
+  "Resuelta": "bg-success/15 text-success",
+};
+
+function IncidenciasSection({ incTab, setIncTab }: { incTab: "Todas"|"Pendientes"|"En revisión"|"Resueltas"; setIncTab: (t: any)=>void }) {
+  const counts = {
+    Todas: 18,
+    Pendientes: INCIDENTS.filter(i=>i.status==="Pendiente").length + 5,
+    "En revisión": INCIDENTS.filter(i=>i.status==="En revisión").length + 3,
+    Resueltas: INCIDENTS.filter(i=>i.status==="Resuelta").length + 3,
+  } as const;
+  const filtered = incTab === "Todas" ? INCIDENTS
+    : incTab === "Pendientes" ? INCIDENTS.filter(i=>i.status==="Pendiente")
+    : incTab === "En revisión" ? INCIDENTS.filter(i=>i.status==="En revisión")
+    : INCIDENTS.filter(i=>i.status==="Resuelta");
+
+  const tabs: { key: typeof incTab; label: string; color: string }[] = [
+    { key: "Todas", label: "Todas", color: "bg-brand text-ink" },
+    { key: "Pendientes", label: "Pendientes", color: "bg-brand text-ink" },
+    { key: "En revisión", label: "En revisión", color: "bg-info text-white" },
+    { key: "Resueltas", label: "Resueltas", color: "bg-success text-white" },
+  ];
+
+  return (
+    <>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-2">
+          {tabs.map(t => {
+            const active = incTab === t.key;
+            return (
+              <button key={t.key} onClick={()=>setIncTab(t.key)} className={`flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-sm font-bold ${active ? "border-brand bg-brand/5" : "border-border bg-card hover:bg-muted/50"}`}>
+                {t.label}
+                <span className={`flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[10px] ${t.color}`}>{counts[t.key]}</span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="flex gap-2">
+          <button className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-bold"><Calendar className="h-4 w-4"/>01/05/2025 - 31/05/2025 <ChevronDown className="h-4 w-4"/></button>
+          <button className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-bold"><Filter className="h-4 w-4"/>Filtros</button>
+        </div>
+      </div>
+
+      <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="grid grid-cols-[110px_1fr_120px_1fr_120px_1fr_140px] gap-4 border-b border-border px-5 py-3 text-xs font-bold text-muted-foreground">
+          <div>ID</div>
+          <div>Inspección</div>
+          <div>Fecha</div>
+          <div>Tipo de incidencia</div>
+          <div>Estado</div>
+          <div>Compensación</div>
+          <div>Acciones</div>
+        </div>
+        {filtered.map(inc => {
+          const ts = TYPE_STYLES[inc.type];
+          const Icon = ts.icon;
+          return (
+            <div key={inc.id} className="grid grid-cols-[110px_1fr_120px_1fr_120px_1fr_140px] items-center gap-4 border-b border-border px-5 py-4 last:border-b-0 hover:bg-muted/30">
+              <div className="text-sm font-bold text-muted-foreground">{inc.id}</div>
+              <div>
+                <div className="text-sm font-extrabold">{inc.plate}</div>
+                <div className="text-xs text-muted-foreground">{inc.vehicle}</div>
+              </div>
+              <div className="text-xs">
+                <div>{inc.date}</div>
+                <div className="text-muted-foreground">{inc.time}</div>
+              </div>
+              <div>
+                <div className={`inline-flex items-center gap-2 rounded-lg ${ts.bg} px-3 py-1 text-xs font-bold ${ts.text}`}>
+                  <Icon className="h-3.5 w-3.5"/>{inc.typeLabel}
+                </div>
+                <div className="mt-1 text-xs text-muted-foreground">{inc.subLabel}</div>
+              </div>
+              <div>
+                <span className={`inline-block rounded-md px-3 py-1 text-xs font-bold ${STATUS_STYLES[inc.status]}`}>{inc.status}</span>
+              </div>
+              <div className="text-xs">
+                {inc.compMulti ? (
+                  <div className="space-y-0.5 font-bold">
+                    <div className="text-success">Taller: {inc.compMulti.taller}</div>
+                    <div className="text-foreground">LUPAUTO: {inc.compMulti.lupa}</div>
+                    <div className="text-foreground">Cliente: {inc.compMulti.cliente}</div>
+                  </div>
+                ) : (
+                  <div className={`whitespace-pre-line font-bold ${inc.comp.includes("€") && !inc.comp.includes("pendiente") && !inc.comp.includes("revisión") ? (inc.comp.includes("-") ? "text-destructive" : "text-success") : "text-muted-foreground"}`}>{inc.comp}</div>
+                )}
+              </div>
+              <div>
+                <button className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-xs font-bold hover:bg-muted"><Eye className="h-3.5 w-3.5"/>Ver detalle</button>
+              </div>
+            </div>
+          );
+        })}
+        <div className="flex items-center justify-between gap-4 px-5 py-4 text-xs text-muted-foreground">
+          <div>Mostrando 1 a {filtered.length} de 18 incidencias</div>
+          <div className="flex items-center gap-1">
+            <button className="rounded border border-border p-1.5"><ChevronLeft className="h-3.5 w-3.5"/></button>
+            <button className="flex h-7 w-7 items-center justify-center rounded border-2 border-brand bg-brand/5 text-xs font-bold text-ink">1</button>
+            <button className="flex h-7 w-7 items-center justify-center rounded border border-border text-xs font-bold">2</button>
+            <button className="flex h-7 w-7 items-center justify-center rounded border border-border text-xs font-bold">3</button>
+            <button className="rounded border border-border p-1.5"><ChevronRight className="h-3.5 w-3.5"/></button>
+          </div>
+          <button className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 font-bold">10 por página <ChevronDown className="h-3.5 w-3.5"/></button>
+        </div>
+      </div>
+    </>
   );
 }
