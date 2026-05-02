@@ -32,10 +32,8 @@ function Dashboard() {
         <div className="p-5"><Logo /></div>
         <nav className="flex-1 space-y-1 px-3">
           <NavItem active icon={<Calendar/>} label="Inspecciones"/>
-          <NavItem icon={<History/>} label="Historial"/>
-          <NavItem icon={<CreditCard/>} label="Pagos"/>
-          <NavItem icon={<MessageSquare/>} label="Soporte" badge={2}/>
-          <NavItem icon={<Settings/>} label="Configuración"/>
+          <NavItem icon={<History/>} label="Completadas"/>
+          <NavItem icon={<MessageSquare/>} label="Incidencias"/>
         </nav>
         <div className="border-t border-border p-3">
           <Link to="/" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm hover:bg-muted"><LogOut className="h-4 w-4"/>Cerrar sesión</Link>
