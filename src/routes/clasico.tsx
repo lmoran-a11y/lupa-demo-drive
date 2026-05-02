@@ -51,13 +51,13 @@ function Clasico() {
           {/* Tapamos toda la zona de foto+miniaturas del PNG con fondo blanco */}
           <div
             className="absolute bg-white"
-            style={{ left: "62%", top: "2%", width: "37%", height: "51%" }}
+            style={{ left: "62%", top: "2%", width: "34%", height: "51%" }}
           />
 
           {/* Foto principal */}
           <div
             className="absolute overflow-hidden rounded-md bg-black"
-            style={{ left: "63.55%", top: "2.75%", width: "34.65%", height: "37.95%" }}
+            style={{ left: "63.55%", top: "2.75%", width: "31.85%", height: "37.95%" }}
           >
             <img
               src={fotos[idx]}
@@ -83,7 +83,7 @@ function Clasico() {
             onClick={next}
             aria-label="Foto siguiente"
             className="absolute flex items-center justify-center rounded-full bg-white/90 shadow hover:bg-white"
-            style={{ left: "95.6%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
+            style={{ left: "92.8%", top: "19.6%", width: "2.6%", aspectRatio: "1 / 1" }}
           >
             <ChevronRight className="h-4 w-4 text-black" />
           </button>
@@ -91,7 +91,7 @@ function Clasico() {
           {/* Miniaturas clicables (6) */}
           <div
             className="absolute flex gap-[1%]"
-            style={{ left: "63.55%", top: "42%", width: "34.65%", height: "9%" }}
+            style={{ left: "63.55%", top: "42%", width: "31.85%", height: "9%" }}
           >
             {fotos.map((src, i) => (
               <button
