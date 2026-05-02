@@ -103,7 +103,7 @@ function Reservar() {
               active={edit === "datetime"}
               last
             />
-            <div className={`mt-5 rounded-xl border p-5 transition-colors ${dgt ? "border-brand bg-brand/5" : "border-border bg-card"}`}>
+            <div className={`mt-5 rounded-xl border-2 border-brand p-5 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
               <div className="flex items-start gap-3">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted">
                   <div className="relative">
@@ -129,7 +129,7 @@ function Reservar() {
               <button
                 type="button"
                 onClick={() => setDgt(!dgt)}
-                className="mt-5 flex w-full items-center gap-3 border-t border-border/60 pt-4 text-left"
+                className="mt-5 flex w-full items-center gap-3 border-t border-brand pt-4 text-left"
               >
                 <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors ${dgt ? "border-brand bg-brand text-brand-foreground" : "border-muted-foreground/40 bg-background"}`}>
                   {dgt && <span className="text-xs font-bold leading-none">✓</span>}
