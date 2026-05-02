@@ -249,6 +249,10 @@ function Reservar() {
                       Confirmo que la matrícula y la categoría seleccionada corresponden al vehículo que será inspeccionado.
                     </span>
                   </label>
+
+                  <p className="mt-3 text-[11px] font-bold text-foreground">
+                    Si el vehículo presentado pertenece a una categoría distinta de la reservada, LUPAUTO podrá aplicar el ajuste de precio correspondiente conforme a la tarifa vigente y gestionar el cobro o la devolución de la diferencia en el método de pago autorizado, según las condiciones de la reserva.
+                  </p>
                 </div>
 
                 <button
