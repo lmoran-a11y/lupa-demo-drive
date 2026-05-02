@@ -52,7 +52,7 @@ function ConsultarCita() {
             <p className="text-sm text-muted-foreground">No hemos encontrado la cita que estás buscando.<br/>Revisa el enlace o contacta con nuestro equipo de soporte.</p>
             <div className="flex gap-3">
               <Link to="/" className="rounded-lg bg-brand px-5 py-2.5 font-bold text-ink">Ir al inicio</Link>
-              <Link to="/contacto" className="rounded-lg border border-border px-5 py-2.5 font-bold">Contactar soporte</Link>
+              <Link to="/contacto" className="rounded-lg border border-border px-5 py-2.5 font-bold">Reportar incidencia</Link>
             </div>
           </div>
         )}

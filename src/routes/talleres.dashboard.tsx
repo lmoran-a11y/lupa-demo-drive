@@ -44,7 +44,7 @@ function Dashboard() {
           <Headphones className="mx-auto h-5 w-5 text-brand"/>
           <div className="mt-2 font-bold">¿Necesitas ayuda?</div>
           <p className="text-muted-foreground">Nuestro equipo está aquí para ayudarte.</p>
-          <Link to="/contacto" className="mt-2 inline-block rounded-lg border border-border bg-card px-3 py-1.5 font-bold">Contactar soporte</Link>
+          <Link to="/contacto" className="mt-2 inline-block rounded-lg border border-border bg-card px-3 py-1.5 font-bold">Reportar incidencia</Link>
         </div>
       </aside>
 
@@ -132,7 +132,7 @@ function Dashboard() {
                       {i.status==="En proceso"?"Continuar inspección":"Abrir inspección"} <ArrowRight className="h-4 w-4"/>
                     </button>
                   )}
-                  <Link to="/contacto" className="flex items-center justify-center gap-2 rounded-lg border border-brand px-4 py-2 text-xs font-bold text-ink"><MessageSquare className="h-3 w-3"/>Contactar soporte</Link>
+                  <Link to="/contacto" className="flex items-center justify-center gap-2 rounded-lg border border-brand px-4 py-2 text-xs font-bold text-ink"><MessageSquare className="h-3 w-3"/>Reportar incidencia</Link>
                 </div>
               </div>
             );
