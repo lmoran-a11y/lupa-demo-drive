@@ -17,6 +17,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("Hoy");
   const [items] = useState<Inspection[]>(workshopInspections);
+  const [incidentOpen, setIncidentOpen] = useState(false);
 
   const filtered = items.filter(i => {
     if (tab === "Completadas") return i.status === "Completada";
