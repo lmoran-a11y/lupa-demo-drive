@@ -103,7 +103,7 @@ function Reservar() {
               active={edit === "datetime"}
               last
             />
-            <div className={`mt-5 rounded-xl border p-5 transition-colors ${dgt ? "border-brand bg-brand/5" : "border-border bg-card"}`}>
+            <div className={`mt-5 rounded-xl border-2 border-brand p-5 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
               <div className="flex items-start gap-3">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted">
                   <div className="relative">
