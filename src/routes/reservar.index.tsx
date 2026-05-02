@@ -227,22 +227,10 @@ function Reservar() {
                     Solo usaremos tu email para enviarte el informe.
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between">
-                    <label htmlFor="brandModel" className="text-xs font-medium text-muted-foreground">
-                      Marca y modelo <span className="text-muted-foreground/70">(opcional)</span>
-                    </label>
-                    <span className="text-[11px] text-muted-foreground">
-                      Categoría: <b className="text-foreground">{vehicleLabel}</b> · Matrícula: <b className="text-foreground">{plate || "—"}</b>
-                    </span>
+                  <div className="mt-4 rounded-lg border border-border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground">
+                    Categoría: <b className="text-foreground">{vehicleLabel}</b> · Matrícula: <b className="text-foreground">{plate || "—"}</b>
+                    {brandModel && <> · Vehículo: <b className="text-foreground">{brandModel}</b></>}
                   </div>
-                  <input
-                    id="brandModel"
-                    type="text"
-                    value={brandModel}
-                    onChange={(e) => setBrandModel(e.target.value)}
-                    placeholder="Ej. Seat León"
-                    className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-brand"
-                  />
 
                   <label className="mt-4 flex items-start gap-2 text-xs text-muted-foreground">
                     <input
