@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 
 const reservarSearchSchema = z.object({
-  vehicle: fallback(z.enum(["turismo", "suv", "furgoneta", "deportivo"]), "turismo").default("turismo"),
+  vehicle: fallback(z.enum(["turismo", "suv", "furgoneta", "deportivo", "clasico"]), "turismo").default("turismo"),
   plate: fallback(z.string(), "").default(""),
 });
 
