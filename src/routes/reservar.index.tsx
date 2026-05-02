@@ -25,6 +25,7 @@ import {
   Info,
   Search,
   Car,
+  Euro,
 } from "lucide-react";
 
 const reservarSearchSchema = z.object({
@@ -55,6 +56,7 @@ function Reservar() {
   const [email, setEmail] = useState("");
   const [brandModel, setBrandModel] = useState("");
   const [confirmVehicle, setConfirmVehicle] = useState(false);
+  const [showConditions, setShowConditions] = useState(false);
 
   const basePrice = getBasePrice(vehicle as VehicleType);
   const totalNum = basePrice + (dgt ? 14.99 : 0);
@@ -250,7 +252,7 @@ function Reservar() {
                     <Info className="mt-0.5 h-4 w-4 shrink-0" />
                     <p>
                       Si el vehículo no coincide con la reserva, podrán aplicarse ajustes según las condiciones.{" "}
-                      <a href="/legal/terminos" className="font-semibold text-brand underline-offset-2 hover:underline">Ver condiciones</a>
+                      <button type="button" onClick={() => setShowConditions(true)} className="font-semibold text-brand underline-offset-2 hover:underline">Ver condiciones</button>
                     </p>
                   </div>
                 </div>
@@ -325,6 +327,96 @@ function Reservar() {
 
 
       <SiteFooter />
+
+      {showConditions && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setShowConditions(false)}
+        >
+          <div
+            className="relative w-full max-w-xl rounded-2xl bg-background p-6 shadow-2xl md:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between">
+              <h2 className="text-xl font-bold">Condiciones de reserva</h2>
+              <button
+                onClick={() => setShowConditions(false)}
+                className="rounded-full p-1 hover:bg-muted"
+                aria-label="Cerrar"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="mt-5 space-y-5">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-muted">
+                  <Car className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <div className="font-bold">Veracidad de los datos del vehículo</div>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    El cliente es responsable de introducir correctamente la matrícula y seleccionar la categoría adecuada del vehículo. Estos datos serán la base para la reserva y la tarifa aplicada.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-muted">
+                  <Euro className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <div className="font-bold">Ajuste de precio</div>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Si el vehículo presentado pertenece a una categoría distinta de la reservada, LUPAUTO podrá recalcular el precio del servicio conforme a la tarifa de categorías vigente.
+                  </p>
+                  <p className="mt-2 text-sm font-bold text-foreground">
+                    En ese caso, se aplicará el cobro o la devolución de la diferencia en el método de pago autorizado.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-muted">
+                  <Shield className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <div className="font-bold">Cómo se gestiona el ajuste</div>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Una vez verificada la incidencia comunicada por el taller, se gestionará el cobro o la devolución de la diferencia a través del método de pago facilitado en la reserva.
+                    <br />
+                    La comunicación correspondiente se enviará al email indicado.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-muted">
+                  <FileText className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <div className="font-bold">Más información</div>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Consulta todos los detalles en nuestras{" "}
+                    <Link to="/legal/terminos" className="font-semibold text-brand hover:underline">Condiciones Generales de Reserva</Link>{" "}
+                    y en la{" "}
+                    <Link to="/legal/privacidad" className="font-semibold text-brand hover:underline">Política de Privacidad</Link>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setShowConditions(false)}
+                className="rounded-lg border border-border px-5 py-2 text-sm font-semibold hover:bg-muted"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
