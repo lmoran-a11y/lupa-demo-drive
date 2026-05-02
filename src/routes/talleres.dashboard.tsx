@@ -132,7 +132,7 @@ function Dashboard() {
                       {i.status==="En proceso"?"Continuar inspección":"Abrir inspección"} <ArrowRight className="h-4 w-4"/>
                     </button>
                   )}
-                  <Link to="/contacto" className="flex items-center justify-center gap-2 rounded-lg border border-brand px-4 py-2 text-xs font-bold text-ink"><MessageSquare className="h-3 w-3"/>Reportar incidencia</Link>
+                  <button onClick={()=>setIncidentOpen(true)} className="flex items-center justify-center gap-2 rounded-lg border border-brand px-4 py-2 text-xs font-bold text-ink"><MessageSquare className="h-3 w-3"/>Reportar incidencia</button>
                 </div>
               </div>
             );
