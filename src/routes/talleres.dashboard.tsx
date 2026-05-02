@@ -39,11 +39,11 @@ const INCIDENTS: IncidentRow[] = [
 
 type Tab = "Hoy" | "Próximas" | "Completadas";
 
-type Tab = "Hoy" | "Próximas" | "Completadas";
-
 function Dashboard() {
   const navigate = useNavigate();
+  const [section, setSection] = useState<Section>("inspecciones");
   const [tab, setTab] = useState<Tab>("Hoy");
+  const [incTab, setIncTab] = useState<"Todas" | "Pendientes" | "En revisión" | "Resueltas">("Todas");
   const [items] = useState<Inspection[]>(workshopInspections);
   const [incidentOpen, setIncidentOpen] = useState(false);
 
