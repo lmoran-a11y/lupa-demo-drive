@@ -3,8 +3,8 @@ import { Check } from "lucide-react";
 export function StepProgress({ current }: { current: 1 | 2 | 3 | 4 }) {
   const steps = [
     { n: 1, label: "Vehículo" },
-    { n: 3, label: "Pago" },
-    { n: 4, label: "Confirmación" },
+    { n: 2, label: "Pago" },
+    { n: 3, label: "Confirmación" },
   ];
   return (
     <div className="flex items-center justify-center gap-2 py-6">
