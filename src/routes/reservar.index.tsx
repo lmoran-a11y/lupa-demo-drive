@@ -103,8 +103,9 @@ function Reservar() {
               value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
               onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
               active={edit === "datetime"}
-              last
             />
+
+            <BrandModelPicker value={brandModel} onChange={setBrandModel} />
             <div className={`mt-5 rounded-xl border-2 border-brand p-5 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
               <div className="flex items-start gap-3">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted">
