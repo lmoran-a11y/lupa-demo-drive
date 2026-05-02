@@ -117,7 +117,7 @@ function Reservar() {
                     <div className="whitespace-nowrap text-sm font-semibold text-muted-foreground">+14,99 €</div>
                   </div>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Incluye el informe oficial de la Dirección General de Tráfico con titularidad, cargas, embargos e historial completo del vehículo.
+                    Incluye el informe oficial de la Dirección General de Tráfico.
                   </p>
                 </div>
               </div>
