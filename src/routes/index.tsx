@@ -113,7 +113,7 @@ function Home() {
                       v.id === "suv" ? 1.15 :
                       v.id === "furgoneta" ? 1.10 : 1;
                     const hoverScale = baseScale + 0.1;
-                    const tx = v.id === "furgoneta" ? "-6%" : v.id === "deportivo" ? "-4%" : "0%";
+                    const tx = v.id === "furgoneta" ? "-6%" : v.id === "deportivo" ? "-4%" : v.id === "turismo" ? "-4%" : "0%";
                     return (
                       <img
                         src={v.image}
