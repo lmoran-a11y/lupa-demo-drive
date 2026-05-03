@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@tanstack/zod-adapter": "^1.166.9",
+    "zod": "^3.25.76"
+  }
+}

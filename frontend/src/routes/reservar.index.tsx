@@ -4,7 +4,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { StepProgress } from "../components/StepProgress";
 import { useState, type ReactNode } from "react";
 import { z } from "zod";
-import { zodValidator } from '@tanstack/zod-adapter';
+import { zodValidator as zodAdapter } from '@tanstack/zod-adapter';
 import { getBasePrice, formatEur, VEHICLE_LABELS, type VehicleType } from "../lib/pricing";
 
 type IconProps = {
@@ -43,8 +43,7 @@ const reservarSearchSchema = z.object({
 });
 
 export const Route = createFileRoute()({
-  validateSearch: zodValidator(reservarSearchSchema),
-  head: () => ({ meta: [{ title: "Reserva tu inspección — LUPAUTO" }] }),
+  validateSearch: (search) => reservarSearchSchema.parse(search),  head: () => ({ meta: [{ title: "Reserva tu inspección — LUPAUTO" }] }),
   component: Reservar,
 });
 
@@ -67,6 +66,9 @@ function Reservar() {
   const [confirmVehicle, setConfirmVehicle] = useState(false);
   const [showConditions, setShowConditions] = useState(false);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const basePrice = getBasePrice(vehicle as VehicleType);
   const totalNum = basePrice + (dgt ? 14.99 : 0);
   const total = formatEur(totalNum);
@@ -75,6 +77,58 @@ function Reservar() {
   const openEdit = (m: EditMode) => {
     setDraftLocation(location);
     setEdit(m);
+  };
+
+  const handleReservation = async () => {
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      // Llamada a tu backend de Node en Lupauto
+      const response = await fetch("http://localhost:3000/api/reservas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          vehicle,
+          plate,
+          brandModel,
+          location,
+          date: `2024-05-${day}`,
+          hour,
+          dgt,
+          total: totalNum,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error en el servidor al procesar la reserva");
+      }
+
+      const data = await response.json();
+
+      // Navegamos a confirmación solo si el backend respondió OK
+      navigate({
+        to: "/reservar/confirmacion",
+        search: { 
+          dgt, 
+          day, 
+          hour, 
+          location, 
+          total, 
+          vehicle: vehicle as VehicleType, 
+          plate,
+          reservaId: data.id // Pasamos el ID que genere tu base de datos
+        },
+      });
+    } catch (err) {
+      setError("No se pudo conectar con el servidor. Reintenta en unos instantes.");
+      console.error("Error en la reserva:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const confirmLocation = () => {
@@ -266,6 +320,12 @@ function Reservar() {
                   </div>
                 </div>
 
+                {error && (
+                  <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive font-medium">
+                    {error}
+                  </div>
+                )}
+                
                 <button
                   onClick={() =>
                     navigate({
@@ -883,4 +943,3 @@ function fallback<T extends z.ZodTypeAny>(schema: T, defaultValue: z.infer<T>): 
 function zodValidator(reservarSearchSchema: z.ZodObject<{ vehicle: any; plate: any; }, "strip", z.ZodTypeAny, { [x: string]: any; vehicle?: unknown; plate?: unknown; }, { [x: string]: any; vehicle?: unknown; plate?: unknown; }>): unknown {
   throw new Error("Function not implemented.");
 }
-
