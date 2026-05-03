@@ -1,39 +1,48 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { StepProgress } from "@/components/StepProgress";
-import { useState } from "react";
+import { createFileRoute, useNavigate, Link, Validator } from "@tanstack/react-router";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+import { StepProgress } from "../components/StepProgress";
+import { useState, type ReactNode } from "react";
 import { z } from "zod";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { getBasePrice, formatEur, VEHICLE_LABELS, type VehicleType } from "@/lib/pricing";
-import {
-  MapPin,
-  Check,
-  Wrench,
-  ChevronLeft,
-  ChevronRight,
-  Calendar as CalIcon,
-  Shield,
-  FileText,
-  ArrowRight,
-  X,
-  Lock,
-  Camera,
-  Clock,
-  Headphones,
-  Hourglass,
-  Info,
-  Search,
-  Car,
-  Euro,
-} from "lucide-react";
+import { zodValidator } from '@tanstack/zod-adapter';
+import { getBasePrice, formatEur, VEHICLE_LABELS, type VehicleType } from "../lib/pricing";
+
+type IconProps = {
+  className?: string;
+  strokeWidth?: number;
+  children?: ReactNode;
+};
+
+function Icon({ className, children }: IconProps) {
+  return <span className={className}>{children}</span>;
+}
+
+const MapPin = (props: IconProps) => <Icon {...props}>📍</Icon>;
+const Check = (props: IconProps) => <Icon {...props}>✓</Icon>;
+const Wrench = (props: IconProps) => <Icon {...props}>🔧</Icon>;
+const ChevronLeft = (props: IconProps) => <Icon {...props}>‹</Icon>;
+const ChevronRight = (props: IconProps) => <Icon {...props}>›</Icon>;
+const CalIcon = (props: IconProps) => <Icon {...props}>📅</Icon>;
+const Shield = (props: IconProps) => <Icon {...props}>🛡️</Icon>;
+const FileText = (props: IconProps) => <Icon {...props}>📄</Icon>;
+const ArrowRight = (props: IconProps) => <Icon {...props}>➔</Icon>;
+const X = (props: IconProps) => <Icon {...props}>✕</Icon>;
+const Lock = (props: IconProps) => <Icon {...props}>🔒</Icon>;
+const Camera = (props: IconProps) => <Icon {...props}>📷</Icon>;
+const Clock = (props: IconProps) => <Icon {...props}>⏰</Icon>;
+const Headphones = (props: IconProps) => <Icon {...props}>🎧</Icon>;
+const Hourglass = (props: IconProps) => <Icon {...props}>⏳</Icon>;
+const Info = (props: IconProps) => <Icon {...props}>ℹ️</Icon>;
+const Search = (props: IconProps) => <Icon {...props}>🔍</Icon>;
+const Car = (props: IconProps) => <Icon {...props}>🚗</Icon>;
+const Euro = (props: IconProps) => <Icon {...props}>€</Icon>;
 
 const reservarSearchSchema = z.object({
-  vehicle: fallback(z.enum(["turismo", "suv", "furgoneta", "deportivo", "clasico"]), "turismo").default("turismo"),
-  plate: fallback(z.string(), "").default(""),
+  vehicle: z.enum(["turismo", "suv", "furgoneta", "deportivo", "clasico"]).default("turismo"),
+  plate: z.string().default(""),
 });
 
-export const Route = createFileRoute("/reservar/")({
+export const Route = createFileRoute()({
   validateSearch: zodValidator(reservarSearchSchema),
   head: () => ({ meta: [{ title: "Reserva tu inspección — LUPAUTO" }] }),
   component: Reservar,
@@ -867,3 +876,11 @@ function BrandModelPicker({ value, onChange }: { value: string; onChange: (v: st
     </div>
   );
 }
+function fallback<T extends z.ZodTypeAny>(schema: T, defaultValue: z.infer<T>): z.ZodDefault<T> {
+  return schema.default(defaultValue);
+}
+
+function zodValidator(reservarSearchSchema: z.ZodObject<{ vehicle: any; plate: any; }, "strip", z.ZodTypeAny, { [x: string]: any; vehicle?: unknown; plate?: unknown; }, { [x: string]: any; vehicle?: unknown; plate?: unknown; }>): unknown {
+  throw new Error("Function not implemented.");
+}
+

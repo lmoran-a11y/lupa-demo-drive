@@ -1,11 +1,43 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { StepProgress } from "@/components/StepProgress";
-import { Check, MapPin, Calendar, Clock, Wrench, FileText, MessageCircle, Copy, Headphones, Shield, Home } from "lucide-react";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+import { StepProgress } from "../components/StepProgress";
 import { z } from "zod";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { VEHICLE_LABELS, type VehicleType } from "@/lib/pricing";
+import { VEHICLE_LABELS, type VehicleType } from "../lib/pricing";
+
+const fallback = <T extends z.ZodTypeAny>(schema: T, defaultValue: z.infer<T>) => schema.default(defaultValue);
+
+type IconProps = { className?: string };
+const Check = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>✓</span>
+);
+const MapPin = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>📍</span>
+);
+const Calendar = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>📅</span>
+);
+const Clock = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>⏰</span>
+);
+const FileText = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>📄</span>
+);
+const MessageCircle = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>💬</span>
+);
+const Copy = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>📋</span>
+);
+const Headphones = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>🎧</span>
+);
+const Shield = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>🛡️</span>
+);
+const Home = ({ className }: IconProps) => (
+  <span className={["inline-flex", className].filter(Boolean).join(" ")}>🏠</span>
+);
 
 const schema = z.object({
   dgt: fallback(z.boolean(), false).default(false),
@@ -17,8 +49,8 @@ const schema = z.object({
   plate: fallback(z.string(), "").default(""),
 });
 
-export const Route = createFileRoute("/reservar/confirmacion")({
-  validateSearch: zodValidator(schema),
+export const Route = createFileRoute()({
+  validateSearch: (search) => schema.parse(search),
   head: () => ({ meta: [{ title: "Reserva confirmada — LUPAUTO" }] }),
   component: Confirmacion,
 });

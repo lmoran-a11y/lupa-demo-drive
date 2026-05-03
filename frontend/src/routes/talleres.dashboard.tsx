@@ -6,7 +6,7 @@ import { workshopInspections, type Inspection } from "@/lib/mock-data";
 import { getWorkshopPayout, formatEur, WORKSHOP_PRICES } from "@/lib/workshop-pricing";
 import { IncidentModal } from "@/components/IncidentModal";
 
-export const Route = createFileRoute("/talleres/dashboard")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Inspecciones asignadas — LUPAUTO" }] }),
   component: Dashboard,
 });

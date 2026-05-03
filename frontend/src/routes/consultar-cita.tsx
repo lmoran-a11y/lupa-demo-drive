@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { inspections } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/consultar-cita")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Consultar cita — LUPAUTO" }] }),
   component: ConsultarCita,
 });

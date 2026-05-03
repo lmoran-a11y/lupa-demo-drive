@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Phone, Mail, MessageCircle, ArrowRight, Clock } from "lucide-react";
 import { useState } from "react";
 
-export const Route = createFileRoute("/contacto")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Contacto — LUPAUTO" }] }),
   component: Contacto,
 });

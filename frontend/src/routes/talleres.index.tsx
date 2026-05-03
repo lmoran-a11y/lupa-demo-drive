@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff, Shield, Car } from "lucide-react";
 
-export const Route = createFileRoute("/talleres/")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
   component: TalleresLogin,
 });

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-export const Route = createFileRoute("/legal")({
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Legal — LUPAUTO" }] }),
   component: () => (
     <div className="min-h-screen bg-background"><SiteHeader/>

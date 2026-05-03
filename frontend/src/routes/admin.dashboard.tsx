@@ -4,7 +4,7 @@ import { Logo } from "@/components/Logo";
 import { LayoutGrid, Calendar, Wrench, Users, FileText, AlertTriangle, Settings, LogOut, Eye, ChevronDown } from "lucide-react";
 import { inspections } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/admin/dashboard")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Panel admin — LUPAUTO" }] }),
   component: Admin,
 });

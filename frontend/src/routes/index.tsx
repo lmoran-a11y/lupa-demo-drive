@@ -13,7 +13,7 @@ import reportEngine from "@/assets/report-engine.jpg";
 import reportFront from "@/assets/report-front.jpg";
 import reportWheel from "@/assets/report-wheel.jpg";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute()({
   head: () => ({
     meta: [
       { title: "LUPAUTO — Revisiones bajo lupa" },

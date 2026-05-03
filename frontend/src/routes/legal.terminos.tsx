@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/LegalPage";
 
-export const Route = createFileRoute("/legal/terminos")({
+export const Route = createFileRoute()({
   head: () => ({
     meta: [
       { title: "Términos y condiciones — LUPAUTO" },

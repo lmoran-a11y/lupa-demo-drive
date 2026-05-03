@@ -14,7 +14,7 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 
-export const Route = createFileRoute("/talleres/inspeccion/$id")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Informe LUPA — LUPAUTO" }] }),
   component: Report,
 });

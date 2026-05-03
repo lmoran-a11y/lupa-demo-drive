@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff, Shield } from "lucide-react";
 
-export const Route = createFileRoute("/admin/login")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Acceso admin — LUPAUTO" }] }),
   component: AdminLogin,
 });

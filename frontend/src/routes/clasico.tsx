@@ -12,7 +12,7 @@ import mg6 from "@/assets/clasico-fotos/mg-6.jpg";
 
 const fotos = [mg1, mg2, mg3, mg4, mg5, mg6];
 
-export const Route = createFileRoute("/clasico")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Inspección de vehículos clásicos — LUPAUTO" }] }),
   component: Clasico,
 });

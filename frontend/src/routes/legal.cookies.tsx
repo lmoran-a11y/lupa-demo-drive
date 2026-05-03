@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/LegalPage";
 
-export const Route = createFileRoute("/legal/cookies")({
+export const Route = createFileRoute()({
   head: () => ({
     meta: [
       { title: "Política de cookies — LUPAUTO" },

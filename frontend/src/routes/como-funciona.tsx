@@ -53,7 +53,7 @@ const steps = [
   },
 ];
 
-export const Route = createFileRoute("/como-funciona")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Cómo funciona — LUPAUTO" }] }),
   component: () => (
     <div className="min-h-screen bg-background">

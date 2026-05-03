@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import informeEjemplo from "@/assets/informe-ejemplo.png";
 
-export const Route = createFileRoute("/ejemplo-informe")({
+export const Route = createFileRoute()({
   head: () => ({ meta: [{ title: "Ejemplo de informe LUPA — LUPAUTO" }] }),
   component: Ejemplo,
 });
