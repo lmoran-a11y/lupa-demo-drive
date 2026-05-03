@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    /* File Layout */
+    "rootDir": "./src",                          // Especifica la raíz para evitar errores de entrada
+    "outDir": "./dist",                         // Separa el código compilado de la basura del código fuente
+
+    /* Environment Settings */
+    "module": "NodeNext",                       // Necesario para ESM moderno en Node.js
+    "target": "ESNext",
+    "lib": ["ESNext"],                          // Habilitamos las librerías de ESNext para Node
+    "types": ["node"],                          // Importante: solo tipos de Node, nada de DOM/Browser
+
+    /* Other Outputs */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* Stricter Typechecking Options */
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Style Options */
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Recommended Options */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true,               // Mantiene tus imports limpios y explícitos
+    
+    /* ELIMINADO: "jsx": "react-jsx" */         // Esto no pertenece a un backend de Node.js[cite: 1]
+    /* ELIMINADO: "isolatedModules": true */    // Más común en bundlers de frontend como Vite[cite: 1]
+  },
+  "include": ["src/**/*"]
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Lupauto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+    
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f1f5f9; /* Gris técnico claro */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            color: #0f172a; 
+        }
+    
+        /* Card: De Glassmorphism a Sólido Profesional */
+        .card { 
+            background: #ffffff; 
+            padding: 2.5rem; 
+            border-radius: 16px; 
+            width: 400px; 
+            border: 1px solid #e2e8f0; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); 
+        }
+    
+        h2 { 
+            text-align: center; 
+            color: #0f172a;
+            margin-bottom: 5px; 
+            font-weight: 900;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            font-style: italic;
+        }
+    
+        /* Subtítulo técnico para el login */
+        .subtitle {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            display: block;
+        }
+        
+        /* Selector de Rol: Minimalista */
+        .role-selector { 
+            display: flex; 
+            background: #f8fafc; 
+            padding: 4px; 
+            border-radius: 8px; 
+            margin-bottom: 25px; 
+            border: 1px solid #e2e8f0;
+        }
+    
+        .role-btn { 
+            flex: 1; 
+            border: none; 
+            padding: 10px; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            font-weight: 800; 
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #64748b; 
+            background: transparent; 
+            transition: all 0.2s ease; 
+        }
+    
+        .role-btn.active { 
+            background: #0f172a; 
+            color: #ffffff; 
+        }
+    
+        .form-group { margin-bottom: 1.2rem; }
+    
+        label { 
+            display: block; 
+            margin-bottom: 6px; 
+            font-size: 11px; 
+            font-weight: 900; 
+            color: #475569; 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    
+        input { 
+            width: 100%; 
+            padding: 12px 16px; 
+            background: #f8fafc;
+            border: 2px solid #e2e8f0; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            color: #0f172a;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+    
+        input:focus {
+            outline: none;
+            border-color: #fbbf24; /* Amarillo Lupa */
+            background: #ffffff;
+        }
+        
+        /* Botón Submit: El "Amarillo Lupa" Sólido */
+        .btn-submit { 
+            width: 100%; 
+            padding: 16px; 
+            background: #fbbf24; 
+            color: #0f172a; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 14px; 
+            font-weight: 900; 
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 10px; 
+            transition: all 0.3s ease;
+        }
+    
+        .btn-submit:hover { 
+            background: #0f172a; 
+            color: #ffffff; 
+            transform: translateY(-2px);
+        }
+    
+        .error { color: #ef4444; font-size: 12px; margin-top: 10px; display: none; text-align: center; font-weight: 700; }
+        
+        .link { text-align: center; margin-top: 20px; font-size: 12px; color: #64748b; font-weight: 600; }
+        .link a { color: #0f172a; text-decoration: none; font-weight: 800; border-bottom: 2px solid #fbbf24; }
+        .link a:hover { color: #fbbf24; }
+    </style>
+</head>
+<body>
+
+    <div class="flex justify-center w-full mb-6">
+        <img src="../Lupauto-logo.png" 
+             alt="Lupauto Header" 
+             class="h-28 md:h-32 object-contain mix-blend-lighten drop-shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:scale-105 transition-transform duration-500">
+    </div>
+
+    <div class="card">
+        <h2>Lupauto</h2>
+        
+        <div class="role-selector">
+            <button type="button" id="tab-usuario" class="role-btn active" onclick="setRole('usuario')">Cliente</button>
+            <button type="button" id="tab-mecanico" class="role-btn" onclick="setRole('mecanico')">Mecánico</button>
+            <button type="button" id="tab-vendedor" class="role-btn" onclick="setRole('vendedor')">Vendedor</button>
+        </div>
+
+        <form id="loginForm">
+            <input type="hidden" name="role" id="roleInput" value="usuario">
+
+            <div class="form-group">
+                <label id="label-user">Usuario</label>
+                <input id="username" type="text" name="username" required placeholder="Ej: lucas_m">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input id="email" type="email" name="email" required placeholder="tu@email.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input id="password" type="password" name="password" required placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="btn-submit">Entrar</button>
+            <p id="errorMsg" class="error"></p>
+        </form>
+
+        <div class="link">¿Sin cuenta? <a href="../page/register.html">Regístrate</a></div>
+    </div>
+
+    <script>
+        function setRole(rol) {
+            document.getElementById('roleInput').value = rol;
+            document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`tab-${rol}`);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            const labelUser = document.getElementById('label-user');
+            if (rol === 'mecanico') {
+                labelUser.innerText = "ID de Mecánico";
+            } else {
+                labelUser.innerText = "Usuario";
+            }
+        }
+    </script>
+    <script src="../js/login.js"></script>
+</body>
+</html>
