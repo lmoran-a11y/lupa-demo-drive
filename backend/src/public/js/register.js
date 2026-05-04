@@ -9,7 +9,7 @@ form.addEventListener('submit', async (e) => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-        const res = await fetch('http://localhost:9001/backend/src/public/pages/register.html', {
+        const res = await fetch('http://localhost:9001/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

@@ -10,7 +10,7 @@ form.addEventListener('submit', async (e) => {
 
     try {
         // Ajustado al puerto 9001 de tu nuevo server.ts
-        const res = await fetch('http://localhost:9001/backend/src/public/pages/login.html', {
+        const res = await fetch('http://localhost:9001/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -56,7 +56,7 @@ form.addEventListener('submit', async (e) => {
 
 async function verificarCredenciales(data) {
     try {
-        const res = await fetch('http://localhost:9001/backend/src/public/pages/login.html', {
+        const res = await fetch('http://localhost:9001/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

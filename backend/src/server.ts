@@ -142,6 +142,38 @@ app.post('/api/login', async (req: Request, res: Response) => {
 /**
  * Crear nueva reserva de inspección[cite: 1]
  */
+
+app.post('/api/reports', async (req, res) => {
+  try {
+    const nuevoInforme = new Informe(req.body);
+    await nuevoInforme.save();
+    
+    // Actualizamos el estado de la reserva a "completada"
+    await Reserva.findOneAndUpdate({ lupId: req.body.reservaId }, { status: 'completada' });
+    
+    res.status(201).json({ message: "Informe guardado y reserva finalizada" });
+  } catch (err) {
+    res.status(500).json({ error: "Error al guardar el informe" });
+  }
+});
+
+app.get('/api/consultar/:id', async (req, res) => {
+  try {
+    const reserva = await Reserva.findOne({ lupId: req.params.id.toUpperCase() });
+    
+    if (!reserva) {
+      // Usamos 'return' para cortar la ejecución aquí
+      return res.status(404).json({ message: "No se encontró ninguna inspección con ese ID" });
+    }
+    
+    // Si llega acá, devuelve la reserva
+    return res.json(reserva); 
+  } catch (err) {
+    // Siempre hay que devolver algo en el catch también
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
+
 app.post('/api/reservar-inspeccion', async (req: Request, res: Response) => {
     try {
         const { tallerId, cliente, fecha, matricula } = req.body;
