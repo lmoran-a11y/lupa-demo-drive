@@ -56,7 +56,7 @@ form.addEventListener('submit', async (e) => {
 
 async function verificarCredenciales(data) {
     try {
-        const res = await fetch('http://localhost:9001/api/login', {
+        const res = await fetch('http://localhost:9001/backend/public/pages/login.html', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
