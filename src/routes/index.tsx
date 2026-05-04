@@ -8,7 +8,7 @@ import carDeportivo from "@/assets/cat-deportivo.png";
 import carSuv from "@/assets/cat-suv.png";
 import carFurgoneta from "@/assets/cat-furgoneta.png";
 import heroLupa from "@/assets/hero-lupa.png";
-import carClasico from "@/assets/car-clasico.jpg";
+import carClasico from "@/assets/car-clasico.png";
 import reportEngine from "@/assets/report-engine.jpg";
 import reportFront from "@/assets/report-front.jpg";
 import reportWheel from "@/assets/report-wheel.jpg";
@@ -277,7 +277,7 @@ function Home() {
 
       {/* CLASSIC */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid items-center gap-4 rounded-2xl border border-border bg-muted/60 p-6 md:grid-cols-[auto_1fr_auto_auto]">
+        <div className="grid items-center gap-4 rounded-2xl border border-border bg-muted/60 p-6 md:grid-cols-[auto_1fr_auto]">
           <div className="flex items-center gap-5">
             <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background">
               <Car className="h-6 w-6" />
@@ -289,8 +289,9 @@ function Home() {
               </p>
             </div>
           </div>
-          <div />
-          <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="hidden h-24 w-auto object-contain md:block" />
+          <div className="hidden md:flex justify-center">
+            <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="h-40 w-auto object-contain" />
+          </div>
           <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-5 py-3 text-sm font-bold hover:bg-ink hover:text-white">
             Revisar clásico <ArrowRight className="h-4 w-4" />
           </Link>
