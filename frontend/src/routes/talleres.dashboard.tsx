@@ -39,7 +39,7 @@ const INCIDENTS: IncidentRow[] = [
 
 type Tab = "Hoy" | "Próximas" | "Completadas";
 
-function Dashboard() {
+export function Dashboard() {
   const navigate = useNavigate();
   const [section, setSection] = useState<Section>("inspecciones");
   const [tab, setTab] = useState<Tab>("Hoy");

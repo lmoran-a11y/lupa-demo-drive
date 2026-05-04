@@ -1,10 +1,25 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, redirect, useMatches } from "@tanstack/react-router";
 import { useState } from "react";
+import { Dashboard } from "../routes/talleres.dashboard.js";
 import { Eye, EyeOff, Shield, Loader2, AlertCircle } from "lucide-react";
 
 export const Route = createFileRoute()({
-  head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
-  component: Login,
+  beforeLoad: ({ location }) => {
+    // 1. Verificamos si existe el token en el almacenamiento local
+    const isAuthenticated = !!localStorage.getItem("token");
+
+    if (!isAuthenticated) {
+      // 2. Si no hay token, lo mandamos de patitas a la calle (al login)
+      // Guardamos la URL actual para que pueda volver tras loguearse
+      throw redirect({
+        to: "/talleres/login",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
+  component: Dashboard,
 });
 
 function Login() {

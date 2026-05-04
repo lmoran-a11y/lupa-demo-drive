@@ -59,7 +59,27 @@ const reservaSchema = new Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
+const InformeSchema = new mongoose.Schema({
+  inspectionId: String,
+  mecanica: {
+    diagnosis: String,
+    kmVerif: String,
+    motor: String,
+    fugas: { aceite: String, refri: String },
+    frenos: Array // [ {nombre: "Pastillas", valor: 70}, ... ]
+  },
+  carroceria: {
+    estructural: String,
+    repintados: String,
+    masilla: String
+  },
+  estadoGeneral: String,
+  status: { type: String, default: 'completada' }
+});
+
 export const Reserva = model('Reserva', reservaSchema);
+export const Informe = model('Informe', InformeSchema);
+
 
 // --- ENDPOINTS DE AUTENTICACIÓN ---
 
