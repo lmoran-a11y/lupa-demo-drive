@@ -6,7 +6,7 @@ export function Logo({ light = false, compact = false }: { light?: boolean; comp
       <img
         src={logoSrc}
         alt="Lupauto - Revisiones bajo lupa"
-        className={`${compact ? "h-9" : "h-11"} w-auto object-contain ${light ? "brightness-0 invert" : ""}`}
+        className={`${compact ? "h-9" : "h-11"} w-auto object-contain py-0 my-0 mx-0 px-0 text-xs border-0 ${light ? "brightness-0 invert" : ""}`}
       />
     </div>
   );
