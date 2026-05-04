@@ -9,8 +9,8 @@ form.addEventListener('submit', async (e) => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-        // Ajustado al puerto 3000 de tu nuevo server.ts
-        const res = await fetch('http://localhost:3000/api/login', {
+        // Ajustado al puerto 9001 de tu nuevo server.ts
+        const res = await fetch('http://localhost:9001/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -53,3 +53,67 @@ form.addEventListener('submit', async (e) => {
         }
     }
 });
+
+async function verificarCredenciales(data) {
+    try {
+        const res = await fetch('http://localhost:9001/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+            // Manejo específico: Usuario no existe vs Contraseña mal
+            throw new Error(result.message || "Credenciales inválidas");
+        }
+
+        return result; // Contiene token, role, username
+    } catch (err) {
+        throw err;
+    }
+}
+
+// ⚠️Este código es solo para pruebas locales sin backend, no usar en producción⚠️
+// async function VerificatorLogin(data) {
+//     if (data.username === "admin" && data.password === "admin") {
+//         return {
+//             token: "token-sesion-lupauto-2026", // Token temporal
+//             role: "mecanico",
+//             username: "admin"
+//         };
+//     } else {
+//         throw new Error("Credenciales inválidas");
+//     }
+    
+//     if(data.username === "vendedor" && data.password === "vendedor") {
+//         return {
+//             token: "token-sesion-lupauto-2026", // Token temporal
+//             role: "vendedor",
+//             username: "vendedor"
+//         };
+//     } else {
+//         throw new Error("Credenciales inválidas");
+//     }
+
+//     if(data.username === "usuario" && data.password === "usuario") {
+//         return {
+//             token: "token-sesion-lupauto-2026", // Token temporal
+//             role: "usuario",
+//             username: "usuario"
+//         };
+//     } else {
+//         throw new Error("Credenciales inválidas");
+//     }
+
+//     if(data.username === "mecanico" && data.password === "mecanico") {
+//         return {
+//             token: "token-sesion-lupauto-2026", // Token temporal
+//             role: "mecanico",
+//             username: "mecanico"
+//         };
+//     } else {
+//         throw new Error("Credenciales inválidas");
+//     }
+// }

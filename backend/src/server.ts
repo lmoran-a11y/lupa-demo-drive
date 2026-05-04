@@ -171,7 +171,7 @@ app.delete('/api/cancelar-reserva/:id', async (req: Request, res: Response) => {
 });
 
 // --- INICIO DEL SERVIDOR ---
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 9001;
 
 app.listen(PORT, () => {
     connectDB();
