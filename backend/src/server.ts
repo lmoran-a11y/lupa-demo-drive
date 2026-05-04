@@ -204,6 +204,62 @@ app.post('/api/reservar-inspeccion', async (req: Request, res: Response) => {
     }
 });
 
+// Endpoint para guardar una nueva reserva/inspección
+app.post('/api/reservas', async (req, res) => {
+  try {
+    const { 
+      lupId, 
+      plate, 
+      vehicle, 
+      vehicleType, 
+      date, 
+      time, 
+      workshopId, 
+      status 
+    } = req.body;
+
+    // 1. Validación básica
+    if (!lupId || !plate || !vehicle) {
+      return res.status(400).json({ 
+        message: "Faltan datos obligatorios (lupId, plate o vehicle)" 
+      });
+    }
+
+    // 2. Creamos el objeto para MongoDB (usando tu modelo de Reserva)
+    const nuevaReserva = new Reserva({
+      lupId: lupId.toUpperCase(),
+      plate: plate.toUpperCase(),
+      vehicle,
+      vehicleType,
+      date,
+      time,
+      workshopId, // Para que el taller lo vea en su dashboard
+      status: status || 'Pendiente',
+      createdAt: new Date()
+    });
+
+    // 3. Guardamos en la base de datos
+    await nuevaReserva.save();
+
+    console.log(`✅ Reserva guardada: ${lupId} para la matrícula ${plate}`);
+    
+    return res.status(201).json({ 
+      message: "Reserva guardada con éxito", 
+      id: nuevaReserva._id 
+    });
+
+    }catch (err: any) { // Cambiamos 'error' por 'err' para evitar conflictos
+        console.error("❌ Error al guardar reserva:", err);
+        
+        // Ahora TypeScript sabe que 'err' es el objeto del error de MongoDB
+        if (err.code === 11000) {
+        return res.status(400).json({ message: "El ID de inspección ya existe" });
+        }
+
+        return res.status(500).json({ error: "Error interno del servidor al guardar" });
+    }
+});
+
 /**
  * Cancelar/Eliminar reserva[cite: 1]
  */
