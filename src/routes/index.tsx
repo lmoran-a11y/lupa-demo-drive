@@ -277,7 +277,7 @@ function Home() {
 
       {/* CLASSIC */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid items-center gap-4 rounded-2xl border border-border bg-muted/60 p-6 md:grid-cols-[auto_1fr_auto]">
+        <div className="grid items-center gap-4 rounded-2xl border border-border bg-muted/60 px-6 py-3 md:grid-cols-[auto_1fr_auto]">
           <div className="flex items-center gap-5">
             <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background">
               <Car className="h-6 w-6" />
@@ -290,7 +290,7 @@ function Home() {
             </div>
           </div>
           <div className="hidden md:flex justify-center">
-            <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="h-40 w-auto object-contain" />
+            <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="h-28 w-auto object-contain" />
           </div>
           <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-5 py-3 text-sm font-bold hover:bg-ink hover:text-white">
             Revisar clásico <ArrowRight className="h-4 w-4" />
