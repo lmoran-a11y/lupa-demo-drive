@@ -567,28 +567,6 @@ function CarTopView() {
   );
 }
 
-function QrPlaceholder() {
-  // deterministic pseudo-random pattern
-  const cells = Array.from({ length: 21 * 21 }, (_, i) => {
-    const x = i % 21, y = Math.floor(i / 21);
-    const corner = (x < 7 && y < 7) || (x > 13 && y < 7) || (x < 7 && y > 13);
-    if (corner) {
-      const cx = x < 7 ? x : x - 14;
-      const cy = y < 7 ? y : y - 14;
-      const inner = cx >= 2 && cx <= 4 && cy >= 2 && cy <= 4;
-      const ring = cx === 0 || cx === 6 || cy === 0 || cy === 6;
-      return ring || inner;
-    }
-    return ((x * 31 + y * 17 + x * y) % 3) === 0;
-  });
-  return (
-    <div className="grid h-full w-full grid-cols-[repeat(21,1fr)] grid-rows-[repeat(21,1fr)] gap-0">
-      {cells.map((on, i) => (
-        <div key={i} className={on ? "bg-ink" : "bg-white"} />
-      ))}
-    </div>
-  );
-}
 
 function SuspRow({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   const opts: { v: string; label: string; tone: Tone }[] = [
