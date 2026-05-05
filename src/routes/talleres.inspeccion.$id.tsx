@@ -430,16 +430,60 @@ function LeakRow({ label, value, onChange }: { label: string; value: string; onC
   );
 }
 
+function fillColor(v: number) {
+  if (v < 30) return "hsl(var(--destructive))";
+  if (v < 60) return "hsl(var(--brand, 45 100% 50%))";
+  return "hsl(var(--success))";
+}
+
+function DraggableBar({ value, onChange, height = 8 }: { value: number; onChange: (n: number) => void; height?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+
+  const setFromEvent = useCallback((clientX: number) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(100, Math.round(((clientX - r.left) / r.width) * 100)));
+    onChange(pct);
+  }, [onChange]);
+
+  return (
+    <div
+      ref={ref}
+      role="slider"
+      aria-valuemin={0} aria-valuemax={100} aria-valuenow={value}
+      tabIndex={0}
+      onPointerDown={(e) => { dragging.current = true; (e.target as HTMLElement).setPointerCapture(e.pointerId); setFromEvent(e.clientX); }}
+      onPointerMove={(e) => { if (dragging.current) setFromEvent(e.clientX); }}
+      onPointerUp={() => { dragging.current = false; }}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") onChange(Math.max(0, value - 5));
+        if (e.key === "ArrowRight") onChange(Math.min(100, value + 5));
+      }}
+      className="relative w-full cursor-pointer overflow-hidden rounded-full bg-muted"
+      style={{ height }}
+    >
+      <div
+        className="h-full rounded-full transition-[width]"
+        style={{
+          width: `${value}%`,
+          background: `linear-gradient(to right, hsl(var(--destructive)) 0%, hsl(var(--destructive)) 30%, #F5B800 30%, #F5B800 60%, hsl(var(--success)) 60%, hsl(var(--success)) 100%)`,
+          backgroundSize: `${value > 0 ? (100 / value) * 100 : 100}% 100%`,
+        }}
+      />
+    </div>
+  );
+}
+
 function BrakeRow({ label, value, onChange }: { label: string; value: number; onChange: (n: number) => void }) {
   return (
     <div className="flex items-center gap-3 text-sm">
       <span className="w-44 text-[11px] font-bold text-muted-foreground">{label}</span>
-      <div className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
-        <div className="h-full rounded-full bg-gradient-to-r from-success via-brand to-destructive" style={{ width: `${value}%` }} />
-      </div>
+      <div className="flex-1"><DraggableBar value={value} onChange={onChange} /></div>
       <input
         type="number" value={value} min={0} max={100}
-        onChange={(e) => onChange(Number(e.target.value))}
+        onChange={(e) => onChange(Math.max(0, Math.min(100, Number(e.target.value))))}
         className="w-14 rounded border border-border px-1 py-0.5 text-center text-xs font-bold"
       />
       <span className="w-4 text-xs font-bold">%</span>
@@ -449,17 +493,40 @@ function BrakeRow({ label, value, onChange }: { label: string; value: number; on
 
 function TyreCorner({ label, value, onChange, align }: { label: string; value: number; onChange: (n: number) => void; align: "left" | "right" }) {
   return (
-    <div className={`flex items-center gap-2 ${align === "right" ? "flex-row-reverse text-right" : ""}`}>
-      <div className="flex-1">
-        <div className="text-[10px] font-bold text-muted-foreground">{label}</div>
-        <div className="mt-1 flex items-center gap-2">
-          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
-            <div className="h-full rounded-full bg-gradient-to-r from-success via-brand to-destructive" style={{ width: `${value}%` }} />
-          </div>
-          <input type="number" value={value} min={0} max={100}
-            onChange={(e) => onChange(Number(e.target.value))}
-            className="w-10 rounded border border-border px-1 text-center text-[10px] font-bold" />
-          <span className="text-[10px] font-bold">%</span>
+    <div className={align === "right" ? "text-right" : ""}>
+      <div className="text-[10px] font-bold text-muted-foreground">{label}</div>
+      <div className="mt-1 flex items-center gap-2">
+        <div className="flex-1"><DraggableBar value={value} onChange={onChange} height={6} /></div>
+        <input type="number" value={value} min={0} max={100}
+          onChange={(e) => onChange(Math.max(0, Math.min(100, Number(e.target.value))))}
+          className="w-10 rounded border border-border px-1 text-center text-[10px] font-bold" />
+        <span className="text-[10px] font-bold">%</span>
+      </div>
+    </div>
+  );
+}
+
+function KmMeta({ value, onChange }: { value: number; onChange: (n: number) => void }) {
+  const formatted = value.toLocaleString("es-ES");
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-muted text-ink">
+        <Gauge className="h-5 w-5" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <div className="text-[11px] font-bold tracking-wide text-muted-foreground">KILÓMETROS LLEGADA AL TALLER</div>
+        <div className="flex items-baseline gap-1">
+          <input
+            type="text"
+            inputMode="numeric"
+            value={formatted}
+            onChange={(e) => {
+              const digits = e.target.value.replace(/\D/g, "");
+              onChange(digits ? parseInt(digits, 10) : 0);
+            }}
+            className="w-28 rounded border border-border bg-white px-2 py-0.5 text-lg font-extrabold focus:border-brand focus:outline-none"
+          />
+          <span className="text-lg font-extrabold">km</span>
         </div>
       </div>
     </div>
