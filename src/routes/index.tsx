@@ -144,7 +144,7 @@ function Home() {
                     <Search className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold">Introduce la matrícula de tu vehículo</div>
+                    <div className="text-sm font-bold">Introduce la matrícula de tu vehículo {selected === "deportivo" && <span className="text-muted-foreground">(250cv o más)</span>}</div>
                     <div className="text-xs text-muted-foreground">La usaremos para identificar tu vehículo durante la inspección.</div>
                   </div>
                 </div>
