@@ -461,15 +461,14 @@ function DraggableBar({ value, onChange, height = 8 }: { value: number; onChange
         if (e.key === "ArrowLeft") onChange(Math.max(0, value - 5));
         if (e.key === "ArrowRight") onChange(Math.min(100, value + 5));
       }}
-      className="relative w-full cursor-pointer overflow-hidden rounded-full bg-muted"
+      className="relative w-full cursor-pointer touch-none select-none overflow-hidden rounded-full bg-muted"
       style={{ height }}
     >
       <div
-        className="h-full rounded-full transition-[width]"
+        className="absolute inset-0 rounded-full"
         style={{
-          width: `${value}%`,
-          background: `linear-gradient(to right, hsl(var(--destructive)) 0%, hsl(var(--destructive)) 30%, #F5B800 30%, #F5B800 60%, hsl(var(--success)) 60%, hsl(var(--success)) 100%)`,
-          backgroundSize: `${value > 0 ? (100 / value) * 100 : 100}% 100%`,
+          background: "linear-gradient(to right, hsl(var(--destructive)) 0%, hsl(var(--destructive)) 30%, #F5B800 30%, #F5B800 60%, hsl(var(--success)) 60%, hsl(var(--success)) 100%)",
+          clipPath: `inset(0 ${100 - value}% 0 0)`,
         }}
       />
     </div>
