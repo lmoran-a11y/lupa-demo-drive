@@ -6,7 +6,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-ink text-white">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-6 md:flex-row md:justify-between md:gap-8">
-        <Logo light size="footer" />
+        <span className="inline-flex items-center rounded-xl bg-white px-6 py-3"><Logo size="footer" /></span>
         <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-white/80">
           <Link to="/legal/aviso-legal" className="hover:text-white">Aviso legal</Link>
           <Link to="/legal/privacidad" className="hover:text-white">Privacidad</Link>
