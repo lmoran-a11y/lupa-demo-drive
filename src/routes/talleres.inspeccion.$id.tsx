@@ -243,16 +243,22 @@ function Report() {
               </Field>
 
               <Field icon={<PlayCircle className="h-4 w-4" />} label="VÍDEO RESUMEN DEL INSPECTOR">
-                <div className="flex items-center gap-3 rounded-lg border border-border p-3">
-                  <div className="grid h-20 w-20 shrink-0 grid-cols-6 grid-rows-6 gap-px bg-white p-1">
-                    {Array.from({ length: 36 }).map((_, i) => (
-                      <div key={i} className={(i * 7) % 3 === 0 ? "bg-ink" : "bg-transparent"} />
-                    ))}
+                <div className="rounded-lg border border-border p-3">
+                  <div className="grid grid-cols-[auto_1fr] items-stretch gap-3">
+                    <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-white p-2">
+                      <QrPlaceholder />
+                    </div>
+                    <div className="relative flex h-32 items-center justify-center overflow-hidden rounded-md bg-gradient-to-br from-ink/80 to-ink">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)]" />
+                      <button className="relative flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-105">
+                        <PlayCircle className="h-10 w-10 text-ink" fill="currentColor" stroke="white" />
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex-1 text-xs text-muted-foreground">
+                  <p className="mt-3 text-center text-xs text-muted-foreground">
                     Escanea para ver el vídeo con la explicación completa de la inspección.
-                  </div>
-                  <button className="flex items-center gap-2 rounded-lg border-2 border-dashed border-brand bg-brand/5 px-4 py-3 text-xs font-bold">
+                  </p>
+                  <button className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-brand bg-brand/5 px-4 py-2.5 text-xs font-bold">
                     <Upload className="h-4 w-4 text-brand" />Subir vídeo
                   </button>
                 </div>
