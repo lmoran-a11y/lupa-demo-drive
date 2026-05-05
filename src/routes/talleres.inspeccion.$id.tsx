@@ -474,7 +474,7 @@ function TyreDiagram({ tyres, setTyres }: { tyres: any; setTyres: (t: any) => vo
   return (
     <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
       <TyreCorner label="DEL. IZQUIERDO" value={tyres.fl} onChange={(n) => setTyres({ ...tyres, fl: n })} align="left" />
-      <div className="row-span-2 flex h-32 w-16 items-center justify-center">
+      <div className="row-span-2 flex h-40 w-24 items-center justify-center">
         <CarTopView />
       </div>
       <TyreCorner label="DEL. DERECHO" value={tyres.fr} onChange={(n) => setTyres({ ...tyres, fr: n })} align="right" />
