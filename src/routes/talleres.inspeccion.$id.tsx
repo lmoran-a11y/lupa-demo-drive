@@ -91,13 +91,13 @@ function Report() {
             </h1>
             <div className="mt-1 text-sm font-bold tracking-wider text-muted-foreground">INSPECCIÓN PRE-COMPRA</div>
           </div>
-          <Logo />
+          <Logo size="xl" />
         </div>
 
         {/* INFO BAR */}
         <div className="grid gap-3 rounded-xl border border-border bg-card p-4 md:grid-cols-3">
           <Meta icon={<LicensePlateIcon />} t="MATRÍCULA" v={inspection.plate} />
-          <Meta icon={<Gauge className="h-5 w-5" />} t="KILOMETRAJE INDICADO" v="120.000 km" />
+          <KmMeta value={kmLlegada} onChange={setKmLlegada} />
           <Meta icon={<Calendar className="h-5 w-5" />} t="FECHA INSPECCIÓN" v={inspection.date} />
         </div>
 
