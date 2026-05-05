@@ -1,55 +1,82 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock } from "lucide-react";
+import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock, CheckCircle2, Info, Mail, Clock } from "lucide-react";
 import liftIcon from "@/assets/lift-icon.png";
 
+type Step = {
+  n: string;
+  title: string;
+  desc: string;
+  icon: React.ReactNode;
+  bullets?: string[];
+  bulletsIntro?: string;
+  notice?: { type: "info" | "mail"; text: string };
+};
 
-const steps = [
+const steps: Step[] = [
   {
     n: "1",
-    title: "Reserva online",
-    desc: "Elige el tipo de vehículo, introduce la matrícula y selecciona ubicación, fecha y hora.",
+    title: "Acuerda la cita\ncon el vendedor",
+    desc: "Habla con el vendedor y confirma qué día y a qué hora puede llevar el vehículo al taller.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="7" y="10" width="34" height="30" rx="3" />
-        <path d="M7 18h34" />
-        <path d="M16 6v8M32 6v8" />
-        <path d="M18 28l4 4 8-8" stroke="#F5B400" />
+      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="20" cy="28" r="7" />
+        <path d="M8 50c0-7 5.5-12 12-12s12 5 12 12" />
+        <circle cx="46" cy="32" r="7" />
+        <path d="M34 54c0-7 5.5-12 12-12s12 5 12 12" />
+        <path d="M30 10h18a4 4 0 014 4v8a4 4 0 01-4 4h-3l-4 4v-4h-11a4 4 0 01-4-4v-8a4 4 0 014-4z" />
+        <path d="M35 18l3 3 6-6" stroke="#F5B400" strokeWidth="2.6" />
       </svg>
     ),
+    notice: {
+      type: "info",
+      text: "El vendedor deberá llevar el vehículo al taller en la fecha y hora acordadas.",
+    },
   },
   {
     n: "2",
-    title: "Te asignamos un taller verificado",
-    desc: "Una vez completes la reserva, te enviaremos el taller, la dirección y los datos de la cita.",
+    title: "Reserva y recibe los\ndatos de la cita",
+    desc: "Selecciona el tipo de vehículo, introduce la matrícula y completa la reserva.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 6l14 5v11c0 9-6 15-14 20-8-5-14-11-14-20V11l14-5z" />
-        <path d="M17 24l5 5 9-10" stroke="#F5B400" />
+      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="8" y="16" width="48" height="34" rx="3" />
+        <path d="M8 18l24 18 24-18" />
+        <circle cx="44" cy="38" r="7" fill="#F5B400" stroke="#F5B400" />
+        <path d="M44 45c-2 4-5 7-5 7s-5-5-5-9a5 5 0 0110 0" fill="#F5B400" stroke="#F5B400" />
+        <circle cx="44" cy="36" r="2" fill="#fff" stroke="#fff" />
       </svg>
     ),
+    bulletsIntro: "Te enviaremos por correo:",
+    bullets: ["Ubicación del taller", "Fecha y hora de la cita", "Datos de la cita y contacto"],
+    notice: {
+      type: "mail",
+      text: "Revisa tu correo (y spam) tras completar la reserva y pásale esta información al vendedor.",
+    },
   },
   {
     n: "3",
-    title: "El vehículo se revisa en taller",
-    desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
-    icon: (
-      <img src={liftIcon} alt="Coche en elevador de taller" className="h-16 w-16 object-contain" />
-    ),
+    title: "El vendedor lleva\nel coche al taller",
+    desc: "El vendedor lleva el vehículo al taller en la fecha y hora acordadas.",
+    icon: <img src={liftIcon} alt="Coche en elevador" className="h-20 w-20 object-contain" />,
+    bulletsIntro: "Realizamos una inspección completa:",
+    bullets: ["Revisión en elevador", "Diagnóstico electrónico", "Prueba dinámica", "Fotos y vídeo de todo el proceso"],
   },
   {
     n: "4",
-    title: "Recibe tu Informe LUPA",
-    desc: "Obtén un informe claro y visual para decidir con más seguridad antes de comprar.",
+    title: "Recibe tu\nInforme LUPA",
+    desc: "En menos de 24h recibirás un informe claro y visual con todo lo revisado para que tomes tu decisión con más seguridad.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 6h16l10 10v22a4 4 0 01-4 4H12a4 4 0 01-4-4V10a4 4 0 014-4z" />
-        <path d="M28 6v10h10" />
-        <circle cx="32" cy="34" r="6" fill="#F5B400" stroke="#F5B400" />
-        <path d="M29 34l2 2 4-4" stroke="#fff" strokeWidth="2" />
+      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 6h22l12 12v36a4 4 0 01-4 4H16a4 4 0 01-4-4V10a4 4 0 014-4z" />
+        <path d="M38 6v12h12" />
+        <path d="M20 28h16M20 34h12" />
+        <circle cx="40" cy="44" r="8" fill="#F5B400" stroke="#F5B400" />
+        <path d="M37 44l2 2 4-4" stroke="#fff" strokeWidth="2.4" />
+        <path d="M46 50l5 5" />
       </svg>
     ),
+    bullets: ["Informe en 24h", "Claro y visual", "Para decidir con confianza"],
   },
 ];
 
