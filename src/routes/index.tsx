@@ -289,7 +289,7 @@ function Home() {
               </p>
             </div>
           </div>
-          <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="hidden md:block mx-auto h-40 w-auto max-w-full object-contain" style={{ filter: "drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1))" }} />
+          <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="hidden md:block mx-auto h-36 w-auto max-w-full object-contain" style={{ filter: "drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1))" }} />
           <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-5 py-3 text-sm font-bold hover:bg-ink hover:text-white">
             Revisar clásico <ArrowRight className="h-4 w-4" />
           </Link>
