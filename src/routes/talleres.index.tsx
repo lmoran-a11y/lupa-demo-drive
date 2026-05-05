@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import lupautoLogo from "@/assets/lupauto-logo.png";
+import workshopBg from "@/assets/talleres-workshop-bg.jpg";
 
 export const Route = createFileRoute("/talleres/")({
   head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
@@ -28,7 +29,11 @@ function TalleresLogin() {
     <div className="grid min-h-screen md:grid-cols-2">
       {/* Left side - hero */}
       <div className="relative hidden items-center justify-center overflow-hidden bg-ink p-8 md:flex lg:p-12">
-        <div className="absolute inset-0 bg-[url('/src/assets/car-turismo.jpg')] bg-cover bg-center opacity-20" />
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-50"
+          style={{ backgroundImage: `url(${workshopBg})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/50 to-ink/80" />
         <div className="relative z-10 flex flex-col items-center justify-center gap-6 text-center">
           <img
             src={lupautoLogo}
