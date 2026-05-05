@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock, CheckCircle2, Info, Mail, Clock } from "lucide-react";
 import liftIcon from "@/assets/lift-icon.png";
+import acuerdaCitaIcon from "@/assets/step-acuerda-cita.png";
 
 type Step = {
   n: string;
@@ -19,16 +20,7 @@ const steps: Step[] = [
     n: "1",
     title: "Acuerda la cita\ncon el vendedor",
     desc: "Habla con el vendedor y confirma qué día y a qué hora puede llevar el vehículo al taller.",
-    icon: (
-      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="20" cy="28" r="7" />
-        <path d="M8 50c0-7 5.5-12 12-12s12 5 12 12" />
-        <circle cx="46" cy="32" r="7" />
-        <path d="M34 54c0-7 5.5-12 12-12s12 5 12 12" />
-        <path d="M30 10h18a4 4 0 014 4v8a4 4 0 01-4 4h-3l-4 4v-4h-11a4 4 0 01-4-4v-8a4 4 0 014-4z" />
-        <path d="M35 18l3 3 6-6" stroke="#F5B400" strokeWidth="2.6" />
-      </svg>
-    ),
+    icon: <img src={acuerdaCitaIcon} alt="Acuerda la cita" className="h-20 w-20 object-contain" />,
     notice: {
       type: "info",
       text: "El vendedor deberá llevar el vehículo al taller en la fecha y hora acordadas.",
@@ -58,7 +50,7 @@ const steps: Step[] = [
     n: "3",
     title: "El vendedor lleva\nel coche al taller",
     desc: "El vendedor lleva el vehículo al taller en la fecha y hora acordadas.",
-    icon: <img src={liftIcon} alt="Coche en elevador" className="h-20 w-20 object-contain" />,
+    icon: <img src={liftIcon} alt="Coche en elevador" className="h-28 w-28 -my-4 object-contain" />,
     bulletsIntro: "Realizamos una inspección completa:",
     bullets: ["Revisión en elevador", "Diagnóstico electrónico", "Prueba dinámica", "Fotos y vídeo de todo el proceso"],
   },
