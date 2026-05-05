@@ -21,7 +21,7 @@ const steps: Step[] = [
     n: "1",
     title: "Acuerda la cita\ncon el vendedor",
     desc: "Habla con el vendedor y confirma qué día y a qué hora puede llevar el vehículo al taller.",
-    icon: <img src={acuerdaCitaIcon} alt="Acuerda la cita" className="h-20 w-20 object-contain" />,
+    icon: <img src={acuerdaCitaIcon} alt="Acuerda la cita" className="h-28 w-28 -my-4 object-contain" />,
     notice: {
       type: "info",
       text: "El vendedor deberá llevar el vehículo al taller en la fecha y hora acordadas.",
