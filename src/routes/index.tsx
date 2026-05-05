@@ -289,9 +289,7 @@ function Home() {
               </p>
             </div>
           </div>
-          <div className="hidden md:flex items-center justify-center h-28 w-full bg-muted/60 rounded-lg overflow-hidden">
-            <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="max-h-full max-w-full object-contain" />
-          </div>
+          <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="hidden md:block mx-auto h-40 w-auto max-w-full object-contain" />
           <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-5 py-3 text-sm font-bold hover:bg-ink hover:text-white">
             Revisar clásico <ArrowRight className="h-4 w-4" />
           </Link>
