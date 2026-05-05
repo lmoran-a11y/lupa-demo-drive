@@ -378,21 +378,21 @@ type PillOpt = { v: string; label: string; sub?: string; tone: Tone };
 function Pills({ value, onChange, options, cols }: { value: string; onChange: (v: string) => void; options: PillOpt[]; cols: number }) {
   const grid = cols === 2 ? "grid-cols-2" : cols === 3 ? "grid-cols-3" : "grid-cols-4";
   return (
-    <div className={`grid gap-2 ${grid}`}>
+    <div className={`grid items-stretch gap-2 ${grid}`}>
       {options.map((o) => {
         const active = value === o.v;
         return (
           <button key={o.v} onClick={() => onChange(o.v)}
-            className={`flex flex-col items-center justify-center gap-1 rounded-lg border-2 px-2 py-2 text-center transition ${active ? toneCls[o.tone] : "border-border bg-white text-ink hover:bg-muted/50"}`}>
-            <div className="flex items-center gap-1.5">
+            className={`flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg border-2 px-4 py-2 text-center transition ${active ? toneCls[o.tone] : "border-border bg-white text-ink hover:bg-muted/50"}`}>
+            <div className="flex w-full items-center justify-center gap-1.5">
               {active && (
-                <span className={`flex h-4 w-4 items-center justify-center rounded-full text-white ${o.tone === "ok" ? "bg-success" : o.tone === "warn" ? "bg-brand" : "bg-destructive"}`}>
+                <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-white ${o.tone === "ok" ? "bg-success" : o.tone === "warn" ? "bg-brand" : "bg-destructive"}`}>
                   {toneIcon(o.tone)}
                 </span>
               )}
-              <span className="text-[11px] font-extrabold leading-tight">{o.label}</span>
+              <span className="whitespace-normal break-words text-[11px] font-extrabold leading-tight">{o.label}</span>
             </div>
-            {o.sub && <span className="text-[9px] font-medium text-muted-foreground">{o.sub}</span>}
+            {o.sub && <span className="whitespace-normal break-words text-[9px] font-medium text-muted-foreground">{o.sub}</span>}
           </button>
         );
       })}
