@@ -486,15 +486,47 @@ function TyreDiagram({ tyres, setTyres }: { tyres: any; setTyres: (t: any) => vo
 
 function CarTopView() {
   return (
-    <svg viewBox="0 0 60 110" className="h-full w-full text-ink">
-      <rect x="10" y="5" width="40" height="100" rx="14" fill="none" stroke="currentColor" strokeWidth="2" />
-      <rect x="14" y="20" width="32" height="22" rx="4" fill="none" stroke="currentColor" strokeWidth="1.2" />
-      <rect x="14" y="65" width="32" height="22" rx="4" fill="none" stroke="currentColor" strokeWidth="1.2" />
-      <rect x="2" y="14" width="8" height="14" rx="2" fill="currentColor" />
-      <rect x="50" y="14" width="8" height="14" rx="2" fill="currentColor" />
-      <rect x="2" y="80" width="8" height="14" rx="2" fill="currentColor" />
-      <rect x="50" y="80" width="8" height="14" rx="2" fill="currentColor" />
+    <svg viewBox="0 0 80 140" className="h-full w-full text-ink">
+      {/* car body silhouette (top-down) */}
+      <path
+        d="M40 4 C24 4 18 14 17 28 L15 50 C14 58 14 78 15 90 L17 116 C18 128 24 136 40 136 C56 136 62 128 63 116 L65 90 C66 78 66 58 65 50 L63 28 C62 14 56 4 40 4 Z"
+        fill="currentColor" fillOpacity="0.08" stroke="currentColor" strokeWidth="1.5"
+      />
+      {/* windshield */}
+      <path d="M22 30 L58 30 L54 48 L26 48 Z" fill="currentColor" fillOpacity="0.15" />
+      {/* rear window */}
+      <path d="M26 92 L54 92 L58 110 L22 110 Z" fill="currentColor" fillOpacity="0.15" />
+      {/* roof line */}
+      <line x1="40" y1="50" x2="40" y2="90" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
+      {/* 4 wheels at corners */}
+      <rect x="2" y="22" width="12" height="22" rx="3" fill="currentColor" />
+      <rect x="66" y="22" width="12" height="22" rx="3" fill="currentColor" />
+      <rect x="2" y="96" width="12" height="22" rx="3" fill="currentColor" />
+      <rect x="66" y="96" width="12" height="22" rx="3" fill="currentColor" />
     </svg>
+  );
+}
+
+function QrPlaceholder() {
+  // deterministic pseudo-random pattern
+  const cells = Array.from({ length: 21 * 21 }, (_, i) => {
+    const x = i % 21, y = Math.floor(i / 21);
+    const corner = (x < 7 && y < 7) || (x > 13 && y < 7) || (x < 7 && y > 13);
+    if (corner) {
+      const cx = x < 7 ? x : x - 14;
+      const cy = y < 7 ? y : y - 14;
+      const inner = cx >= 2 && cx <= 4 && cy >= 2 && cy <= 4;
+      const ring = cx === 0 || cx === 6 || cy === 0 || cy === 6;
+      return ring || inner;
+    }
+    return ((x * 31 + y * 17 + x * y) % 3) === 0;
+  });
+  return (
+    <div className="grid h-full w-full grid-cols-[repeat(21,1fr)] grid-rows-[repeat(21,1fr)] gap-0">
+      {cells.map((on, i) => (
+        <div key={i} className={on ? "bg-ink" : "bg-white"} />
+      ))}
+    </div>
   );
 }
 
