@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import talleresHero from "@/assets/talleres-hero.png";
+import lupautoLogo from "@/assets/lupauto-logo.png";
 
 export const Route = createFileRoute("/talleres/")({
   head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
@@ -26,13 +26,19 @@ function TalleresLogin() {
 
   return (
     <div className="grid min-h-screen md:grid-cols-2">
-      {/* Left side - hero image */}
+      {/* Left side - hero */}
       <div className="relative hidden items-center justify-center overflow-hidden bg-ink p-8 md:flex lg:p-12">
-        <img
-          src={talleresHero}
-          alt="LUPAUTO - Revisiones bajo lupa"
-          className="max-h-[70vh] w-auto max-w-full object-contain"
-        />
+        <div className="absolute inset-0 bg-[url('/src/assets/car-turismo.jpg')] bg-cover bg-center opacity-20" />
+        <div className="relative z-10 flex flex-col items-center justify-center gap-6 text-center">
+          <img
+            src={lupautoLogo}
+            alt="LUPAUTO - Revisiones bajo lupa"
+            className="max-h-[280px] max-w-[280px] w-auto object-contain"
+          />
+          <p className="text-sm font-bold uppercase tracking-wider text-white/80">
+            Talleres verificados de confianza
+          </p>
+        </div>
       </div>
 
       {/* Right side - white */}
