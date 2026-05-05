@@ -1,7 +1,6 @@
 import logoSrc from "@/assets/lupauto-logo.png";
 
 export function Logo({
-  light = false,
   compact = false,
   size = "default",
 }: {
@@ -13,9 +12,9 @@ export function Logo({
     size === "xl"
       ? "h-24 md:h-28"
       : size === "header"
-      ? "h-14 scale-150 origin-left"
+      ? "h-12"
       : size === "footer"
-      ? "h-16 md:h-20"
+      ? "h-14 md:h-16"
       : compact
       ? "h-14"
       : "h-16";
@@ -24,7 +23,7 @@ export function Logo({
       <img
         src={logoSrc}
         alt="Lupauto - Revisiones bajo lupa"
-        className={`${heightCls} w-auto object-contain ${light ? "brightness-0 invert" : ""}`}
+        className={`${heightCls} w-auto object-contain`}
       />
     </div>
   );

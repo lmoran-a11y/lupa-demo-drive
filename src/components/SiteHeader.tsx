@@ -25,7 +25,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <Link to="/" className="flex items-center pr-20"><Logo size="header" /></Link>
+        <Link to="/" className="flex items-center"><span className="inline-flex items-center rounded-xl bg-white px-4 py-1.5"><Logo size="header" /></span></Link>
         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
           <Link to="/como-funciona" className="hover:text-brand">Cómo funciona</Link>
           <Link to="/talleres" className="hover:text-brand">Para talleres</Link>
