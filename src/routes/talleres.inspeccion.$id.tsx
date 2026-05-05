@@ -243,16 +243,22 @@ function Report() {
               </Field>
 
               <Field icon={<PlayCircle className="h-4 w-4" />} label="VÍDEO RESUMEN DEL INSPECTOR">
-                <div className="flex items-center gap-3 rounded-lg border border-border p-3">
-                  <div className="grid h-20 w-20 shrink-0 grid-cols-6 grid-rows-6 gap-px bg-white p-1">
-                    {Array.from({ length: 36 }).map((_, i) => (
-                      <div key={i} className={(i * 7) % 3 === 0 ? "bg-ink" : "bg-transparent"} />
-                    ))}
+                <div className="rounded-lg border border-border p-3">
+                  <div className="grid grid-cols-[auto_1fr] items-stretch gap-3">
+                    <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-white p-2">
+                      <QrPlaceholder />
+                    </div>
+                    <div className="relative flex h-32 items-center justify-center overflow-hidden rounded-md bg-gradient-to-br from-ink/80 to-ink">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)]" />
+                      <button className="relative flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-105">
+                        <PlayCircle className="h-10 w-10 text-ink" fill="currentColor" stroke="white" />
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex-1 text-xs text-muted-foreground">
+                  <p className="mt-3 text-center text-xs text-muted-foreground">
                     Escanea para ver el vídeo con la explicación completa de la inspección.
-                  </div>
-                  <button className="flex items-center gap-2 rounded-lg border-2 border-dashed border-brand bg-brand/5 px-4 py-3 text-xs font-bold">
+                  </p>
+                  <button className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-brand bg-brand/5 px-4 py-2.5 text-xs font-bold">
                     <Upload className="h-4 w-4 text-brand" />Subir vídeo
                   </button>
                 </div>
@@ -468,7 +474,7 @@ function TyreDiagram({ tyres, setTyres }: { tyres: any; setTyres: (t: any) => vo
   return (
     <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
       <TyreCorner label="DEL. IZQUIERDO" value={tyres.fl} onChange={(n) => setTyres({ ...tyres, fl: n })} align="left" />
-      <div className="row-span-2 flex h-32 w-16 items-center justify-center">
+      <div className="row-span-2 flex h-40 w-24 items-center justify-center">
         <CarTopView />
       </div>
       <TyreCorner label="DEL. DERECHO" value={tyres.fr} onChange={(n) => setTyres({ ...tyres, fr: n })} align="right" />
@@ -480,15 +486,47 @@ function TyreDiagram({ tyres, setTyres }: { tyres: any; setTyres: (t: any) => vo
 
 function CarTopView() {
   return (
-    <svg viewBox="0 0 60 110" className="h-full w-full text-ink">
-      <rect x="10" y="5" width="40" height="100" rx="14" fill="none" stroke="currentColor" strokeWidth="2" />
-      <rect x="14" y="20" width="32" height="22" rx="4" fill="none" stroke="currentColor" strokeWidth="1.2" />
-      <rect x="14" y="65" width="32" height="22" rx="4" fill="none" stroke="currentColor" strokeWidth="1.2" />
-      <rect x="2" y="14" width="8" height="14" rx="2" fill="currentColor" />
-      <rect x="50" y="14" width="8" height="14" rx="2" fill="currentColor" />
-      <rect x="2" y="80" width="8" height="14" rx="2" fill="currentColor" />
-      <rect x="50" y="80" width="8" height="14" rx="2" fill="currentColor" />
+    <svg viewBox="0 0 80 140" className="h-full w-full text-ink">
+      {/* car body silhouette (top-down) */}
+      <path
+        d="M40 4 C24 4 18 14 17 28 L15 50 C14 58 14 78 15 90 L17 116 C18 128 24 136 40 136 C56 136 62 128 63 116 L65 90 C66 78 66 58 65 50 L63 28 C62 14 56 4 40 4 Z"
+        fill="currentColor" fillOpacity="0.08" stroke="currentColor" strokeWidth="1.5"
+      />
+      {/* windshield */}
+      <path d="M22 30 L58 30 L54 48 L26 48 Z" fill="currentColor" fillOpacity="0.15" />
+      {/* rear window */}
+      <path d="M26 92 L54 92 L58 110 L22 110 Z" fill="currentColor" fillOpacity="0.15" />
+      {/* roof line */}
+      <line x1="40" y1="50" x2="40" y2="90" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
+      {/* 4 wheels at corners */}
+      <rect x="2" y="22" width="12" height="22" rx="3" fill="currentColor" />
+      <rect x="66" y="22" width="12" height="22" rx="3" fill="currentColor" />
+      <rect x="2" y="96" width="12" height="22" rx="3" fill="currentColor" />
+      <rect x="66" y="96" width="12" height="22" rx="3" fill="currentColor" />
     </svg>
+  );
+}
+
+function QrPlaceholder() {
+  // deterministic pseudo-random pattern
+  const cells = Array.from({ length: 21 * 21 }, (_, i) => {
+    const x = i % 21, y = Math.floor(i / 21);
+    const corner = (x < 7 && y < 7) || (x > 13 && y < 7) || (x < 7 && y > 13);
+    if (corner) {
+      const cx = x < 7 ? x : x - 14;
+      const cy = y < 7 ? y : y - 14;
+      const inner = cx >= 2 && cx <= 4 && cy >= 2 && cy <= 4;
+      const ring = cx === 0 || cx === 6 || cy === 0 || cy === 6;
+      return ring || inner;
+    }
+    return ((x * 31 + y * 17 + x * y) % 3) === 0;
+  });
+  return (
+    <div className="grid h-full w-full grid-cols-[repeat(21,1fr)] grid-rows-[repeat(21,1fr)] gap-0">
+      {cells.map((on, i) => (
+        <div key={i} className={on ? "bg-ink" : "bg-white"} />
+      ))}
+    </div>
   );
 }
 
