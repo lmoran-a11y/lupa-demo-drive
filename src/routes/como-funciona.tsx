@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock, CheckCircle2, Info, Mail, Clock } from "lucide-react";
 import liftIcon from "@/assets/lift-icon.png";
 import acuerdaCitaIcon from "@/assets/step-acuerda-cita.png";
+import reservaCitaIcon from "@/assets/step-reserva-cita.png";
 
 type Step = {
   n: string;
