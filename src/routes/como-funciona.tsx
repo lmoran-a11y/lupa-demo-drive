@@ -1,55 +1,82 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock } from "lucide-react";
+import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock, CheckCircle2, Info, Mail, Clock } from "lucide-react";
 import liftIcon from "@/assets/lift-icon.png";
 
+type Step = {
+  n: string;
+  title: string;
+  desc: string;
+  icon: React.ReactNode;
+  bullets?: string[];
+  bulletsIntro?: string;
+  notice?: { type: "info" | "mail"; text: string };
+};
 
-const steps = [
+const steps: Step[] = [
   {
     n: "1",
-    title: "Reserva online",
-    desc: "Elige el tipo de vehículo, introduce la matrícula y selecciona ubicación, fecha y hora.",
+    title: "Acuerda la cita\ncon el vendedor",
+    desc: "Habla con el vendedor y confirma qué día y a qué hora puede llevar el vehículo al taller.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="7" y="10" width="34" height="30" rx="3" />
-        <path d="M7 18h34" />
-        <path d="M16 6v8M32 6v8" />
-        <path d="M18 28l4 4 8-8" stroke="#F5B400" />
+      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="20" cy="28" r="7" />
+        <path d="M8 50c0-7 5.5-12 12-12s12 5 12 12" />
+        <circle cx="46" cy="32" r="7" />
+        <path d="M34 54c0-7 5.5-12 12-12s12 5 12 12" />
+        <path d="M30 10h18a4 4 0 014 4v8a4 4 0 01-4 4h-3l-4 4v-4h-11a4 4 0 01-4-4v-8a4 4 0 014-4z" />
+        <path d="M35 18l3 3 6-6" stroke="#F5B400" strokeWidth="2.6" />
       </svg>
     ),
+    notice: {
+      type: "info",
+      text: "El vendedor deberá llevar el vehículo al taller en la fecha y hora acordadas.",
+    },
   },
   {
     n: "2",
-    title: "Te asignamos un taller verificado",
-    desc: "Una vez completes la reserva, te enviaremos el taller, la dirección y los datos de la cita.",
+    title: "Reserva y recibe los\ndatos de la cita",
+    desc: "Selecciona el tipo de vehículo, introduce la matrícula y completa la reserva.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 6l14 5v11c0 9-6 15-14 20-8-5-14-11-14-20V11l14-5z" />
-        <path d="M17 24l5 5 9-10" stroke="#F5B400" />
+      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="8" y="16" width="48" height="34" rx="3" />
+        <path d="M8 18l24 18 24-18" />
+        <circle cx="44" cy="38" r="7" fill="#F5B400" stroke="#F5B400" />
+        <path d="M44 45c-2 4-5 7-5 7s-5-5-5-9a5 5 0 0110 0" fill="#F5B400" stroke="#F5B400" />
+        <circle cx="44" cy="36" r="2" fill="#fff" stroke="#fff" />
       </svg>
     ),
+    bulletsIntro: "Te enviaremos por correo:",
+    bullets: ["Ubicación del taller", "Fecha y hora de la cita", "Datos de la cita y contacto"],
+    notice: {
+      type: "mail",
+      text: "Revisa tu correo (y spam) tras completar la reserva y pásale esta información al vendedor.",
+    },
   },
   {
     n: "3",
-    title: "El vehículo se revisa en taller",
-    desc: "Inspección mecánica, diagnosis, elevador, prueba dinámica y evidencias en foto y vídeo.",
-    icon: (
-      <img src={liftIcon} alt="Coche en elevador de taller" className="h-16 w-16 object-contain" />
-    ),
+    title: "El vendedor lleva\nel coche al taller",
+    desc: "El vendedor lleva el vehículo al taller en la fecha y hora acordadas.",
+    icon: <img src={liftIcon} alt="Coche en elevador" className="h-20 w-20 object-contain" />,
+    bulletsIntro: "Realizamos una inspección completa:",
+    bullets: ["Revisión en elevador", "Diagnóstico electrónico", "Prueba dinámica", "Fotos y vídeo de todo el proceso"],
   },
   {
     n: "4",
-    title: "Recibe tu Informe LUPA",
-    desc: "Obtén un informe claro y visual para decidir con más seguridad antes de comprar.",
+    title: "Recibe tu\nInforme LUPA",
+    desc: "En menos de 24h recibirás un informe claro y visual con todo lo revisado para que tomes tu decisión con más seguridad.",
     icon: (
-      <svg viewBox="0 0 48 48" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 6h16l10 10v22a4 4 0 01-4 4H12a4 4 0 01-4-4V10a4 4 0 014-4z" />
-        <path d="M28 6v10h10" />
-        <circle cx="32" cy="34" r="6" fill="#F5B400" stroke="#F5B400" />
-        <path d="M29 34l2 2 4-4" stroke="#fff" strokeWidth="2" />
+      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 6h22l12 12v36a4 4 0 01-4 4H16a4 4 0 01-4-4V10a4 4 0 014-4z" />
+        <path d="M38 6v12h12" />
+        <path d="M20 28h16M20 34h12" />
+        <circle cx="40" cy="44" r="8" fill="#F5B400" stroke="#F5B400" />
+        <path d="M37 44l2 2 4-4" stroke="#fff" strokeWidth="2.4" />
+        <path d="M46 50l5 5" />
       </svg>
     ),
+    bullets: ["Informe en 24h", "Claro y visual", "Para decidir con confianza"],
   },
 ];
 
@@ -59,7 +86,7 @@ export const Route = createFileRoute("/como-funciona")({
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main className="bg-white">
-        <section className="mx-auto max-w-[984px] px-6 py-10 pb-8">
+        <section className="mx-auto max-w-[1320px] px-6 py-10 pb-8">
           {/* Top label */}
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[15px] font-bold uppercase tracking-[-0.01em] text-neutral-700">
             <span>Reserva online</span>
@@ -77,38 +104,82 @@ export const Route = createFileRoute("/como-funciona")({
             Un proceso claro, rápido y profesional para comprar con más seguridad.
           </p>
 
-          {/* Steps */}
-          <ol className="relative mt-9 space-y-5 pl-[96px] md:pl-[126px]">
-            {/* dotted vertical connector behind numbers */}
-            <div
-              className="pointer-events-none absolute top-[52px] bottom-[76px] w-0 border-l-[2px] border-neutral-200"
-              style={{ left: "30px" }}
-              aria-hidden
-            />
-            <span className="pointer-events-none absolute top-[137px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary" style={{ left: "31px" }} aria-hidden />
-            <span className="pointer-events-none absolute top-[303px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary" style={{ left: "31px" }} aria-hidden />
-            <span className="pointer-events-none absolute top-[469px] h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary" style={{ left: "31px" }} aria-hidden />
+          {/* Steps - 4 column grid with arrows */}
+          <div className="relative mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+            {steps.map(({ n, title, desc, icon, bullets, bulletsIntro, notice }, idx) => (
+              <div key={n} className="relative">
+                {/* arrow between cards (desktop only) */}
+                {idx < steps.length - 1 && (
+                  <div className="pointer-events-none absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-primary lg:block">
+                    <ArrowRight className="h-6 w-6" strokeWidth={3} />
+                  </div>
+                )}
 
-            {steps.map(({ n, title, desc, icon }) => (
-              <li key={n} className="relative">
-                {/* number circle - absolutely positioned to the left */}
-                <div className="absolute -left-[96px] top-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-[28px] font-black leading-none text-neutral-950 shadow-[0_0_0_9px_white] md:-left-[126px]">
+                {/* number circle floating above card */}
+                <div className="absolute left-1/2 -top-5 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-[22px] font-black leading-none text-neutral-950 shadow-[0_4px_10px_rgba(0,0,0,0.12)]">
                   {n}
                 </div>
 
                 {/* card */}
-                <div className="flex min-h-[146px] items-center gap-12 rounded-[14px] border border-neutral-200 bg-white px-10 py-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
-                  <div className="flex h-[102px] w-[108px] shrink-0 items-center justify-center rounded-[18px] border border-neutral-200 bg-white text-neutral-950 shadow-[0_7px_22px_rgba(0,0,0,0.06)]">
-                    {icon}
+                <div className="flex h-full flex-col rounded-[18px] border border-neutral-200 bg-white px-6 pt-10 pb-7 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
+                  <div className="flex justify-center pb-4 text-neutral-950">{icon}</div>
+                  <h3 className="mt-2 whitespace-pre-line text-[22px] font-black leading-[1.15] text-neutral-950">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-[1.5] text-neutral-600">{desc}</p>
+
+                  {bulletsIntro && (
+                    <p className="mt-4 text-[15px] leading-[1.5] text-neutral-700">{bulletsIntro}</p>
+                  )}
+                  {bullets && (
+                    <ul className="mt-2 space-y-1.5">
+                      {bullets.map((b) => (
+                        <li key={b} className="flex items-start gap-2 text-[15px] text-neutral-700">
+                          <CheckCircle2 className="mt-[2px] h-[18px] w-[18px] shrink-0 text-emerald-600" strokeWidth={2.2} />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {notice && (
+                    <div className="mt-auto pt-5">
+                      <div className="flex items-start gap-2 rounded-[10px] bg-[#FFF7E0] px-3 py-2.5 text-[13px] leading-[1.4] text-neutral-700">
+                        {notice.type === "info" ? (
+                          <Info className="mt-[1px] h-4 w-4 shrink-0 text-primary" strokeWidth={2.4} />
+                        ) : (
+                          <Mail className="mt-[1px] h-4 w-4 shrink-0 text-neutral-700" strokeWidth={2.2} />
+                        )}
+                        <span>{notice.text}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Trust strip */}
+          <div className="mt-6 rounded-[14px] border border-neutral-200 bg-white px-6 py-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: <ShieldCheck className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Talleres verificados", sub: "y de confianza" },
+                { icon: <FileText className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Informes imparciales", sub: "y detallados" },
+                { icon: <Lock className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Datos 100% seguros", sub: "y protegidos" },
+                { icon: <Clock className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Informes en 24h", sub: "" },
+              ].map((t, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-100">
+                    {t.icon}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-[24px] font-black leading-tight text-neutral-950">{title}</div>
-                    <p className="mt-2 max-w-[560px] text-[19px] leading-[1.45] text-neutral-600">{desc}</p>
+                    <div className="text-[15px] font-bold leading-tight text-neutral-900">{t.title}</div>
+                    {t.sub && <div className="text-[14px] leading-tight text-neutral-600">{t.sub}</div>}
                   </div>
                 </div>
-              </li>
-            ))}
-          </ol>
+              ))}
+            </div>
+          </div>
 
           {/* CTA block */}
           <div className="relative mt-6 overflow-hidden rounded-[18px] border border-neutral-200 bg-white px-10 py-10 shadow-[0_2px_10px_rgba(0,0,0,0.025)] md:px-16">
