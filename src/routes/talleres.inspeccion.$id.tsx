@@ -55,6 +55,7 @@ function Report() {
   const [interiorRows, setInteriorRows] = useState({ volante: "warn", pedales: "warn", asiento: "warn" });
   const [interiorGen, setInteriorGen] = useState("ok");
   const [estado, setEstado] = useState("ok");
+  const [kmLlegada, setKmLlegada] = useState(120000);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   function send() {
