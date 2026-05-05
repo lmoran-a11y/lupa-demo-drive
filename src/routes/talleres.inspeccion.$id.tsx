@@ -245,19 +245,14 @@ function Report() {
 
               <Field icon={<PlayCircle className="h-4 w-4" />} label="VÍDEO RESUMEN DEL INSPECTOR">
                 <div className="rounded-lg border border-border p-3">
-                  <div className="grid grid-cols-[auto_1fr] items-stretch gap-3">
-                    <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-md border border-border bg-white p-2">
-                      <QrPlaceholder />
-                    </div>
-                    <div className="relative flex h-32 items-center justify-center overflow-hidden rounded-md bg-gradient-to-br from-ink/80 to-ink">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)]" />
-                      <button className="relative flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-105">
-                        <PlayCircle className="h-10 w-10 text-ink" fill="currentColor" stroke="white" />
-                      </button>
-                    </div>
+                  <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-md bg-gradient-to-br from-ink/80 to-ink">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)]" />
+                    <button className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-105">
+                      <PlayCircle className="h-12 w-12 text-ink" fill="currentColor" stroke="white" />
+                    </button>
                   </div>
                   <p className="mt-3 text-center text-xs text-muted-foreground">
-                    Escanea para ver el vídeo con la explicación completa de la inspección.
+                    Vídeo explicativo de la inspección realizada por el técnico.
                   </p>
                   <button className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-brand bg-brand/5 px-4 py-2.5 text-xs font-bold">
                     <Upload className="h-4 w-4 text-brand" />Subir vídeo
