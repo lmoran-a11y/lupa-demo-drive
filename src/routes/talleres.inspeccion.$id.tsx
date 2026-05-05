@@ -4,7 +4,7 @@ import {
   ArrowLeft, Save, Send, Check, AlertTriangle, X, Camera, Upload, Zap,
   Settings, Car, Gauge, Calendar, Cpu, Activity, Droplet, Disc, CircleDot,
   Wind, Shield, SprayCan, Brush, LayoutGrid, Armchair, Image as ImageIcon,
-  PlayCircle, Info, FileText, Wrench,
+  PlayCircle, Info,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { workshopInspections } from "@/lib/mock-data";
