@@ -27,8 +27,12 @@ function TalleresLogin() {
   return (
     <div className="grid min-h-screen md:grid-cols-2">
       {/* Left side - hero image */}
-      <div className="relative hidden md:block">
-        <img src={talleresHero} alt="LUPAUTO - Revisiones bajo lupa" className="h-full w-full object-cover" />
+      <div className="relative hidden items-center justify-center overflow-hidden bg-ink p-8 md:flex lg:p-12">
+        <img
+          src={talleresHero}
+          alt="LUPAUTO - Revisiones bajo lupa"
+          className="max-h-[70vh] w-auto max-w-full object-contain"
+        />
       </div>
 
       {/* Right side - white */}
