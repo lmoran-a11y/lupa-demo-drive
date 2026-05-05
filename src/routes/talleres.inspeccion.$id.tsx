@@ -1,17 +1,17 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Save, Send, Check, AlertTriangle, X, Camera, Upload, Settings, Car, Zap } from "lucide-react";
+import {
+  ArrowLeft, Save, Send, Check, AlertTriangle, X, Camera, Upload, Zap,
+  Settings, Car, Gauge, Calendar, Cpu, Activity, Droplet, Disc, CircleDot,
+  Wind, Shield, SprayCan, Brush, LayoutGrid, Armchair, Image as ImageIcon,
+  PlayCircle, Info,
+} from "lucide-react";
+import { Logo } from "@/components/Logo";
 import { workshopInspections } from "@/lib/mock-data";
 import { getWorkshopPayout, formatEur } from "@/lib/workshop-pricing";
 import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
+  AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/talleres/inspeccion/$id")({
@@ -19,31 +19,43 @@ export const Route = createFileRoute("/talleres/inspeccion/$id")({
   component: Report,
 });
 
-const TRI = [
-  { v: "ok", label: "OK", icon: Check, cls: "border-success bg-success/10 text-success" },
-  { v: "warn", label: "Aviso", icon: AlertTriangle, cls: "border-brand bg-brand/10 text-ink" },
-  { v: "bad", label: "Mal", icon: X, cls: "border-destructive bg-destructive/10 text-destructive" },
-];
+type Tone = "ok" | "warn" | "bad" | "neutral";
+const toneCls: Record<Tone, string> = {
+  ok: "border-success bg-success/10 text-success",
+  warn: "border-brand bg-brand/10 text-ink",
+  bad: "border-destructive bg-destructive/10 text-destructive",
+  neutral: "border-ink bg-ink/5 text-ink",
+};
+const toneIcon = (t: Tone) =>
+  t === "ok" ? <Check className="h-3.5 w-3.5" /> :
+  t === "warn" ? <AlertTriangle className="h-3.5 w-3.5" /> :
+  t === "bad" ? <X className="h-3.5 w-3.5" /> : null;
 
 function Report() {
   const { id } = Route.useParams();
   const navigate = useNavigate();
   const inspection = workshopInspections.find(i => i.id === id) ?? workshopInspections[0];
+  const payout = getWorkshopPayout(inspection.vehicleType);
 
+  // ---- state ----
   const [diag, setDiag] = useState("ok");
   const [km, setKm] = useState("ok");
-  const [motor, setMotor] = useState("warn");
-  const [aceite, setAceite] = useState("ok");
-  const [refri, setRefri] = useState("warn");
+  const [motor, setMotor] = useState("bueno");
+  const [aceite, setAceite] = useState("no");
+  const [refri, setRefri] = useState("no");
+  const [frenos, setFrenos] = useState({ pd: 70, dd: 75, pt: 60, dt: 65 });
+  const [tyres, setTyres] = useState({ fl: 70, fr: 70, rl: 50, rr: 50 });
+  const [susp, setSusp] = useState({ amort: "ok", silent: "ok", rot: "ok", dir: "ok" });
+  const [escape, setEscape] = useState("ok");
+
   const [estructural, setEstructural] = useState("ok");
-  const [repaint, setRepaint] = useState("0");
+  const [repaint, setRepaint] = useState("ninguno");
   const [masilla, setMasilla] = useState("ok");
   const [aline, setAline] = useState("ok");
-  const [interior, setInterior] = useState("ok");
+  const [interiorRows, setInteriorRows] = useState({ volante: "warn", pedales: "warn", asiento: "warn" });
+  const [interiorGen, setInteriorGen] = useState("ok");
   const [estado, setEstado] = useState("ok");
   const [confirmOpen, setConfirmOpen] = useState(false);
-
-  const payout = getWorkshopPayout(inspection.vehicleType);
 
   function send() {
     setConfirmOpen(false);
@@ -53,142 +65,242 @@ function Report() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* sticky action bar */}
       <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-card px-6 py-3">
-        <button onClick={()=>navigate({to:"/talleres/dashboard"})} className="flex items-center gap-2 text-sm font-bold"><ArrowLeft className="h-4 w-4"/>Volver</button>
-        <div className="text-center">
-          <div className="text-xl font-extrabold">INFORME <span className="text-brand">LUPA</span></div>
-          <div className="text-xs text-muted-foreground">INSPECCIÓN PRE-COMPRA</div>
-        </div>
+        <button onClick={() => navigate({ to: "/talleres/dashboard" })} className="flex items-center gap-2 text-sm font-bold">
+          <ArrowLeft className="h-4 w-4" />Volver
+        </button>
+        <div className="text-xs text-muted-foreground">Editando informe · <b className="text-ink">{inspection.id}</b></div>
         <div className="flex gap-2">
-          <button onClick={()=>alert("💾 Progreso guardado")} className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-bold"><Save className="h-4 w-4"/>Guardar progreso</button>
-          <button onClick={()=>setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95"><Send className="h-4 w-4"/>Enviar informe</button>
+          <button onClick={() => alert("💾 Progreso guardado")} className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-bold">
+            <Save className="h-4 w-4" />Guardar progreso
+          </button>
+          <button onClick={() => setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95">
+            <Send className="h-4 w-4" />Enviar informe
+          </button>
         </div>
       </header>
 
       <main className="mx-auto max-w-7xl space-y-4 px-6 py-6">
-        {/* META */}
-        <div className="grid gap-4 rounded-2xl border border-border bg-card p-5 md:grid-cols-3">
-          <Meta t="MATRÍCULA" v={inspection.plate}/>
-          <Meta t="KILOMETRAJE INDICADO" v="120.000 km"/>
-          <Meta t="FECHA INSPECCIÓN" v={inspection.date}/>
+        {/* TITLE HEADER */}
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">
+              INFORME <span className="text-brand">LUPA</span>
+            </h1>
+            <div className="mt-1 text-sm font-bold tracking-wider text-muted-foreground">INSPECCIÓN PRE-COMPRA</div>
+          </div>
+          <Logo />
         </div>
 
+        {/* INFO BAR */}
+        <div className="grid gap-3 rounded-xl border border-border bg-card p-4 md:grid-cols-3">
+          <Meta icon={<LicensePlateIcon />} t="MATRÍCULA" v={inspection.plate} />
+          <Meta icon={<Gauge className="h-5 w-5" />} t="KILOMETRAJE INDICADO" v="120.000 km" />
+          <Meta icon={<Calendar className="h-5 w-5" />} t="FECHA INSPECCIÓN" v={inspection.date} />
+        </div>
+
+        {/* MAIN GRID */}
         <div className="grid gap-4 lg:grid-cols-2">
           {/* MECÁNICA */}
-          <section className="rounded-2xl border border-border bg-card">
-            <h2 className="rounded-t-2xl bg-ink px-5 py-3 text-sm font-extrabold text-white">⚙️ 1. MECÁNICA</h2>
+          <section className="overflow-hidden rounded-xl border border-border bg-card">
+            <SectionHeader icon={<Settings className="h-4 w-4" />} title="1. MECÁNICA" />
             <div className="space-y-5 p-5">
-              <Group label="Diagnosis electrónica">
-                <Tri value={diag} set={setDiag} options={[["ok","SIN FALLOS"],["warn","FALLOS REGISTRADOS"],["bad","FALLOS ACTIVOS"]]}/>
-              </Group>
-              <Group label="Verificación de kilometraje">
-                <Tri value={km} set={setKm} options={[["ok","COHERENTE"],["warn","NO VERIFICABLE"],["bad","MANIPULACIÓN DETECTADA"]]}/>
-              </Group>
-              <Group label="Estado del motor">
-                <div className="grid grid-cols-4 gap-2">
-                  {[["ok","EXCELENTE"],["ok","BUENO"],["warn","CORRECTO"],["bad","PROBLEMA DETECTADO"]].map(([v,l],i)=>(
-                    <button key={i} onClick={()=>setMotor(v)} className={`rounded-lg border-2 px-2 py-2 text-xs font-bold ${motor===v && i===1?TRI[0].cls:"border-border"}`}>{l}</button>
-                  ))}
-                </div>
-              </Group>
-              <Group label="Fugas">
-                <Row label="Aceite"><Quad v={aceite} set={setAceite}/></Row>
-                <Row label="Refrigerante"><Quad v={refri} set={setRefri}/></Row>
-              </Group>
-              <Group label="Frenos">
-                {[["Pastillas delanteras",70],["Discos delanteros",75],["Pastillas traseras",60],["Discos traseros",65]].map(([n,p]:any)=>(
-                  <div key={n} className="flex items-center gap-3 text-sm">
-                    <span className="w-44 text-xs">{n}</span>
-                    <input defaultValue={p} className="w-12 rounded border border-border px-1 text-center text-sm"/>
-                    <span className="text-xs">%</span>
-                    <div className="h-2 flex-1 rounded-full bg-muted"><div className="h-full rounded-full bg-gradient-to-r from-success to-brand" style={{width:`${p}%`}}/></div>
-                  </div>
-                ))}
-              </Group>
-              <Group label="Suspensión y dirección">
-                {["Amortiguadores","Silentblocks","Rótulas / Brazos","Dirección"].map(n=>(
-                  <Row key={n} label={n}><Tri value="ok" set={()=>{}} options={[["ok","BIEN"],["warn","REGULAR"],["bad","MAL"]]}/></Row>
-                ))}
-              </Group>
+              <Field icon={<Cpu className="h-4 w-4" />} label="DIAGNOSIS ELECTRÓNICA">
+                <Pills cols={3}
+                  value={diag} onChange={setDiag}
+                  options={[
+                    { v: "ok", label: "SIN FALLOS", tone: "ok" },
+                    { v: "warn", label: "FALLOS REGISTRADOS", tone: "warn" },
+                    { v: "bad", label: "FALLOS ACTIVOS", tone: "bad" },
+                  ]} />
+              </Field>
+
+              <Field icon={<Gauge className="h-4 w-4" />} label="VERIFICACIÓN DE KILOMETRAJE">
+                <Pills cols={3}
+                  value={km} onChange={setKm}
+                  options={[
+                    { v: "ok", label: "COHERENTE", sub: "con datos electrónicos", tone: "ok" },
+                    { v: "warn", label: "NO VERIFICABLE", sub: "con los datos disponibles", tone: "warn" },
+                    { v: "bad", label: "MANIPULACIÓN DETECTADA", sub: "(discrepancia entre módulos)", tone: "bad" },
+                  ]} />
+              </Field>
+
+              <Field icon={<Activity className="h-4 w-4" />} label="ESTADO DEL MOTOR">
+                <Pills cols={4}
+                  value={motor} onChange={setMotor}
+                  options={[
+                    { v: "excelente", label: "EXCELENTE", tone: "ok" },
+                    { v: "bueno", label: "BUENO", tone: "ok" },
+                    { v: "correcto", label: "CORRECTO", tone: "warn" },
+                    { v: "problema", label: "PROBLEMA DETECTADO", tone: "bad" },
+                  ]} />
+              </Field>
+
+              <Field icon={<Droplet className="h-4 w-4" />} label="FUGAS">
+                <LeakRow label="ACEITE" value={aceite} onChange={setAceite} />
+                <LeakRow label="REFRIGERANTE" value={refri} onChange={setRefri} />
+              </Field>
+
+              <Field icon={<Disc className="h-4 w-4" />} label="FRENOS">
+                <BrakeRow label="PASTILLAS DELANTERAS" value={frenos.pd} onChange={(n) => setFrenos({ ...frenos, pd: n })} />
+                <BrakeRow label="DISCOS DELANTEROS" value={frenos.dd} onChange={(n) => setFrenos({ ...frenos, dd: n })} />
+                <div className="h-2" />
+                <BrakeRow label="PASTILLAS TRASERAS" value={frenos.pt} onChange={(n) => setFrenos({ ...frenos, pt: n })} />
+                <BrakeRow label="DISCOS TRASEROS" value={frenos.dt} onChange={(n) => setFrenos({ ...frenos, dt: n })} />
+              </Field>
+
+              <Field icon={<CircleDot className="h-4 w-4" />} label="NEUMÁTICOS">
+                <TyreDiagram tyres={tyres} setTyres={setTyres} />
+              </Field>
+
+              <Field icon={<Settings className="h-4 w-4" />} label="SUSPENSIÓN Y DIRECCIÓN">
+                <SuspRow label="AMORTIGUADORES" value={susp.amort} onChange={(v) => setSusp({ ...susp, amort: v })} />
+                <SuspRow label="SILENTBLOCKS" value={susp.silent} onChange={(v) => setSusp({ ...susp, silent: v })} />
+                <SuspRow label="RÓTULAS / BRAZOS" value={susp.rot} onChange={(v) => setSusp({ ...susp, rot: v })} />
+                <SuspRow label="DIRECCIÓN" value={susp.dir} onChange={(v) => setSusp({ ...susp, dir: v })} />
+              </Field>
+
+              <Field icon={<Wind className="h-4 w-4" />} label="ESCAPE">
+                <Pills cols={3}
+                  value={escape} onChange={setEscape}
+                  options={[
+                    { v: "ok", label: "SIN FUGAS", tone: "ok" },
+                    { v: "warn", label: "FUGA LEVE", tone: "warn" },
+                    { v: "bad", label: "FUGA IMPORTANTE", tone: "bad" },
+                  ]} />
+              </Field>
             </div>
           </section>
 
-          {/* CARROCERÍA */}
-          <section className="rounded-2xl border border-border bg-card">
-            <h2 className="rounded-t-2xl bg-ink px-5 py-3 text-sm font-extrabold text-white">🚗 2. CARROCERÍA E INTERIOR</h2>
+          {/* CARROCERÍA E INTERIOR */}
+          <section className="overflow-hidden rounded-xl border border-border bg-card">
+            <SectionHeader icon={<Car className="h-4 w-4" />} title="2. CARROCERÍA E INTERIOR" />
             <div className="space-y-5 p-5">
-              <Group label="Daños estructurales">
-                <div className="grid grid-cols-2 gap-2">
-                  <button onClick={()=>setEstructural("ok")} className={`rounded-lg border-2 px-3 py-2 text-sm font-bold ${estructural==="ok"?TRI[0].cls:"border-border"}`}><Check className="mr-1 inline h-4 w-4"/>NO DETECTADOS</button>
-                  <button onClick={()=>setEstructural("bad")} className={`rounded-lg border-2 px-3 py-2 text-sm font-bold ${estructural==="bad"?TRI[2].cls:"border-border"}`}><X className="mr-1 inline h-4 w-4"/>DETECTADOS</button>
+              <Field icon={<Shield className="h-4 w-4" />} label="DAÑOS ESTRUCTURALES" inline>
+                <Pills cols={2}
+                  value={estructural} onChange={setEstructural}
+                  options={[
+                    { v: "ok", label: "NO DETECTADOS", tone: "ok" },
+                    { v: "bad", label: "DETECTADOS", tone: "bad" },
+                  ]} />
+              </Field>
+
+              <Field icon={<SprayCan className="h-4 w-4" />} label="REPINTADOS" inline>
+                <Pills cols={4}
+                  value={repaint} onChange={setRepaint}
+                  options={[
+                    { v: "ninguno", label: "NINGUNO", tone: "ok" },
+                    { v: "1-2", label: "1 - 2 PANELES", tone: "warn" },
+                    { v: "3-4", label: "3 - 4 PANELES", tone: "warn" },
+                    { v: "+4", label: "+ 4 PANELES", tone: "bad" },
+                  ]} />
+              </Field>
+
+              <Field icon={<Brush className="h-4 w-4" />} label="MASILLA" inline>
+                <Pills cols={2}
+                  value={masilla} onChange={setMasilla}
+                  options={[
+                    { v: "ok", label: "NO", tone: "ok" },
+                    { v: "bad", label: "SÍ", tone: "bad" },
+                  ]} />
+              </Field>
+
+              <Field icon={<LayoutGrid className="h-4 w-4" />} label="ALINEACIÓN DE PANELES" inline>
+                <Pills cols={3}
+                  value={aline} onChange={setAline}
+                  options={[
+                    { v: "ok", label: "CORRECTA", tone: "ok" },
+                    { v: "warn", label: "VARIACIÓN LEVE", tone: "warn" },
+                    { v: "bad", label: "DESALINEACIÓN", tone: "bad" },
+                  ]} />
+              </Field>
+
+              <Field icon={<Armchair className="h-4 w-4" />} label="INTERIOR">
+                <InteriorRow label="VOLANTE" value={interiorRows.volante} onChange={(v) => setInteriorRows({ ...interiorRows, volante: v })} />
+                <InteriorRow label="PEDALES" value={interiorRows.pedales} onChange={(v) => setInteriorRows({ ...interiorRows, pedales: v })} />
+                <InteriorRow label="ASIENTO CONDUCTOR" value={interiorRows.asiento} onChange={(v) => setInteriorRows({ ...interiorRows, asiento: v })} />
+                <div className="flex items-center gap-3 pt-1">
+                  <span className="w-44 text-xs font-bold">INTERIOR GENERAL</span>
+                  <div className="flex-1">
+                    <Pills cols={3}
+                      value={interiorGen} onChange={setInteriorGen}
+                      options={[
+                        { v: "ok", label: "BUENO", tone: "ok" },
+                        { v: "warn", label: "REGULAR", tone: "warn" },
+                        { v: "bad", label: "MALO", tone: "bad" },
+                      ]} />
+                  </div>
                 </div>
-              </Group>
-              <Group label="Repintados">
+              </Field>
+
+              <Field icon={<ImageIcon className="h-4 w-4" />} label="FOTOGRAFÍAS INCLUIDAS">
                 <div className="grid grid-cols-4 gap-2">
-                  {[["0","NINGUNO"],["1","1-2 PANELES"],["2","3-4 PANELES"],["3","+4 PANELES"]].map(([v,l])=>(
-                    <button key={v} onClick={()=>setRepaint(v)} className={`rounded-lg border-2 px-2 py-2 text-xs font-bold ${repaint===v?TRI[0].cls:"border-border"}`}>{l}</button>
+                  {["FRONTAL", "TRASERA", "LATERAL IZQ.", "LATERAL DER.", "INTERIOR", "MOTOR", "KM LLEGADA", "KM FINAL"].map((n) => (
+                    <PhotoSlot key={n} label={n} />
                   ))}
                 </div>
-              </Group>
-              <Group label="Masilla">
-                <div className="grid grid-cols-2 gap-2">
-                  <button onClick={()=>setMasilla("ok")} className={`rounded-lg border-2 px-3 py-2 text-sm font-bold ${masilla==="ok"?TRI[0].cls:"border-border"}`}>NO</button>
-                  <button onClick={()=>setMasilla("bad")} className={`rounded-lg border-2 px-3 py-2 text-sm font-bold ${masilla==="bad"?TRI[2].cls:"border-border"}`}>SÍ</button>
+              </Field>
+
+              <Field icon={<PlayCircle className="h-4 w-4" />} label="VÍDEO RESUMEN DEL INSPECTOR">
+                <div className="flex items-center gap-3 rounded-lg border border-border p-3">
+                  <div className="grid h-20 w-20 shrink-0 grid-cols-6 grid-rows-6 gap-px bg-white p-1">
+                    {Array.from({ length: 36 }).map((_, i) => (
+                      <div key={i} className={(i * 7) % 3 === 0 ? "bg-ink" : "bg-transparent"} />
+                    ))}
+                  </div>
+                  <div className="flex-1 text-xs text-muted-foreground">
+                    Escanea para ver el vídeo con la explicación completa de la inspección.
+                  </div>
+                  <button className="flex items-center gap-2 rounded-lg border-2 border-dashed border-brand bg-brand/5 px-4 py-3 text-xs font-bold">
+                    <Upload className="h-4 w-4 text-brand" />Subir vídeo
+                  </button>
                 </div>
-              </Group>
-              <Group label="Alineación de paneles">
-                <Tri value={aline} set={setAline} options={[["ok","CORRECTA"],["warn","VARIACIÓN LEVE"],["bad","DESALINEACIÓN"]]}/>
-              </Group>
-              <Group label="Interior">
-                {["Volante","Pedales","Asiento conductor"].map(n=>(
-                  <Row key={n} label={n}><Tri value="warn" set={()=>{}} options={[["ok","BAJO"],["warn","MEDIO"],["bad","ALTO"]]}/></Row>
-                ))}
-                <Row label="Interior general"><Tri value={interior} set={setInterior} options={[["ok","BUENO"],["warn","REGULAR"],["bad","MALO"]]}/></Row>
-              </Group>
-              <Group label="📷 Fotografías incluidas">
-                <div className="grid grid-cols-4 gap-2 md:grid-cols-7">
-                  {["FRONTAL","TRASERA","LAT. IZQ.","LAT. DER.","INTERIOR","MOTOR","CUADRO KM"].map(n=>(
-                    <div key={n} className="text-center">
-                      <div className="relative flex aspect-square items-center justify-center rounded-lg bg-muted"><Camera className="h-5 w-5 text-muted-foreground"/><div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-ink text-xs font-bold">+</div></div>
-                      <div className="mt-1 text-[10px] font-bold">{n}</div>
-                    </div>
-                  ))}
-                </div>
-              </Group>
-              <Group label="▶️ Vídeo resumen del inspector">
-                <button className="flex w-full flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-brand bg-brand/5 py-6 text-sm">
-                  <Upload className="h-6 w-6 text-brand"/><b>Subir vídeo</b><span className="text-xs text-muted-foreground">o arrastrar aquí</span>
-                </button>
-              </Group>
+              </Field>
             </div>
           </section>
         </div>
 
-        <section className="rounded-2xl border border-border bg-card p-5">
-          <h3 className="text-sm font-extrabold">ESTADO GENERAL DEL VEHÍCULO</h3>
+        {/* ESTADO GENERAL */}
+        <section className="rounded-xl border border-border bg-card p-5">
+          <h3 className="text-sm font-extrabold tracking-wide">ESTADO GENERAL DEL VEHÍCULO</h3>
           <div className="mt-3 grid gap-3 md:grid-cols-3">
-            {[
-              ["ok","CORRECTO","El vehículo se encuentra en buen estado general.", "border-success/40 bg-success/5", "bg-success"],
-              ["warn","REQUIERE REVISIÓN","Presenta puntos que deberían revisarse.","border-brand/40 bg-brand/5","bg-brand"],
-              ["bad","PROBLEMA IMPORTANTE","Presenta defectos relevantes.","border-destructive/40 bg-destructive/5","bg-destructive"],
-            ].map(([v,t,d,bg,dot])=>(
-              <button key={v} onClick={()=>setEstado(v)} className={`rounded-2xl border-2 p-4 text-left ${estado===v?bg:"border-border"}`}>
-                <div className={`mx-auto flex h-10 w-10 items-center justify-center rounded-full ${dot} text-white`}>{v==="ok"?<Check className="h-5 w-5"/>:v==="warn"?<AlertTriangle className="h-5 w-5"/>:<X className="h-5 w-5"/>}</div>
+            {([
+              ["ok", "CORRECTO", "El vehículo se encuentra en buen estado general.", "border-success/40 bg-success/5", "bg-success", <Check className="h-5 w-5" />],
+              ["warn", "REQUIERE REVISIÓN", "Presenta puntos que deberían revisarse.", "border-brand/50 bg-brand/5", "bg-brand", <AlertTriangle className="h-5 w-5" />],
+              ["bad", "PROBLEMA IMPORTANTE", "Presenta defectos relevantes.", "border-destructive/40 bg-destructive/5", "bg-destructive", <X className="h-5 w-5" />],
+            ] as const).map(([v, t, d, bg, dot, ic]) => (
+              <button key={v} onClick={() => setEstado(v)} className={`rounded-xl border-2 p-4 text-left transition ${estado === v ? bg : "border-border"}`}>
+                <div className={`mx-auto flex h-10 w-10 items-center justify-center rounded-full ${dot} text-white`}>{ic}</div>
                 <div className="mt-2 text-center text-sm font-extrabold">{t}</div>
-                <div className="text-center text-xs text-muted-foreground">{d}</div>
+                <div className="mt-1 text-center text-xs text-muted-foreground">{d}</div>
               </button>
             ))}
           </div>
         </section>
 
-        <div className="flex items-start justify-between rounded-2xl border border-border bg-card p-5 text-xs text-muted-foreground">
-          <div>ℹ️ Inspección visual y electrónica realizada en taller. El informe refleja el estado del vehículo en el momento de la revisión.</div>
-          <div>🛡 INSPECCIÓN REALIZADA POR<br/><b className="text-ink">Taller certificado LUPAUTO</b><br/>Nº Taller: ES-12345</div>
+        {/* FOOTER INFO */}
+        <div className="grid gap-3 rounded-xl border border-border bg-card p-5 text-xs text-muted-foreground md:grid-cols-2">
+          <div className="flex items-start gap-3">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-ink" />
+            <div>
+              <div className="font-extrabold text-ink">ALCANCE DE LA INSPECCIÓN</div>
+              Inspección visual y electrónica realizada en taller. El informe refleja el estado del vehículo en el momento de la revisión.
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <Shield className="mt-0.5 h-4 w-4 shrink-0 text-ink" />
+            <div>
+              <div className="font-extrabold text-ink">INSPECCIÓN REALIZADA POR</div>
+              Taller certificado LUPAUTO<br />Nº Taller: ES-12345
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col items-stretch justify-between gap-3 rounded-2xl border border-brand/30 bg-brand/5 p-4 md:flex-row md:items-center">
+        {/* PAYMENT */}
+        <div className="flex flex-col items-stretch justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 p-4 md:flex-row md:items-center">
           <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-ink"><Zap className="h-5 w-5"/></div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-ink"><Zap className="h-5 w-5" /></div>
             <div className="text-sm">
               <div className="font-extrabold">Pago automático tras enviar el informe</div>
               <div className="text-xs text-muted-foreground">Vehículo: <b>{inspection.vehicleType}</b> · Importe a recibir: <b className="text-ink">{formatEur(payout)} €</b></div>
@@ -196,7 +308,7 @@ function Report() {
           </div>
           <div className="flex justify-end gap-3">
             <Link to="/talleres/dashboard" className="rounded-lg border border-border px-4 py-3 text-sm font-bold">Cancelar</Link>
-            <button onClick={()=>setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4"/>Enviar informe y cobrar {formatEur(payout)} €</button>
+            <button onClick={() => setConfirmOpen(true)} className="flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink"><Send className="h-4 w-4" />Enviar informe y cobrar {formatEur(payout)} €</button>
           </div>
         </div>
       </main>
@@ -221,30 +333,231 @@ function Report() {
   );
 }
 
-function Meta({ t, v }: { t: string; v: string }) {
-  return <div className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted"><Car className="h-5 w-5"/></div><div><div className="text-xs text-muted-foreground">{t}</div><div className="text-lg font-extrabold">{v}</div></div></div>;
-}
-function Group({ label, children }: { label: string; children: React.ReactNode }) {
-  return (<div><div className="mb-2 flex items-center gap-2 text-xs font-extrabold tracking-wide"><Settings className="h-3 w-3"/>{label.toUpperCase()}</div><div className="space-y-2">{children}</div></div>);
-}
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
-  return (<div className="flex items-center gap-3"><span className="w-44 text-xs font-bold">{label.toUpperCase()}</span><div className="flex-1">{children}</div></div>);
-}
-function Tri({ value, set, options }: { value: string; set: (v: string) => void; options: [string,string][] }) {
+/* ---------------- helpers ---------------- */
+
+function SectionHeader({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <div className="grid grid-cols-3 gap-2">
-      {options.map(([v,l]) => {
-        const cls = v==="ok"?TRI[0].cls:v==="warn"?TRI[1].cls:TRI[2].cls;
-        return <button key={l} onClick={()=>set(v)} className={`rounded-lg border-2 px-2 py-2 text-xs font-bold ${value===v?cls:"border-border"}`}>{l}</button>;
+    <div className="flex items-center gap-2 bg-ink px-5 py-3 text-sm font-extrabold tracking-wide text-white">
+      <span className="text-brand">{icon}</span>{title}
+    </div>
+  );
+}
+
+function Meta({ icon, t, v }: { icon: React.ReactNode; t: string; v: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-muted text-ink">{icon}</div>
+      <div>
+        <div className="text-[11px] font-bold tracking-wide text-muted-foreground">{t}</div>
+        <div className="text-lg font-extrabold">{v}</div>
+      </div>
+    </div>
+  );
+}
+
+function LicensePlateIcon() {
+  return (
+    <div className="flex h-5 w-7 items-center justify-center rounded border-2 border-ink text-[8px] font-extrabold">A</div>
+  );
+}
+
+function Field({ icon, label, children, inline = false }: { icon: React.ReactNode; label: string; children: React.ReactNode; inline?: boolean }) {
+  return (
+    <div className={inline ? "flex items-center gap-3" : ""}>
+      <div className={`flex items-center gap-2 text-[11px] font-extrabold tracking-wide text-ink ${inline ? "w-44 shrink-0" : "mb-2"}`}>
+        <span className="text-ink/70">{icon}</span>{label}
+      </div>
+      <div className={`space-y-2 ${inline ? "flex-1" : ""}`}>{children}</div>
+    </div>
+  );
+}
+
+type PillOpt = { v: string; label: string; sub?: string; tone: Tone };
+function Pills({ value, onChange, options, cols }: { value: string; onChange: (v: string) => void; options: PillOpt[]; cols: number }) {
+  const grid = cols === 2 ? "grid-cols-2" : cols === 3 ? "grid-cols-3" : "grid-cols-4";
+  return (
+    <div className={`grid gap-2 ${grid}`}>
+      {options.map((o) => {
+        const active = value === o.v;
+        return (
+          <button key={o.v} onClick={() => onChange(o.v)}
+            className={`flex flex-col items-center justify-center gap-1 rounded-lg border-2 px-2 py-2 text-center transition ${active ? toneCls[o.tone] : "border-border bg-white text-ink hover:bg-muted/50"}`}>
+            <div className="flex items-center gap-1.5">
+              {active && (
+                <span className={`flex h-4 w-4 items-center justify-center rounded-full text-white ${o.tone === "ok" ? "bg-success" : o.tone === "warn" ? "bg-brand" : "bg-destructive"}`}>
+                  {toneIcon(o.tone)}
+                </span>
+              )}
+              <span className="text-[11px] font-extrabold leading-tight">{o.label}</span>
+            </div>
+            {o.sub && <span className="text-[9px] font-medium text-muted-foreground">{o.sub}</span>}
+          </button>
+        );
       })}
     </div>
   );
 }
-function Quad({ v, set }: { v: string; set: (s: string) => void }) {
-  const opts = [["ok","NO"],["warn","LEVE"],["warn","MODERADA"],["bad","IMPORTANTE"]];
+
+function LeakRow({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+  const opts: { v: string; label: string; tone: Tone }[] = [
+    { v: "no", label: "NO", tone: "ok" },
+    { v: "leve", label: "LEVE", tone: "warn" },
+    { v: "moderada", label: "MODERADA", tone: "warn" },
+    { v: "importante", label: "IMPORTANTE", tone: "bad" },
+  ];
   return (
-    <div className="grid grid-cols-4 gap-2">
-      {opts.map(([s,l],i)=>(<button key={i} onClick={()=>set(s)} className={`rounded-lg border-2 px-2 py-1.5 text-xs font-bold ${v===s && i<2?(s==="ok"?TRI[0].cls:TRI[1].cls):"border-border"}`}>{l}</button>))}
+    <div className="flex items-center gap-3">
+      <span className="w-28 text-[11px] font-bold text-muted-foreground">{label}</span>
+      <div className="grid flex-1 grid-cols-4 gap-2">
+        {opts.map((o) => {
+          const active = value === o.v;
+          return (
+            <button key={o.v} onClick={() => onChange(o.v)}
+              className={`flex items-center justify-center gap-1 rounded-lg border-2 px-2 py-1.5 text-[11px] font-extrabold transition ${active ? toneCls[o.tone] : "border-border bg-white"}`}>
+              {active && (
+                <span className={`flex h-4 w-4 items-center justify-center rounded-full text-white ${o.tone === "ok" ? "bg-success" : o.tone === "warn" ? "bg-brand" : "bg-destructive"}`}>
+                  {toneIcon(o.tone)}
+                </span>
+              )}
+              {o.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
+  );
+}
+
+function BrakeRow({ label, value, onChange }: { label: string; value: number; onChange: (n: number) => void }) {
+  return (
+    <div className="flex items-center gap-3 text-sm">
+      <span className="w-44 text-[11px] font-bold text-muted-foreground">{label}</span>
+      <div className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
+        <div className="h-full rounded-full bg-gradient-to-r from-success via-brand to-destructive" style={{ width: `${value}%` }} />
+      </div>
+      <input
+        type="number" value={value} min={0} max={100}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="w-14 rounded border border-border px-1 py-0.5 text-center text-xs font-bold"
+      />
+      <span className="w-4 text-xs font-bold">%</span>
+    </div>
+  );
+}
+
+function TyreCorner({ label, value, onChange, align }: { label: string; value: number; onChange: (n: number) => void; align: "left" | "right" }) {
+  return (
+    <div className={`flex items-center gap-2 ${align === "right" ? "flex-row-reverse text-right" : ""}`}>
+      <div className="flex-1">
+        <div className="text-[10px] font-bold text-muted-foreground">{label}</div>
+        <div className="mt-1 flex items-center gap-2">
+          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
+            <div className="h-full rounded-full bg-gradient-to-r from-success via-brand to-destructive" style={{ width: `${value}%` }} />
+          </div>
+          <input type="number" value={value} min={0} max={100}
+            onChange={(e) => onChange(Number(e.target.value))}
+            className="w-10 rounded border border-border px-1 text-center text-[10px] font-bold" />
+          <span className="text-[10px] font-bold">%</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TyreDiagram({ tyres, setTyres }: { tyres: any; setTyres: (t: any) => void }) {
+  return (
+    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+      <TyreCorner label="DEL. IZQUIERDO" value={tyres.fl} onChange={(n) => setTyres({ ...tyres, fl: n })} align="left" />
+      <div className="row-span-2 flex h-32 w-16 items-center justify-center">
+        <CarTopView />
+      </div>
+      <TyreCorner label="DEL. DERECHO" value={tyres.fr} onChange={(n) => setTyres({ ...tyres, fr: n })} align="right" />
+      <TyreCorner label="TRAS. IZQUIERDO" value={tyres.rl} onChange={(n) => setTyres({ ...tyres, rl: n })} align="left" />
+      <TyreCorner label="TRAS. DERECHO" value={tyres.rr} onChange={(n) => setTyres({ ...tyres, rr: n })} align="right" />
+    </div>
+  );
+}
+
+function CarTopView() {
+  return (
+    <svg viewBox="0 0 60 110" className="h-full w-full text-ink">
+      <rect x="10" y="5" width="40" height="100" rx="14" fill="none" stroke="currentColor" strokeWidth="2" />
+      <rect x="14" y="20" width="32" height="22" rx="4" fill="none" stroke="currentColor" strokeWidth="1.2" />
+      <rect x="14" y="65" width="32" height="22" rx="4" fill="none" stroke="currentColor" strokeWidth="1.2" />
+      <rect x="2" y="14" width="8" height="14" rx="2" fill="currentColor" />
+      <rect x="50" y="14" width="8" height="14" rx="2" fill="currentColor" />
+      <rect x="2" y="80" width="8" height="14" rx="2" fill="currentColor" />
+      <rect x="50" y="80" width="8" height="14" rx="2" fill="currentColor" />
+    </svg>
+  );
+}
+
+function SuspRow({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+  const opts: { v: string; label: string; tone: Tone }[] = [
+    { v: "ok", label: "BIEN", tone: "ok" },
+    { v: "warn", label: "REGULAR", tone: "warn" },
+    { v: "bad", label: "MAL", tone: "bad" },
+  ];
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-44 text-[11px] font-bold text-muted-foreground">{label}</span>
+      <div className="grid flex-1 grid-cols-3 gap-2">
+        {opts.map((o) => {
+          const active = value === o.v;
+          return (
+            <button key={o.v} onClick={() => onChange(o.v)}
+              className={`flex items-center justify-center gap-1 rounded-lg border-2 px-2 py-1.5 text-[11px] font-extrabold ${active ? toneCls[o.tone] : "border-border bg-white"}`}>
+              {active && (
+                <span className={`flex h-4 w-4 items-center justify-center rounded-full text-white ${o.tone === "ok" ? "bg-success" : o.tone === "warn" ? "bg-brand" : "bg-destructive"}`}>
+                  {toneIcon(o.tone)}
+                </span>
+              )}
+              {o.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function InteriorRow({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+  const opts: { v: string; label: string; tone: Tone }[] = [
+    { v: "ok", label: "BAJO", tone: "ok" },
+    { v: "warn", label: "MEDIO", tone: "warn" },
+    { v: "bad", label: "ALTO", tone: "bad" },
+  ];
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-44 text-[11px] font-bold text-muted-foreground">{label}</span>
+      <div className="grid flex-1 grid-cols-3 gap-2">
+        {opts.map((o) => {
+          const active = value === o.v;
+          return (
+            <button key={o.v} onClick={() => onChange(o.v)}
+              className={`flex items-center justify-center gap-1 rounded-lg border-2 px-2 py-1.5 text-[11px] font-extrabold ${active ? toneCls[o.tone] : "border-border bg-white"}`}>
+              {active && (
+                <span className={`flex h-4 w-4 items-center justify-center rounded-full text-white ${o.tone === "ok" ? "bg-success" : o.tone === "warn" ? "bg-brand" : "bg-destructive"}`}>
+                  {toneIcon(o.tone)}
+                </span>
+              )}
+              {o.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function PhotoSlot({ label }: { label: string }) {
+  return (
+    <button className="group text-center">
+      <div className="relative flex aspect-[4/3] items-center justify-center rounded-lg border-2 border-dashed border-border bg-muted/40 group-hover:border-brand">
+        <Camera className="h-5 w-5 text-muted-foreground" />
+        <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] font-extrabold text-ink">+</div>
+      </div>
+      <div className="mt-1 text-[10px] font-extrabold tracking-wide">{label}</div>
+    </button>
   );
 }
