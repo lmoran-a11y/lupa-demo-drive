@@ -31,15 +31,7 @@ const steps: Step[] = [
     n: "2",
     title: "Reserva y recibe los\ndatos de la cita",
     desc: "Selecciona el tipo de vehículo, introduce la matrícula y completa la reserva.",
-    icon: (
-      <svg viewBox="0 0 64 64" className="h-20 w-20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="8" y="16" width="48" height="34" rx="3" />
-        <path d="M8 18l24 18 24-18" />
-        <circle cx="44" cy="38" r="7" fill="#F5B400" stroke="#F5B400" />
-        <path d="M44 45c-2 4-5 7-5 7s-5-5-5-9a5 5 0 0110 0" fill="#F5B400" stroke="#F5B400" />
-        <circle cx="44" cy="36" r="2" fill="#fff" stroke="#fff" />
-      </svg>
-    ),
+    icon: <img src={reservaCitaIcon} alt="Reserva y recibe los datos" className="h-28 w-28 -my-4 object-contain" />,
     bulletsIntro: "Te enviaremos por correo:",
     bullets: ["Ubicación del taller", "Fecha y hora de la cita", "Datos de la cita y contacto"],
     notice: {
