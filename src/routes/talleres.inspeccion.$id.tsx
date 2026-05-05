@@ -430,11 +430,9 @@ function LeakRow({ label, value, onChange }: { label: string; value: string; onC
   );
 }
 
-function fillColor(v: number) {
-  if (v < 30) return "hsl(var(--destructive))";
-  if (v < 60) return "hsl(var(--brand, 45 100% 50%))";
-  return "hsl(var(--success))";
-}
+
+
+
 
 function DraggableBar({ value, onChange, height = 8 }: { value: number; onChange: (n: number) => void; height?: number }) {
   const ref = useRef<HTMLDivElement>(null);
