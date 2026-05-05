@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Eye, EyeOff, Shield, Car } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
+import talleresHero from "@/assets/talleres-hero.png";
 
 export const Route = createFileRoute("/talleres/")({
   head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
@@ -25,27 +26,9 @@ function TalleresLogin() {
 
   return (
     <div className="grid min-h-screen md:grid-cols-2">
-      {/* Left side - black */}
-      <div className="relative hidden flex-col bg-ink text-white md:flex">
-        <div className="absolute left-8 top-8">
-          <div className="text-3xl font-extrabold leading-none">
-            LUPA<span className="text-brand">UTO</span>
-          </div>
-          <div className="mt-1 text-sm italic text-white/70">Revisiones bajo lupa</div>
-        </div>
-
-        <div className="flex flex-1 items-center justify-center">
-          <div className="flex h-56 w-56 items-center justify-center rounded-full bg-brand">
-            <Car className="h-24 w-24 text-ink" strokeWidth={2.2} />
-          </div>
-        </div>
-
-        <div className="absolute bottom-8 left-8 flex items-center gap-3">
-          <Shield className="h-6 w-6 text-brand" />
-          <div className="text-xs font-bold leading-tight">
-            Talleres verificados<br />de confianza
-          </div>
-        </div>
+      {/* Left side - hero image */}
+      <div className="relative hidden md:block">
+        <img src={talleresHero} alt="LUPAUTO - Revisiones bajo lupa" className="h-full w-full object-cover" />
       </div>
 
       {/* Right side - white */}
