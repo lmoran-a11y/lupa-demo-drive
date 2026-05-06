@@ -242,7 +242,7 @@ function Reservar() {
                       type="checkbox"
                       checked={confirmVehicle}
                       onChange={(e) => setConfirmVehicle(e.target.checked)}
-                      className="mt-0.5 h-4 w-4 shrink-0 accent-brand my-[23px] mx-[22px] py-0 px-0 mb-[22px]"
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-brand my-[23px] py-0 px-0 mb-[22px] mx-[2px]"
                     />
                     <span className="font-bold">
                       Confirmo que los datos del vehículo indicados en la reserva son correctos para la inspección.
