@@ -103,37 +103,33 @@ function Reservar() {
             <div className="md:hidden mt-3 rounded-xl border border-border overflow-hidden">
               <div className="grid grid-cols-2 divide-x divide-border">
                 <MobileSummaryTile
-                  icon={<MapPin className="h-3.5 w-3.5" />}
-                  title="Ubicación"
+                  icon={<MapPin className="h-4 w-4" />}
+                  title="UBICACIÓN"
                   value={location}
                   active={edit === "location"}
-                  onClick={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
+                  onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
+                  editLabel={edit === "location" ? "Cerrar" : "Cambiar"}
                 />
                 <MobileSummaryTile
-                  icon={<CalIcon className="h-3.5 w-3.5" />}
-                  title="Fecha y hora"
+                  icon={<CalIcon className="h-4 w-4" />}
+                  title="FECHA Y HORA"
                   value=" "
                   active={edit === "datetime"}
-                  onClick={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
+                  onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
+                  editLabel={edit === "datetime" ? "Cerrar" : "Cambiar"}
                 />
               </div>
               <div className="grid grid-cols-2 divide-x divide-border border-t border-border">
                 <MobileSummaryTile
-                  icon={<Car className="h-3.5 w-3.5" />}
-                  title="Marca y modelo"
+                  icon={<Car className="h-4 w-4" />}
+                  title="MARCA Y MODELO"
                   value={brandModel || "Sin especificar"}
-                  active={false}
-                  onClick={() => {
-                    const el = document.getElementById("mobile-brand-picker");
-                    el?.scrollIntoView({ behavior: "smooth", block: "center" });
-                  }}
                 />
                 <MobileSummaryTile
-                  icon={<FileText className="h-3.5 w-3.5" />}
-                  title="Informe DGT"
+                  icon={<FileText className="h-4 w-4" />}
+                  title="INFORME DGT"
                   value={dgt ? "Añadido (+14,99 €)" : "No incluido"}
                   active={dgt}
-                  onClick={() => setDgt(!dgt)}
                 />
               </div>
             </div>
