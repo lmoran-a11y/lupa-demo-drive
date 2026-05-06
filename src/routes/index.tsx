@@ -24,10 +24,10 @@ export const Route = createFileRoute("/")({
 });
 
 const VEHICLES = [
-  { id: "turismo", label: "Turismos", image: carTurismo },
-  { id: "deportivo", label: "Deportivos", image: carDeportivo },
-  { id: "suv", label: "SUV / 4x4", image: carSuv },
-  { id: "furgoneta", label: "Furgonetas", image: carFurgoneta },
+  { id: "turismo", label: "Turismos", image: carTurismo, sub: "Menos de 250 CV" },
+  { id: "deportivo", label: "Deportivos", image: carDeportivo, sub: "250 CV o más" },
+  { id: "suv", label: "SUV / 4x4", image: carSuv, sub: "Todoterrenos y crossovers" },
+  { id: "furgoneta", label: "Furgonetas", image: carFurgoneta, sub: "Comerciales y carga" },
 ];
 
 function Home() {
@@ -52,24 +52,24 @@ function Home() {
       <SiteHeader />
 
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-6 pt-8 pb-10 md:pt-10">
-        <div className="grid items-center gap-8 md:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-6 pt-5 pb-6 md:pt-10 md:pb-10">
+        <div className="grid items-center gap-5 md:gap-8 md:grid-cols-2">
           <div>
-            <h1 className="text-5xl font-extrabold leading-[1.02] tracking-tight text-ink md:text-[64px]">
+            <h1 className="text-3xl font-extrabold leading-[1.05] tracking-tight text-ink md:text-[64px] md:leading-[1.02]">
               Revisa tu coche<br />antes de comprar
             </h1>
-            <p className="mt-3 text-base text-muted-foreground">
+            <p className="mt-2 text-sm text-muted-foreground md:mt-3 md:text-base">
               Inspección en taller con fotos y vídeo en 24h.
             </p>
             <button
               type="button"
               onClick={() => pickerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              className="mt-5 inline-flex items-center rounded-xl bg-brand px-6 py-3.5 text-base font-bold text-ink shadow-sm hover:brightness-95"
+              className="mt-4 inline-flex items-center rounded-xl bg-brand px-5 py-3 text-sm font-bold text-ink shadow-sm hover:brightness-95 md:mt-5 md:px-6 md:py-3.5 md:text-base"
             >
               Solicitar inspección
             </button>
 
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 md:mt-8 md:gap-x-8 md:gap-y-4">
               <Trust icon={<Shield className="h-5 w-5" />} title="Talleres verificados" sub="de confianza" />
               <Trust icon={<Clock className="h-5 w-5" />} title="Informe en 24h" sub="rápido y detallado" />
               <Trust icon={<Lock className="h-5 w-5" />} title="Pago seguro" sub="100% protegido" />
@@ -81,32 +81,32 @@ function Home() {
               alt="Lupa con coche"
               width={600}
               height={600}
-              className="w-full max-w-[420px]"
+              className="w-full max-w-[260px] md:max-w-[420px]"
             />
           </div>
         </div>
       </section>
 
       {/* VEHICLE PICKER */}
-      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.18_0_0)] py-10 text-white md:py-12">
-        <div className="mx-auto max-w-7xl px-6" ref={pickerRef}>
-          <h2 className="text-center text-2xl font-bold md:text-[28px]">¿Qué vehículo quieres revisar?</h2>
+      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.18_0_0)] py-7 text-white md:py-12">
+        <div className="mx-auto max-w-7xl px-4 md:px-6" ref={pickerRef}>
+          <h2 className="text-center text-xl font-bold md:text-[28px]">¿Qué vehículo quieres revisar?</h2>
           <div className="mx-auto mt-2 h-[3px] w-12 rounded bg-brand" />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-4">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 md:mt-8 md:gap-5 md:grid-cols-4">
             {VEHICLES.map((v) => (
               <button
                 key={v.id}
                 onClick={() => setSelected(v.id)}
-                className={`group relative flex aspect-[4/2] sm:aspect-[4/4.2] flex-col rounded-2xl border bg-[#111111] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
+                className={`group relative flex h-[88px] sm:h-auto sm:aspect-[4/4.2] flex-row sm:flex-col items-center rounded-2xl border bg-[#111111] p-3 sm:p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
                   selected === v.id ? "border-brand ring-1 ring-brand/40" : "border-white/10 hover:border-white/25"
                 }`}
               >
                 {selected === v.id && (
-                  <div className="absolute right-3 top-3 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-ink">
-                    <Check className="h-4 w-4" />
+                  <div className="absolute right-2 top-2 sm:right-3 sm:top-3 z-10 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-brand text-ink">
+                    <Check className="h-3 w-3 sm:h-4 sm:w-4" />
                   </div>
                 )}
-                <div className="flex flex-1 items-center justify-center overflow-hidden p-2">
+                <div className="flex h-full sm:h-auto sm:flex-1 w-[40%] sm:w-full items-center justify-center overflow-hidden sm:p-2">
                   {(() => {
                     const baseScale =
                       v.id === "deportivo" ? 1.15 :
@@ -120,14 +120,18 @@ function Home() {
                         alt={v.label}
                         loading="lazy"
                         style={{ "--base": baseScale, "--hover": hoverScale, "--tx": tx } as React.CSSProperties}
-                        className="h-[92%] w-full object-contain transition-transform duration-300 [transform:translateX(var(--tx))_scale(var(--base))] group-hover:[transform:translateX(var(--tx))_scale(var(--hover))]"
+                        className="h-full sm:h-[92%] w-full object-contain transition-transform duration-300 [transform:translateX(var(--tx))_scale(var(--base))] group-hover:[transform:translateX(var(--tx))_scale(var(--hover))]"
                       />
                     );
                   })()}
                 </div>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="text-lg font-bold tracking-tight text-white md:text-xl">{v.label}</span>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-ink transition-transform group-hover:translate-x-0.5">
+                <div className="flex flex-1 sm:flex-none sm:w-full items-center justify-between sm:mt-2 pl-2 sm:pl-0">
+                  <div className="leading-tight">
+                    <div className="text-base font-bold tracking-tight text-white md:text-xl">{v.label}</div>
+                    <div className="text-[11px] text-white/50 sm:hidden">{v.sub}</div>
+                    <div className="hidden sm:block text-[11px] md:text-xs text-white/50 mt-0.5">{v.sub}</div>
+                  </div>
+                  <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-brand text-ink transition-transform group-hover:translate-x-0.5 ml-2">
                     <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
                   </span>
                 </div>
@@ -164,10 +168,10 @@ function Home() {
       </section>
 
       {/* HOW */}
-      <section className="mx-auto max-w-7xl px-6 py-12">
-        <h2 className="text-center text-[28px] font-bold">Así funciona</h2>
+      <section className="mx-auto max-w-7xl px-6 py-7 md:py-12">
+        <h2 className="text-center text-xl md:text-[28px] font-bold">Así funciona</h2>
         <div className="mx-auto mt-2 h-[3px] w-12 rounded bg-brand" />
-        <div className="relative mt-10 grid gap-10 md:grid-cols-3">
+        <div className="relative mt-5 grid gap-5 md:mt-10 md:gap-10 md:grid-cols-3">
           {/* dashed connectors (desktop only) */}
           <div className="pointer-events-none absolute left-0 right-0 top-10 hidden md:block">
             <div className="mx-auto grid max-w-5xl grid-cols-3">
@@ -181,44 +185,52 @@ function Home() {
             { n: 2, t: "Reserva en taller", d: "Elige el taller, día y hora que mejor te venga." },
             { n: 3, t: "Recibe tu informe", d: "En 24h tendrás el informe completo con fotos y vídeo." },
           ].map((s) => (
-            <div key={s.n} className="relative text-center">
-              <div className="relative mx-auto h-20 w-20">
-                <div className="flex h-full w-full items-center justify-center rounded-full bg-ink ring-8 ring-background">
-                  <Search className="h-7 w-7 text-white" />
+            <div key={s.n} className="relative flex md:block items-center gap-4 md:text-center text-left">
+              <div className="relative h-14 w-14 md:mx-auto md:h-20 md:w-20 shrink-0">
+                <div className="flex h-full w-full items-center justify-center rounded-full bg-ink ring-4 md:ring-8 ring-background">
+                  <Search className="h-5 w-5 md:h-7 md:w-7 text-white" />
                 </div>
-                <span className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-brand text-sm font-bold text-ink ring-4 ring-background">{s.n}</span>
+                <span className="absolute -top-1.5 -right-1.5 md:-top-2 md:-right-2 flex h-5 w-5 md:h-7 md:w-7 items-center justify-center rounded-full bg-brand text-[11px] md:text-sm font-bold text-ink ring-2 md:ring-4 ring-background">{s.n}</span>
               </div>
-              <h3 className="mt-5 text-lg font-bold">{s.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
+              <div className="flex-1 md:mt-5">
+                <h3 className="text-base md:text-lg font-bold">{s.t}</h3>
+                <p className="mt-0.5 md:mt-2 text-xs md:text-sm text-muted-foreground">{s.d}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* PROFESSIONAL REPORT */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid gap-10 rounded-3xl border border-border bg-card p-8 shadow-sm md:grid-cols-2 md:p-12">
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-8 md:pb-16">
+        <div className="grid gap-5 md:gap-10 rounded-2xl md:rounded-3xl border border-border bg-card p-5 md:p-12 shadow-sm md:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <div className="text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
-            <h3 className="mt-3 text-3xl font-bold leading-tight md:text-4xl">Toma decisiones<br />con información real</h3>
-            <ul className="mt-6 space-y-3 text-sm">
-              {["Revisión punto por punto", "Fotos y vídeo explicativo", "Semáforo final para tu decisión", "Información clara y detallada"].map((x) => (
+            <div className="text-[11px] md:text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
+            <h3 className="mt-2 md:mt-3 text-xl md:text-4xl font-bold leading-tight">Toma decisiones<br />con información real</h3>
+            <ul className="mt-4 md:mt-6 space-y-2 md:space-y-3 text-sm">
+              {["Revisión punto por punto", "Fotos y vídeo explicativo", "Semáforo final para tu decisión"].map((x) => (
                 <li key={x} className="flex items-center gap-3">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-brand text-brand">
-                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                  <span className="flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full border-2 border-brand text-brand shrink-0">
+                    <Check className="h-3 w-3 md:h-3.5 md:w-3.5" strokeWidth={3} />
                   </span>
-                  {x}
+                  <span className="text-[13px] md:text-sm">{x}</span>
                 </li>
               ))}
+              <li className="hidden md:flex items-center gap-3">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-brand text-brand">
+                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                </span>
+                Información clara y detallada
+              </li>
             </ul>
-            <Link to="/ejemplo-informe" className="mt-8 inline-flex w-full items-center justify-center rounded-lg border-2 border-ink bg-background px-6 py-3 text-sm font-bold hover:bg-ink hover:text-white sm:w-auto">
+            <Link to="/ejemplo-informe" className="mt-5 md:mt-8 inline-flex w-full items-center justify-center rounded-lg border-2 border-ink bg-background px-5 md:px-6 py-2.5 md:py-3 text-sm font-bold hover:bg-ink hover:text-white sm:w-auto">
               Ver ejemplo de informe
             </Link>
           </div>
 
           {/* Tablet mock */}
-          <div className="rounded-2xl border border-border bg-muted/40 p-3 shadow-sm">
-            <div className="rounded-xl bg-white p-5 text-ink">
+          <div className="rounded-xl md:rounded-2xl border border-border bg-muted/40 p-2 md:p-3 shadow-sm md:scale-100 origin-top max-w-sm mx-auto md:max-w-none w-full">
+            <div className="rounded-lg md:rounded-xl bg-white p-3 md:p-5 text-ink">
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
                   <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-ink">
@@ -276,41 +288,42 @@ function Home() {
       </section>
 
       {/* CLASSIC */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid items-center gap-4 rounded-2xl border border-border bg-muted/60 px-6 py-3 md:grid-cols-[auto_1fr_auto]">
-          <div className="flex items-center gap-5">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background">
-              <Car className="h-6 w-6" />
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-6 md:pb-16">
+        <div className="grid items-center gap-3 md:gap-4 rounded-2xl border border-border bg-muted/60 px-4 md:px-6 py-3 md:grid-cols-[auto_1fr_auto]">
+          <div className="flex items-center gap-3 md:gap-5">
+            <div className="flex h-11 w-11 md:h-14 md:w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background shrink-0">
+              <Car className="h-5 w-5 md:h-6 md:w-6" />
             </div>
             <div>
-              <h3 className="text-lg font-bold">¿Buscas un coche clásico?</h3>
-              <p className="text-sm text-muted-foreground">
-                Inspecciones especializadas para vehículos clásicos.<br />Para coches con historia.
+              <h3 className="text-base md:text-lg font-bold">¿Buscas un coche clásico?</h3>
+              <p className="text-xs md:text-sm text-muted-foreground">
+                Inspecciones especializadas para vehículos clásicos.
               </p>
             </div>
           </div>
           <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="hidden md:block mx-auto h-36 w-auto max-w-full object-contain" style={{ filter: "drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1))" }} />
-          <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-5 py-3 text-sm font-bold hover:bg-ink hover:text-white">
+          <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-4 md:px-5 py-2.5 md:py-3 text-sm font-bold hover:bg-ink hover:text-white">
             Revisar clásico <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
 
       {/* WORKSHOPS CTA */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="flex flex-col items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-ink to-[oklch(0.22_0_0)] p-6 text-white md:flex-row">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/10">
-              <svg viewBox="0 0 24 24" className="h-5 w-5 text-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-8 md:pb-16">
+        <div className="flex flex-col items-stretch md:items-center justify-between gap-3 md:gap-4 rounded-xl md:rounded-2xl bg-gradient-to-r from-ink to-[oklch(0.22_0_0)] p-4 md:p-6 text-white md:flex-row">
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-lg bg-white/10 shrink-0">
+              <svg viewBox="0 0 24 24" className="h-4 w-4 md:h-5 md:w-5 text-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 12l9-9 9 9" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" />
               </svg>
             </div>
             <div>
-              <div className="text-lg font-bold">Acceso talleres colaborativos</div>
-              <div className="text-sm text-white/70">Inicia sesión para ver tus inspecciones asignadas y gestionar informes.</div>
+              <div className="text-sm md:text-lg font-bold">Acceso talleres colaborativos</div>
+              <div className="text-xs md:text-sm text-white/70 hidden md:block">Inicia sesión para ver tus inspecciones asignadas y gestionar informes.</div>
+              <div className="text-[11px] text-white/70 md:hidden">Para profesionales con inspecciones asignadas.</div>
             </div>
           </div>
-          <Link to="/talleres/login" className="inline-flex items-center gap-2 rounded-lg border-2 border-brand bg-transparent px-5 py-3 font-bold text-brand hover:bg-brand hover:text-ink">
+          <Link to="/talleres/login" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand bg-transparent px-4 md:px-5 py-2 md:py-3 text-sm font-bold text-brand hover:bg-brand hover:text-ink">
             <Lock className="h-4 w-4" /> Acceso para talleres
           </Link>
         </div>

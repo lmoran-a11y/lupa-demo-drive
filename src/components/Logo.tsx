@@ -12,7 +12,7 @@ export function Logo({
     size === "xl"
       ? "h-24 md:h-28"
       : size === "header"
-      ? "h-12"
+      ? "h-7 md:h-12"
       : size === "footer"
       ? "h-14 md:h-16"
       : compact
