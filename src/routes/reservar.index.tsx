@@ -48,8 +48,8 @@ function Reservar() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const { vehicle, plate } = Route.useSearch();
-  const [location, setLocation] = useState(" ");
-  const [draftLocation, setDraftLocation] = useState(" ");
+  const [location, setLocation] = useState("Lucena, Córdoba");
+  const [draftLocation, setDraftLocation] = useState("Lucena, Córdoba");
   const [locationOk, setLocationOk] = useState(true);
   const [day, setDay] = useState<number>(16);
   const [hour, setHour] = useState<string>("14:00");
@@ -99,77 +99,25 @@ function Reservar() {
               {vehicleLabel} · {plate || "—"}
             </div>
 
-            {/* MOBILE: compact 2x2 grid summary */}
-            <div className="md:hidden mt-3 rounded-xl border border-border overflow-hidden">
-              <div className="grid grid-cols-2 divide-x divide-border">
-                <MobileSummaryTile
-                  icon={<MapPin className="h-4 w-4" />}
-                  title="UBICACIÓN"
-                  value={location}
-                  active={edit === "location"}
-                  onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
-                  editLabel={edit === "location" ? "Cerrar" : "Cambiar"}
-                />
-                <MobileSummaryTile
-                  icon={<CalIcon className="h-4 w-4" />}
-                  title="FECHA Y HORA"
-                  value=" "
-                  active={edit === "datetime"}
-                  onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
-                  editLabel={edit === "datetime" ? "Cerrar" : "Cambiar"}
-                />
-              </div>
-              <div className="grid grid-cols-2 divide-x divide-border border-t border-border">
-                <MobileSummaryTile
-                  icon={<Car className="h-4 w-4" />}
-                  title="MARCA Y MODELO"
-                  value={brandModel || "Sin especificar"}
-                />
-                <MobileSummaryTile
-                  icon={<FileText className="h-4 w-4" />}
-                  title="INFORME DGT"
-                  value={dgt ? "Añadido (+14,99 €)" : "No incluido"}
-                  active={dgt}
-                />
-              </div>
-            </div>
+            <SummaryRow
+              icon={<MapPin className="h-4 w-4" />}
+              title="Ubicación"
+              value={location}
+              onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
+              active={edit === "location"}
+              mobileEditor={renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
+            />
+            <SummaryRow
+              icon={<CalIcon className="h-4 w-4" />}
+              title="Fecha y hora"
+              value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
+              onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
+              active={edit === "datetime"}
+              mobileEditor={renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
+            />
 
-            {/* MOBILE: inline editor panel below grid */}
-            {edit === "location" && (
-              <div className="md:hidden mt-3 rounded-xl border-2 border-brand bg-card p-3 shadow-sm">
-                {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
-              </div>
-            )}
-            {edit === "datetime" && (
-              <div className="md:hidden mt-3 rounded-xl border-2 border-brand bg-card p-3 shadow-sm">
-                {renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
-              </div>
-            )}
-
-            {/* DESKTOP: original detailed rows */}
-            <div className="hidden md:block">
-              <SummaryRow
-                icon={<MapPin className="h-4 w-4" />}
-                title="Ubicación"
-                value={location}
-                onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
-                active={edit === "location"}
-                mobileEditor={renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
-              />
-              <SummaryRow
-                icon={<CalIcon className="h-4 w-4" />}
-                title="Fecha y hora"
-                value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
-                onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
-                active={edit === "datetime"}
-                mobileEditor={renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
-              />
-            </div>
-
-            <div className="hidden md:block">
-              <BrandModelPicker value={brandModel} onChange={setBrandModel} />
-            </div>
-            <div className={`hidden md:block mt-3 rounded-xl border-2 border-brand p-3 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
+            <BrandModelPicker value={brandModel} onChange={setBrandModel} />
+            <div className={`mt-3 rounded-xl border-2 border-brand p-3 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted">
                   <div className="relative">
@@ -207,6 +155,14 @@ function Reservar() {
               </button>
             </div>
 
+            <div className="mt-3 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
+              <Shield className="mt-0.5 h-4 w-4 text-info" />
+              <div>
+                Trabajamos con talleres <span className="font-bold text-info">verificados</span>
+                <br />
+                de confianza en tu zona.
+              </div>
+            </div>
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
@@ -477,45 +433,6 @@ function Reservar() {
             </div>
           </div>
         </div>
-      )}
-    </div>
-  );
-}
-
-function MobileSummaryTile({
-  icon,
-  title,
-  value,
-  active,
-  onEdit,
-  editLabel,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  value: string;
-  active?: boolean;
-  onEdit?: () => void;
-  editLabel?: string;
-}) {
-  return (
-    <div
-      className={`flex flex-col items-start gap-2 p-4 text-left transition-colors ${active ? "bg-brand/5" : "bg-card"}`}
-    >
-      <div className="flex items-center gap-2 text-muted-foreground">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-muted/40">
-          {icon}
-        </span>
-        <span className="text-[12px] font-bold uppercase tracking-wide text-foreground">{title}</span>
-      </div>
-      <div className="line-clamp-2 text-sm font-semibold text-foreground break-words min-h-[1.25rem]">{value}</div>
-      {onEdit && (
-        <button
-          type="button"
-          onClick={onEdit}
-          className={`mt-auto text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
-        >
-          {editLabel ?? "Cambiar"}
-        </button>
       )}
     </div>
   );
