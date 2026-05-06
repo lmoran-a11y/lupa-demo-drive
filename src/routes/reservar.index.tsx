@@ -200,17 +200,17 @@ function Reservar() {
                 {renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
               </div>
             ) : (
-              <>
+              <div id="checkout-final" className="scroll-mt-24">
                 <div className="grid gap-3 md:gap-4 grid-cols-1 md:grid-cols-[1fr_auto]">
                   <div>
                     <div className="text-sm font-bold">Total a pagar</div>
                     <div className="mt-1 text-3xl md:text-4xl font-extrabold tracking-tight">{total} €</div>
                     <div className="mt-0.5 text-xs text-muted-foreground">IVA incluido</div>
-                    <div className="mt-2 inline-flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="mt-2 hidden md:inline-flex items-center gap-2 text-xs text-muted-foreground">
                       <Lock className="h-3.5 w-3.5" /> Pago 100% seguro
                     </div>
                   </div>
-                  <div className="flex items-start gap-2 rounded-lg border border-success/30 bg-success/5 p-2 text-xs">
+                  <div className="hidden md:flex items-start gap-2 rounded-lg border border-success/30 bg-success/5 p-2 text-xs">
                     <Shield className="mt-0.5 h-4 w-4 shrink-0 text-success" />
                     <div>
                       <div className="font-bold">Sin sorpresas</div>
@@ -225,7 +225,7 @@ function Reservar() {
 
                 <div>
                   <div className="text-sm font-bold">Email para tu informe</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">Te enviaremos aquí todos los detalles de tu reserva e informe.</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">Te enviaremos aquí los detalles de tu reserva e informe.</div>
                   <div className="relative mt-2">
                     <input
                       type="email"
@@ -266,37 +266,34 @@ function Reservar() {
                     })
                   }
                   disabled={!confirmVehicle}
-                  className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-brand text-base font-semibold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="mt-4 flex h-11 md:h-12 w-full items-center justify-center gap-2 rounded-lg bg-brand text-sm md:text-base font-semibold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <Lock className="h-4 w-4" />
-                  Reservar inspección por {total} €
-                  <ArrowRight className="h-4 w-4" />
+                  Confirmar reserva
                 </button>
 
-                <div className="mt-3 grid grid-cols-3 gap-3 text-xs">
+                {/* Payment methods — discreet, secondary */}
+                <div className="mt-3 flex items-center justify-center gap-2.5 opacity-70">
+                  <PayBadge label="VISA" />
+                  <PayBadge label="MC" />
+                  <PayBadge label=" Pay" />
+                  <PayBadge label="G Pay" />
+                </div>
+
+                {/* Desktop-only extras */}
+                <div className="hidden md:grid mt-3 grid-cols-3 gap-3 text-xs">
                   <Feature icon={<Check className="h-4 w-4 text-success" />} t="Confirmación" t2="inmediata" />
                   <Feature icon={<Camera className="h-4 w-4 text-muted-foreground" />} t="Informe completo" t2="con fotos y vídeo" />
                   <Feature icon={<Clock className="h-4 w-4 text-muted-foreground" />} t="Informe en menos de 24h" t2="" />
                 </div>
-
-                <div className="mt-3 flex items-center justify-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-4 py-2 text-sm">
+                <div className="hidden md:flex mt-3 items-center justify-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-4 py-2 text-sm">
                   <Hourglass className="h-4 w-4 text-brand" />
                   <span className="font-bold text-ink">Plazas limitadas. Asegura tu cita ahora.</span>
                 </div>
-
-                <div className="mt-3 rounded-lg border border-border px-3 py-3">
-                  <div className="text-xs text-muted-foreground">Paga de forma segura con</div>
-                  <div className="mt-2 flex items-center gap-3">
-                    <PayBadge label="VISA" />
-                    <PayBadge label="MC" />
-                    <PayBadge label=" Pay" />
-                    <PayBadge label="G Pay" />
-                  </div>
-                </div>
-                <div className="mt-2 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                <div className="hidden md:flex mt-2 items-center justify-center gap-2 text-xs text-muted-foreground">
                   <Lock className="h-3.5 w-3.5" /> Pago seguro con cifrado SSL
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
