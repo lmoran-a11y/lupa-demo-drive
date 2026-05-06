@@ -225,7 +225,7 @@ function Reservar() {
 
                 <div>
                   <div className="text-sm font-bold">Email para tu informe</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">Te enviaremos aquí los detalles de tu reserva e informe.</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">​</div>
                   <div className="relative mt-2">
                     <input
                       type="email"
