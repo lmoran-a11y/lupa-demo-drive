@@ -52,57 +52,70 @@ function Home() {
       <SiteHeader />
 
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-5 pt-3 pb-5 md:px-6 md:pt-10 md:pb-10">
-        <div className="grid items-center gap-5 md:gap-8 md:grid-cols-2">
-          {/* Mobile illustration: integrated above headline with overlap */}
-          <div className="relative -mb-4 flex justify-center md:hidden">
-            <div className="pointer-events-none absolute inset-x-8 top-6 h-32 rounded-full bg-brand/20 blur-3xl" />
-            <img
-              src={heroLupa}
-              alt="Lupa con coche"
-              width={600}
-              height={600}
-              className="relative w-full max-w-[200px]"
-            />
-          </div>
-          <div className="text-center md:text-left">
-            <h1 className="text-[28px] font-extrabold leading-[1.05] tracking-tight text-ink md:text-[64px] md:leading-[1.02]">
+      <section className="bg-white md:bg-transparent">
+        <div className="mx-auto max-w-7xl px-5 pt-5 pb-6 md:px-6 md:pt-10 md:pb-10">
+          {/* MOBILE HERO */}
+          <div className="md:hidden flex flex-col items-center text-center">
+            <h1 className="text-[28px] font-extrabold leading-[1.05] tracking-tight text-ink">
               Revisa tu coche<br />antes de comprar
             </h1>
-            <p className="mx-auto mt-2 max-w-[300px] text-[13px] text-muted-foreground md:mx-0 md:mt-3 md:max-w-none md:text-base">
-              Inspección en taller con fotos y vídeo en 24h.
-            </p>
+            <div className="relative my-4 flex w-full justify-center">
+              <div className="pointer-events-none absolute inset-x-10 top-4 h-32 rounded-full bg-brand/25 blur-3xl" />
+              <img
+                src={heroLupa}
+                alt="Lupa con coche"
+                width={600}
+                height={600}
+                className="relative w-full max-w-[220px]"
+              />
+            </div>
             <button
               type="button"
               onClick={() => pickerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              className="mt-4 inline-flex w-full max-w-[320px] items-center justify-center rounded-xl bg-brand px-5 py-3.5 text-base font-bold text-ink shadow-[0_8px_24px_-6px_rgba(255,204,0,0.5)] hover:brightness-95 md:mt-5 md:w-auto md:max-w-none md:px-6 md:py-3.5"
+              className="inline-flex w-full max-w-[320px] items-center justify-center rounded-xl bg-brand px-5 py-3.5 text-base font-bold text-ink shadow-[0_8px_24px_-6px_rgba(255,204,0,0.5)] hover:brightness-95"
             >
               Solicitar inspección
             </button>
-
-            <div className="mt-4 flex items-center justify-center gap-3 text-[11px] md:hidden">
+            <div className="mt-4 flex items-center justify-center gap-3 text-[11px]">
               <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Shield className="h-3.5 w-3.5 text-ink" /> Talleres verificados</span>
               <span className="h-1 w-1 rounded-full bg-border" />
               <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5 text-ink" /> Informe 24h</span>
               <span className="h-1 w-1 rounded-full bg-border" />
               <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Lock className="h-3.5 w-3.5 text-ink" /> Pago seguro</span>
             </div>
-
-            <div className="mt-8 hidden flex-wrap gap-x-8 gap-y-4 md:flex">
-              <Trust icon={<Shield className="h-5 w-5" />} title="Talleres verificados" sub="de confianza" />
-              <Trust icon={<Clock className="h-5 w-5" />} title="Informe en 24h" sub="rápido y detallado" />
-              <Trust icon={<Lock className="h-5 w-5" />} title="Pago seguro" sub="100% protegido" />
-            </div>
           </div>
-          {/* Desktop illustration */}
-          <div className="hidden md:flex md:justify-end">
-            <img
-              src={heroLupa}
-              alt="Lupa con coche"
-              width={600}
-              height={600}
-              className="w-full max-w-[420px]"
-            />
+
+          {/* DESKTOP HERO */}
+          <div className="hidden md:grid items-center gap-8 md:grid-cols-2">
+            <div className="text-left">
+              <h1 className="text-[64px] font-extrabold leading-[1.02] tracking-tight text-ink">
+                Revisa tu coche<br />antes de comprar
+              </h1>
+              <p className="mt-3 max-w-none text-base text-muted-foreground">
+                Inspección en taller con fotos y vídeo en 24h.
+              </p>
+              <button
+                type="button"
+                onClick={() => pickerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                className="mt-5 inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3.5 text-base font-bold text-ink shadow-[0_8px_24px_-6px_rgba(255,204,0,0.5)] hover:brightness-95"
+              >
+                Solicitar inspección
+              </button>
+              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
+                <Trust icon={<Shield className="h-5 w-5" />} title="Talleres verificados" sub="de confianza" />
+                <Trust icon={<Clock className="h-5 w-5" />} title="Informe en 24h" sub="rápido y detallado" />
+                <Trust icon={<Lock className="h-5 w-5" />} title="Pago seguro" sub="100% protegido" />
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <img
+                src={heroLupa}
+                alt="Lupa con coche"
+                width={600}
+                height={600}
+                className="w-full max-w-[420px]"
+              />
+            </div>
           </div>
         </div>
       </section>
