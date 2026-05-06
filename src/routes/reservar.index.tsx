@@ -48,8 +48,8 @@ function Reservar() {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const { vehicle, plate } = Route.useSearch();
-  const [location, setLocation] = useState("Lucena, Córdoba");
-  const [draftLocation, setDraftLocation] = useState("Lucena, Córdoba");
+  const [location, setLocation] = useState(" ");
+  const [draftLocation, setDraftLocation] = useState(" ");
   const [locationOk, setLocationOk] = useState(true);
   const [day, setDay] = useState<number>(16);
   const [hour, setHour] = useState<string>("14:00");
