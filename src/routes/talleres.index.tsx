@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 import workshopBg from "@/assets/talleres-workshop-bg.jpg";
 
@@ -37,6 +37,13 @@ function TalleresLogin() {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
+        <Link
+          to="/"
+          className="absolute left-6 top-6 z-10 inline-flex items-center gap-2 rounded-full bg-ink/60 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white backdrop-blur transition hover:bg-ink/80"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Volver
+        </Link>
         <div className="absolute inset-x-0 bottom-8 z-10 flex justify-center">
           <p className="text-xs font-bold uppercase tracking-wider text-white/80">
             Talleres verificados de confianza
