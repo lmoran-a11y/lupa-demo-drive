@@ -7,7 +7,7 @@ export function StepProgress({ current }: { current: 1 | 2 | 3 | 4 }) {
     { n: 3, label: "Confirmación" },
   ];
   return (
-    <div className="flex items-center justify-center gap-2 py-6">
+    <div className="flex items-center justify-center gap-2 py-3">
       {steps.map((s, i) => {
         const done = current > s.n;
         const active = current === s.n;
