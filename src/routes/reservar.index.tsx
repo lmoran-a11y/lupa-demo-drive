@@ -94,7 +94,7 @@ function Reservar() {
 
         <div className="grid gap-4 md:gap-6 md:grid-cols-[1fr_1.4fr]">
           {/* LEFT: Summary */}
-          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
+          <div className="order-2 md:order-1 rounded-2xl border border-border bg-card p-3.5 md:p-4">
             <div className="text-base font-bold">Resumen de tu reserva</div>
             <div className="mt-1 text-xs text-muted-foreground">
               {vehicleLabel} · {plate || "—"}
@@ -195,18 +195,10 @@ function Reservar() {
             </div>
             )}
 
-            <div className="mt-3 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
-              <Shield className="mt-0.5 h-4 w-4 text-info" />
-              <div>
-                Trabajamos con talleres <span className="font-bold text-info">verificados</span>
-                <br />
-                de confianza en tu zona.
-              </div>
-            </div>
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
-          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
+          <div className="order-1 md:order-2 rounded-2xl border border-border bg-card p-3.5 md:p-4">
             {!isMobile && edit === "location" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
