@@ -128,7 +128,7 @@ function Reservar() {
                 <div className="flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <div className="text-sm font-bold">Informe DGT</div>
+                      <div className="font-bold text-base">Informe DGT</div>
                       <span className="rounded-full border border-muted-foreground/30 bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Opcional</span>
                     </div>
                     <div className="whitespace-nowrap text-xs font-semibold text-muted-foreground">+14,99 €</div>
@@ -203,7 +203,7 @@ function Reservar() {
               <div id="checkout-final" className="scroll-mt-24">
                 <div className="grid gap-3 md:gap-4 grid-cols-1 md:grid-cols-[1fr_auto]">
                   <div>
-                    <div className="text-sm font-bold">Total a pagar</div>
+                    <div className="font-bold text-base">Total a pagar</div>
                     <div className="mt-1 text-3xl md:text-4xl font-extrabold tracking-tight">{total} €</div>
                     <div className="mt-0.5 text-xs text-muted-foreground">IVA incluido</div>
                     <div className="mt-2 hidden md:inline-flex items-center gap-2 text-xs text-muted-foreground">
@@ -224,7 +224,7 @@ function Reservar() {
                 <hr className="my-3 border-border" />
 
                 <div>
-                  <div className="text-sm font-bold">Email para tu informe</div>
+                  <div className="font-bold text-base">Email para tu informe</div>
                   <div className="mt-0.5 text-xs text-muted-foreground">​</div>
                   <div className="relative mt-2">
                     <input
@@ -464,11 +464,11 @@ function SummaryRow({
           {icon}
         </div>
         <div className="flex-1">
-          <div className="text-sm font-bold">{title}</div>
+          <div className="font-bold text-base">{title}</div>
           <div className="whitespace-pre-line text-sm text-muted-foreground">{value}</div>
           <button
             onClick={onEdit}
-            className={`mt-1 text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
+            className={`mt-1 font-bold text-base ${active ? "text-brand" : "text-success"} hover:underline`}
           >
             {active ? "Cerrar" : "Cambiar"}
           </button>
@@ -721,7 +721,7 @@ function Trust({ icon, t, d }: { icon: React.ReactNode; t: string; d: string }) 
         {icon}
       </div>
       <div>
-        <div className="text-sm font-bold">{t}</div>
+        <div className="font-bold text-base">{t}</div>
         <div className="text-xs text-muted-foreground">{d}</div>
       </div>
     </div>
@@ -817,7 +817,7 @@ function BrandModelPicker({ value, onChange }: { value: string; onChange: (v: st
           <Car className="h-4 w-4" />
         </div>
         <div className="flex-1">
-          <div className="text-sm font-bold">Marca y modelo <span className="text-xs font-normal text-muted-foreground">(opcional)</span></div>
+          <div className="font-bold text-base">Marca y modelo <span className="text-xs font-normal text-muted-foreground">(opcional)</span></div>
           {value ? (
             <div className="text-sm text-muted-foreground">{value}</div>
           ) : (
@@ -832,7 +832,7 @@ function BrandModelPicker({ value, onChange }: { value: string; onChange: (v: st
                 setOpen(true);
               }
             }}
-            className={`mt-1 text-sm font-bold ${open ? "text-brand" : "text-success"} hover:underline`}
+            className={`mt-1 font-bold text-base ${open ? "text-brand" : "text-success"} hover:underline`}
           >
             {open ? "Cerrar" : value ? "Cambiar" : "Añadir"}
           </button>
