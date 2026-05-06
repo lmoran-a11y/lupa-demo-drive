@@ -427,6 +427,7 @@ function SummaryRow({
   onEdit,
   active,
   last,
+  mobileEditor,
 }: {
   icon: React.ReactNode;
   title: string;
@@ -434,22 +435,30 @@ function SummaryRow({
   onEdit: () => void;
   active?: boolean;
   last?: boolean;
+  mobileEditor?: React.ReactNode;
 }) {
   return (
-    <div className={`mt-3 md:mt-4 flex items-start gap-3 ${last ? "" : "border-b border-border pb-3 md:pb-4"}`}>
-      <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted/40">
-        {icon}
+    <div className={`mt-3 md:mt-4 ${last ? "" : "border-b border-border pb-3 md:pb-4"}`}>
+      <div className="flex items-start gap-3">
+        <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted/40">
+          {icon}
+        </div>
+        <div className="flex-1">
+          <div className="text-sm font-bold">{title}</div>
+          <div className="whitespace-pre-line text-sm text-muted-foreground">{value}</div>
+          <button
+            onClick={onEdit}
+            className={`mt-1 text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
+          >
+            {active ? "Cerrar" : "Cambiar"}
+          </button>
+        </div>
       </div>
-      <div className="flex-1">
-        <div className="text-sm font-bold">{title}</div>
-        <div className="whitespace-pre-line text-sm text-muted-foreground">{value}</div>
-        <button
-          onClick={onEdit}
-          className={`mt-1 text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
-        >
-          {active ? "Cerrar" : "Cambiar"}
-        </button>
-      </div>
+      {active && mobileEditor && (
+        <div className="md:hidden mt-3 rounded-xl border-2 border-brand bg-card p-3 shadow-sm">
+          {mobileEditor}
+        </div>
+      )}
     </div>
   );
 }
