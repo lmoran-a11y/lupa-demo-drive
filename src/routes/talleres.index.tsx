@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import lupautoLogo from "@/assets/lupauto-logo.png";
+
 import workshopBg from "@/assets/talleres-workshop-bg.jpg";
 
 export const Route = createFileRoute("/talleres/")({
