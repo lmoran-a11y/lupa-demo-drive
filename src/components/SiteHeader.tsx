@@ -37,7 +37,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={handleSolicitar}
-            className="rounded-lg bg-brand px-4 py-2 text-sm font-bold text-ink hover:brightness-95"
+            className="rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-ink hover:brightness-95 md:px-4 md:py-2 md:text-sm"
           >
             Solicitar inspección
           </button>
