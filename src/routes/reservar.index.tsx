@@ -59,6 +59,7 @@ function Reservar() {
   const [brandModel, setBrandModel] = useState("");
   const [confirmVehicle, setConfirmVehicle] = useState(false);
   const [showConditions, setShowConditions] = useState(false);
+  const [showDgtDetails, setShowDgtDetails] = useState(false);
 
   const basePrice = getBasePrice(vehicle as VehicleType);
   const totalNum = basePrice + (dgt ? 14.99 : 0);
