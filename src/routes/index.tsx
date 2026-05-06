@@ -229,8 +229,8 @@ function Home() {
           </div>
 
           {/* Tablet mock */}
-          <div className="rounded-2xl border border-border bg-muted/40 p-3 shadow-sm">
-            <div className="rounded-xl bg-white p-5 text-ink">
+          <div className="rounded-xl md:rounded-2xl border border-border bg-muted/40 p-2 md:p-3 shadow-sm md:scale-100 origin-top max-w-sm mx-auto md:max-w-none w-full">
+            <div className="rounded-lg md:rounded-xl bg-white p-3 md:p-5 text-ink">
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
                   <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-ink">
