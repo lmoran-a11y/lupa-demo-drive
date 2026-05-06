@@ -288,41 +288,42 @@ function Home() {
       </section>
 
       {/* CLASSIC */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid items-center gap-4 rounded-2xl border border-border bg-muted/60 px-6 py-3 md:grid-cols-[auto_1fr_auto]">
-          <div className="flex items-center gap-5">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background">
-              <Car className="h-6 w-6" />
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-6 md:pb-16">
+        <div className="grid items-center gap-3 md:gap-4 rounded-2xl border border-border bg-muted/60 px-4 md:px-6 py-3 md:grid-cols-[auto_1fr_auto]">
+          <div className="flex items-center gap-3 md:gap-5">
+            <div className="flex h-11 w-11 md:h-14 md:w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background shrink-0">
+              <Car className="h-5 w-5 md:h-6 md:w-6" />
             </div>
             <div>
-              <h3 className="text-lg font-bold">¿Buscas un coche clásico?</h3>
-              <p className="text-sm text-muted-foreground">
-                Inspecciones especializadas para vehículos clásicos.<br />Para coches con historia.
+              <h3 className="text-base md:text-lg font-bold">¿Buscas un coche clásico?</h3>
+              <p className="text-xs md:text-sm text-muted-foreground">
+                Inspecciones especializadas para vehículos clásicos.
               </p>
             </div>
           </div>
           <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="hidden md:block mx-auto h-36 w-auto max-w-full object-contain" style={{ filter: "drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1))" }} />
-          <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-5 py-3 text-sm font-bold hover:bg-ink hover:text-white">
+          <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-4 md:px-5 py-2.5 md:py-3 text-sm font-bold hover:bg-ink hover:text-white">
             Revisar clásico <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
 
       {/* WORKSHOPS CTA */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="flex flex-col items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-ink to-[oklch(0.22_0_0)] p-6 text-white md:flex-row">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/10">
-              <svg viewBox="0 0 24 24" className="h-5 w-5 text-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-8 md:pb-16">
+        <div className="flex flex-col items-stretch md:items-center justify-between gap-3 md:gap-4 rounded-xl md:rounded-2xl bg-gradient-to-r from-ink to-[oklch(0.22_0_0)] p-4 md:p-6 text-white md:flex-row">
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-lg bg-white/10 shrink-0">
+              <svg viewBox="0 0 24 24" className="h-4 w-4 md:h-5 md:w-5 text-brand" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 12l9-9 9 9" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" />
               </svg>
             </div>
             <div>
-              <div className="text-lg font-bold">Acceso talleres colaborativos</div>
-              <div className="text-sm text-white/70">Inicia sesión para ver tus inspecciones asignadas y gestionar informes.</div>
+              <div className="text-sm md:text-lg font-bold">Acceso talleres colaborativos</div>
+              <div className="text-xs md:text-sm text-white/70 hidden md:block">Inicia sesión para ver tus inspecciones asignadas y gestionar informes.</div>
+              <div className="text-[11px] text-white/70 md:hidden">Para profesionales con inspecciones asignadas.</div>
             </div>
           </div>
-          <Link to="/talleres/login" className="inline-flex items-center gap-2 rounded-lg border-2 border-brand bg-transparent px-5 py-3 font-bold text-brand hover:bg-brand hover:text-ink">
+          <Link to="/talleres/login" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand bg-transparent px-4 md:px-5 py-2 md:py-3 text-sm font-bold text-brand hover:bg-brand hover:text-ink">
             <Lock className="h-4 w-4" /> Acceso para talleres
           </Link>
         </div>
