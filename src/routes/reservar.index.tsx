@@ -197,22 +197,21 @@ function Reservar() {
               </div>
             ) : (
               <>
-                <div className="grid gap-4 md:grid-cols-[1fr_auto]">
+                <div className="grid gap-3 md:gap-4 grid-cols-1 md:grid-cols-[1fr_auto]">
                   <div>
                     <div className="text-sm font-bold">Total a pagar</div>
-                    <div className="mt-1 text-4xl font-extrabold tracking-tight">{total} €</div>
+                    <div className="mt-1 text-3xl md:text-4xl font-extrabold tracking-tight">{total} €</div>
                     <div className="mt-0.5 text-xs text-muted-foreground">IVA incluido</div>
                     <div className="mt-2 inline-flex items-center gap-2 text-xs text-muted-foreground">
                       <Lock className="h-3.5 w-3.5" /> Pago 100% seguro
                     </div>
                   </div>
                   <div className="flex items-start gap-2 rounded-lg border border-success/30 bg-success/5 p-2 text-xs">
-                    <Shield className="mt-0.5 h-4 w-4 text-success" />
+                    <Shield className="mt-0.5 h-4 w-4 shrink-0 text-success" />
                     <div>
                       <div className="font-bold">Sin sorpresas</div>
                       <div className="text-muted-foreground">
-                        Precio cerrado,
-                        <br /> sin costes ocultos
+                        Precio cerrado, sin costes ocultos
                       </div>
                     </div>
                   </div>
