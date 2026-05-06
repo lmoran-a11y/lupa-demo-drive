@@ -103,37 +103,33 @@ function Reservar() {
             <div className="md:hidden mt-3 rounded-xl border border-border overflow-hidden">
               <div className="grid grid-cols-2 divide-x divide-border">
                 <MobileSummaryTile
-                  icon={<MapPin className="h-3.5 w-3.5" />}
-                  title="Ubicación"
+                  icon={<MapPin className="h-4 w-4" />}
+                  title="UBICACIÓN"
                   value={location}
                   active={edit === "location"}
-                  onClick={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
+                  onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
+                  editLabel={edit === "location" ? "Cerrar" : "Cambiar"}
                 />
                 <MobileSummaryTile
-                  icon={<CalIcon className="h-3.5 w-3.5" />}
-                  title="Fecha y hora"
+                  icon={<CalIcon className="h-4 w-4" />}
+                  title="FECHA Y HORA"
                   value=" "
                   active={edit === "datetime"}
-                  onClick={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
+                  onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
+                  editLabel={edit === "datetime" ? "Cerrar" : "Cambiar"}
                 />
               </div>
               <div className="grid grid-cols-2 divide-x divide-border border-t border-border">
                 <MobileSummaryTile
-                  icon={<Car className="h-3.5 w-3.5" />}
-                  title="Marca y modelo"
+                  icon={<Car className="h-4 w-4" />}
+                  title="MARCA Y MODELO"
                   value={brandModel || "Sin especificar"}
-                  active={false}
-                  onClick={() => {
-                    const el = document.getElementById("mobile-brand-picker");
-                    el?.scrollIntoView({ behavior: "smooth", block: "center" });
-                  }}
                 />
                 <MobileSummaryTile
-                  icon={<FileText className="h-3.5 w-3.5" />}
-                  title="Informe DGT"
+                  icon={<FileText className="h-4 w-4" />}
+                  title="INFORME DGT"
                   value={dgt ? "Añadido (+14,99 €)" : "No incluido"}
                   active={dgt}
-                  onClick={() => setDgt(!dgt)}
                 />
               </div>
             </div>
@@ -211,14 +207,6 @@ function Reservar() {
               </button>
             </div>
 
-            <div className="mt-3 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
-              <Shield className="mt-0.5 h-4 w-4 text-info" />
-              <div>
-                Trabajamos con talleres <span className="font-bold text-info">verificados</span>
-                <br />
-                de confianza en tu zona.
-              </div>
-            </div>
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
@@ -499,28 +487,37 @@ function MobileSummaryTile({
   title,
   value,
   active,
-  onClick,
+  onEdit,
+  editLabel,
 }: {
   icon: React.ReactNode;
   title: string;
   value: string;
   active?: boolean;
-  onClick: () => void;
+  onEdit?: () => void;
+  editLabel?: string;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`flex flex-col items-start gap-1 p-2.5 text-left transition-colors ${active ? "bg-brand/5" : "bg-card hover:bg-muted/40"}`}
+    <div
+      className={`flex flex-col items-start gap-2 p-4 text-left transition-colors ${active ? "bg-brand/5" : "bg-card"}`}
     >
-      <div className="flex items-center gap-1.5 text-muted-foreground">
-        <span className="flex h-5 w-5 items-center justify-center rounded-full border border-border bg-muted/40">
+      <div className="flex items-center gap-2 text-muted-foreground">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-muted/40">
           {icon}
         </span>
-        <span className="text-[11px] font-bold uppercase tracking-wide">{title}</span>
+        <span className="text-[12px] font-bold uppercase tracking-wide text-foreground">{title}</span>
       </div>
-      <div className="line-clamp-2 text-xs font-semibold text-foreground break-words">{value}</div>
-    </button>
+      <div className="line-clamp-2 text-sm font-semibold text-foreground break-words min-h-[1.25rem]">{value}</div>
+      {onEdit && (
+        <button
+          type="button"
+          onClick={onEdit}
+          className={`mt-auto text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
+        >
+          {editLabel ?? "Cambiar"}
+        </button>
+      )}
+    </div>
   );
 }
 
