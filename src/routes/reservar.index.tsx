@@ -329,6 +329,30 @@ function Reservar() {
 
       <SiteFooter />
 
+      {/* Mobile sticky payment bar */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]">
+        <div className="flex items-center gap-3 px-3 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+          <div className="flex flex-col leading-tight">
+            <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">Total</span>
+            <span className="text-lg font-extrabold tracking-tight text-ink">{total} €</span>
+          </div>
+          <button
+            onClick={() =>
+              navigate({
+                to: "/reservar/confirmacion",
+                search: { dgt, day, hour, location, total, vehicle: vehicle as VehicleType, plate },
+              })
+            }
+            disabled={!confirmVehicle}
+            className="ml-auto flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-brand text-sm font-semibold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Lock className="h-4 w-4" />
+            {confirmVehicle ? "Reservar inspección" : "Confirma los datos"}
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+
       {showConditions && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
