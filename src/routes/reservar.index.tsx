@@ -94,7 +94,7 @@ function Reservar() {
 
         <div className="grid gap-4 md:gap-6 md:grid-cols-[1fr_1.4fr]">
           {/* LEFT: Summary */}
-          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
+          <div className="order-2 md:order-1 rounded-2xl border border-border bg-card p-3.5 md:p-4">
             <div className="text-base font-bold">Resumen de tu reserva</div>
             <div className="mt-1 text-xs text-muted-foreground">
               {vehicleLabel} · {plate || "—"}
