@@ -227,7 +227,7 @@ function Home() {
               </div>
               <div className="flex-1 md:mt-5">
                 <h3 className="text-base md:text-lg font-bold"><span className="md:hidden">{s.mt}</span><span className="hidden md:inline">{s.t}</span></h3>
-                <p className="mt-0.5 md:mt-2 text-xs md:text-sm text-muted-foreground"><span className="md:hidden">{s.md}</span><span className="hidden md:inline">{s.d}</span></p>
+                <p className="mt-0.5 md:mt-2 text-xs md:text-sm text-muted-foreground whitespace-pre-line"><span className="md:hidden">{s.md}</span><span className="hidden md:inline whitespace-normal">{s.d}</span></p>
               </div>
             </div>
           ))}
