@@ -231,8 +231,8 @@ function Reservar() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="ejemplo@email.com"
-                      className="h-10 w-full rounded-lg border border-success px-3 pr-10 text-sm outline-none"
+                      placeholder="ejemplo@gmail.com"
+                      className="h-10 w-full rounded-lg border border-success pr-10 text-sm outline-none my-0 mx-0 py-0 px-[10px] text-left"
                     />
                     <Check className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-success p-1 text-white" />
                   </div>
