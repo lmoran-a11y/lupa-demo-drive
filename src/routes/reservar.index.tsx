@@ -494,6 +494,36 @@ function Reservar() {
   );
 }
 
+function MobileSummaryTile({
+  icon,
+  title,
+  value,
+  active,
+  onClick,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  value: string;
+  active?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex flex-col items-start gap-1 p-2.5 text-left transition-colors ${active ? "bg-brand/5" : "bg-card hover:bg-muted/40"}`}
+    >
+      <div className="flex items-center gap-1.5 text-muted-foreground">
+        <span className="flex h-5 w-5 items-center justify-center rounded-full border border-border bg-muted/40">
+          {icon}
+        </span>
+        <span className="text-[11px] font-bold uppercase tracking-wide">{title}</span>
+      </div>
+      <div className="line-clamp-2 text-xs font-semibold text-foreground break-words">{value}</div>
+    </button>
+  );
+}
+
 /* ---------- helpers ---------- */
 
 function SummaryRow({
