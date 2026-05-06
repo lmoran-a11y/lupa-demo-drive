@@ -214,9 +214,9 @@ function Home() {
             </div>
           </div>
           {[
-            { n: 1, t: "Elige tu vehículo", d: "Selecciona el tipo de vehículo y la ubicación." },
-            { n: 2, t: "Reserva en taller", d: "Elige el taller, día y hora que mejor te venga." },
-            { n: 3, t: "Recibe tu informe", d: "En 24h tendrás el informe completo con fotos y vídeo." },
+            { n: 1, t: "Elige tu vehículo", d: "Selecciona el tipo de vehículo y la ubicación.", mt: "Elige tu vehículo", md: "Selecciona la categoría." },
+            { n: 2, t: "Reserva en taller", d: "Elige el taller, día y hora que mejor te venga.", mt: "Reserva en la web", md: "Escoge localización, fecha y hora. El vendedor lo llevará al taller asignado." },
+            { n: 3, t: "Recibe tu informe", d: "En 24h tendrás el informe completo con fotos y vídeo.", mt: "Recibe tu informe", md: "Fotos, vídeo y valoración final." },
           ].map((s) => (
             <div key={s.n} className="relative flex md:block items-center gap-4 md:text-center text-left">
               <div className="relative h-14 w-14 md:mx-auto md:h-20 md:w-20 shrink-0">
@@ -226,8 +226,8 @@ function Home() {
                 <span className="absolute -top-1.5 -right-1.5 md:-top-2 md:-right-2 flex h-5 w-5 md:h-7 md:w-7 items-center justify-center rounded-full bg-brand text-[11px] md:text-sm font-bold text-ink ring-2 md:ring-4 ring-background">{s.n}</span>
               </div>
               <div className="flex-1 md:mt-5">
-                <h3 className="text-base md:text-lg font-bold">{s.t}</h3>
-                <p className="mt-0.5 md:mt-2 text-xs md:text-sm text-muted-foreground">{s.d}</p>
+                <h3 className="text-base md:text-lg font-bold"><span className="md:hidden">{s.mt}</span><span className="hidden md:inline">{s.t}</span></h3>
+                <p className="mt-0.5 md:mt-2 text-xs md:text-sm text-muted-foreground"><span className="md:hidden">{s.md}</span><span className="hidden md:inline">{s.d}</span></p>
               </div>
             </div>
           ))}
