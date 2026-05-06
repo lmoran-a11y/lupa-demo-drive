@@ -33,14 +33,9 @@ function TalleresLogin() {
           className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{ backgroundImage: `url(${workshopBg})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/50 to-ink/80" />
-        <div className="relative z-10 flex flex-col items-center justify-center gap-6 text-center">
-          <img
-            src={lupautoLogo}
-            alt="LUPAUTO - Revisiones bajo lupa"
-            className="max-h-[280px] max-w-[280px] w-auto object-contain"
-          />
-          <p className="text-sm font-bold uppercase tracking-wider text-white/80">
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink/80" />
+        <div className="absolute inset-x-0 bottom-8 z-10 flex justify-center">
+          <p className="text-xs font-bold uppercase tracking-wider text-white/80">
             Talleres verificados de confianza
           </p>
         </div>
