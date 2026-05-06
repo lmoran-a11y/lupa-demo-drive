@@ -148,7 +148,7 @@ function Home() {
                     <div className="text-xs text-muted-foreground">{selected === "deportivo" ? "Para vehículos con potencia homologada de 250 CV o más." : "La usaremos para identificar tu vehículo durante la inspección."}</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 rounded-lg border border-border px-3 py-3">
+                <div className="flex items-center gap-2 rounded-lg border border-neutral-900 px-3 py-3">
                   <div className="flex h-9 w-7 items-center justify-center rounded bg-info text-[10px] font-bold text-white">E</div>
                   <input value={plate} onChange={(e) => setPlate(e.target.value)} className="flex-1 text-lg font-bold tracking-wider outline-none" />
                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-success text-white"><Check className="h-4 w-4" /></div>
