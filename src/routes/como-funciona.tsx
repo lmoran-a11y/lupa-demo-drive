@@ -218,7 +218,6 @@ export const Route = createFileRoute("/como-funciona")({
               </div>
             </div>
           </div>
-
           {/* CTA block */}
           <div className="relative mt-6 overflow-hidden rounded-[18px] border border-neutral-200 bg-white px-10 py-10 shadow-[0_2px_10px_rgba(0,0,0,0.025)] md:px-16">
             <div className="absolute left-10 top-12 bottom-12 w-[3px] rounded-full bg-primary" />
