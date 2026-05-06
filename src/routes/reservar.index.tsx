@@ -167,7 +167,7 @@ function Reservar() {
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
           <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
-            {edit === "location" ? (
+            {!isMobile && edit === "location" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
@@ -183,7 +183,7 @@ function Reservar() {
                 </div>
                 {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
               </div>
-            ) : edit === "datetime" ? (
+            ) : !isMobile && edit === "datetime" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
