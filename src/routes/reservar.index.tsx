@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StepProgress } from "@/components/StepProgress";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { getBasePrice, formatEur, VEHICLE_LABELS, type VehicleType } from "@/lib/pricing";
