@@ -112,7 +112,7 @@ function Reservar() {
                 <MobileSummaryTile
                   icon={<CalIcon className="h-3.5 w-3.5" />}
                   title="Fecha y hora"
-                  value={`${day} may · ${hour}`}
+                  value=" "
                   active={edit === "datetime"}
                   onClick={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
                 />
