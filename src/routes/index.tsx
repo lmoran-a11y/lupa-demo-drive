@@ -309,20 +309,48 @@ function Home() {
 
       {/* CLASSIC */}
       <section className="mx-auto max-w-7xl px-4 md:px-6 pb-6 md:pb-16">
-        <div className="grid items-center gap-3 md:gap-4 rounded-2xl border border-border bg-muted/60 px-4 md:px-6 py-3 md:grid-cols-[auto_1fr_auto]">
-          <div className="flex items-center gap-3 md:gap-5">
-            <div className="flex h-11 w-11 md:h-14 md:w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background shrink-0">
-              <Car className="h-5 w-5 md:h-6 md:w-6" />
+        {/* Mobile layout */}
+        <div className="md:hidden relative overflow-hidden rounded-2xl border border-border bg-muted/60 p-4">
+          <div className="relative z-10 flex items-center gap-3">
+            <img
+              src={carClasico}
+              alt="Coche clásico"
+              loading="lazy"
+              width={1024}
+              height={576}
+              className="h-20 w-28 shrink-0 object-contain"
+              style={{ filter: "drop-shadow(0 8px 10px rgba(0, 0, 0, 0.15))" }}
+            />
+            <div className="min-w-0 flex-1">
+              <h3 className="text-[15px] font-bold leading-tight">¿Buscas un coche clásico?</h3>
+              <p className="mt-0.5 text-[11px] text-muted-foreground leading-snug">
+                Inspecciones especializadas para vehículos clásicos.
+              </p>
+              <Link
+                to="/clasico"
+                className="mt-2 inline-flex items-center gap-1.5 rounded-lg border-2 border-ink bg-background px-3 py-1.5 text-xs font-bold hover:bg-ink hover:text-white"
+              >
+                Revisar clásico <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop layout (unchanged) */}
+        <div className="hidden md:grid items-center gap-4 rounded-2xl border border-border bg-muted/60 px-6 py-3 md:grid-cols-[auto_1fr_auto]">
+          <div className="flex items-center gap-5">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink/10 bg-background shrink-0">
+              <Car className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="text-base md:text-lg font-bold">¿Buscas un coche clásico?</h3>
-              <p className="text-xs md:text-sm text-muted-foreground">
+              <h3 className="text-lg font-bold">¿Buscas un coche clásico?</h3>
+              <p className="text-sm text-muted-foreground">
                 Inspecciones especializadas para vehículos clásicos.
               </p>
             </div>
           </div>
-          <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="hidden md:block mx-auto h-36 w-auto max-w-full object-contain" style={{ filter: "drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1))" }} />
-          <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-4 md:px-5 py-2.5 md:py-3 text-sm font-bold hover:bg-ink hover:text-white">
+          <img src={carClasico} alt="Coche clásico" loading="lazy" width={1024} height={576} className="mx-auto h-36 w-auto max-w-full object-contain" style={{ filter: "drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1))" }} />
+          <Link to="/clasico" className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-background px-5 py-3 text-sm font-bold hover:bg-ink hover:text-white">
             Revisar clásico <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
