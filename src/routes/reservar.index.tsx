@@ -782,9 +782,9 @@ function BrandModelPicker({ value, onChange }: { value: string; onChange: (v: st
   };
 
   return (
-    <div className="mt-4 border-b border-border pb-4">
+    <div className="mt-3 md:mt-4 border-b border-border pb-3 md:pb-4">
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted/40">
+        <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted/40">
           <Car className="h-4 w-4" />
         </div>
         <div className="flex-1">
