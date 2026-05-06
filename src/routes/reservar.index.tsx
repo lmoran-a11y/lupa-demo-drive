@@ -299,24 +299,24 @@ function Reservar() {
         </div>
 
         {/* CANCELLATION BANNER */}
-        <div className="flex items-center justify-between rounded-2xl border border-brand/30 bg-brand/5 px-5 py-3">
-          <div className="flex items-center gap-3 text-sm">
-            <CalIcon className="h-5 w-5 text-brand" />
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 rounded-2xl border border-brand/30 bg-brand/5 px-4 md:px-5 py-3">
+          <div className="flex items-start md:items-center gap-3 text-sm">
+            <CalIcon className="mt-0.5 md:mt-0 h-5 w-5 shrink-0 text-brand" />
             <div>
-              <b>Cancelación gratuita hasta 24h antes de la cita</b>
+              <b className="text-sm">Cancelación gratuita hasta 24h antes de la cita</b>
               <br />
               <span className="text-xs text-muted-foreground">
                 Si cambias de opinión, te devolvemos el dinero.
               </span>
             </div>
           </div>
-          <Link to="/contacto" className="text-sm font-bold underline">
+          <Link to="/contacto" className="self-end md:self-auto text-sm font-bold underline">
             Saber más ›
           </Link>
         </div>
 
         {/* TRUST ROW */}
-        <div className="grid gap-4 rounded-2xl border border-border bg-card px-5 py-3 md:grid-cols-3">
+        <div className="grid gap-3 md:gap-4 rounded-2xl border border-border bg-card px-4 md:px-5 py-3 md:grid-cols-3">
           <Trust icon={<Shield className="h-5 w-5" />} t="Talleres verificados" d="Solo trabajamos con profesionales de confianza." />
           <Trust icon={<span className="text-lg font-bold">€</span>} t="Precio cerrado" d="Sin costes ocultos. Lo que ves es lo que pagas." />
           <Trust icon={<Headphones className="h-5 w-5" />} t="Atención al cliente" d="Estamos aquí para ayudarte antes, durante y después." />
