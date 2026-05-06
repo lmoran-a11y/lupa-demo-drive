@@ -235,18 +235,18 @@ function Home() {
       </section>
 
       {/* PROFESSIONAL REPORT */}
-      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-8 md:pb-16">
-        <div className="grid gap-5 md:gap-10 rounded-2xl md:rounded-3xl border border-border bg-card p-5 md:p-12 shadow-sm md:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-4 md:pb-16">
+        <div className="grid gap-3 md:gap-10 rounded-xl md:rounded-3xl border border-border bg-card p-3 md:p-12 shadow-sm md:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <div className="text-[11px] md:text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
-            <h3 className="mt-2 md:mt-3 text-xl md:text-4xl font-bold leading-tight">Toma decisiones<br />con información real</h3>
-            <ul className="mt-4 md:mt-6 space-y-2 md:space-y-3 text-sm">
+            <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
+            <h3 className="mt-1 md:mt-3 text-base md:text-4xl font-bold leading-tight">Toma decisiones<br />con información real</h3>
+            <ul className="mt-2 md:mt-6 space-y-1 md:space-y-3 text-sm">
               {["Revisión punto por punto", "Fotos y vídeo explicativo", "Semáforo final para tu decisión"].map((x) => (
-                <li key={x} className="flex items-center gap-3">
-                  <span className="flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full border-2 border-brand text-brand shrink-0">
-                    <Check className="h-3 w-3 md:h-3.5 md:w-3.5" strokeWidth={3} />
+                <li key={x} className="flex items-center gap-2 md:gap-3">
+                  <span className="flex h-4 w-4 md:h-6 md:w-6 items-center justify-center rounded-full border-2 border-brand text-brand shrink-0">
+                    <Check className="h-2.5 w-2.5 md:h-3.5 md:w-3.5" strokeWidth={3} />
                   </span>
-                  <span className="text-[13px] md:text-sm">{x}</span>
+                  <span className="text-[11px] md:text-sm">{x}</span>
                 </li>
               ))}
               <li className="hidden md:flex items-center gap-3">
