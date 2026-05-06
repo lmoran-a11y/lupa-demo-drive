@@ -207,14 +207,6 @@ function Reservar() {
               </button>
             </div>
 
-            <div className="mt-3 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
-              <Shield className="mt-0.5 h-4 w-4 text-info" />
-              <div>
-                Trabajamos con talleres <span className="font-bold text-info">verificados</span>
-                <br />
-                de confianza en tu zona.
-              </div>
-            </div>
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
