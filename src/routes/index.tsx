@@ -97,7 +97,7 @@ function Home() {
               <button
                 key={v.id}
                 onClick={() => setSelected(v.id)}
-                className={`group relative flex aspect-[4/3] sm:aspect-[4/4.2] flex-col rounded-2xl border bg-[#111111] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
+                className={`group relative flex aspect-[4/2] sm:aspect-[4/4.2] flex-col rounded-2xl border bg-[#111111] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
                   selected === v.id ? "border-brand ring-1 ring-brand/40" : "border-white/10 hover:border-white/25"
                 }`}
               >
