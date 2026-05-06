@@ -30,10 +30,13 @@ function TalleresLogin() {
       {/* Left side - hero */}
       <div className="relative hidden items-center justify-center overflow-hidden bg-ink p-8 md:flex lg:p-12">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-50"
-          style={{ backgroundImage: `url(${workshopBg})` }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${workshopBg})`,
+            filter: "saturate(1.35) contrast(1.1) brightness(1.05)",
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink/60" />
         <div className="absolute inset-x-0 bottom-8 z-10 flex justify-center">
           <p className="text-xs font-bold uppercase tracking-wider text-white/80">
             Talleres verificados de confianza
