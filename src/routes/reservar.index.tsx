@@ -326,25 +326,20 @@ function Reservar() {
 
       <SiteFooter />
 
-      {/* Mobile sticky payment bar */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]">
-        <div className="flex items-center gap-3 px-3 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+      {/* Mobile sticky support bar — scrolls to final checkout area */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+        <div className="flex items-center gap-3 px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
           <div className="flex flex-col leading-tight">
             <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">Total</span>
-            <span className="text-lg font-extrabold tracking-tight text-ink">{total} €</span>
+            <span className="text-base font-extrabold tracking-tight text-ink">{total} €</span>
           </div>
           <button
-            onClick={() =>
-              navigate({
-                to: "/reservar/confirmacion",
-                search: { dgt, day, hour, location, total, vehicle: vehicle as VehicleType, plate },
-              })
-            }
-            disabled={!confirmVehicle}
-            className="ml-auto flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-brand text-sm font-semibold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
+            onClick={() => {
+              document.getElementById("checkout-final")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className="ml-auto flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg border border-ink/10 bg-ink text-sm font-semibold text-white hover:bg-ink/90"
           >
-            <Lock className="h-4 w-4" />
-            {confirmVehicle ? "Reservar inspección" : "Confirma los datos"}
+            Continuar
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
