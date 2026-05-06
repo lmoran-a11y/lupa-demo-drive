@@ -168,10 +168,10 @@ function Home() {
       </section>
 
       {/* HOW */}
-      <section className="mx-auto max-w-7xl px-6 py-12">
-        <h2 className="text-center text-[28px] font-bold">Así funciona</h2>
+      <section className="mx-auto max-w-7xl px-6 py-7 md:py-12">
+        <h2 className="text-center text-xl md:text-[28px] font-bold">Así funciona</h2>
         <div className="mx-auto mt-2 h-[3px] w-12 rounded bg-brand" />
-        <div className="relative mt-10 grid gap-10 md:grid-cols-3">
+        <div className="relative mt-5 grid gap-5 md:mt-10 md:gap-10 md:grid-cols-3">
           {/* dashed connectors (desktop only) */}
           <div className="pointer-events-none absolute left-0 right-0 top-10 hidden md:block">
             <div className="mx-auto grid max-w-5xl grid-cols-3">
@@ -185,15 +185,17 @@ function Home() {
             { n: 2, t: "Reserva en taller", d: "Elige el taller, día y hora que mejor te venga." },
             { n: 3, t: "Recibe tu informe", d: "En 24h tendrás el informe completo con fotos y vídeo." },
           ].map((s) => (
-            <div key={s.n} className="relative text-center">
-              <div className="relative mx-auto h-20 w-20">
-                <div className="flex h-full w-full items-center justify-center rounded-full bg-ink ring-8 ring-background">
-                  <Search className="h-7 w-7 text-white" />
+            <div key={s.n} className="relative flex md:block items-center gap-4 md:text-center text-left">
+              <div className="relative h-14 w-14 md:mx-auto md:h-20 md:w-20 shrink-0">
+                <div className="flex h-full w-full items-center justify-center rounded-full bg-ink ring-4 md:ring-8 ring-background">
+                  <Search className="h-5 w-5 md:h-7 md:w-7 text-white" />
                 </div>
-                <span className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-brand text-sm font-bold text-ink ring-4 ring-background">{s.n}</span>
+                <span className="absolute -top-1.5 -right-1.5 md:-top-2 md:-right-2 flex h-5 w-5 md:h-7 md:w-7 items-center justify-center rounded-full bg-brand text-[11px] md:text-sm font-bold text-ink ring-2 md:ring-4 ring-background">{s.n}</span>
               </div>
-              <h3 className="mt-5 text-lg font-bold">{s.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
+              <div className="flex-1 md:mt-5">
+                <h3 className="text-base md:text-lg font-bold">{s.t}</h3>
+                <p className="mt-0.5 md:mt-2 text-xs md:text-sm text-muted-foreground">{s.d}</p>
+              </div>
             </div>
           ))}
         </div>
