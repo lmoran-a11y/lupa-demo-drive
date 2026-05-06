@@ -92,9 +92,9 @@ function Reservar() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:gap-6 md:grid-cols-[1.4fr_1fr]">
+        <div className="grid gap-4 md:gap-6 md:grid-cols-[1fr_1.4fr]">
           {/* LEFT: Summary */}
-          <div className="order-2 md:order-2 rounded-2xl border border-border bg-card p-3.5 md:p-4">
+          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
             <div className="text-base font-bold">Resumen de tu reserva</div>
             <div className="mt-1 text-xs text-muted-foreground">
               {vehicleLabel} · {plate || "—"}
@@ -198,7 +198,7 @@ function Reservar() {
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
-          <div className="order-1 md:order-2 rounded-2xl border border-border bg-card p-3.5 md:p-4">
+          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
             {!isMobile && edit === "location" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
