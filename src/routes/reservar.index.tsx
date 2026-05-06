@@ -162,7 +162,7 @@ function Reservar() {
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
-          <div className="rounded-2xl border border-border bg-card p-4">
+          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
             {edit === "location" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
