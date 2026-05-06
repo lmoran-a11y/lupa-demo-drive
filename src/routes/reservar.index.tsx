@@ -59,6 +59,7 @@ function Reservar() {
   const [brandModel, setBrandModel] = useState("");
   const [confirmVehicle, setConfirmVehicle] = useState(false);
   const [showConditions, setShowConditions] = useState(false);
+  const [showDgtDetails, setShowDgtDetails] = useState(false);
 
   const basePrice = getBasePrice(vehicle as VehicleType);
   const totalNum = basePrice + (dgt ? 14.99 : 0);
@@ -117,6 +118,44 @@ function Reservar() {
             />
 
             <BrandModelPicker value={brandModel} onChange={setBrandModel} />
+            {isMobile ? (
+              <div className={`mt-3 rounded-xl border border-brand/60 p-3 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
+                <div className="flex items-start gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted">
+                    <FileText className="h-5 w-5 text-foreground" strokeWidth={1.5} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="font-bold text-base leading-tight">Informe DGT</div>
+                      <button
+                        type="button"
+                        onClick={() => setShowDgtDetails(v => !v)}
+                        className="shrink-0 text-xs font-semibold text-muted-foreground underline-offset-2 hover:underline"
+                      >
+                        {showDgtDetails ? "Ocultar" : "Detalles"}
+                      </button>
+                    </div>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      Añade el informe oficial por <span className="font-semibold text-foreground">14,99 €</span>
+                    </p>
+                  </div>
+                </div>
+                {showDgtDetails && (
+                  <ul className="mt-3 space-y-1 text-xs text-muted-foreground">
+                    <li className="flex items-center gap-2"><span className="text-success">✓</span> Titularidad y datos técnicos</li>
+                    <li className="flex items-center gap-2"><span className="text-success">✓</span> Cargas y estado administrativo</li>
+                    <li className="flex items-center gap-2"><span className="text-success">✓</span> Historial oficial del vehículo</li>
+                  </ul>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setDgt(!dgt)}
+                  className={`mt-3 flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${dgt ? "bg-brand text-brand-foreground" : "border border-brand text-foreground hover:bg-brand/5"}`}
+                >
+                  {dgt ? (<><Check className="h-4 w-4" /> Añadido</>) : "Añadir"}
+                </button>
+              </div>
+            ) : (
             <div className={`mt-3 rounded-xl border-2 border-brand p-3 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted">
@@ -154,6 +193,7 @@ function Reservar() {
                 <span className="text-sm font-semibold">Añadir a mi reserva</span>
               </button>
             </div>
+            )}
 
             <div className="mt-3 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
               <Shield className="mt-0.5 h-4 w-4 text-info" />
