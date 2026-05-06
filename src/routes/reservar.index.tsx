@@ -103,6 +103,7 @@ function Reservar() {
               value={location}
               onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
               active={edit === "location"}
+              mobileEditor={renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
             />
             <SummaryRow
               icon={<CalIcon className="h-4 w-4" />}
@@ -110,6 +111,7 @@ function Reservar() {
               value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
               onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
               active={edit === "datetime"}
+              mobileEditor={renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
             />
 
             <BrandModelPicker value={brandModel} onChange={setBrandModel} />
