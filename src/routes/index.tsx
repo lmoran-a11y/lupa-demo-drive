@@ -202,22 +202,28 @@ function Home() {
       </section>
 
       {/* PROFESSIONAL REPORT */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid gap-10 rounded-3xl border border-border bg-card p-8 shadow-sm md:grid-cols-2 md:p-12">
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-8 md:pb-16">
+        <div className="grid gap-5 md:gap-10 rounded-2xl md:rounded-3xl border border-border bg-card p-5 md:p-12 shadow-sm md:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <div className="text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
-            <h3 className="mt-3 text-3xl font-bold leading-tight md:text-4xl">Toma decisiones<br />con información real</h3>
-            <ul className="mt-6 space-y-3 text-sm">
-              {["Revisión punto por punto", "Fotos y vídeo explicativo", "Semáforo final para tu decisión", "Información clara y detallada"].map((x) => (
+            <div className="text-[11px] md:text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
+            <h3 className="mt-2 md:mt-3 text-xl md:text-4xl font-bold leading-tight">Toma decisiones<br />con información real</h3>
+            <ul className="mt-4 md:mt-6 space-y-2 md:space-y-3 text-sm">
+              {["Revisión punto por punto", "Fotos y vídeo explicativo", "Semáforo final para tu decisión"].map((x) => (
                 <li key={x} className="flex items-center gap-3">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-brand text-brand">
-                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                  <span className="flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full border-2 border-brand text-brand shrink-0">
+                    <Check className="h-3 w-3 md:h-3.5 md:w-3.5" strokeWidth={3} />
                   </span>
-                  {x}
+                  <span className="text-[13px] md:text-sm">{x}</span>
                 </li>
               ))}
+              <li className="hidden md:flex items-center gap-3">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-brand text-brand">
+                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                </span>
+                Información clara y detallada
+              </li>
             </ul>
-            <Link to="/ejemplo-informe" className="mt-8 inline-flex w-full items-center justify-center rounded-lg border-2 border-ink bg-background px-6 py-3 text-sm font-bold hover:bg-ink hover:text-white sm:w-auto">
+            <Link to="/ejemplo-informe" className="mt-5 md:mt-8 inline-flex w-full items-center justify-center rounded-lg border-2 border-ink bg-background px-5 md:px-6 py-2.5 md:py-3 text-sm font-bold hover:bg-ink hover:text-white sm:w-auto">
               Ver ejemplo de informe
             </Link>
           </div>
