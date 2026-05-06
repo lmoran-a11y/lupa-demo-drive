@@ -52,36 +52,56 @@ function Home() {
       <SiteHeader />
 
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-6 pt-5 pb-6 md:pt-10 md:pb-10">
+      <section className="mx-auto max-w-7xl px-5 pt-3 pb-5 md:px-6 md:pt-10 md:pb-10">
         <div className="grid items-center gap-5 md:gap-8 md:grid-cols-2">
-          <div>
-            <h1 className="text-3xl font-extrabold leading-[1.05] tracking-tight text-ink md:text-[64px] md:leading-[1.02]">
-              Revisa tu coche<br />antes de comprar
-            </h1>
-            <p className="mt-2 text-sm text-muted-foreground md:mt-3 md:text-base">
-              Inspección en taller con fotos y vídeo en 24h.
-            </p>
-            <button
-              type="button"
-              onClick={() => pickerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              className="mt-4 inline-flex items-center rounded-xl bg-brand px-5 py-3 text-sm font-bold text-ink shadow-sm hover:brightness-95 md:mt-5 md:px-6 md:py-3.5 md:text-base"
-            >
-              Solicitar inspección
-            </button>
-
-            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 md:mt-8 md:gap-x-8 md:gap-y-4">
-              <Trust icon={<Shield className="h-5 w-5" />} title="Talleres verificados" sub="de confianza" />
-              <Trust icon={<Clock className="h-5 w-5" />} title="Informe en 24h" sub="rápido y detallado" />
-              <Trust icon={<Lock className="h-5 w-5" />} title="Pago seguro" sub="100% protegido" />
-            </div>
-          </div>
-          <div className="flex justify-center md:justify-end">
+          {/* Mobile illustration: integrated above headline with overlap */}
+          <div className="relative -mb-4 flex justify-center md:hidden">
+            <div className="pointer-events-none absolute inset-x-8 top-6 h-32 rounded-full bg-brand/20 blur-3xl" />
             <img
               src={heroLupa}
               alt="Lupa con coche"
               width={600}
               height={600}
-              className="w-full max-w-[260px] md:max-w-[420px]"
+              className="relative w-full max-w-[200px]"
+            />
+          </div>
+          <div className="text-center md:text-left">
+            <h1 className="text-[28px] font-extrabold leading-[1.05] tracking-tight text-ink md:text-[64px] md:leading-[1.02]">
+              Revisa tu coche<br />antes de comprar
+            </h1>
+            <p className="mx-auto mt-2 max-w-[300px] text-[13px] text-muted-foreground md:mx-0 md:mt-3 md:max-w-none md:text-base">
+              Inspección en taller con fotos y vídeo en 24h.
+            </p>
+            <button
+              type="button"
+              onClick={() => pickerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              className="mt-4 inline-flex w-full max-w-[320px] items-center justify-center rounded-xl bg-brand px-5 py-3.5 text-base font-bold text-ink shadow-[0_8px_24px_-6px_rgba(255,204,0,0.5)] hover:brightness-95 md:mt-5 md:w-auto md:max-w-none md:px-6 md:py-3.5"
+            >
+              Solicitar inspección
+            </button>
+
+            <div className="mt-4 flex items-center justify-center gap-3 text-[11px] md:hidden">
+              <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Shield className="h-3.5 w-3.5 text-ink" /> Talleres verificados</span>
+              <span className="h-1 w-1 rounded-full bg-border" />
+              <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Clock className="h-3.5 w-3.5 text-ink" /> Informe 24h</span>
+              <span className="h-1 w-1 rounded-full bg-border" />
+              <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Lock className="h-3.5 w-3.5 text-ink" /> Pago seguro</span>
+            </div>
+
+            <div className="mt-8 hidden flex-wrap gap-x-8 gap-y-4 md:flex">
+              <Trust icon={<Shield className="h-5 w-5" />} title="Talleres verificados" sub="de confianza" />
+              <Trust icon={<Clock className="h-5 w-5" />} title="Informe en 24h" sub="rápido y detallado" />
+              <Trust icon={<Lock className="h-5 w-5" />} title="Pago seguro" sub="100% protegido" />
+            </div>
+          </div>
+          {/* Desktop illustration */}
+          <div className="hidden md:flex md:justify-end">
+            <img
+              src={heroLupa}
+              alt="Lupa con coche"
+              width={600}
+              height={600}
+              className="w-full max-w-[420px]"
             />
           </div>
         </div>
