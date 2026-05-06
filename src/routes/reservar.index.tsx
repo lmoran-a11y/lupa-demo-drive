@@ -116,6 +116,10 @@ function Reservar() {
               mobileEditor={renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
             />
 
+            <div className="md:hidden mt-4 mb-2 flex items-center gap-3">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Opcionales</span>
+              <span className="h-px flex-1 bg-border" />
+            </div>
             <BrandModelPicker value={brandModel} onChange={setBrandModel} />
             <div className={`mt-3 rounded-xl border-2 border-brand p-3 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
               <div className="flex items-start gap-3">
