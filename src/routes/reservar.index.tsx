@@ -83,7 +83,7 @@ function Reservar() {
       <SiteHeader />
       <StepProgress current={3} />
 
-      <main className="mx-auto max-w-6xl space-y-3 md:space-y-4 px-3 md:px-6 py-4 md:py-6">
+      <main className="mx-auto max-w-6xl space-y-3 md:space-y-4 px-3 md:px-6 py-4 md:py-6 pb-28 md:pb-6">
         <div>
           <h2 className="text-lg md:text-2xl font-bold leading-tight">3. Revisa y paga para confirmar tu reserva</h2>
           <p className="mt-1 text-xs md:text-sm text-muted-foreground">
