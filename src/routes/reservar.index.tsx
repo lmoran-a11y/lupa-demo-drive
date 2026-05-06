@@ -495,28 +495,37 @@ function MobileSummaryTile({
   title,
   value,
   active,
-  onClick,
+  onEdit,
+  editLabel,
 }: {
   icon: React.ReactNode;
   title: string;
   value: string;
   active?: boolean;
-  onClick: () => void;
+  onEdit?: () => void;
+  editLabel?: string;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`flex flex-col items-start gap-1 p-2.5 text-left transition-colors ${active ? "bg-brand/5" : "bg-card hover:bg-muted/40"}`}
+    <div
+      className={`flex flex-col items-start gap-2 p-4 text-left transition-colors ${active ? "bg-brand/5" : "bg-card"}`}
     >
-      <div className="flex items-center gap-1.5 text-muted-foreground">
-        <span className="flex h-5 w-5 items-center justify-center rounded-full border border-border bg-muted/40">
+      <div className="flex items-center gap-2 text-muted-foreground">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-muted/40">
           {icon}
         </span>
-        <span className="text-[11px] font-bold uppercase tracking-wide">{title}</span>
+        <span className="text-[12px] font-bold uppercase tracking-wide text-foreground">{title}</span>
       </div>
-      <div className="line-clamp-2 text-xs font-semibold text-foreground break-words">{value}</div>
-    </button>
+      <div className="line-clamp-2 text-sm font-semibold text-foreground break-words min-h-[1.25rem]">{value}</div>
+      {onEdit && (
+        <button
+          type="button"
+          onClick={onEdit}
+          className={`mt-auto text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
+        >
+          {editLabel ?? "Cambiar"}
+        </button>
+      )}
+    </div>
   );
 }
 
