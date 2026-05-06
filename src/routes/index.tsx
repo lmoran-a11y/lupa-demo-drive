@@ -24,10 +24,10 @@ export const Route = createFileRoute("/")({
 });
 
 const VEHICLES = [
-  { id: "turismo", label: "Turismos", image: carTurismo },
-  { id: "deportivo", label: "Deportivos", image: carDeportivo },
-  { id: "suv", label: "SUV / 4x4", image: carSuv },
-  { id: "furgoneta", label: "Furgonetas", image: carFurgoneta },
+  { id: "turismo", label: "Turismos", image: carTurismo, sub: "Menos de 250 CV" },
+  { id: "deportivo", label: "Deportivos", image: carDeportivo, sub: "250 CV o más" },
+  { id: "suv", label: "SUV / 4x4", image: carSuv, sub: "Todoterrenos y crossovers" },
+  { id: "furgoneta", label: "Furgonetas", image: carFurgoneta, sub: "Comerciales y carga" },
 ];
 
 function Home() {
