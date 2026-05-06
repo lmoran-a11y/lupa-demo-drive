@@ -142,26 +142,26 @@ function Home() {
           {/* plate row — only after selecting a vehicle */}
           {selected && (
             <>
-              <div className="mt-6 grid items-center gap-4 rounded-2xl bg-white p-5 text-ink md:grid-cols-[auto_1fr_auto] animate-in fade-in slide-in-from-top-2 duration-300">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border">
-                    <Search className="h-5 w-5" />
+              <div className="mt-4 md:mt-6 grid items-center gap-2.5 md:gap-4 rounded-xl md:rounded-2xl bg-white p-3 md:p-5 text-ink md:grid-cols-[auto_1fr_auto] animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="flex items-center gap-2.5 md:gap-3">
+                  <div className="flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-lg border border-border shrink-0">
+                    <Search className="h-4 w-4 md:h-5 md:w-5" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold">Introduce la matrícula del vehículo</div>
-                    <div className="text-xs text-muted-foreground">{selected === "deportivo" ? "Para vehículos con potencia homologada de 250 CV o más." : selected === "turismo" ? "Para vehículos con potencia homologada inferior a 250 CV." : "La usaremos para identificar tu vehículo durante la inspección."}</div>
+                    <div className="text-[13px] md:text-sm font-bold leading-tight">Introduce la matrícula del vehículo</div>
+                    <div className="text-[11px] md:text-xs text-muted-foreground leading-snug mt-0.5">{selected === "deportivo" ? "Para vehículos con potencia homologada de 250 CV o más." : selected === "turismo" ? "Para vehículos con potencia homologada inferior a 250 CV." : "La usaremos para identificar tu vehículo durante la inspección."}</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 rounded-lg border border-neutral-900 px-3 py-3">
-                  <div className="flex h-9 w-7 items-center justify-center rounded bg-info text-[10px] font-bold text-white">E</div>
-                  <input value={plate} onChange={(e) => setPlate(e.target.value)} className="flex-1 text-lg font-bold tracking-wider outline-none" />
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-success text-white"><Check className="h-4 w-4" /></div>
+                <div className="flex items-center gap-2 rounded-lg border border-neutral-900 px-2.5 md:px-3 py-2 md:py-3">
+                  <div className="flex h-7 w-5 md:h-9 md:w-7 items-center justify-center rounded bg-info text-[9px] md:text-[10px] font-bold text-white">E</div>
+                  <input value={plate} onChange={(e) => setPlate(e.target.value)} className="flex-1 text-base md:text-lg font-bold tracking-wider outline-none min-w-0" />
+                  <div className="flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full bg-success text-white"><Check className="h-3 w-3 md:h-4 md:w-4" /></div>
                 </div>
-                <button onClick={() => navigate({ to: "/reservar", search: { vehicle: selected ?? "turismo", plate } })} className="flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 font-bold text-ink hover:brightness-95">
+                <button onClick={() => navigate({ to: "/reservar", search: { vehicle: selected ?? "turismo", plate } })} className="flex items-center justify-center gap-2 rounded-lg bg-brand px-4 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-bold text-ink hover:brightness-95">
                   Continuar <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
-              <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-white/60"><Lock className="h-3 w-3" /> Tus datos están protegidos. No compartimos tu información.</p>
+              <p className="mt-2 md:mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] md:text-xs text-white/60"><Lock className="h-3 w-3" /> Tus datos están protegidos. No compartimos tu información.</p>
             </>
           )}
         </div>
