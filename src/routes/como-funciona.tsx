@@ -108,7 +108,7 @@ export const Route = createFileRoute("/como-funciona")({
                 {/* card */}
                 <div className="flex h-full flex-col space-y-2 rounded-[18px] border border-neutral-200 bg-white p-4 pt-7 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
                   <div className="flex justify-center text-neutral-950">
-                    <div className="[&>img]:h-10 [&>img]:w-10 [&>img]:my-0 [&>svg]:h-10 [&>svg]:w-10">{icon}</div>
+                    <div className="[&>img]:h-16 [&>img]:w-16 [&>img]:my-0 [&>svg]:h-16 [&>svg]:w-16">{icon}</div>
                   </div>
                   <h3 className="whitespace-pre-line text-base font-semibold leading-tight text-neutral-950">
                     {title}
