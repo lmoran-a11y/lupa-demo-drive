@@ -122,15 +122,18 @@ function Reservar() {
                   icon={<Car className="h-3.5 w-3.5" />}
                   title="Marca y modelo"
                   value={brandModel || "Sin especificar"}
-                  active={edit === ("brand" as EditMode)}
-                  onClick={() => setEdit(edit === ("brand" as EditMode) ? null : ("brand" as EditMode))}
+                  active={false}
+                  onClick={() => {
+                    const el = document.getElementById("mobile-brand-picker");
+                    el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }}
                 />
                 <MobileSummaryTile
                   icon={<FileText className="h-3.5 w-3.5" />}
                   title="Informe DGT"
                   value={dgt ? "Añadido (+14,99 €)" : "No incluido"}
-                  active={edit === ("dgt" as EditMode)}
-                  onClick={() => setEdit(edit === ("dgt" as EditMode) ? null : ("dgt" as EditMode))}
+                  active={dgt}
+                  onClick={() => setDgt(!dgt)}
                 />
               </div>
             </div>
