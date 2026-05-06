@@ -77,21 +77,21 @@ function Reservar() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <SiteHeader />
       <StepProgress current={3} />
 
-      <main className="mx-auto max-w-6xl space-y-4 px-6 py-6">
+      <main className="mx-auto max-w-6xl space-y-3 md:space-y-4 px-3 md:px-6 py-4 md:py-6">
         <div>
-          <h2 className="text-xl font-bold md:text-2xl">3. Revisa y paga para confirmar tu reserva</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <h2 className="text-lg md:text-2xl font-bold leading-tight">3. Revisa y paga para confirmar tu reserva</h2>
+          <p className="mt-1 text-xs md:text-sm text-muted-foreground">
             Una vez realizado el pago, te asignaremos el taller y recibirás todos los detalles.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-[1fr_1.4fr]">
+        <div className="grid gap-4 md:gap-6 md:grid-cols-[1fr_1.4fr]">
           {/* LEFT: Summary */}
-          <div className="rounded-2xl border border-border bg-card p-4">
+          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
             <div className="text-base font-bold">Resumen de tu reserva</div>
             <div className="mt-1 text-xs text-muted-foreground">
               {vehicleLabel} · {plate || "—"}
@@ -162,7 +162,7 @@ function Reservar() {
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
-          <div className="rounded-2xl border border-border bg-card p-4">
+          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
             {edit === "location" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
@@ -197,22 +197,21 @@ function Reservar() {
               </div>
             ) : (
               <>
-                <div className="grid gap-4 md:grid-cols-[1fr_auto]">
+                <div className="grid gap-3 md:gap-4 grid-cols-1 md:grid-cols-[1fr_auto]">
                   <div>
                     <div className="text-sm font-bold">Total a pagar</div>
-                    <div className="mt-1 text-4xl font-extrabold tracking-tight">{total} €</div>
+                    <div className="mt-1 text-3xl md:text-4xl font-extrabold tracking-tight">{total} €</div>
                     <div className="mt-0.5 text-xs text-muted-foreground">IVA incluido</div>
                     <div className="mt-2 inline-flex items-center gap-2 text-xs text-muted-foreground">
                       <Lock className="h-3.5 w-3.5" /> Pago 100% seguro
                     </div>
                   </div>
                   <div className="flex items-start gap-2 rounded-lg border border-success/30 bg-success/5 p-2 text-xs">
-                    <Shield className="mt-0.5 h-4 w-4 text-success" />
+                    <Shield className="mt-0.5 h-4 w-4 shrink-0 text-success" />
                     <div>
                       <div className="font-bold">Sin sorpresas</div>
                       <div className="text-muted-foreground">
-                        Precio cerrado,
-                        <br /> sin costes ocultos
+                        Precio cerrado, sin costes ocultos
                       </div>
                     </div>
                   </div>
@@ -299,24 +298,24 @@ function Reservar() {
         </div>
 
         {/* CANCELLATION BANNER */}
-        <div className="flex items-center justify-between rounded-2xl border border-brand/30 bg-brand/5 px-5 py-3">
-          <div className="flex items-center gap-3 text-sm">
-            <CalIcon className="h-5 w-5 text-brand" />
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 rounded-2xl border border-brand/30 bg-brand/5 px-4 md:px-5 py-3">
+          <div className="flex items-start md:items-center gap-3 text-sm">
+            <CalIcon className="mt-0.5 md:mt-0 h-5 w-5 shrink-0 text-brand" />
             <div>
-              <b>Cancelación gratuita hasta 24h antes de la cita</b>
+              <b className="text-sm">Cancelación gratuita hasta 24h antes de la cita</b>
               <br />
               <span className="text-xs text-muted-foreground">
                 Si cambias de opinión, te devolvemos el dinero.
               </span>
             </div>
           </div>
-          <Link to="/contacto" className="text-sm font-bold underline">
+          <Link to="/contacto" className="self-end md:self-auto text-sm font-bold underline">
             Saber más ›
           </Link>
         </div>
 
         {/* TRUST ROW */}
-        <div className="grid gap-4 rounded-2xl border border-border bg-card px-5 py-3 md:grid-cols-3">
+        <div className="grid gap-3 md:gap-4 rounded-2xl border border-border bg-card px-4 md:px-5 py-3 md:grid-cols-3">
           <Trust icon={<Shield className="h-5 w-5" />} t="Talleres verificados" d="Solo trabajamos con profesionales de confianza." />
           <Trust icon={<span className="text-lg font-bold">€</span>} t="Precio cerrado" d="Sin costes ocultos. Lo que ves es lo que pagas." />
           <Trust icon={<Headphones className="h-5 w-5" />} t="Atención al cliente" d="Estamos aquí para ayudarte antes, durante y después." />
@@ -437,8 +436,8 @@ function SummaryRow({
   last?: boolean;
 }) {
   return (
-    <div className={`mt-4 flex items-start gap-3 ${last ? "" : "border-b border-border pb-4"}`}>
-      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted/40">
+    <div className={`mt-3 md:mt-4 flex items-start gap-3 ${last ? "" : "border-b border-border pb-3 md:pb-4"}`}>
+      <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted/40">
         {icon}
       </div>
       <div className="flex-1">
@@ -519,7 +518,7 @@ function renderLocationEditor({
           key={draftLocation}
           title={`Mapa de ${city}`}
           src={`https://www.google.com/maps?q=${encodeURIComponent(draftLocation || city)}&z=13&output=embed`}
-          className="h-64 w-full border-0"
+          className="h-48 md:h-64 w-full border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
@@ -783,9 +782,9 @@ function BrandModelPicker({ value, onChange }: { value: string; onChange: (v: st
   };
 
   return (
-    <div className="mt-4 border-b border-border pb-4">
+    <div className="mt-3 md:mt-4 border-b border-border pb-3 md:pb-4">
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted/40">
+        <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted/40">
           <Car className="h-4 w-4" />
         </div>
         <div className="flex-1">
