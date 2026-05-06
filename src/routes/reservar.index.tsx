@@ -81,9 +81,9 @@ function Reservar() {
       <SiteHeader />
       <StepProgress current={3} />
 
-      <main className="mx-auto max-w-6xl space-y-8 px-6 pb-16">
+      <main className="mx-auto max-w-6xl space-y-4 px-6 py-6">
         <div>
-          <h2 className="text-2xl font-bold">3. Revisa y paga para confirmar tu reserva</h2>
+          <h2 className="text-xl font-bold md:text-2xl">3. Revisa y paga para confirmar tu reserva</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Una vez realizado el pago, te asignaremos el taller y recibirás todos los detalles.
           </p>
@@ -91,7 +91,7 @@ function Reservar() {
 
         <div className="grid gap-6 md:grid-cols-[1fr_1.4fr]">
           {/* LEFT: Summary */}
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl border border-border bg-card p-4">
             <div className="text-base font-bold">Resumen de tu reserva</div>
             <div className="mt-1 text-xs text-muted-foreground">
               {vehicleLabel} · {plate || "—"}
@@ -113,28 +113,28 @@ function Reservar() {
             />
 
             <BrandModelPicker value={brandModel} onChange={setBrandModel} />
-            <div className={`mt-5 rounded-xl border-2 border-brand p-5 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
+            <div className={`mt-3 rounded-xl border-2 border-brand p-3 transition-colors ${dgt ? "bg-brand/5" : "bg-card"}`}>
               <div className="flex items-start gap-3">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-muted">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted">
                   <div className="relative">
-                    <FileText className="h-7 w-7 text-foreground" strokeWidth={1.5} />
+                    <FileText className="h-6 w-6 text-foreground" strokeWidth={1.5} />
                     <span className="absolute -bottom-0.5 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-success text-[8px] font-bold text-success-foreground">✓</span>
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <div className="text-base font-bold">Informe DGT</div>
+                      <div className="text-sm font-bold">Informe DGT</div>
                       <span className="rounded-full border border-muted-foreground/30 bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Opcional</span>
                     </div>
-                    <div className="whitespace-nowrap text-sm font-semibold text-muted-foreground">+14,99 €</div>
+                    <div className="whitespace-nowrap text-xs font-semibold text-muted-foreground">+14,99 €</div>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                  <p className="mt-1 text-xs text-muted-foreground">
                     Incluye el informe oficial de la Dirección General de Tráfico.
                   </p>
                 </div>
               </div>
-              <ul className="mt-4 space-y-1.5 text-xs text-muted-foreground">
+              <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
                 <li className="flex items-center gap-2"><span className="text-success">✓</span> Titularidad y datos técnicos</li>
                 <li className="flex items-center gap-2"><span className="text-success">✓</span> Cargas, embargos y reservas de dominio</li>
                 <li className="flex items-center gap-2"><span className="text-success">✓</span> Historial de ITV y kilometraje oficial</li>
@@ -142,7 +142,7 @@ function Reservar() {
               <button
                 type="button"
                 onClick={() => setDgt(!dgt)}
-                className="mt-5 flex w-full items-center gap-3 border-t border-brand pt-4 text-left"
+                className="mt-3 flex w-full items-center gap-3 border-t border-brand pt-3 text-left"
               >
                 <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors ${dgt ? "border-brand bg-brand text-brand-foreground" : "border-muted-foreground/40 bg-background"}`}>
                   {dgt && <span className="text-xs font-bold leading-none">✓</span>}
@@ -151,7 +151,7 @@ function Reservar() {
               </button>
             </div>
 
-            <div className="mt-6 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
+            <div className="mt-3 flex items-start gap-3 rounded-lg border border-info/30 bg-info/5 p-3 text-xs">
               <Shield className="mt-0.5 h-4 w-4 text-info" />
               <div>
                 Trabajamos con talleres <span className="font-bold text-info">verificados</span>
@@ -162,7 +162,7 @@ function Reservar() {
           </div>
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl border border-border bg-card p-4">
             {edit === "location" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
@@ -197,17 +197,17 @@ function Reservar() {
               </div>
             ) : (
               <>
-                <div className="grid gap-6 md:grid-cols-[1fr_auto]">
+                <div className="grid gap-4 md:grid-cols-[1fr_auto]">
                   <div>
                     <div className="text-sm font-bold">Total a pagar</div>
-                    <div className="mt-2 text-5xl font-extrabold tracking-tight">{total} €</div>
-                    <div className="mt-1 text-xs text-muted-foreground">IVA incluido</div>
-                    <div className="mt-3 inline-flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="mt-1 text-4xl font-extrabold tracking-tight">{total} €</div>
+                    <div className="mt-0.5 text-xs text-muted-foreground">IVA incluido</div>
+                    <div className="mt-2 inline-flex items-center gap-2 text-xs text-muted-foreground">
                       <Lock className="h-3.5 w-3.5" /> Pago 100% seguro
                     </div>
                   </div>
-                  <div className="flex items-start gap-3 rounded-lg border border-success/30 bg-success/5 p-3 text-xs">
-                    <Shield className="mt-0.5 h-5 w-5 text-success" />
+                  <div className="flex items-start gap-2 rounded-lg border border-success/30 bg-success/5 p-2 text-xs">
+                    <Shield className="mt-0.5 h-4 w-4 text-success" />
                     <div>
                       <div className="font-bold">Sin sorpresas</div>
                       <div className="text-muted-foreground">
@@ -218,25 +218,23 @@ function Reservar() {
                   </div>
                 </div>
 
-                <hr className="my-6 border-border" />
+                <hr className="my-3 border-border" />
 
                 <div>
-                  <div className="text-base font-bold">Email para tu informe</div>
-                  <div className="mt-1 text-sm text-muted-foreground">Te enviaremos aquí todos los detalles de tu reserva e informe.</div>
-                  <div className="relative mt-4">
+                  <div className="text-sm font-bold">Email para tu informe</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">Te enviaremos aquí todos los detalles de tu reserva e informe.</div>
+                  <div className="relative mt-2">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="ejemplo@email.com"
-                      className="w-full rounded-lg border border-success px-4 py-3 pr-10 outline-none"
+                      className="h-10 w-full rounded-lg border border-success px-3 pr-10 text-sm outline-none"
                     />
                     <Check className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-success p-1 text-white" />
                   </div>
 
-
-
-                  <label className="mt-4 flex items-start gap-3 text-sm text-foreground">
+                  <label className="mt-3 flex items-start gap-3 text-sm leading-snug text-foreground">
                     <input
                       type="checkbox"
                       checked={confirmVehicle}
@@ -248,7 +246,7 @@ function Reservar() {
                     </span>
                   </label>
 
-                  <div className="mt-3 flex items-start gap-2 text-[12px] text-muted-foreground">
+                  <div className="mt-2 flex items-start gap-2 text-xs text-muted-foreground">
                     <Info className="mt-0.5 h-4 w-4 shrink-0" />
                     <p>
                       Si el vehículo no coincide con la reserva, podrán aplicarse ajustes según las condiciones.{" "}
@@ -265,34 +263,34 @@ function Reservar() {
                     })
                   }
                   disabled={!confirmVehicle}
-                  className="mt-5 flex w-full items-center justify-center gap-3 rounded-lg bg-brand py-4 text-lg font-bold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-brand text-base font-semibold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <Lock className="h-5 w-5" />
+                  <Lock className="h-4 w-4" />
                   Reservar inspección por {total} €
-                  <ArrowRight className="h-5 w-5" />
+                  <ArrowRight className="h-4 w-4" />
                 </button>
 
-                <div className="mt-5 grid grid-cols-3 gap-3 text-xs">
+                <div className="mt-3 grid grid-cols-3 gap-3 text-xs">
                   <Feature icon={<Check className="h-4 w-4 text-success" />} t="Confirmación" t2="inmediata" />
                   <Feature icon={<Camera className="h-4 w-4 text-muted-foreground" />} t="Informe completo" t2="con fotos y vídeo" />
                   <Feature icon={<Clock className="h-4 w-4 text-muted-foreground" />} t="Informe en menos de 24h" t2="" />
                 </div>
 
-                <div className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-4 py-3 text-sm">
+                <div className="mt-3 flex items-center justify-center gap-2 rounded-lg border border-brand/30 bg-brand/5 px-4 py-2 text-sm">
                   <Hourglass className="h-4 w-4 text-brand" />
                   <span className="font-bold text-ink">Plazas limitadas. Asegura tu cita ahora.</span>
                 </div>
 
-                <div className="mt-5 rounded-lg border border-border p-4">
+                <div className="mt-3 rounded-lg border border-border px-3 py-3">
                   <div className="text-xs text-muted-foreground">Paga de forma segura con</div>
-                  <div className="mt-3 flex items-center gap-3">
+                  <div className="mt-2 flex items-center gap-3">
                     <PayBadge label="VISA" />
                     <PayBadge label="MC" />
                     <PayBadge label=" Pay" />
                     <PayBadge label="G Pay" />
                   </div>
                 </div>
-                <div className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                <div className="mt-2 flex items-center justify-center gap-2 text-xs text-muted-foreground">
                   <Lock className="h-3.5 w-3.5" /> Pago seguro con cifrado SSL
                 </div>
               </>
@@ -301,7 +299,7 @@ function Reservar() {
         </div>
 
         {/* CANCELLATION BANNER */}
-        <div className="flex items-center justify-between rounded-2xl border border-brand/30 bg-brand/5 px-5 py-4">
+        <div className="flex items-center justify-between rounded-2xl border border-brand/30 bg-brand/5 px-5 py-3">
           <div className="flex items-center gap-3 text-sm">
             <CalIcon className="h-5 w-5 text-brand" />
             <div>
@@ -318,7 +316,7 @@ function Reservar() {
         </div>
 
         {/* TRUST ROW */}
-        <div className="grid gap-4 rounded-2xl border border-border bg-card p-5 md:grid-cols-3">
+        <div className="grid gap-4 rounded-2xl border border-border bg-card px-5 py-3 md:grid-cols-3">
           <Trust icon={<Shield className="h-5 w-5" />} t="Talleres verificados" d="Solo trabajamos con profesionales de confianza." />
           <Trust icon={<span className="text-lg font-bold">€</span>} t="Precio cerrado" d="Sin costes ocultos. Lo que ves es lo que pagas." />
           <Trust icon={<Headphones className="h-5 w-5" />} t="Atención al cliente" d="Estamos aquí para ayudarte antes, durante y después." />
