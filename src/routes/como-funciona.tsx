@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { ArrowRight, ShieldCheck, BadgeCheck, FileText, Lock, CheckCircle2, Info, Mail, Clock } from "lucide-react";
+import { ArrowRight, ArrowLeft, ShieldCheck, BadgeCheck, FileText, Lock, CheckCircle2, Info, Mail, Clock } from "lucide-react";
 import liftIcon from "@/assets/lift-icon.png";
 import acuerdaCitaIcon from "@/assets/step-acuerda-cita.png";
 import reservaCitaIcon from "@/assets/step-reserva-cita.png";
@@ -71,7 +71,14 @@ export const Route = createFileRoute("/como-funciona")({
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main className="bg-white">
-        <section className="mx-auto max-w-[1320px] px-6 py-10">
+        <section className="relative mx-auto max-w-[1320px] px-6 py-10">
+          <Link
+            to="/"
+            className="absolute left-6 top-4 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-700 shadow-sm transition hover:bg-neutral-50"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Volver
+          </Link>
           {/* Top label */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-bold uppercase tracking-[-0.01em] text-neutral-700">
             <span>Reserva online</span>
