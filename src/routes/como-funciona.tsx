@@ -218,58 +218,6 @@ export const Route = createFileRoute("/como-funciona")({
               </div>
             </div>
           </div>
-          {/* CTA block */}
-          <div className="relative mt-6 overflow-hidden rounded-[18px] border border-neutral-200 bg-white px-10 py-10 shadow-[0_2px_10px_rgba(0,0,0,0.025)] md:px-16">
-            <div className="absolute left-10 top-12 bottom-12 w-[3px] rounded-full bg-primary" />
-            <div className="flex flex-col items-start gap-8 md:flex-row md:items-center">
-              <div className="flex items-center gap-8 pl-10">
-                <div className="flex h-[96px] w-[96px] shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
-                  <ShieldCheck className="h-12 w-12 text-neutral-950" strokeWidth={1.9} />
-                </div>
-                <div>
-                  <div className="text-[24px] font-black leading-[1.12] text-neutral-950">
-                    Compra con confianza.<br />Decide con seguridad.
-                  </div>
-                  <p className="mt-4 max-w-[405px] text-[16px] leading-relaxed text-neutral-600">
-                    Talleres verificados y proceso estandarizado para comprar con más seguridad.
-                  </p>
-                </div>
-              </div>
-              <Link
-                to="/"
-                hash="vehicle-picker"
-                onClick={(e) => {
-                  if (window.location.pathname === "/") {
-                    e.preventDefault();
-                    document
-                      .getElementById("vehicle-picker")
-                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }
-                }}
-                className="ml-auto inline-flex w-full min-w-[420px] items-center justify-center gap-14 rounded-[16px] bg-primary px-10 py-5 text-[20px] font-black text-neutral-950 transition-colors hover:bg-primary/90 md:w-auto"
-              >
-                Solicitar inspección
-                <ArrowRight className="h-7 w-7" strokeWidth={2.5} />
-              </Link>
-            </div>
-
-            <div className="mt-7 flex flex-wrap items-center justify-end gap-x-5 gap-y-3 text-[12px] text-neutral-600">
-              <div className="flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4 text-neutral-700" />
-                Talleres verificados
-              </div>
-              <span className="h-5 w-px bg-neutral-300" />
-              <div className="flex items-center gap-2">
-                <FileText className="h-4 w-4 text-neutral-700" />
-                Informes imparciales
-              </div>
-              <span className="h-5 w-px bg-neutral-300" />
-              <div className="flex items-center gap-2">
-                <Lock className="h-4 w-4 text-neutral-700" />
-                Datos 100% seguros
-              </div>
-            </div>
-          </div>
         </section>
       </main>
       <SiteFooter />
