@@ -88,25 +88,25 @@ function Home() {
       </section>
 
       {/* VEHICLE PICKER */}
-      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.18_0_0)] py-10 text-white md:py-12">
-        <div className="mx-auto max-w-7xl px-6" ref={pickerRef}>
-          <h2 className="text-center text-2xl font-bold md:text-[28px]">¿Qué vehículo quieres revisar?</h2>
+      <section id="vehicle-picker" className="bg-gradient-to-b from-ink to-[oklch(0.18_0_0)] py-7 text-white md:py-12">
+        <div className="mx-auto max-w-7xl px-4 md:px-6" ref={pickerRef}>
+          <h2 className="text-center text-xl font-bold md:text-[28px]">¿Qué vehículo quieres revisar?</h2>
           <div className="mx-auto mt-2 h-[3px] w-12 rounded bg-brand" />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-4">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 md:mt-8 md:gap-5 md:grid-cols-4">
             {VEHICLES.map((v) => (
               <button
                 key={v.id}
                 onClick={() => setSelected(v.id)}
-                className={`group relative flex aspect-[4/2] sm:aspect-[4/4.2] flex-col rounded-2xl border bg-[#111111] p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
+                className={`group relative flex h-[88px] sm:h-auto sm:aspect-[4/4.2] flex-row sm:flex-col items-center rounded-2xl border bg-[#111111] p-3 sm:p-5 text-left text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.8)] ${
                   selected === v.id ? "border-brand ring-1 ring-brand/40" : "border-white/10 hover:border-white/25"
                 }`}
               >
                 {selected === v.id && (
-                  <div className="absolute right-3 top-3 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-ink">
-                    <Check className="h-4 w-4" />
+                  <div className="absolute right-2 top-2 sm:right-3 sm:top-3 z-10 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-brand text-ink">
+                    <Check className="h-3 w-3 sm:h-4 sm:w-4" />
                   </div>
                 )}
-                <div className="flex flex-1 items-center justify-center overflow-hidden p-2">
+                <div className="flex h-full sm:h-auto sm:flex-1 w-[40%] sm:w-full items-center justify-center overflow-hidden sm:p-2">
                   {(() => {
                     const baseScale =
                       v.id === "deportivo" ? 1.15 :
@@ -120,14 +120,18 @@ function Home() {
                         alt={v.label}
                         loading="lazy"
                         style={{ "--base": baseScale, "--hover": hoverScale, "--tx": tx } as React.CSSProperties}
-                        className="h-[92%] w-full object-contain transition-transform duration-300 [transform:translateX(var(--tx))_scale(var(--base))] group-hover:[transform:translateX(var(--tx))_scale(var(--hover))]"
+                        className="h-full sm:h-[92%] w-full object-contain transition-transform duration-300 [transform:translateX(var(--tx))_scale(var(--base))] group-hover:[transform:translateX(var(--tx))_scale(var(--hover))]"
                       />
                     );
                   })()}
                 </div>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="text-lg font-bold tracking-tight text-white md:text-xl">{v.label}</span>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-ink transition-transform group-hover:translate-x-0.5">
+                <div className="flex flex-1 sm:flex-none sm:w-full items-center justify-between sm:mt-2 pl-2 sm:pl-0">
+                  <div className="leading-tight">
+                    <div className="text-base font-bold tracking-tight text-white md:text-xl">{v.label}</div>
+                    <div className="text-[11px] text-white/50 sm:hidden">{v.sub}</div>
+                    <div className="hidden sm:block text-[11px] md:text-xs text-white/50 mt-0.5">{v.sub}</div>
+                  </div>
+                  <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-brand text-ink transition-transform group-hover:translate-x-0.5 ml-2">
                     <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
                   </span>
                 </div>
