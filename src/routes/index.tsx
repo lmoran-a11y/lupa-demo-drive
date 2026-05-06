@@ -216,7 +216,7 @@ function Home() {
           {[
             { n: 1, t: "Elige tu vehículo", d: "Selecciona el tipo de vehículo y la ubicación.", mt: "Elige tu vehículo", md: "Selecciona la categoría." },
             { n: 2, t: "Reserva en taller", d: "Elige el taller, día y hora que mejor te venga.", mt: "Reserva en la web", md: "Escoge localización, fecha y hora.\nEl vendedor lo llevará al taller asignado." },
-            { n: 3, t: "Recibe tu informe", d: "En 24h tendrás el informe completo con fotos y vídeo.", mt: "Recibe tu informe", md: "Fotos, vídeo y valoración final." },
+            { n: 3, t: "Recibe tu informe", d: "En 24h tendrás el informe completo con fotos y vídeo.", mt: "Recibe tu informe", md: "En menos de 24h tendrás el informe completo con fotos y vídeo." },
           ].map((s) => (
             <div key={s.n} className="relative flex md:block items-center gap-4 md:text-center text-left">
               <div className="relative h-14 w-14 md:mx-auto md:h-20 md:w-20 shrink-0">
