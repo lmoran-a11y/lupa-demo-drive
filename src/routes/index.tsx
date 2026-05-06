@@ -127,7 +127,7 @@ function Home() {
                 </div>
                 <div className="flex flex-1 sm:flex-none sm:w-full items-center justify-between sm:mt-2 pl-2 sm:pl-0">
                   <div className="leading-tight">
-                    <div className="text-base font-bold tracking-tight text-white md:text-xl">{v.label}</div>
+                    <div className="text-sm font-bold tracking-tight text-white sm:text-base md:text-xl">{v.label}</div>
                     <div className="text-[11px] text-white/50 sm:hidden">{v.sub}</div>
                     <div className="hidden sm:block text-[11px] md:text-xs text-white/50 mt-0.5">{v.sub}</div>
                   </div>
