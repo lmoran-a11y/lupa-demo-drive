@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StepProgress } from "@/components/StepProgress";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { getBasePrice, formatEur, VEHICLE_LABELS, type VehicleType } from "@/lib/pricing";
@@ -45,6 +46,7 @@ type EditMode = null | "location" | "datetime";
 
 function Reservar() {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const { vehicle, plate } = Route.useSearch();
   const [location, setLocation] = useState("Lucena, Córdoba");
   const [draftLocation, setDraftLocation] = useState("Lucena, Córdoba");
@@ -103,6 +105,7 @@ function Reservar() {
               value={location}
               onEdit={() => (edit === "location" ? setEdit(null) : openEdit("location"))}
               active={edit === "location"}
+              mobileEditor={renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
             />
             <SummaryRow
               icon={<CalIcon className="h-4 w-4" />}
@@ -110,6 +113,7 @@ function Reservar() {
               value={`Jueves, ${day} de mayo de 2024\na las ${hour}`}
               onEdit={() => (edit === "datetime" ? setEdit(null) : openEdit("datetime"))}
               active={edit === "datetime"}
+              mobileEditor={renderDateTimeEditor({ day, setDay, hour, setHour, location, dgt, setDgt, cancel: () => setEdit(null), confirm: () => setEdit(null) })}
             />
 
             <BrandModelPicker value={brandModel} onChange={setBrandModel} />
@@ -163,7 +167,7 @@ function Reservar() {
 
           {/* RIGHT: Dynamic panel — payment by default, editor when editing */}
           <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
-            {edit === "location" ? (
+            {!isMobile && edit === "location" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
@@ -179,7 +183,7 @@ function Reservar() {
                 </div>
                 {renderLocationEditor({ draftLocation, setDraftLocation, confirmLocation, cancel: () => setEdit(null) })}
               </div>
-            ) : edit === "datetime" ? (
+            ) : !isMobile && edit === "datetime" ? (
               <div>
                 <div className="mb-4 flex items-center justify-between">
                   <div className="text-[11px] font-bold uppercase tracking-widest text-brand">
@@ -427,6 +431,7 @@ function SummaryRow({
   onEdit,
   active,
   last,
+  mobileEditor,
 }: {
   icon: React.ReactNode;
   title: string;
@@ -434,22 +439,30 @@ function SummaryRow({
   onEdit: () => void;
   active?: boolean;
   last?: boolean;
+  mobileEditor?: React.ReactNode;
 }) {
   return (
-    <div className={`mt-3 md:mt-4 flex items-start gap-3 ${last ? "" : "border-b border-border pb-3 md:pb-4"}`}>
-      <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted/40">
-        {icon}
+    <div className={`mt-3 md:mt-4 ${last ? "" : "border-b border-border pb-3 md:pb-4"}`}>
+      <div className="flex items-start gap-3">
+        <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted/40">
+          {icon}
+        </div>
+        <div className="flex-1">
+          <div className="text-sm font-bold">{title}</div>
+          <div className="whitespace-pre-line text-sm text-muted-foreground">{value}</div>
+          <button
+            onClick={onEdit}
+            className={`mt-1 text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
+          >
+            {active ? "Cerrar" : "Cambiar"}
+          </button>
+        </div>
       </div>
-      <div className="flex-1">
-        <div className="text-sm font-bold">{title}</div>
-        <div className="whitespace-pre-line text-sm text-muted-foreground">{value}</div>
-        <button
-          onClick={onEdit}
-          className={`mt-1 text-sm font-bold ${active ? "text-brand" : "text-success"} hover:underline`}
-        >
-          {active ? "Cerrar" : "Cambiar"}
-        </button>
-      </div>
+      {active && mobileEditor && (
+        <div className="md:hidden mt-3 rounded-xl border-2 border-brand bg-card p-3 shadow-sm">
+          {mobileEditor}
+        </div>
+      )}
     </div>
   );
 }
