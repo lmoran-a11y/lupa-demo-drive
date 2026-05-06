@@ -46,6 +46,7 @@ type EditMode = null | "location" | "datetime";
 
 function Reservar() {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const { vehicle, plate } = Route.useSearch();
   const [location, setLocation] = useState("Lucena, Córdoba");
   const [draftLocation, setDraftLocation] = useState("Lucena, Córdoba");
