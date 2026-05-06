@@ -235,18 +235,18 @@ function Home() {
       </section>
 
       {/* PROFESSIONAL REPORT */}
-      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-8 md:pb-16">
-        <div className="grid gap-5 md:gap-10 rounded-2xl md:rounded-3xl border border-border bg-card p-5 md:p-12 shadow-sm md:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 md:px-6 pb-4 md:pb-16">
+        <div className="grid gap-3 md:gap-10 rounded-xl md:rounded-3xl border border-border bg-card p-3 md:p-12 shadow-sm md:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <div className="text-[11px] md:text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
-            <h3 className="mt-2 md:mt-3 text-xl md:text-4xl font-bold leading-tight">Toma decisiones<br />con información real</h3>
-            <ul className="mt-4 md:mt-6 space-y-2 md:space-y-3 text-sm">
+            <div className="text-[10px] md:text-xs font-bold tracking-widest text-brand">INFORME PROFESIONAL</div>
+            <h3 className="mt-1 md:mt-3 text-base md:text-4xl font-bold leading-tight">Toma decisiones<br />con información real</h3>
+            <ul className="mt-2 md:mt-6 space-y-1 md:space-y-3 text-sm">
               {["Revisión punto por punto", "Fotos y vídeo explicativo", "Semáforo final para tu decisión"].map((x) => (
-                <li key={x} className="flex items-center gap-3">
-                  <span className="flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full border-2 border-brand text-brand shrink-0">
-                    <Check className="h-3 w-3 md:h-3.5 md:w-3.5" strokeWidth={3} />
+                <li key={x} className="flex items-center gap-2 md:gap-3">
+                  <span className="flex h-4 w-4 md:h-6 md:w-6 items-center justify-center rounded-full border-2 border-brand text-brand shrink-0">
+                    <Check className="h-2.5 w-2.5 md:h-3.5 md:w-3.5" strokeWidth={3} />
                   </span>
-                  <span className="text-[13px] md:text-sm">{x}</span>
+                  <span className="text-[11px] md:text-sm">{x}</span>
                 </li>
               ))}
               <li className="hidden md:flex items-center gap-3">
@@ -256,41 +256,41 @@ function Home() {
                 Información clara y detallada
               </li>
             </ul>
-            <Link to="/ejemplo-informe" className="mt-5 md:mt-8 inline-flex w-full items-center justify-center rounded-lg border-2 border-ink bg-background px-5 md:px-6 py-2.5 md:py-3 text-sm font-bold hover:bg-ink hover:text-white sm:w-auto">
+            <Link to="/ejemplo-informe" className="mt-3 md:mt-8 inline-flex w-full items-center justify-center rounded-lg border-2 border-ink bg-background px-4 md:px-6 py-2 md:py-3 text-xs md:text-sm font-bold hover:bg-ink hover:text-white sm:w-auto">
               Ver ejemplo de informe
             </Link>
           </div>
 
           {/* Tablet mock */}
-          <div className="rounded-xl md:rounded-2xl border border-border bg-muted/40 p-2 md:p-3 shadow-sm md:scale-100 origin-top max-w-sm mx-auto md:max-w-none w-full">
-            <div className="rounded-lg md:rounded-xl bg-white p-3 md:p-5 text-ink">
+          <div className="rounded-lg md:rounded-2xl border border-border bg-muted/40 p-1.5 md:p-3 shadow-sm origin-top max-w-[200px] md:max-w-none mx-auto w-full">
+            <div className="rounded-md md:rounded-xl bg-white p-2 md:p-5 text-ink">
               <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-ink">
-                    <svg viewBox="0 0 24 24" className="h-3 w-3 text-white" fill="currentColor"><path d="M5 14l1.5-4.5A3 3 0 0 1 9.3 7.5h5.4a3 3 0 0 1 2.8 2L19 14v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H8v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3z"/></svg>
+                <div className="flex items-center gap-1 md:gap-2">
+                  <div className="relative flex h-4 w-4 md:h-6 md:w-6 items-center justify-center rounded-full bg-ink">
+                    <svg viewBox="0 0 24 24" className="h-2 w-2 md:h-3 md:w-3 text-white" fill="currentColor"><path d="M5 14l1.5-4.5A3 3 0 0 1 9.3 7.5h5.4a3 3 0 0 1 2.8 2L19 14v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H8v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3z"/></svg>
                   </div>
                   <div className="leading-tight">
-                    <div className="text-sm font-extrabold">LUPA<span className="text-brand">UTO</span></div>
-                    <div className="text-[8px] text-muted-foreground">Revisiones bajo lupa</div>
+                    <div className="text-[9px] md:text-sm font-extrabold">LUPA<span className="text-brand">UTO</span></div>
+                    <div className="text-[6px] md:text-[8px] text-muted-foreground">Revisiones bajo lupa</div>
                   </div>
                 </div>
-                <div className="text-right text-[10px] font-bold text-muted-foreground">
+                <div className="text-right text-[6px] md:text-[10px] font-bold text-muted-foreground">
                   INFORME DE INSPECCIÓN<br /><span className="font-normal">FECHA: 24/05/2024</span>
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-[1fr_auto] gap-3">
+              <div className="mt-2 md:mt-4 grid grid-cols-[1fr_auto] gap-1.5 md:gap-3">
                 <div>
-                  <div className="text-[10px] font-bold text-muted-foreground">ESTADO GENERAL</div>
-                  <div className="mt-1 flex items-center justify-center gap-2 rounded-lg bg-success py-2 text-sm font-bold text-white">
-                    <Check className="h-4 w-4" /> BUEN ESTADO
+                  <div className="text-[6px] md:text-[10px] font-bold text-muted-foreground">ESTADO GENERAL</div>
+                  <div className="mt-0.5 md:mt-1 flex items-center justify-center gap-1 md:gap-2 rounded md:rounded-lg bg-success py-1 md:py-2 text-[8px] md:text-sm font-bold text-white">
+                    <Check className="h-2 w-2 md:h-4 md:w-4" /> BUEN ESTADO
                   </div>
-                  <div className="mt-3 space-y-1.5 text-[11px]">
+                  <div className="mt-1.5 md:mt-3 space-y-0.5 md:space-y-1.5 text-[7px] md:text-[11px]">
                     {[["Motor","Buen estado","ok"],["Frenos","A revisar","warn"],["Neumáticos","Buen estado","ok"],["Suspensión","Buen estado","ok"],["Carrocería","Defecto leve","warn"]].map(([k,v,s]) => (
-                      <div key={k} className="flex items-center justify-between border-b border-border/50 py-1">
-                        <span className="flex items-center gap-2">
-                          <span className={`flex h-3 w-3 items-center justify-center rounded-full ${s==="ok"?"bg-success":"bg-brand"} text-white`}>
-                            <Check className="h-2 w-2" strokeWidth={4} />
+                      <div key={k} className="flex items-center justify-between border-b border-border/50 py-0.5 md:py-1">
+                        <span className="flex items-center gap-1 md:gap-2">
+                          <span className={`flex h-2 w-2 md:h-3 md:w-3 items-center justify-center rounded-full ${s==="ok"?"bg-success":"bg-brand"} text-white`}>
+                            <Check className="h-1.5 w-1.5 md:h-2 md:w-2" strokeWidth={4} />
                           </span>
                           {k}
                         </span>
@@ -300,18 +300,18 @@ function Home() {
                   </div>
                 </div>
 
-                <div className="flex w-32 flex-col gap-2">
-                  <div className="relative aspect-square overflow-hidden rounded-md">
+                <div className="flex w-14 md:w-32 flex-col gap-1 md:gap-2">
+                  <div className="relative aspect-square overflow-hidden rounded-sm md:rounded-md">
                     <img src={reportEngine} alt="Motor" loading="lazy" width={768} height={512} className="h-full w-full object-cover" />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90">
-                        <Play className="h-3 w-3 fill-ink text-ink" />
+                      <div className="flex h-4 w-4 md:h-8 md:w-8 items-center justify-center rounded-full bg-white/90">
+                        <Play className="h-1.5 w-1.5 md:h-3 md:w-3 fill-ink text-ink" />
                       </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <img src={reportFront} alt="Frontal" loading="lazy" width={512} height={512} className="aspect-square w-full rounded-md object-cover" />
-                    <img src={reportWheel} alt="Rueda" loading="lazy" width={512} height={512} className="aspect-square w-full rounded-md object-cover" />
+                  <div className="grid grid-cols-2 gap-1 md:gap-2">
+                    <img src={reportFront} alt="Frontal" loading="lazy" width={512} height={512} className="aspect-square w-full rounded-sm md:rounded-md object-cover" />
+                    <img src={reportWheel} alt="Rueda" loading="lazy" width={512} height={512} className="aspect-square w-full rounded-sm md:rounded-md object-cover" />
                   </div>
                 </div>
               </div>
