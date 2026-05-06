@@ -71,56 +71,58 @@ export const Route = createFileRoute("/como-funciona")({
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main className="bg-white">
-        <section className="mx-auto max-w-[1320px] px-6 py-10 pb-8">
+        <section className="mx-auto max-w-[1320px] px-6 py-10">
           {/* Top label */}
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[15px] font-bold uppercase tracking-[-0.01em] text-neutral-700">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-bold uppercase tracking-[-0.01em] text-neutral-700">
             <span>Reserva online</span>
-            <span className="h-2.5 w-2.5 rounded-full bg-primary" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             <span>Taller verificado</span>
-            <span className="h-2.5 w-2.5 rounded-full bg-primary" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             <span>Informe claro</span>
           </div>
 
           {/* Title + subtitle */}
-          <h1 className="mt-5 text-center text-[46px] font-black leading-none text-neutral-950 md:text-[66px]">
+          <h1 className="mt-3 text-center text-3xl font-bold leading-tight text-neutral-950 md:text-4xl">
             Cómo funciona LUPAUTO
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-center text-[20px] leading-relaxed text-neutral-600">
+          <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted-foreground md:text-base">
             Un proceso claro, rápido y profesional para comprar con más seguridad.
           </p>
 
           {/* Steps - 4 column grid with arrows */}
-          <div className="relative mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+          <div className="relative mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {steps.map(({ n, title, desc, icon, bullets, bulletsIntro, notice }, idx) => (
               <div key={n} className="relative">
                 {/* arrow between cards (desktop only) */}
                 {idx < steps.length - 1 && (
-                  <div className="pointer-events-none absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-primary lg:block">
-                    <ArrowRight className="h-6 w-6" strokeWidth={3} />
+                  <div className="pointer-events-none absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 text-primary lg:block">
+                    <ArrowRight className="h-4 w-4" strokeWidth={3} />
                   </div>
                 )}
 
                 {/* number circle floating above card */}
-                <div className="absolute left-1/2 -top-5 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-[22px] font-black leading-none text-neutral-950 shadow-[0_4px_10px_rgba(0,0,0,0.12)]">
+                <div className="absolute left-1/2 -top-4 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-primary text-sm font-black leading-none text-neutral-950 shadow-[0_4px_10px_rgba(0,0,0,0.12)]">
                   {n}
                 </div>
 
                 {/* card */}
-                <div className="flex h-full flex-col rounded-[18px] border border-neutral-200 bg-white px-6 pt-10 pb-7 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
-                  <div className="flex justify-center pb-4 text-neutral-950">{icon}</div>
-                  <h3 className="mt-2 whitespace-pre-line text-[22px] font-black leading-[1.15] text-neutral-950">
+                <div className="flex h-full flex-col space-y-2 rounded-[18px] border border-neutral-200 bg-white p-4 pt-7 shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
+                  <div className="flex justify-center text-neutral-950">
+                    <div className="[&>img]:h-10 [&>img]:w-10 [&>img]:my-0 [&>svg]:h-10 [&>svg]:w-10">{icon}</div>
+                  </div>
+                  <h3 className="whitespace-pre-line text-base font-semibold leading-tight text-neutral-950">
                     {title}
                   </h3>
-                  <p className="mt-3 text-[15px] leading-[1.5] text-neutral-600">{desc}</p>
+                  <p className="text-xs leading-snug text-neutral-600">{desc}</p>
 
                   {bulletsIntro && (
-                    <p className="mt-4 text-[15px] leading-[1.5] text-neutral-700">{bulletsIntro}</p>
+                    <p className="text-xs leading-snug text-neutral-700">{bulletsIntro}</p>
                   )}
                   {bullets && (
-                    <ul className="mt-2 space-y-1.5">
+                    <ul className="space-y-1">
                       {bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-2 text-[15px] text-neutral-700">
-                          <CheckCircle2 className="mt-[2px] h-[18px] w-[18px] shrink-0 text-emerald-600" strokeWidth={2.2} />
+                        <li key={b} className="flex items-start gap-1.5 text-xs text-neutral-700">
+                          <CheckCircle2 className="mt-[2px] h-3.5 w-3.5 shrink-0 text-emerald-600" strokeWidth={2.2} />
                           <span>{b}</span>
                         </li>
                       ))}
@@ -128,12 +130,12 @@ export const Route = createFileRoute("/como-funciona")({
                   )}
 
                   {notice && (
-                    <div className="mt-auto pt-5">
-                      <div className="flex items-start gap-2 rounded-[10px] bg-[#FFF7E0] px-3 py-2.5 text-[13px] leading-[1.4] text-neutral-700">
+                    <div className="mt-auto pt-2">
+                      <div className="flex items-start gap-1.5 rounded-[10px] bg-[#FFF7E0] p-2 text-xs leading-snug text-neutral-700">
                         {notice.type === "info" ? (
-                          <Info className="mt-[1px] h-4 w-4 shrink-0 text-primary" strokeWidth={2.4} />
+                          <Info className="mt-[1px] h-3.5 w-3.5 shrink-0 text-primary" strokeWidth={2.4} />
                         ) : (
-                          <Mail className="mt-[1px] h-4 w-4 shrink-0 text-neutral-700" strokeWidth={2.2} />
+                          <Mail className="mt-[1px] h-3.5 w-3.5 shrink-0 text-neutral-700" strokeWidth={2.2} />
                         )}
                         <span>{notice.text}</span>
                       </div>
@@ -145,21 +147,21 @@ export const Route = createFileRoute("/como-funciona")({
           </div>
 
           {/* Trust strip */}
-          <div className="mt-6 rounded-[14px] border border-neutral-200 bg-white px-6 py-5 shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 rounded-[14px] border border-neutral-200 bg-white px-4 py-3 shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { icon: <ShieldCheck className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Talleres verificados", sub: "y de confianza" },
-                { icon: <FileText className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Informes imparciales", sub: "y detallados" },
-                { icon: <Lock className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Datos 100% seguros", sub: "y protegidos" },
-                { icon: <Clock className="h-6 w-6 text-neutral-800" strokeWidth={2} />, title: "Informes en 24h", sub: "" },
+                { icon: <ShieldCheck className="h-5 w-5 text-neutral-800" strokeWidth={2} />, title: "Talleres verificados", sub: "y de confianza" },
+                { icon: <FileText className="h-5 w-5 text-neutral-800" strokeWidth={2} />, title: "Informes imparciales", sub: "y detallados" },
+                { icon: <Lock className="h-5 w-5 text-neutral-800" strokeWidth={2} />, title: "Datos 100% seguros", sub: "y protegidos" },
+                { icon: <Clock className="h-5 w-5 text-neutral-800" strokeWidth={2} />, title: "Informes en 24h", sub: "" },
               ].map((t, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-neutral-100">
+                <div key={i} className="flex items-center gap-2.5">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100">
                     {t.icon}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-[15px] font-bold leading-tight text-neutral-900">{t.title}</div>
-                    {t.sub && <div className="text-[14px] leading-tight text-neutral-600">{t.sub}</div>}
+                    <div className="text-sm font-bold leading-tight text-neutral-900">{t.title}</div>
+                    {t.sub && <div className="text-xs leading-tight text-neutral-600">{t.sub}</div>}
                   </div>
                 </div>
               ))}
@@ -167,18 +169,18 @@ export const Route = createFileRoute("/como-funciona")({
           </div>
 
           {/* CTA block */}
-          <div className="relative mt-6 overflow-hidden rounded-[18px] border border-neutral-200 bg-white px-10 py-10 shadow-[0_2px_10px_rgba(0,0,0,0.025)] md:px-16">
-            <div className="absolute left-10 top-12 bottom-12 w-[3px] rounded-full bg-primary" />
-            <div className="flex flex-col items-start gap-8 md:flex-row md:items-center">
-              <div className="flex items-center gap-8 pl-10">
-                <div className="flex h-[96px] w-[96px] shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
-                  <ShieldCheck className="h-12 w-12 text-neutral-950" strokeWidth={1.9} />
+          <div className="relative mt-6 overflow-hidden rounded-[18px] border border-neutral-200 bg-white p-6 shadow-[0_2px_10px_rgba(0,0,0,0.025)]">
+            <div className="absolute left-6 top-6 bottom-6 w-[3px] rounded-full bg-primary" />
+            <div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
+              <div className="flex items-center gap-4 pl-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
+                  <ShieldCheck className="h-6 w-6 text-neutral-950" strokeWidth={1.9} />
                 </div>
                 <div>
-                  <div className="text-[24px] font-black leading-[1.12] text-neutral-950">
+                  <div className="text-xl font-black leading-tight text-neutral-950 md:text-2xl">
                     Compra con confianza.<br />Decide con seguridad.
                   </div>
-                  <p className="mt-4 max-w-[405px] text-[16px] leading-relaxed text-neutral-600">
+                  <p className="mt-1 max-w-[405px] text-sm text-neutral-600">
                     Talleres verificados y proceso estandarizado para comprar con más seguridad.
                   </p>
                 </div>
@@ -194,26 +196,26 @@ export const Route = createFileRoute("/como-funciona")({
                       ?.scrollIntoView({ behavior: "smooth", block: "start" });
                   }
                 }}
-                className="ml-auto inline-flex w-full min-w-[420px] items-center justify-center gap-14 rounded-[16px] bg-primary px-10 py-5 text-[20px] font-black text-neutral-950 transition-colors hover:bg-primary/90 md:w-auto"
+                className="ml-auto inline-flex items-center justify-center gap-3 rounded-[12px] bg-primary px-5 py-2.5 text-sm font-black text-neutral-950 transition-colors hover:bg-primary/90"
               >
                 Solicitar inspección
-                <ArrowRight className="h-7 w-7" strokeWidth={2.5} />
+                <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
               </Link>
             </div>
 
-            <div className="mt-7 flex flex-wrap items-center justify-end gap-x-5 gap-y-3 text-[12px] text-neutral-600">
-              <div className="flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4 text-neutral-700" />
+            <div className="mt-3 flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-xs text-neutral-600">
+              <div className="flex items-center gap-1.5">
+                <BadgeCheck className="h-3.5 w-3.5 text-neutral-700" />
                 Talleres verificados
               </div>
-              <span className="h-5 w-px bg-neutral-300" />
-              <div className="flex items-center gap-2">
-                <FileText className="h-4 w-4 text-neutral-700" />
+              <span className="h-4 w-px bg-neutral-300" />
+              <div className="flex items-center gap-1.5">
+                <FileText className="h-3.5 w-3.5 text-neutral-700" />
                 Informes imparciales
               </div>
-              <span className="h-5 w-px bg-neutral-300" />
-              <div className="flex items-center gap-2">
-                <Lock className="h-4 w-4 text-neutral-700" />
+              <span className="h-4 w-px bg-neutral-300" />
+              <div className="flex items-center gap-1.5">
+                <Lock className="h-3.5 w-3.5 text-neutral-700" />
                 Datos 100% seguros
               </div>
             </div>
