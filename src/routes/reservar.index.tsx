@@ -77,21 +77,21 @@ function Reservar() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <SiteHeader />
       <StepProgress current={3} />
 
-      <main className="mx-auto max-w-6xl space-y-4 px-6 py-6">
+      <main className="mx-auto max-w-6xl space-y-3 md:space-y-4 px-3 md:px-6 py-4 md:py-6">
         <div>
-          <h2 className="text-xl font-bold md:text-2xl">3. Revisa y paga para confirmar tu reserva</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <h2 className="text-lg md:text-2xl font-bold leading-tight">3. Revisa y paga para confirmar tu reserva</h2>
+          <p className="mt-1 text-xs md:text-sm text-muted-foreground">
             Una vez realizado el pago, te asignaremos el taller y recibirás todos los detalles.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-[1fr_1.4fr]">
+        <div className="grid gap-4 md:gap-6 md:grid-cols-[1fr_1.4fr]">
           {/* LEFT: Summary */}
-          <div className="rounded-2xl border border-border bg-card p-4">
+          <div className="rounded-2xl border border-border bg-card p-3.5 md:p-4">
             <div className="text-base font-bold">Resumen de tu reserva</div>
             <div className="mt-1 text-xs text-muted-foreground">
               {vehicleLabel} · {plate || "—"}
