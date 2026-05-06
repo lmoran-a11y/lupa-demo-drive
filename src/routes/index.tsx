@@ -144,8 +144,8 @@ function Home() {
                     <Search className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold">Introduce la matrícula del vehículo {selected === "deportivo" && <span className="text-muted-foreground">(250cv o más)</span>}</div>
-                    <div className="text-xs text-muted-foreground">La usaremos para identificar tu vehículo durante la inspección.</div>
+                    <div className="text-sm font-bold">Introduce la matrícula del vehículo</div>
+                    <div className="text-xs text-muted-foreground">{selected === "deportivo" ? "Para vehículos con potencia homologada de 250 CV o más." : "La usaremos para identificar tu vehículo durante la inspección."}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 rounded-lg border border-border px-3 py-3">
