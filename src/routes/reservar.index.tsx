@@ -518,7 +518,7 @@ function renderLocationEditor({
           key={draftLocation}
           title={`Mapa de ${city}`}
           src={`https://www.google.com/maps?q=${encodeURIComponent(draftLocation || city)}&z=13&output=embed`}
-          className="h-64 w-full border-0"
+          className="h-48 md:h-64 w-full border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
