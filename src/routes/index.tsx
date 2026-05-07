@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Shield, Clock, Lock, Check, ArrowRight, Search, Play, Car } from "lucide-react";
+import { Shield, Clock, Lock, Check, ArrowRight, Search, Play, Car, Calendar } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import carTurismo from "@/assets/cat-turismo.png";
 import carDeportivo from "@/assets/cat-deportivo.png";
@@ -76,6 +76,12 @@ function Home() {
             >
               Solicitar inspección
             </button>
+            <Link
+              to="/consultar-cita"
+              className="mt-2 inline-flex w-full max-w-[320px] items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold text-ink hover:bg-muted"
+            >
+              <Calendar className="h-3.5 w-3.5" /> Consultar cita
+            </Link>
             <div className="mt-4 flex items-center justify-center gap-3 text-[11px]">
               <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Shield className="h-3.5 w-3.5 text-ink" /> Talleres verificados</span>
               <span className="h-1 w-1 rounded-full bg-border" />
