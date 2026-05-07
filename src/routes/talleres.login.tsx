@@ -26,7 +26,7 @@ function Login() {
         <div className="w-full max-w-sm">
           <button
             type="button"
-            onClick={() => navigate({ to: "/talleres" })}
+            onClick={() => navigate({ to: "/" })}
             aria-label="Volver"
             className="md:hidden mb-4 inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[11px] font-bold hover:bg-muted"
           >
