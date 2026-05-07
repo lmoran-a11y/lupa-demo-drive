@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Eye, EyeOff, Shield } from "lucide-react";
+import { ChevronLeft, Eye, EyeOff, Shield } from "lucide-react";
 
 export const Route = createFileRoute("/talleres/login")({
   head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
@@ -24,6 +24,13 @@ function Login() {
       </div>
       <div className="flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-sm">
+          <Link
+            to="/talleres"
+            aria-label="Volver"
+            className="md:hidden mb-4 inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[11px] font-bold"
+          >
+            <ChevronLeft className="h-3.5 w-3.5" /> Volver
+          </Link>
           <h1 className="text-3xl font-extrabold tracking-wide">ACCESO TALLER</h1>
           <p className="mt-1 text-sm text-muted-foreground">Panel privado para talleres colaboradores de LUPAUTO.</p>
           <form onSubmit={(e)=>{e.preventDefault(); navigate({to:"/talleres/dashboard"})}} className="mt-6 space-y-4">
