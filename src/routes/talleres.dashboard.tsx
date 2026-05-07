@@ -109,29 +109,29 @@ function Dashboard() {
           <IncidenciasSection incTab={incTab} setIncTab={setIncTab} />
         ) : (
           <>
-            <div className="mt-6 flex items-center justify-between">
-              <div className="flex gap-2 rounded-xl bg-brand/10 p-1">
+            <div className="mt-3 md:mt-6 flex items-center justify-between gap-2">
+              <div className="flex gap-1 md:gap-2 rounded-xl bg-brand/10 p-1">
                 {(["Hoy","Próximas","Completadas"] as Tab[]).map(t=>(
-                  <button key={t} onClick={()=>setTab(t)} className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-bold ${tab===t?"bg-card shadow-sm":"text-muted-foreground"}`}>
-                    {t} <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${tab===t?"bg-brand text-ink":"bg-muted"}`}>{counts[t]}</span>
+                  <button key={t} onClick={()=>setTab(t)} className={`flex items-center gap-1 md:gap-2 rounded-lg px-2 md:px-4 py-1.5 md:py-2 text-xs md:text-sm font-bold ${tab===t?"bg-card shadow-sm":"text-muted-foreground"}`}>
+                    {t} <span className={`flex h-4 w-4 md:h-5 md:w-5 items-center justify-center rounded-full text-[9px] md:text-[10px] ${tab===t?"bg-brand text-ink":"bg-muted"}`}>{counts[t]}</span>
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-bold"><Calendar className="h-4 w-4"/>Jueves, 16 de mayo</div>
+              <div className="hidden md:flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-bold"><Calendar className="h-4 w-4"/>Jueves, 16 de mayo</div>
             </div>
 
             {/* Tariff & automatic payment banner */}
-            <div className="mt-5 grid gap-3 rounded-2xl border border-brand/30 bg-brand/5 p-4 md:grid-cols-[1fr_auto] md:items-center">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand text-ink"><Zap className="h-5 w-5"/></div>
+            <div className="mt-3 md:mt-5 grid gap-2 md:gap-3 rounded-2xl border border-brand/30 bg-brand/5 p-3 md:p-4 md:grid-cols-[1fr_auto] md:items-center">
+              <div className="flex items-start gap-2 md:gap-3">
+                <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-lg bg-brand text-ink"><Zap className="h-4 w-4 md:h-5 md:w-5"/></div>
                 <div>
-                  <div className="text-sm font-extrabold">Pago automático al enviar el informe</div>
-                  <p className="text-xs text-muted-foreground">En cuanto envíes el informe, la inspección se marca como completada y el pago se transfiere automáticamente a tu taller.</p>
+                  <div className="text-xs md:text-sm font-extrabold">Pago automático al enviar el informe</div>
+                  <p className="text-[11px] md:text-xs text-muted-foreground">En cuanto envíes el informe, la inspección se marca como completada y el pago se transfiere automáticamente a tu taller.</p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-2 text-xs">
+              <div className="flex flex-wrap gap-1.5 md:gap-2 text-[10px] md:text-xs">
                 {(Object.entries(WORKSHOP_PRICES) as [keyof typeof WORKSHOP_PRICES, number][]).map(([k,v])=>(
-                  <span key={k} className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-3 py-1 font-bold">
+                  <span key={k} className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 md:px-3 py-0.5 md:py-1 font-bold">
                     {k === "Deportivo" ? "Deportivo / Alta gama" : k === "SUV" ? "SUV / 4x4" : k}
                     <span className="text-brand">{formatEur(v)} €</span>
                   </span>
@@ -139,30 +139,64 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="mt-5 space-y-3">
+            <div className="mt-3 md:mt-5 space-y-2 md:space-y-3">
               {filtered.map(i => {
                 const accent = i.status==="Completada"?"bg-success":i.status==="En proceso"?"bg-info":"bg-brand";
                 return (
-                  <div key={i.id} className="flex items-center gap-5 rounded-2xl border border-border bg-card p-5">
-                    <div className={`h-16 w-1 rounded-full ${accent}`}/>
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand/10"><Car className="h-6 w-6"/></div>
-                    <div className="flex-1">
+                  <div key={i.id} className="rounded-2xl border border-border bg-card p-3 md:p-5 md:flex md:items-center md:gap-5">
+                    {/* Mobile compact layout */}
+                    <div className="flex items-center gap-3 md:hidden">
+                      <div className={`h-12 w-1 rounded-full ${accent}`}/>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand/10 shrink-0"><Car className="h-5 w-5"/></div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="text-sm font-extrabold truncate">{i.plate}</div>
+                          <div className="text-sm font-extrabold whitespace-nowrap text-ink">
+                            <span className={i.status==="Completada"?"text-success":""}>{formatEur(getWorkshopPayout(i.vehicleType))} €</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between gap-2 text-[11px] text-muted-foreground">
+                          <span className="truncate">{i.vehicleType} · ID {i.id}</span>
+                          <span className="whitespace-nowrap">{i.date} · {i.time}</span>
+                        </div>
+                        <div className="mt-0.5 flex items-center gap-1.5 text-[11px]">
+                          <span className={`h-1.5 w-1.5 rounded-full ${accent}`}/>
+                          <span className="font-bold">{i.status}</span>
+                          <span className="text-muted-foreground">· {i.status==="Completada"?"Pagado":"Pago al enviar"}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-2 flex gap-2 md:hidden">
+                      {i.status === "Completada" ? (
+                        <Link to="/ejemplo-informe" className="flex flex-1 items-center justify-center gap-1 rounded-lg border-2 border-ink px-2 py-1.5 text-xs font-bold">Ver informe <ArrowRight className="h-3 w-3"/></Link>
+                      ) : (
+                        <button onClick={()=>navigate({to:"/talleres/inspeccion/$id", params:{id:i.id}})} className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-brand px-2 py-1.5 text-xs font-bold text-ink hover:brightness-95">
+                          {i.status==="En proceso"?"Continuar":"Abrir inspección"} <ArrowRight className="h-3 w-3"/>
+                        </button>
+                      )}
+                      <button onClick={()=>setIncidentOpen(true)} className="flex items-center justify-center gap-1 rounded-lg border border-brand px-2 py-1.5 text-xs font-bold text-ink"><MessageSquare className="h-3 w-3"/>Incidencia</button>
+                    </div>
+
+                    {/* Desktop layout (unchanged) */}
+                    <div className={`hidden md:block h-16 w-1 rounded-full ${accent}`}/>
+                    <div className="hidden md:flex h-14 w-14 items-center justify-center rounded-xl bg-brand/10"><Car className="h-6 w-6"/></div>
+                    <div className="hidden md:block flex-1">
                       <div className="text-lg font-extrabold">{i.plate}</div>
                       <div className="text-sm text-muted-foreground">{i.vehicleType}</div>
                     </div>
-                    <div className="text-sm">
+                    <div className="hidden md:block text-sm">
                       <div className="flex items-center gap-1"><Calendar className="h-3 w-3"/>{i.date}</div>
                       <div className="flex items-center gap-1"><Clock className="h-3 w-3"/>{i.time}</div>
                     </div>
-                    <div className="text-sm">
+                    <div className="hidden md:block text-sm">
                       <div className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${accent}`}/><span className="font-bold">{i.status}</span></div>
                       <div className="text-xs text-muted-foreground">ID: {i.id}</div>
                     </div>
-                    <div className="text-right text-sm">
+                    <div className="hidden md:block text-right text-sm">
                       <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{i.status==="Completada"?"Pagado":"Pago al enviar"}</div>
                       <div className={`text-lg font-extrabold ${i.status==="Completada"?"text-success":"text-ink"}`}>{formatEur(getWorkshopPayout(i.vehicleType))} €</div>
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="hidden md:flex flex-col gap-2">
                       {i.status === "Completada" ? (
                         <Link to="/ejemplo-informe" className="flex items-center gap-2 rounded-lg border-2 border-ink px-4 py-2 text-sm font-bold">Ver informe <ArrowRight className="h-4 w-4"/></Link>
                       ) : (
@@ -177,7 +211,7 @@ function Dashboard() {
               })}
             </div>
 
-            <p className="mt-6 text-center text-xs text-muted-foreground">🛡 Tus inspecciones están seguras. Solo tú decides con quién compartirlas.</p>
+            <p className="mt-4 md:mt-6 text-center text-[10px] md:text-xs text-muted-foreground">🛡 Tus inspecciones están seguras. Solo tú decides con quién compartirlas.</p>
           </>
         )}
       </main>
