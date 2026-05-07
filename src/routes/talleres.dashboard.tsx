@@ -77,23 +77,23 @@ function Dashboard() {
       </aside>
 
       {/* MAIN */}
-      <main className="flex-1 px-8 py-8">
-        <div className="flex items-start justify-between">
-          <div className="flex items-start gap-3">
+      <main className="flex-1 px-3 py-3 md:px-8 md:py-8">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start gap-2 md:gap-3">
             {section==="incidencias" && (
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand/10"><AlertTriangle className="h-5 w-5 text-brand"/></div>
+              <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-xl bg-brand/10"><AlertTriangle className="h-4 w-4 md:h-5 md:w-5 text-brand"/></div>
             )}
             <div>
-              <h1 className="text-3xl font-extrabold">{section==="incidencias" ? "Incidencias" : "Inspecciones asignadas"}</h1>
-              <p className="text-sm text-muted-foreground">{section==="incidencias" ? "Consulta y gestiona las incidencias reportadas" : "Gestiona tus citas y revisiones."}</p>
+              <h1 className="text-lg md:text-3xl font-extrabold leading-tight">{section==="incidencias" ? "Incidencias" : "Inspecciones asignadas"}</h1>
+              <p className="text-[11px] md:text-sm text-muted-foreground">{section==="incidencias" ? "Consulta y gestiona las incidencias reportadas" : "Gestiona tus citas y revisiones."}</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <button className="relative rounded-full p-2 hover:bg-muted">
-              <Bell className="h-5 w-5"/>
-              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] font-bold text-ink">2</span>
+          <div className="flex items-center gap-2 md:gap-4">
+            <button className="relative rounded-full p-1.5 md:p-2 hover:bg-muted">
+              <Bell className="h-4 w-4 md:h-5 md:w-5"/>
+              <span className="absolute -right-1 -top-1 flex h-4 w-4 md:h-5 md:w-5 items-center justify-center rounded-full bg-brand text-[9px] md:text-[10px] font-bold text-ink">2</span>
             </button>
-            <div className="flex items-center gap-3 rounded-lg border border-border px-3 py-2">
+            <div className="hidden md:flex items-center gap-3 rounded-lg border border-border px-3 py-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-[10px] font-extrabold text-white">RTC<br/>SPORT</div>
               <div className="text-sm">
                 <div className="font-bold">RTC Sport</div>
@@ -101,6 +101,7 @@ function Dashboard() {
               </div>
               <ChevronDown className="h-4 w-4 text-muted-foreground"/>
             </div>
+            <div className="flex md:hidden h-8 w-8 items-center justify-center rounded-full bg-ink text-[8px] font-extrabold text-white">RTC</div>
           </div>
         </div>
 
