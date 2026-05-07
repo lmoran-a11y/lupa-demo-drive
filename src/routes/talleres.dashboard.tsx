@@ -89,6 +89,14 @@ function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
+            <button
+              onClick={()=>setSection("incidencias")}
+              className={`md:hidden inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold transition-colors ${section==="incidencias" ? "border-brand bg-brand/10 text-brand" : "border-border bg-card text-foreground hover:bg-muted"}`}
+              aria-label="Ir a incidencias"
+            >
+              <AlertTriangle className="h-3.5 w-3.5"/>
+              Incidencias
+            </button>
             <button className="relative rounded-full p-1.5 md:p-2 hover:bg-muted">
               <Bell className="h-4 w-4 md:h-5 md:w-5"/>
               <span className="absolute -right-1 -top-1 flex h-4 w-4 md:h-5 md:w-5 items-center justify-center rounded-full bg-brand text-[9px] md:text-[10px] font-bold text-ink">2</span>
