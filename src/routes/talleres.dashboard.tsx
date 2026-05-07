@@ -126,7 +126,7 @@ function Dashboard() {
                 <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-lg bg-brand text-ink"><Zap className="h-4 w-4 md:h-5 md:w-5"/></div>
                 <div>
                   <div className="text-xs md:text-sm font-extrabold">Pago automático al enviar el informe</div>
-                  <p className="text-[11px] md:text-xs text-muted-foreground">En cuanto envíes el informe, la inspección se marca como completada y el pago se transfiere automáticamente a tu taller.</p>
+                  <p className="text-[11px] md:text-xs text-muted-foreground">Envía el informe completo y automáticamente recibirás el pago</p>
                 </div>
               </div>
               <div className="flex flex-wrap gap-1.5 md:gap-2 text-[10px] md:text-xs">
