@@ -78,9 +78,9 @@ function Home() {
             </button>
             <Link
               to="/consultar-cita"
-              className="mt-2 inline-flex w-full max-w-[320px] items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold text-ink hover:bg-muted"
+              className="mt-2 inline-flex w-full max-w-[272px] items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-3 py-2 text-[13px] font-semibold text-ink hover:bg-muted"
             >
-              <Calendar className="h-3.5 w-3.5" /> Consultar cita
+              <Calendar className="h-3 w-3" /> Consultar cita
             </Link>
             <div className="mt-4 flex items-center justify-center gap-3 text-[11px]">
               <span className="inline-flex items-center gap-1.5 text-muted-foreground"><Shield className="h-3.5 w-3.5 text-ink" /> Talleres verificados</span>
