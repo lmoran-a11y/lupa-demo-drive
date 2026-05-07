@@ -81,7 +81,17 @@ function Dashboard() {
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-start gap-2 md:gap-3">
             {section==="incidencias" && (
-              <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-xl bg-brand/10"><AlertTriangle className="h-4 w-4 md:h-5 md:w-5 text-brand"/></div>
+              <button
+                onClick={()=>setSection("inspecciones")}
+                className="md:hidden inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[11px] font-bold text-foreground hover:bg-muted"
+                aria-label="Volver a inspecciones"
+              >
+                <ChevronLeft className="h-3.5 w-3.5"/>
+                Volver
+              </button>
+            )}
+            {section==="incidencias" && (
+              <div className="hidden md:flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-xl bg-brand/10"><AlertTriangle className="h-4 w-4 md:h-5 md:w-5 text-brand"/></div>
             )}
             <div>
               <h1 className="text-lg md:text-3xl font-extrabold leading-tight">{section==="incidencias" ? "Incidencias" : "Inspecciones asignadas"}</h1>
