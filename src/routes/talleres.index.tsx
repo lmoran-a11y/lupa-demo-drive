@@ -1,30 +1,14 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, ArrowRight, ShieldCheck, Wrench, ClipboardCheck } from "lucide-react";
 
 import workshopBg from "@/assets/talleres-workshop-bg.jpg";
 
 export const Route = createFileRoute("/talleres/")({
-  head: () => ({ meta: [{ title: "Acceso taller — LUPAUTO" }] }),
-  component: TalleresLogin,
+  head: () => ({ meta: [{ title: "Para talleres — LUPAUTO" }] }),
+  component: TalleresEntry,
 });
 
-function TalleresLogin() {
-  const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("taller@lupauto.es");
-  const [password, setPassword] = useState("1234");
-  const [error, setError] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email === "taller@lupauto.es" && password === "1234") {
-      navigate({ to: "/talleres/dashboard" });
-    } else {
-      setError("Credenciales incorrectas. Usa taller@lupauto.es / 1234");
-    }
-  };
-
+function TalleresEntry() {
   return (
     <div className="grid min-h-screen md:grid-cols-2">
       {/* Left side - hero */}
@@ -51,73 +35,54 @@ function TalleresLogin() {
         </div>
       </div>
 
-      {/* Right side - white */}
+      {/* Right side - entry / landing (NOT the login form) */}
       <div className="flex items-center justify-center bg-background px-6 py-12">
         <div className="w-full max-w-sm">
           <Link
             to="/"
             aria-label="Volver"
-            className="md:hidden mb-4 inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[11px] font-bold hover:bg-muted"
+            className="md:hidden mb-6 inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[11px] font-bold hover:bg-muted"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Volver
           </Link>
-          <h1 className="text-3xl font-extrabold tracking-wide">ACCESO TALLER</h1>
+
+          <div className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand">
+            <Wrench className="h-3.5 w-3.5" /> Para talleres
+          </div>
+
+          <h1 className="mt-4 text-3xl font-extrabold tracking-wide">
+            ÁREA DE TALLERES
+          </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Panel privado para talleres colaboradores de LUPAUTO.
+            Bienvenido al espacio para talleres colaboradores de LUPAUTO. Gestiona inspecciones, recibe pagos y reporta incidencias desde un único panel.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-            <div>
-              <label className="text-sm font-bold">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:border-brand"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-bold">Contraseña</label>
-              <div className="relative mt-1">
-                <input
-                  type={show ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-background px-4 py-3 pr-10 outline-none focus:border-brand"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShow(!show)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                >
-                  {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              </div>
-            </div>
+          <ul className="mt-6 space-y-3 text-sm">
+            <li className="flex items-start gap-3">
+              <ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+              <span>Recibe inspecciones asignadas y envía informes en minutos.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+              <span>Cobros automáticos al completar cada revisión.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <Wrench className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+              <span>Soporte directo y gestión de incidencias integrada.</span>
+            </li>
+          </ul>
 
-            <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" className="h-4 w-4 accent-[#F5B800]" />
-              Recuérdame
-            </label>
-
-            {error && (
-              <div className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-xs text-destructive">
-                {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-brand py-3 font-bold text-ink hover:brightness-95"
-            >
-              Entrar al panel
-            </button>
-          </form>
+          <Link
+            to="/talleres/login"
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand py-3 font-bold text-ink hover:brightness-95"
+          >
+            Acceder al panel <ArrowRight className="h-4 w-4" />
+          </Link>
 
           <div className="mt-4 text-center text-sm">
-            <span className="text-muted-foreground">¿Problemas para acceder? </span>
+            <span className="text-muted-foreground">¿Aún no colaboras con LUPAUTO? </span>
             <Link to="/contacto" className="font-bold text-brand hover:underline">
-              Contactar con soporte
+              Contáctanos
             </Link>
           </div>
 
