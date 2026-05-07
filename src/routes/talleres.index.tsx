@@ -54,6 +54,13 @@ function TalleresLogin() {
       {/* Right side - white */}
       <div className="flex items-center justify-center bg-background px-6 py-12">
         <div className="w-full max-w-sm">
+          <Link
+            to="/"
+            aria-label="Volver"
+            className="md:hidden mb-4 inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[11px] font-bold hover:bg-muted"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" /> Volver
+          </Link>
           <h1 className="text-3xl font-extrabold tracking-wide">ACCESO TALLER</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Panel privado para talleres colaboradores de LUPAUTO.

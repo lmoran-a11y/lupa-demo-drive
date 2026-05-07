@@ -91,9 +91,9 @@ function Dashboard() {
               </button>
             ) : (
               <Link
-                to="/talleres"
+                to="/talleres/login"
                 className="md:hidden inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-1 text-[11px] font-bold text-foreground hover:bg-muted"
-                aria-label="Volver al inicio de talleres"
+                aria-label="Volver al acceso taller"
               >
                 <ChevronLeft className="h-3.5 w-3.5"/>
                 Volver
