@@ -11,6 +11,14 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Necesario para procesar el JSON de login.js y register.js
 
+app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, './public/page')));
+
+app.get('/', (_req, res) => res.sendFile(path.join(__dirname, './public/page/index.html')));
+app.get('/login', (_req, res) => res.sendFile(path.join(__dirname, './public/page/login.html')));
+app.get('/register', (_req, res) => res.sendFile(path.join(__dirname, './public/page/register.html')));
+
+
 // --- CONFIGURACIÓN DE BASE DE DATOS ---
 const dbName = "Lupauto";
 const mongoURI = process.env.MONGO_URI || `mongodb://localhost:27017/${dbName}`;
