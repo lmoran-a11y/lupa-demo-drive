@@ -11,6 +11,7 @@
     Base de Datos: MongoDB (Flexibilidad para gestionar historiales y publicaciones).
 
 #Para ejecutar el backend, sigue los siguientes pasos:
+    
     1. cd LUPA-DEMO-DRIVE/backend
 
     2. Instala las dependencias de tu proyecto:
@@ -22,6 +23,7 @@
         npm run dev
 
 #Para ejecutar el frontend, sigue los siguientes pasos:
+    
     1. cd LUPA-DEMO-DRIVE/frontend
 
     2. Instala las dependencias de tu proyecto:
