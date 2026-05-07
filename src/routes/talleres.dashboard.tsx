@@ -271,25 +271,84 @@ function IncidenciasSection({ incTab, setIncTab }: { incTab: "Todas"|"Pendientes
 
   return (
     <>
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-2">
+      <div className="mt-3 md:mt-6 flex flex-col md:flex-row md:flex-wrap md:items-center md:justify-between gap-2 md:gap-3">
+        <div className="flex flex-wrap gap-1.5 md:gap-2">
           {tabs.map(t => {
             const active = incTab === t.key;
             return (
-              <button key={t.key} onClick={()=>setIncTab(t.key)} className={`flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-sm font-bold ${active ? "border-brand bg-brand/5" : "border-border bg-card hover:bg-muted/50"}`}>
+              <button key={t.key} onClick={()=>setIncTab(t.key)} className={`flex items-center gap-1.5 md:gap-2 rounded-lg md:rounded-xl border-2 px-2.5 md:px-4 py-1.5 md:py-2 text-xs md:text-sm font-bold ${active ? "border-brand bg-brand/5" : "border-border bg-card hover:bg-muted/50"}`}>
                 {t.label}
-                <span className={`flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[10px] ${t.color}`}>{counts[t.key]}</span>
+                <span className={`flex h-4 md:h-5 min-w-4 md:min-w-5 items-center justify-center rounded-full px-1 md:px-1.5 text-[9px] md:text-[10px] ${t.color}`}>{counts[t.key]}</span>
               </button>
             );
           })}
         </div>
         <div className="flex gap-2">
-          <button className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-bold"><Calendar className="h-4 w-4"/>01/05/2025 - 31/05/2025 <ChevronDown className="h-4 w-4"/></button>
-          <button className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-bold"><Filter className="h-4 w-4"/>Filtros</button>
+          <button className="flex flex-1 md:flex-none items-center justify-center gap-1.5 md:gap-2 rounded-lg border border-border px-2.5 md:px-4 py-1.5 md:py-2 text-[11px] md:text-sm font-bold"><Calendar className="h-3.5 w-3.5 md:h-4 md:w-4"/><span className="md:hidden">May 2025</span><span className="hidden md:inline">01/05/2025 - 31/05/2025</span> <ChevronDown className="h-3.5 w-3.5 md:h-4 md:w-4"/></button>
+          <button className="flex items-center gap-1.5 md:gap-2 rounded-lg border border-border px-2.5 md:px-4 py-1.5 md:py-2 text-[11px] md:text-sm font-bold"><Filter className="h-3.5 w-3.5 md:h-4 md:w-4"/>Filtros</button>
         </div>
       </div>
 
-      <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-card">
+      {/* MOBILE LIST */}
+      <div className="mt-3 space-y-2 md:hidden">
+        {filtered.map(inc => {
+          const ts = TYPE_STYLES[inc.type];
+          const Icon = ts.icon;
+          return (
+            <div key={inc.id} className="rounded-xl border border-border bg-card p-3">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="text-[10px] font-bold uppercase text-muted-foreground">{inc.id}</div>
+                  <div className="mt-0.5 text-sm font-extrabold truncate">{inc.plate}</div>
+                  <div className="text-[11px] text-muted-foreground truncate">{inc.vehicle}</div>
+                </div>
+                <span className={`shrink-0 rounded-md px-2 py-0.5 text-[10px] font-bold ${STATUS_STYLES[inc.status]}`}>{inc.status}</span>
+              </div>
+
+              <div className="mt-2 flex items-center justify-between gap-2 text-[11px] text-muted-foreground">
+                <span>{inc.date} · {inc.time}</span>
+              </div>
+
+              <div className="mt-2">
+                <div className={`inline-flex items-center gap-1.5 rounded-md ${ts.bg} px-2 py-1 text-[11px] font-bold ${ts.text}`}>
+                  <Icon className="h-3 w-3"/>{inc.typeLabel}
+                </div>
+                <div className="mt-1 text-[11px] text-muted-foreground">{inc.subLabel}</div>
+              </div>
+
+              <div className="mt-2 rounded-lg bg-muted/40 px-2.5 py-1.5 text-[11px]">
+                {inc.compMulti ? (
+                  <div className="space-y-0.5 font-bold">
+                    <div className="flex justify-between"><span className="text-muted-foreground">Taller</span><span className="text-success">{inc.compMulti.taller}</span></div>
+                    <div className="flex justify-between"><span className="text-muted-foreground">LUPAUTO</span><span>{inc.compMulti.lupa}</span></div>
+                    <div className="flex justify-between"><span className="text-muted-foreground">Cliente</span><span>{inc.compMulti.cliente}</span></div>
+                  </div>
+                ) : (
+                  <div className="flex justify-between gap-2">
+                    <span className="text-muted-foreground">Compensación</span>
+                    <span className={`whitespace-pre-line text-right font-bold ${inc.comp.includes("€") && !inc.comp.includes("pendiente") && !inc.comp.includes("revisión") ? (inc.comp.includes("-") ? "text-destructive" : "text-success") : "text-foreground"}`}>{inc.comp}</span>
+                  </div>
+                )}
+              </div>
+
+              <button className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg border border-border bg-background px-3 py-2 text-xs font-bold hover:bg-muted"><Eye className="h-3.5 w-3.5"/>Ver detalle</button>
+            </div>
+          );
+        })}
+        <div className="flex items-center justify-between pt-1 text-[10px] text-muted-foreground">
+          <span>1–{filtered.length} de 18</span>
+          <div className="flex items-center gap-1">
+            <button className="rounded border border-border p-1"><ChevronLeft className="h-3 w-3"/></button>
+            <button className="flex h-6 w-6 items-center justify-center rounded border-2 border-brand bg-brand/5 text-[10px] font-bold text-ink">1</button>
+            <button className="flex h-6 w-6 items-center justify-center rounded border border-border text-[10px] font-bold">2</button>
+            <button className="flex h-6 w-6 items-center justify-center rounded border border-border text-[10px] font-bold">3</button>
+            <button className="rounded border border-border p-1"><ChevronRight className="h-3 w-3"/></button>
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP TABLE */}
+      <div className="mt-5 hidden md:block overflow-hidden rounded-2xl border border-border bg-card">
         <div className="grid grid-cols-[110px_1fr_120px_1fr_120px_1fr_140px] gap-4 border-b border-border px-5 py-3 text-xs font-bold text-muted-foreground">
           <div>ID</div>
           <div>Inspección</div>
