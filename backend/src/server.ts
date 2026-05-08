@@ -140,7 +140,7 @@ app.post('/api/reservas', async (req: Request, res: Response) => {
 // 2. Consultar Reserva por ID (Para el buscador del taller)
 app.get('/api/consultar/:id', async (req: Request, res: Response) => {
     try {
-        const reserva = await Reserva.findOne({ lupId: req.params.id.toUpperCase() });
+        const reserva = await Reserva.findOne({ lupId: String(req.params.id).toUpperCase() });
         if (!reserva) return res.status(404).json({ message: "Inspección no encontrada" });
         return res.json(reserva);
     } catch (err) {
